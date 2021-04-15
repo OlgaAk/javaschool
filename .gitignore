@@ -1,2 +1,4 @@
 .idea/
 railway_app.iml
+target/
+.DS_Store
