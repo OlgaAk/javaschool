@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = {"io.github.olgaak.controller", "io.github.olgaak.service"})
+@ComponentScan(basePackages = {"io.github.olgaak.controller", "io.github.olgaak.service", "io.github.olgaak.dao"})
 public class WebConfig implements WebMvcConfigurer {
 
     @Bean

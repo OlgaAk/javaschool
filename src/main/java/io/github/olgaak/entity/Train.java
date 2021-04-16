@@ -1,15 +1,31 @@
 package io.github.olgaak.entity;
 
-public class Train {
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Entity
+@Table(name = "train")
+public class Train implements Serializable {
+
+    private static final long serialVersionUID = 1l;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
+    private long id;
+
+    @Column(name = "number", nullable = false)
     private int number;
-    private int seat_count;
-    private Station[] stations;
 
-    public Train(int number, int seat_count, Station[] stations) {
+    @Column(name = "seat_count", nullable = false)
+    private int seat_count;
+
+    public Train(int number, int seat_count) {
         this.number = number;
         this.seat_count = seat_count;
-        this.stations = stations;
+    }
+
+    public Train() {
     }
 
     public int getNumber() {
@@ -28,11 +44,4 @@ public class Train {
         this.seat_count = seat_count;
     }
 
-    public Station[] getStations() {
-        return stations;
-    }
-
-    public void setStations(Station[] stations) {
-        this.stations = stations;
-    }
 }
