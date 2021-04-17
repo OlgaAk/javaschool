@@ -1,12 +1,27 @@
 package io.github.olgaak.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "station")
 public class Station {
 
-    private String name;
-    private TimeTable[] timetable;
+    @Id
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
+    private long id;
 
-    public Station(String name) {
-        this.name = name;
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    public Station() {}
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -16,13 +31,4 @@ public class Station {
     public void setName(String name) {
         this.name = name;
     }
-
-    public TimeTable[] getTimetable() {
-        return timetable;
-    }
-
-    public void setTimetable(TimeTable[] timetable) {
-        this.timetable = timetable;
-    }
-
 }

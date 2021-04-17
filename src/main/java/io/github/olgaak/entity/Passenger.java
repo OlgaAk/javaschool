@@ -1,25 +1,33 @@
 package io.github.olgaak.entity;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "passenger")
 public class Passenger {
-    private int id;
+
+    @Id
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
+    private long id;
+
+    @Column(name = "first_name", nullable = false)
     private String firstName;
+
+    @Column(name = "last_name", nullable = false)
     private String lastName;
+
+    @Column(name = "birthday", nullable = false)
     private Date birthday;
 
-    public Passenger(int id, String firstName, String lastName, Date birthday) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthday = birthday;
-    }
+    public Passenger() { }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

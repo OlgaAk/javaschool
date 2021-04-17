@@ -1,27 +1,45 @@
 package io.github.olgaak.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "ticket")
 public class Ticket {
-    private int passengerId;
-    private int trainId;
 
-    public Ticket(int passengerId, int trainId) {
-        this.passengerId = passengerId;
-        this.trainId = trainId;
+    @Id
+    @GeneratedValue
+    @Column(name = "id", nullable = false)
+    private long id;
+
+    @Column(name = "train_id", nullable = false)
+    private long trainId;
+
+    @Column(name = "passenger_id", nullable = false)
+    private long passengerId;
+
+    public Ticket() { }
+
+    public long getId() {
+        return id;
     }
 
-    public int getPassengerId() {
-        return passengerId;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setPassengerId(int passengerId) {
-        this.passengerId = passengerId;
-    }
-
-    public int getTrainId() {
+    public long getTrainId() {
         return trainId;
     }
 
-    public void setTrainId(int trainId) {
+    public void setTrainId(long trainId) {
         this.trainId = trainId;
+    }
+
+    public long getPassengerId() {
+        return passengerId;
+    }
+
+    public void setPassengerId(long passengerId) {
+        this.passengerId = passengerId;
     }
 }
