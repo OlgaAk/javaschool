@@ -1,7 +1,7 @@
 .btn{
     background-color: #ffde11;
     border: none;
-    padding: 10px;
+    padding: 5px 10px;
     border-radius: 5px;
 }
 
@@ -15,11 +15,11 @@
 }
 
 .table-row {
-    width: 700px;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 60px 60px;
     grid-gap: 1px;
-    grid-auto-rows: 50px;
+    grid-auto-rows: 30px;
     border-right: 1px solid gray;
 }
 .table-cell{
@@ -52,4 +52,14 @@
 .icon{
     color: black;
     text-decoration: none;
+}
+
+.main-subsection{
+    height: 40%;
+    width: 50%;
+    background-color: #f3f2f2;
+    padding: 20px;
+}
+.station-section{
+    margin-top: 50px;
 }

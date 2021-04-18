@@ -1,6 +1,8 @@
 package io.github.olgaak.controller;
 
+import io.github.olgaak.entity.Station;
 import io.github.olgaak.entity.Train;
+import io.github.olgaak.service.api.StationService;
 import io.github.olgaak.service.api.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +18,16 @@ public class AdminController {
     @Autowired
     public TrainService trainService;
 
+    @Autowired
+    public StationService stationService;
+
     @GetMapping("/admin")
     public String getAdminPage(ModelMap model){
         model.addAttribute("name", "Tom");
         List<Train> trains = trainService.getAllTrains();
         model.addAttribute("trains", trains);
+        List<Station> stations = stationService.getAllStations();
+        model.addAttribute("stations", stations);
         return "admin";
     }
 
@@ -40,6 +47,18 @@ public class AdminController {
     @PostMapping("/edit/train")
     public String editTrain(@ModelAttribute("train")Train train){
         trainService.editTrain(train);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/add/station")
+    public String addStation(@ModelAttribute("station") Station station){
+        stationService.createNewStation(station);
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/delete/station/{id}")
+    public String deleteStation(@PathVariable("id") long id){
+        stationService.deleteStation(id);
         return "redirect:/admin";
     }
 

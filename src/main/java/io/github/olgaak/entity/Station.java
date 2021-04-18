@@ -8,15 +8,14 @@ import java.util.Set;
 public class Station {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private long id;
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @OneToMany
-    @JoinColumn(name = "timetableItem_id")
+    @OneToMany(mappedBy = "station")
     private Set<TimetableItem> timetableItems;
 
     public Station() {}

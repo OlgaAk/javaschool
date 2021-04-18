@@ -8,51 +8,97 @@
           rel="stylesheet">
 </head>
 <body>
-<p>Admin Area
-</p>
-<div>
-    <div class="tabs">
-        <div class="tab"></div>
-        <div class="tab"></div>
-    </div>
-    <div class="addNew-section">
-        <form method="post" action="/add/train">
-            <label for="train-number">Train number</label>
-            <input id="train-number" name="number" type="number" required>
-            <label for="seat-count">Number of seats </label>
-            <input id="seat-count" name="seat_count" type="number" required>
-            <button class="btn" type="submit"> ADD</button>
-        </form>
-    </div>
-    <div class="train-table">
-        <h3>Train list</h3>
-        <div class="table-row table-header">
-            <div class="table-cell">Train number</div>
-            <div class="table-cell">Number of seats</div>
-            <div class="table-cell"></div>
-            <div class="table-cell"></div>
-        </div>
-        <c:forEach var="train" items="${trains}">
-            <div class="table-row">
-                <span class="table-cell">${train.number}</span>
-                <span class="table-cell">${train.seat_count}</span>
-                <span class="table-cell">
+<div class="header">
+    <p>Admin Area</p>
+</div>
 
-                    <span class="material-icons"
+<div class="main-container">
+
+    <%--Trains    --%>
+    <div class="train-section main-subsection">
+        <div class="addNew-section">
+            <form method="post" action="/add/train">
+                <label for="train-number">Train number</label>
+                <input id="train-number" name="number" type="number" required>
+                <label for="seat-count">Number of seats </label>
+                <input id="seat-count" name="seat_count" type="number" required>
+                <button class="btn" type="submit"> ADD</button>
+            </form>
+        </div>
+        <div class="train-table">
+            <h3>Train list</h3>
+            <div class="table-row table-header">
+                <div class="table-cell">Train number</div>
+                <div class="table-cell">Number of seats</div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+            </div>
+            <c:forEach var="train" items="${trains}">
+                <div class="table-row">
+                    <span class="table-cell">${train.number}</span>
+                    <span class="table-cell">${train.seat_count}</span>
+                    <span class="table-cell">
+
+                    <span class="material-icons md-18"
                           onclick="openEditPopUp(${train.id}, ${train.number}, ${train.seat_count})">
                         edit
                     </span>
 
                 </span>
-                <span class="table-cell">
+                    <span class="table-cell">
                     <a href="/delete/train/${train.id}" class="icon">
+                        <span class="material-icons md-18">clear</span>
+                    </a>
+                </span>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+
+
+    <%--Stations--%>
+
+    <div class="station-section main-subsection">
+        <div class="addNew-section">
+            <form method="post" action="/add/station">
+                <label for="train-number">Station name</label>
+                <input id="station-name" name="name" type="text" required>
+                <button class="btn" type="submit">ADD</button>
+            </form>
+        </div>
+        <div class="table">
+            <h3>Station list</h3>
+            <div class="table-row table-header">
+                <div class="table-cell">Station name</div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+                <div class="table-cell"></div>
+            </div>
+            <c:forEach var="station" items="${stations}">
+                <div class="table-row">
+                    <span class="table-cell">${station.name}</span>
+                    <span class="table-cell"></span>
+                    <span class="table-cell">
+                    <span class="material-icons"
+                          onclick="openEditPopUp(${station.id}, ${station.name})">
+                        edit
+                    </span>
+                     </span>
+                    <span class="table-cell">
+                    <a href="/delete/station/${station.id}" class="icon">
                         <span class="material-icons">clear</span>
                     </a>
                 </span>
-            </div>
-        </c:forEach>
+                </div>
+            </c:forEach>
+        </div>
     </div>
 </div>
+
+</div>
+<%--main section end--%>
+
+<%--EDIT POP-UP--%>
 <div id="edit-popup-container">
     <div id="edit-popup">
         <h3>Edit train info</h3>
@@ -69,13 +115,14 @@
 </div>
 <script>
     function openEditPopUp(id, number, seats) {
-        document.getElementById("edit-popup-container").style.visibility='visible';
+        document.getElementById("edit-popup-container").style.visibility = 'visible';
         document.getElementById("edit_train_number").value = number;
         document.getElementById("edit_train_seat_count").value = seats;
         document.getElementById("edit_train_id").value = id;
     }
+
     function closeEditPopUp() {
-        document.getElementById("edit-popup-container").style.visibility='hidden';
+        document.getElementById("edit-popup-container").style.visibility = 'hidden';
     }
 </script>
 </body>

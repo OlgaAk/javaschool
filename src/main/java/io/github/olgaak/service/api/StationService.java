@@ -1,4 +1,15 @@
 package io.github.olgaak.service.api;
 
+import io.github.olgaak.entity.Station;
+
+import java.util.List;
+
 public interface StationService {
+    public Station createNewStation(Station station);
+
+    List<Station> getAllStations();
+
+    void deleteStation(long id);
+
+    void editStation(Station station);
 }
