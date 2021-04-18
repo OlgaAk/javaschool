@@ -27,4 +27,9 @@ public class TrainServiceImpl implements TrainService {
         return trainDao.getAllTrains();
     }
 
+    @Override
+    public void deleteTrain(long id) {
+        trainDao.deleteTrain(id);
+    }
+
 }

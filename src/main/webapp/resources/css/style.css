@@ -17,7 +17,7 @@
 .table-row {
     width: 700px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 60px 60px;
     grid-gap: 1px;
     grid-auto-rows: 50px;
     border-right: 1px solid gray;

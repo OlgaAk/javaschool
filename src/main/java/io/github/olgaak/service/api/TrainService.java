@@ -10,4 +10,6 @@ public interface TrainService {
     public Train createNewTrain(Train train);
 
     List<Train> getAllTrains();
+
+    void deleteTrain(long id);
 }

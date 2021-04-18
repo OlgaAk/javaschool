@@ -39,4 +39,25 @@ public class TrainDaoImpl implements TrainDao {
         System.out.println(trains.get(0).getNumber());
         return trains;
     }
+
+    @Override
+    public void deleteTrain(long id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            Train train = entityManager.find(Train.class, id);
+            entityManager.remove(train);
+            transaction.commit();
+        }
+        catch (Exception ex){
+            if(transaction != null){
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+    }
 }
