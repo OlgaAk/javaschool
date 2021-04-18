@@ -32,4 +32,9 @@ public class TrainServiceImpl implements TrainService {
         trainDao.deleteTrain(id);
     }
 
+    @Override
+    public void editTrain(Train train) {
+        trainDao.editTrain(train);
+    }
+
 }

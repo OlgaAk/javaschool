@@ -12,4 +12,6 @@ public interface TrainService {
     List<Train> getAllTrains();
 
     void deleteTrain(long id);
+
+    void editTrain(Train train);
 }

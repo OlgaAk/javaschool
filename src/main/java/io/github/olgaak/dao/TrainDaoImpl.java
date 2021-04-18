@@ -60,4 +60,24 @@ public class TrainDaoImpl implements TrainDao {
             entityManager.close();
         }
     }
+
+    @Override
+    public void editTrain(Train train) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            entityManager.merge(train);
+            transaction.commit();
+        }
+        catch (Exception ex){
+            if(transaction != null){
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+    }
 }

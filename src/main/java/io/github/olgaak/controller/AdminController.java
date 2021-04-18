@@ -24,7 +24,7 @@ public class AdminController {
         return "admin";
     }
 
-    @PostMapping("/add-train")
+    @PostMapping("/add/train")
     public String addTrain(@ModelAttribute("train")Train train){
         System.out.println(train.getNumber());
         trainService.createNewTrain(train);
@@ -35,6 +35,12 @@ public class AdminController {
     public String deleteTrain(@PathVariable("id") long id){
        trainService.deleteTrain(id);
        return "redirect:/admin";
+    }
+
+    @PostMapping("/edit/train")
+    public String editTrain(@ModelAttribute("train")Train train){
+        trainService.editTrain(train);
+        return "redirect:/admin";
     }
 
 }
