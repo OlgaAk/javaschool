@@ -2,6 +2,7 @@ package io.github.olgaak.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "train")
@@ -19,6 +20,13 @@ public class Train implements Serializable {
 
     @Column(name = "seat_count", nullable = false)
     private int seat_count;
+
+    @ManyToMany
+    @JoinTable(name = "train_station",
+            joinColumns = @JoinColumn(name = "train_id"),
+            inverseJoinColumns = @JoinColumn(name = "station_id")
+    )
+    private Set<Station> stations;
 
     public Train(int number, int seat_count) {
         this.number = number;
@@ -52,4 +60,11 @@ public class Train implements Serializable {
         this.seat_count = seat_count;
     }
 
+    public Set<Station> getStations() {
+        return stations;
+    }
+
+    public void setStations(Set<Station> stations) {
+        this.stations = stations;
+    }
 }

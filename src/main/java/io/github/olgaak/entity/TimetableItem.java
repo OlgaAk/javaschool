@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "route")
-public class Route {
+@Table(name = "timetableItem")
+public class TimetableItem {
     @Id
     @GeneratedValue
     @Column(name = "id", nullable = false)
@@ -18,18 +18,30 @@ public class Route {
     private Date arrivalTime;
 
     @ManyToOne
-    @JoinColumn(name = "departure_station_id")
-    private Station departureStation;
-
-    @ManyToOne
-    @JoinColumn(name = "arrival_station_id")
-    private Station arrivalStation;
-
-    @ManyToOne
     @JoinColumn(name = "train_id")
     private Train trainId;
 
-    public Route() {
+    @ManyToOne
+    @JoinColumn(name = "station_id")
+    private Station stationId;
+
+    public TimetableItem() {
+    }
+
+    public Train getTrainId() {
+        return trainId;
+    }
+
+    public void setTrainId(Train trainId) {
+        this.trainId = trainId;
+    }
+
+    public Station getStationId() {
+        return stationId;
+    }
+
+    public void setStationId(Station stationId) {
+        this.stationId = stationId;
     }
 
     public long getId() {

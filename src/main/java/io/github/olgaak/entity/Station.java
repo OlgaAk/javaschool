@@ -1,6 +1,7 @@
 package io.github.olgaak.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "station")
@@ -13,6 +14,10 @@ public class Station {
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
+
+    @OneToMany
+    @JoinColumn(name = "timetableItem_id")
+    private Set<TimetableItem> timetableItems;
 
     public Station() {}
 
