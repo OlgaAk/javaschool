@@ -4,10 +4,8 @@ import io.github.olgaak.entity.Train;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.List;
 
 @Repository
 public class TrainDaoImpl implements TrainDao {
@@ -32,5 +30,13 @@ public class TrainDaoImpl implements TrainDao {
         } finally {
             entityManager.close();
         }
+    }
+
+    public List<Train> getAllTrains() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Query query = entityManager.createQuery("SELECT t FROM Train t");
+        List<Train> trains = query.getResultList();
+        System.out.println(trains.get(0).getNumber());
+        return trains;
     }
 }

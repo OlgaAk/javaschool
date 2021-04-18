@@ -14,7 +14,7 @@ public class Train implements Serializable {
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
-    @Column(name = "number", nullable = false)
+    @Column(name = "number", nullable = false, unique = true)
     private int number;
 
     @Column(name = "seat_count", nullable = false)

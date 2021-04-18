@@ -3,9 +3,29 @@
     border: none;
     padding: 10px;
     border-radius: 5px;
-    background-color: #ffde11;
 }
 
 .addNew-section{
 
+}
+
+.table-header{
+    font-weight: bold;
+    border-top: 1px solid gray;
+}
+
+.table-row {
+    width: 700px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1px;
+    grid-auto-rows: 50px;
+    border-right: 1px solid gray;
+}
+.table-cell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
 }

@@ -6,6 +6,8 @@ import io.github.olgaak.service.api.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TrainServiceImpl implements TrainService {
 
@@ -19,6 +21,10 @@ public class TrainServiceImpl implements TrainService {
     public Train createNewTrain(Train train) {
         trainDao.createNewTrain(train);
         return null;
+    }
+
+    public List<Train> getAllTrains() {
+        return trainDao.getAllTrains();
     }
 
 }
