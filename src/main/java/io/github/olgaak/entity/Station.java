@@ -18,6 +18,13 @@ public class Station {
     @OneToMany(mappedBy = "station")
     private Set<TimetableItem> timetableItems;
 
+    @ManyToMany
+    @JoinTable(name = "train_station",
+            joinColumns = @JoinColumn(name = "station_id"),
+            inverseJoinColumns = @JoinColumn(name = "train_id")
+    )
+    private Set<Train> trains;
+
     public Station() {}
 
     public long getId() {

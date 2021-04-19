@@ -19,21 +19,13 @@ public class TimetableItem {
 
     @ManyToOne
     @JoinColumn(name = "train_id")
-    private Train trainId;
+    private Train train;
 
     @ManyToOne
     @JoinColumn(name = "station_id")
     private Station station;
 
     public TimetableItem() {
-    }
-
-    public Train getTrainId() {
-        return trainId;
-    }
-
-    public void setTrainId(Train trainId) {
-        this.trainId = trainId;
     }
 
     public long getId() {
