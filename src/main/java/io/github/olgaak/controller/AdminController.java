@@ -1,8 +1,10 @@
 package io.github.olgaak.controller;
 
 import io.github.olgaak.entity.Station;
+import io.github.olgaak.entity.TimetableItem;
 import io.github.olgaak.entity.Train;
 import io.github.olgaak.service.api.StationService;
+import io.github.olgaak.service.api.TimetableService;
 import io.github.olgaak.service.api.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class AdminController {
 
     @Autowired
     public StationService stationService;
+
+    @Autowired
+    public TimetableService timetableService;
 
     @GetMapping("/admin")
     public String getAdminPage(ModelMap model){
@@ -64,6 +69,12 @@ public class AdminController {
     @GetMapping("/delete/station/{id}")
     public String deleteStation(@PathVariable("id") long id){
         stationService.deleteStation(id);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/add/timeTableItem")
+    public String addStation(@ModelAttribute("timetableItem") TimetableItem timetableItem){
+        timetableService.createNewTimetableItem(timetableItem);
         return "redirect:/admin";
     }
 

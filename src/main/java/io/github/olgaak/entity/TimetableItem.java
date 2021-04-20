@@ -14,16 +14,16 @@ public class TimetableItem {
     @Column(name = "departure_time", nullable = false)
     private Date departureTime;
 
-    @Column(name = "arrival_time", nullable = false)
+    @Column(name = "arrival_time")
     private Date arrivalTime;
+
+    @ManyToOne
+    @JoinColumn(name = "station_id")
+    private Station station;
 
     @ManyToOne
     @JoinColumn(name = "train_id")
     private Train train;
-
-    @ManyToOne
-    @JoinColumn(name = "station_name")
-    private Station station;
 
     public TimetableItem() {
     }
@@ -50,6 +50,22 @@ public class TimetableItem {
 
     public void setArrivalTime(Date arrivalTime) {
         this.arrivalTime = arrivalTime;
+    }
+
+    public Station getStation() {
+        return station;
+    }
+
+    public void setStation(Station station) {
+        this.station = station;
+    }
+
+    public Train getTrain() {
+        return train;
+    }
+
+    public void setTrain(Train train) {
+        this.train = train;
     }
 
 }

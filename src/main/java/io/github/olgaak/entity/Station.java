@@ -42,4 +42,12 @@ public class Station {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Set<Train> getTrains() {
+        return trains;
+    }
+
+    public void setTrains(Set<Train> trains) {
+        this.trains = trains;
+    }
 }
