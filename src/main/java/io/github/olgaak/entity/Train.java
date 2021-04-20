@@ -22,7 +22,7 @@ public class Train implements Serializable {
     private int seat_count;
 
     @ManyToMany
-    @JoinTable(name = "train_station",
+        @JoinTable(name = "train_station",
             joinColumns = @JoinColumn(name = "train_id"),
             inverseJoinColumns = @JoinColumn(name = "station_id")
     )

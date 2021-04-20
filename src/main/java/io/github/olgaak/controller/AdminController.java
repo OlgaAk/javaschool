@@ -33,7 +33,6 @@ public class AdminController {
 
     @PostMapping("/add/train")
     public String addTrain(@ModelAttribute("train")Train train){
-        System.out.println(train.getNumber());
         trainService.createNewTrain(train);
         return "redirect:/admin";
     }

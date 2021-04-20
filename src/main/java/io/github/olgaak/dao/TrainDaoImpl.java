@@ -19,7 +19,7 @@ public class TrainDaoImpl implements TrainDao {
             transaction = entityManager.getTransaction();
             transaction.begin();
             entityManager.persist(train);
-            entityManager.flush();
+//            entityManager.flush();
             transaction.commit();
         }
         catch (Exception ex){

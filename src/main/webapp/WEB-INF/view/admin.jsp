@@ -22,6 +22,11 @@
                 <input id="train-number" name="number" type="number" required>
                 <label for="seat-count">Number of seats </label>
                 <input id="seat-count" name="seat_count" type="number" required>
+                <select multiple name="stations">
+                    <c:forEach var="station" items="${stations}">
+                        <option value="${station.id}">${station.name}</option>
+                    </c:forEach>
+                </select>
                 <button class="btn" type="submit"> ADD</button>
             </form>
         </div>
@@ -30,13 +35,20 @@
             <div class="table-row table-header">
                 <div class="table-cell">Train number</div>
                 <div class="table-cell">Number of seats</div>
+                <div class="table-cell">Stations</div>
                 <div class="table-cell"></div>
                 <div class="table-cell"></div>
             </div>
-            <c:forEach var="train" items="${trains}">
+            <c:forEach var="train" items="${trains}" >
                 <div class="table-row">
                     <span class="table-cell">${train.number}</span>
                     <span class="table-cell">${train.seat_count}</span>
+                    <span class="table-cell">
+                        <c:forEach var="station" items="${train.stations}" varStatus="loop">
+                           <span> ${station.name}</span>
+                            <c:if test="${!loop.last}">,&nbsp;</c:if>
+                        </c:forEach>
+                    </span>
                     <span class="table-cell">
 
                     <span class="material-icons md-18"

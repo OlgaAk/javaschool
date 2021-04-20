@@ -22,7 +22,7 @@ public class TimetableItem {
     private Train train;
 
     @ManyToOne
-    @JoinColumn(name = "station_id")
+    @JoinColumn(name = "station_name")
     private Station station;
 
     public TimetableItem() {
