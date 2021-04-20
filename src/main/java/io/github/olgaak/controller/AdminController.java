@@ -55,6 +55,12 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+    @PostMapping("/edit/station")
+    public String editTrain(@ModelAttribute("station")Station station){
+        stationService.editStation(station);
+        return "redirect:/admin";
+    }
+
     @GetMapping("/delete/station/{id}")
     public String deleteStation(@PathVariable("id") long id){
         stationService.deleteStation(id);

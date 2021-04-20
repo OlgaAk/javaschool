@@ -5,7 +5,7 @@ import io.github.olgaak.entity.Station;
 import java.util.List;
 
 public interface StationService {
-    public Station createNewStation(Station station);
+    Station createNewStation(Station station);
 
     List<Station> getAllStations();
 

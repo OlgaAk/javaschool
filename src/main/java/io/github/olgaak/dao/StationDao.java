@@ -5,7 +5,7 @@ import io.github.olgaak.entity.Station;
 import java.util.List;
 
 public interface StationDao {
-    public void createNewStation(Station station);
+    void createNewStation(Station station);
 
     List<Station> getAllStations();
 

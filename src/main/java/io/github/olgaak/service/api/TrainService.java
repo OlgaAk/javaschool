@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public interface TrainService {
-    public Train createNewTrain(Train train);
+    Train createNewTrain(Train train);
 
     List<Train> getAllTrains();
 
