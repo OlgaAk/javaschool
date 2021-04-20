@@ -44,7 +44,8 @@
                     <div class="table-row table-row-5">
                         <span class="table-cell">${train.number}</span>
                         <span class="table-cell">${train.seat_count}</span>
-                        <span class="table-cell">
+                        <span class="table-cell" onclick="openRoutesSection(${train.number},
+                                '<c:forEach var="station" items="${train.stations}">${station.name},</c:forEach>')">
                         <c:forEach var="station" items="${train.stations}" varStatus="loop">
                             ${station.name}<c:if test="${!loop.last}">,&nbsp;</c:if>
                         </c:forEach>
@@ -110,62 +111,11 @@
 
     </div>
     <%--main section end--%>
-
-
-    <%--Schedule Section--%>
     <div id="main-container-right-side">
-        <div id="schedule-section" class="hidden">
-            <h3 id="schedule_title">Schedules for station ***</h3>
-            <div class="addNew-section">
-                <form method="post" action="/add/timeTableItem" >
-                    <input id="schedule_station_id" name="station_id" type="hidden">
-                    <select id="schedule_station_trains" multiple name="stations">
-                        <c:forEach var="train" items="${trains}">
-                            <option value="${train.id}">${train.number}</option>
-                        </c:forEach>
-                    </select>
-                    <label for="schedule_departure_time">Time</label>
-                    <input id="schedule_departure_time" name="departure_time" type="datetime-local" required>
-                    <button class="btn btn-primary" type="submit"> ADD</button>
-                </form>
-            </div>
-            <div class="schedule-table">
-                <h3>Schedule</h3>
-                <div class="table-row table-header table-row-4">
-                    <div class="table-cell">Train number</div>
-                    <div class="table-cell">Time</div>
-                    <div class="table-cell"></div>
-                    <div class="table-cell"></div>
-                </div>
-<%--                <c:forEach var="train" items="${trains}">--%>
-<%--                    <div class="table-row table-row-train">--%>
-<%--                        <span class="table-cell">${train.number}</span>--%>
-<%--                        <span class="table-cell"></span>--%>
-<%--                        <span class="table-cell">--%>
-<%--                        <c:forEach var="station" items="${train.stations}" varStatus="loop">--%>
-<%--                            ${station.name}<c:if test="${!loop.last}">,&nbsp;</c:if>--%>
-<%--                        </c:forEach>--%>
-<%--                    </span>--%>
-<%--                        <span class="table-cell">--%>
-
-<%--                    <span class="material-icons md-18"--%>
-<%--                          onclick="openTrainEditPopUp(${train.id}, ${train.number}, ${train.seat_count},--%>
-<%--                                  '<c:forEach var="station" items="${train.stations}">${station.name},</c:forEach>')">--%>
-<%--                        edit--%>
-<%--                    </span>--%>
-
-<%--                </span>--%>
-<%--                        <span class="table-cell">--%>
-<%--                    <a href="/delete/train/${train.id}" class="icon">--%>
-<%--                        <span class="material-icons md-18">clear</span>--%>
-<%--                    </a>--%>
-<%--                </span>--%>
-<%--                    </div>--%>
-<%--                </c:forEach>--%>
-            </div>
-        </div>
+        <%@include file="includes/schedule.jsp" %>
+        <%@include file="includes/routes.jsp" %>
     </div>
-    <%--Schedule section End--%>
+
 </div>
 
 <%--EDIT POP-UP--%>
@@ -204,45 +154,6 @@
     </div>
 </div>
 
-<script>
-    function openTrainEditPopUp(id, number, seats, stations) {
-        document.getElementById("train-edit-popup-container").classList.remove("hidden");
-        // insert saved values into fields
-        document.getElementById("edit_train_number").value = number;
-        document.getElementById("edit_train_seat_count").value = seats;
-        document.getElementById("edit_train_id").value = id;
-        let select = document.getElementById("edit_train_select_stations");
-        let values = stations.split(',');
-        for (let i = 0; i < select.options.length; i++) {
-            select.options[i].selected = values.indexOf(select.options[i].text) >= 0;
-        }
-    }
-
-
-    function openStationEditPopUp(id, name) {
-        document.getElementById("station-edit-popup-container").classList.remove("hidden");
-        // insert saved values into fields
-        document.getElementById("edit_station_name").value = name;
-        document.getElementById("edit_station_id").value = id;
-    }
-
-    function closeEditPopUp(container) {
-        document.getElementById(container).classList.add("hidden");
-    }
-
-    function openScheduleSection(stationId, stationName, trains) {
-        document.getElementById("schedule-section").classList.remove("hidden");
-        // insert saved values into fields
-        document.getElementById("schedule_station_id").value = stationId;
-        document.getElementById("schedule_title").innerText = "Schedule for station " + stationName;
-        let select = document.getElementById("schedule_station_trains");
-        let values = trains.split(',');
-        for (let i = 0; i < select.options.length; i++) {
-            select.options[i].selected = values.indexOf(select.options[i].text) >= 0;
-        }
-    }
-
-
-</script>
+<script src="/resources/js/script.js"/>></script>
 </body>
 </html>

@@ -28,12 +28,19 @@ public class Train implements Serializable {
     )
     private Set<Station> stations;
 
+    @OneToMany
+    private Set<Route> routes;
+
     public Train(int number, int seat_count) {
         this.number = number;
         this.seat_count = seat_count;
     }
 
     public Train() {
+    }
+
+    public Train(String id) {
+        this.id = Long.parseLong(id);
     }
 
     public long getId() {
