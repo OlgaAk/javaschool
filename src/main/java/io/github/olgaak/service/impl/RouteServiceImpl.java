@@ -14,7 +14,7 @@ public class RouteServiceImpl implements RouteService {
     private RouteDao routeDao;
 
     @Autowired
-    public RouteServiceImpl(RouteDao route){
+    public RouteServiceImpl(RouteDao routeDao){
         this.routeDao = routeDao;
     }
 

@@ -30,6 +30,22 @@ public class Station {
         this.id = Long.parseLong(id);
     }
 
+    public Set<TimetableItem> getTimetableItems() {
+        return timetableItems;
+    }
+
+    public void setTimetableItems(Set<TimetableItem> timetableItems) {
+        this.timetableItems = timetableItems;
+    }
+
+    public Set<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(Set<Route> routes) {
+        this.routes = routes;
+    }
+
     public long getId() {
         return id;
     }

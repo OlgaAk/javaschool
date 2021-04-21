@@ -1,6 +1,7 @@
 package io.github.olgaak.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -8,7 +9,7 @@ import java.util.Set;
 public class Route {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private long id;
 
@@ -16,8 +17,8 @@ public class Route {
     @JoinColumn(name = "train_id")
     private Train train;
 
-    @OneToMany
-    private Set<TimetableItem> timetableItems;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<TimetableItem> timetableItems;
 
     @ManyToMany
     @JoinTable(name = "route_station",
@@ -29,10 +30,10 @@ public class Route {
     public Route() {
     }
 
-    public Route(String train, String station, String departureTime) {
-        System.out.println("constructer 3");
-        System.out.println(train + station + departureTime);
+    public Route(String id) {
+        this.id = Long.parseLong(id);
     }
+
 
     public long getId() {
         return id;
@@ -50,11 +51,11 @@ public class Route {
         this.train = train;
     }
 
-    public Set<TimetableItem> getTimetableItems() {
+    public List<TimetableItem> getTimetableItems() {
         return timetableItems;
     }
 
-    public void setTimetableItems(Set<TimetableItem> timetableItems) {
+    public void setTimetableItems(List<TimetableItem> timetableItems) {
         this.timetableItems = timetableItems;
     }
     public Set<Station> getStations() {

@@ -4,14 +4,13 @@ import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Date;
 
 @Entity
 @Table(name = "timetableItem")
 public class TimetableItem {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private long id;
 
@@ -43,14 +42,19 @@ public class TimetableItem {
 
     public TimetableItem(String departureTime, String station) {
         this.station = new Station(station);
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-        Date date = null;
-        try {
-            date = format.parse(departureTime);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        this.departureTime = date;
+        setDepartureTime(departureTime);
+    }
+
+    public TimetableItem(String id) {
+        this.id = Long.parseLong(id);
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
 
     public long getId() {

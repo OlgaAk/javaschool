@@ -8,18 +8,18 @@
             <input id="routes_train_id" name="train" type="hidden">
             <div id="select_container">
                 <div id="routes_stations_div">
-                    <select name="timetableItems[0][station]">
+                    <select name="timetableItems[0].station">
                         <c:forEach var="station" items="${stations}">
                             <option value="${station.id}">${station.name}</option>
                         </c:forEach>
                     </select>
-                    <label><input type="datetime-local" name="timetableItems[0][departureTime]">Time</label>
-                    <select name="timetableItems[1][station]">
+                    <label><input type="datetime-local" name="timetableItems[0].departureTime">Time</label>
+                    <select name="timetableItems[1].station">
                          <c:forEach var="station" items="${stations}">
                             <option value="${station.id}">${station.name}</option>
                         </c:forEach>
                     </select>
-                    <label><input type="datetime-local" name="timetableItems[1][departureTime]">Time</label>
+                    <label><input type="datetime-local" name="timetableItems[1].departureTime">Time</label>
                 </div>
             </div>
             <button type="button" onclick="sendRequestAddRoute()">+</button>
