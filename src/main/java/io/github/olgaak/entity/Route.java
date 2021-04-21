@@ -1,7 +1,6 @@
 package io.github.olgaak.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,7 +17,14 @@ public class Route {
     private Train train;
 
     @OneToMany
-    private Set<TimetableItem> timetableItemSet;
+    private Set<TimetableItem> timetableItems;
+
+    @ManyToMany
+    @JoinTable(name = "route_station",
+            joinColumns = @JoinColumn(name = "route_id"),
+            inverseJoinColumns = @JoinColumn(name = "station_id")
+    )
+    private Set<Station> stations;
 
     public Route() {
     }
@@ -44,8 +50,19 @@ public class Route {
         this.train = train;
     }
 
-    public Set<TimetableItem> getTimetableItemSet() {
-        return timetableItemSet;
+    public Set<TimetableItem> getTimetableItems() {
+        return timetableItems;
+    }
+
+    public void setTimetableItems(Set<TimetableItem> timetableItems) {
+        this.timetableItems = timetableItems;
+    }
+    public Set<Station> getStations() {
+        return stations;
+    }
+
+    public void setStations(Set<Station> stations) {
+        this.stations = stations;
     }
 
 }

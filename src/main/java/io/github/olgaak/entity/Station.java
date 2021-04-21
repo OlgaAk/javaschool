@@ -21,6 +21,9 @@ public class Station {
     @ManyToMany(mappedBy = "stations")
     private Set<Train> trains;
 
+    @ManyToMany(mappedBy = "stations")
+    private Set<Route> routes;
+
     public Station() {}
 
     public Station(String id) {

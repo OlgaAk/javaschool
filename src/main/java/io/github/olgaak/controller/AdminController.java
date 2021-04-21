@@ -85,7 +85,7 @@ public class AdminController {
     }
 
     @PostMapping( path = "/add/route")
-    public String addRoute(@RequestBody Route route){
+    public String addRoute(@ModelAttribute("route") Route route){
         routeService.createNewRoute(route);
         return "redirect:/admin";
     }

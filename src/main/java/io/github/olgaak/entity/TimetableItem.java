@@ -36,9 +36,21 @@ public class TimetableItem {
     public TimetableItem() {
     }
 
-    public TimetableItem(String train, String station) {
-        this.train = new Train(train);
+//    public TimetableItem(String train, String station) {
+//        this.train = new Train(train);
+//        this.station = new Station(station);
+//    }
+
+    public TimetableItem(String departureTime, String station) {
         this.station = new Station(station);
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        Date date = null;
+        try {
+            date = format.parse(departureTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.departureTime = date;
     }
 
     public long getId() {
