@@ -36,14 +36,30 @@ function openScheduleSection(stationId, stationName, trains) {
     }
 }
 
-function openRoutesSection(trainNumber, stations) {
+function openRoutesSection(trainNumber, trainId, stations) {
     document.getElementById("schedule-section").classList.add("hidden");
     document.getElementById("routes-section").classList.remove("hidden");
     // insert saved values into fields
     document.getElementById("routes_title").innerText = "Routes for train  " + trainNumber;
+    document.getElementById("routes_train_id").value = trainId;
     let select = document.getElementById("routes_stations");
     let values = stations.split(',');
     for (let i = 0; i < select.options.length; i++) {
         select.options[i].selected = values.indexOf(select.options[i].text) >= 0;
     }
+}
+function addNewSelect(){
+    let container = document.getElementById("select_container");
+    let clone = document.getElementById("routes_stations_div").cloneNode(true);
+    container.appendChild(clone);
+}
+
+async function sendRequestAddRoute(){
+    const rawResponse = await fetch('/add/route', {
+        method: 'POST',
+        body: '{ "train": "13","station": "2","departureTime": "2021-04-23T23:48"}'
+    });
+    const content = await rawResponse.json();
+    console.log(content);
+
 }

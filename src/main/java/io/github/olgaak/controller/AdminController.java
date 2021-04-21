@@ -1,8 +1,10 @@
 package io.github.olgaak.controller;
 
+import io.github.olgaak.entity.Route;
 import io.github.olgaak.entity.Station;
 import io.github.olgaak.entity.TimetableItem;
 import io.github.olgaak.entity.Train;
+import io.github.olgaak.service.api.RouteService;
 import io.github.olgaak.service.api.StationService;
 import io.github.olgaak.service.api.TimetableService;
 import io.github.olgaak.service.api.TrainService;
@@ -12,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/")
@@ -25,6 +28,9 @@ public class AdminController {
 
     @Autowired
     public TimetableService timetableService;
+
+    @Autowired
+    public RouteService routeService;
 
     @GetMapping("/admin")
     public String getAdminPage(ModelMap model){
@@ -78,4 +84,9 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+    @PostMapping( path = "/add/route")
+    public String addRoute(@RequestBody Route route){
+        routeService.createNewRoute(route);
+        return "redirect:/admin";
+    }
 }

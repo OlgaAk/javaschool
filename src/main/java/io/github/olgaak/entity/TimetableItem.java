@@ -36,6 +36,11 @@ public class TimetableItem {
     public TimetableItem() {
     }
 
+    public TimetableItem(String train, String station) {
+        this.train = new Train(train);
+        this.station = new Station(station);
+    }
+
     public long getId() {
         return id;
     }

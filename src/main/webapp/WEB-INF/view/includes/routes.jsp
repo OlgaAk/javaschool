@@ -6,14 +6,22 @@
         <h3 id="routes_title">Routes for train ***</h3>
         <div class="addNew-section">
             <form method="post" action="/add/route" >
-                <input id="schedule_station_id" name="station" type="hidden">
-                <select id="routes_stations" name="stations">
+                <input id="routes_train_id" name="train" type="hidden">
+                <div id="select_container">
+                    <div id="routes_stations_div">
+                <select id="routes_stations" name="station">
                     <c:forEach var="station" items="${stations}">
                         <option value="${station.id}">${station.name}</option>
                     </c:forEach>
                 </select>
-                <label for="schedule_departure_time">Time</label>
-                <input id="schedule_departure_time" name="departureTime" type="datetime-local" required>
+                        <label><input type="datetime-local" name="departureTime">Time</label>
+                    </div>
+                </div>
+                <button type="button" onclick="sendRequestAddRoute()">+</button>
+
+<%--                <label for="schedule_departure_time">Time</label>--%>
+<%--                <input id="schedule_departure_time" name="departureTime"--%>
+<%--                       type="datetime-local" required>--%>
                 <button class="btn btn-primary" type="submit"> ADD</button>
             </form>
         </div>
