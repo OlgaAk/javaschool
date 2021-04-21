@@ -15,7 +15,7 @@ public class TimetableServiceImpl implements TimetableService {
     private TimetableDao timetableDao;
 
     @Autowired
-    public TimetableServiceImpl(TrainDao trainDao){
+    public TimetableServiceImpl(TimetableDao timetableDao){
         this.timetableDao = timetableDao;
     }
 

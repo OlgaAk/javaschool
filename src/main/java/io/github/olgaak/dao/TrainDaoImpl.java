@@ -36,7 +36,6 @@ public class TrainDaoImpl implements TrainDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Query query = entityManager.createQuery("SELECT t FROM Train t");
         List<Train> trains = query.getResultList();
-        System.out.println(trains.get(0).getNumber());
         return trains;
     }
 
