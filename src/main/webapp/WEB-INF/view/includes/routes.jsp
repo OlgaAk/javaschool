@@ -14,15 +14,15 @@
                         </c:forEach>
                     </select>
                     <label><input type="datetime-local" name="timetableItems[0].departureTime">Time</label>
-                    <select name="timetableItems[1].station">
-                         <c:forEach var="station" items="${stations}">
-                            <option value="${station.id}">${station.name}</option>
-                        </c:forEach>
-                    </select>
-                    <label><input type="datetime-local" name="timetableItems[1].departureTime">Time</label>
+<%--                    <select name="timetableItems[1].station">--%>
+<%--                         <c:forEach var="station" items="${stations}">--%>
+<%--                            <option value="${station.id}">${station.name}</option>--%>
+<%--                        </c:forEach>--%>
+<%--                    </select>--%>
+<%--                    <label><input type="datetime-local" name="timetableItems[1].departureTime">Time</label>--%>
                 </div>
             </div>
-            <button type="button" onclick="sendRequestAddRoute()">+</button>
+            <button type="button" onclick="addNewSelect()">+</button>
 
             <%--                <label for="schedule_departure_time">Time</label>--%>
             <%--                <input id="schedule_departure_time" name="departureTime"--%>

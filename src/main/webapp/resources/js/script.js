@@ -51,15 +51,20 @@ function openRoutesSection(trainNumber, trainId, stations) {
 function addNewSelect(){
     let container = document.getElementById("select_container");
     let clone = document.getElementById("routes_stations_div").cloneNode(true);
+    let nextSelectIndex = container.children.length;
+    let select = clone.children[0]
+    select.name = "timetableItems["+ nextSelectIndex+"].station";
+    let timeinput = clone.children[1].children[0];
+    timeinput.name = "timetableItems["+ nextSelectIndex+"].departureTime";
     container.appendChild(clone);
 }
 
-async function sendRequestAddRoute(){
-    const rawResponse = await fetch('/add/route', {
-        method: 'POST',
-        body: '{ "train": "13","station": "2","departureTime": "2021-04-23T23:48"}'
-    });
-    const content = await rawResponse.json();
-    console.log(content);
-
-}
+// async function sendRequestAddRoute(){
+//     const rawResponse = await fetch('/add/route', {
+//         method: 'POST',
+//         body: '{ "train": "13","station": "2","departureTime": "2021-04-23T23:48"}'
+//     });
+//     const content = await rawResponse.json();
+//     console.log(content);
+//
+// }

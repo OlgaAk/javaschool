@@ -18,6 +18,7 @@ public class Route {
     private Train train;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "route_id")
     private List<TimetableItem> timetableItems;
 
     @ManyToMany

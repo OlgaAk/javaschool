@@ -13,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/")
@@ -86,6 +88,12 @@ public class AdminController {
 
     @PostMapping( path = "/add/route")
     public String addRoute(@ModelAttribute("route") Route route){
+        Set<Station> stations = new HashSet<>();
+        for(TimetableItem timetable : route.getTimetableItems()){
+            timetable.setTrain(route.getTrain());
+            stations.add(timetable.getStation());
+        }
+        route.setStations(stations);
         routeService.createNewRoute(route);
         return "redirect:/admin";
     }
