@@ -8,6 +8,9 @@
           rel="stylesheet">
 </head>
 <body>
+
+<%@include file="includes/common/navbar.jsp" %>
+
 <div class="header">
     <p>Home Area</p>
 </div>

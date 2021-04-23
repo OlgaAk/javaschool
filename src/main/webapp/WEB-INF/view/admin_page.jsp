@@ -8,20 +8,18 @@
           rel="stylesheet">
 </head>
 <body>
-<div class="header">
-    <p>Admin Area</p>
-</div>
+<%@include file="includes/common/navbar.jsp" %>
 
 <div class="main-container">
 
     <div id="main-container-left-side">
-        <%@include file="admin/trains_section.jsp" %>
-        <%@include file="admin/stations_section.jsp" %>
+        <%@include file="includes/admin/trains_section.jsp" %>
+        <%@include file="includes/admin/stations_section.jsp" %>
     </div>
 
     <div id="main-container-right-side">
-        <%@include file="admin/schedule_section.jsp" %>
-        <%@include file="admin/routes_section.jsp" %>
+        <%@include file="includes/admin/schedule_section.jsp" %>
+        <%@include file="includes/admin/routes_section.jsp" %>
     </div>
 
 </div>
