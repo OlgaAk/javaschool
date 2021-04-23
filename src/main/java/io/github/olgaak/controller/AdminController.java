@@ -34,6 +34,11 @@ public class AdminController {
     @Autowired
     public RouteService routeService;
 
+    @GetMapping("/")
+    public String getHomePage(ModelMap model){
+        return "home_page";
+    }
+
     @GetMapping("/admin")
     public String getAdminPage(ModelMap model){
         model.addAttribute("name", "Tom");
@@ -41,7 +46,7 @@ public class AdminController {
         model.addAttribute("trains", trains);
         List<Station> stations = stationService.getAllStations();
         model.addAttribute("stations", stations);
-        return "admin";
+        return "admin_page";
     }
 
     @PostMapping("/add/train")
