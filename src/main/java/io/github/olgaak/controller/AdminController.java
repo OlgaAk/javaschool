@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @Controller
@@ -34,10 +33,7 @@ public class AdminController {
     @Autowired
     public RouteService routeService;
 
-    @GetMapping("/")
-    public String getHomePage(ModelMap model){
-        return "home_page";
-    }
+
 
     @GetMapping("/admin")
     public String getAdminPage(ModelMap model){
