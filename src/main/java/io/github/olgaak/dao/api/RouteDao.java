@@ -1,4 +1,4 @@
-package io.github.olgaak.dao;
+package io.github.olgaak.dao.api;
 
 import io.github.olgaak.entity.Route;
 

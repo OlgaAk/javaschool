@@ -1,6 +1,6 @@
 package io.github.olgaak.service.impl;
 
-import io.github.olgaak.dao.RouteDao;
+import io.github.olgaak.dao.api.RouteDao;
 import io.github.olgaak.entity.Route;
 import io.github.olgaak.service.api.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,6 @@
 package io.github.olgaak.service.impl;
 
-import io.github.olgaak.dao.TimetableDao;
-import io.github.olgaak.dao.TrainDao;
+import io.github.olgaak.dao.api.TimetableDao;
 import io.github.olgaak.entity.TimetableItem;
 import io.github.olgaak.service.api.TimetableService;
 import org.springframework.beans.factory.annotation.Autowired;

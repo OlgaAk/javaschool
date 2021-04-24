@@ -1,6 +1,6 @@
 package io.github.olgaak.service.impl;
 
-import io.github.olgaak.dao.TrainDao;
+import io.github.olgaak.dao.api.TrainDao;
 import io.github.olgaak.entity.Train;
 import io.github.olgaak.service.api.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;

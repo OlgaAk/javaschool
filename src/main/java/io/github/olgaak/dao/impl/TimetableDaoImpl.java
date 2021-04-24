@@ -1,24 +1,24 @@
-package io.github.olgaak.dao;
+package io.github.olgaak.dao.impl;
 
-import io.github.olgaak.entity.Train;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.github.olgaak.dao.api.TimetableDao;
+import io.github.olgaak.entity.TimetableItem;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Repository
-public class TrainDaoImpl implements TrainDao {
+public class TimetableDaoImpl implements TimetableDao {
 
     private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("railway_app");
 
-    public void createNewTrain(Train train){
+    public void createNewTimetableItem(TimetableItem timetableItem){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-            entityManager.persist(train);
+            entityManager.persist(timetableItem);
 //            entityManager.flush();
             transaction.commit();
         }
@@ -32,22 +32,22 @@ public class TrainDaoImpl implements TrainDao {
         }
     }
 
-    public List<Train> getAllTrains() {
+    public List<TimetableItem> getAllTimetableItems() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Query query = entityManager.createQuery("SELECT t FROM Train t");
-        List<Train> trains = query.getResultList();
-        return trains;
+        Query query = entityManager.createQuery("SELECT t FROM TimetableItem t");
+        List<TimetableItem> timetableItems = query.getResultList();
+        return timetableItems;
     }
 
     @Override
-    public void deleteTrain(long id) {
+    public void deleteTimetableItem(long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-            Train train = entityManager.find(Train.class, id);
-            entityManager.remove(train);
+            TimetableItem timetableItem = entityManager.find(TimetableItem.class, id);
+            entityManager.remove(timetableItem);
             transaction.commit();
         }
         catch (Exception ex){
@@ -61,13 +61,13 @@ public class TrainDaoImpl implements TrainDao {
     }
 
     @Override
-    public void editTrain(Train train) {
+    public void editTimetableItem(TimetableItem timetableItem) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-            entityManager.merge(train);
+            entityManager.merge(timetableItem);
             transaction.commit();
         }
         catch (Exception ex){

@@ -1,24 +1,25 @@
-package io.github.olgaak.dao;
+package io.github.olgaak.dao.impl;
 
-import io.github.olgaak.entity.Station;
+import io.github.olgaak.dao.api.RouteDao;
+import io.github.olgaak.entity.Route;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Repository
-public class StationDaoImpl implements StationDao {
+public class RouteDaoImpl implements RouteDao {
 
     private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("railway_app");
 
-    public void createNewStation(Station station){
+    public void createNewRoute(Route route){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-            entityManager.persist(station);
-            entityManager.flush();
+            entityManager.persist(route);
+//            entityManager.flush();
             transaction.commit();
         }
         catch (Exception ex){
@@ -31,22 +32,22 @@ public class StationDaoImpl implements StationDao {
         }
     }
 
-    public List<Station> getAllStations() {
+    public List<Route> getAllRoutes() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Query query = entityManager.createQuery("SELECT t FROM Station t");
-        List<Station> stations = query.getResultList();
-        return stations;
+        Query query = entityManager.createQuery("SELECT t FROM Route t");
+        List<Route> routes = query.getResultList();
+        return routes;
     }
 
     @Override
-    public void deleteStation(long id) {
+    public void deleteRoute(long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-            Station station = entityManager.find(Station.class, id);
-            entityManager.remove(station);
+            Route route = entityManager.find(Route.class, id);
+            entityManager.remove(route);
             transaction.commit();
         }
         catch (Exception ex){
@@ -60,13 +61,13 @@ public class StationDaoImpl implements StationDao {
     }
 
     @Override
-    public void editStation(Station station) {
+    public void editRoute(Route route) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-            entityManager.merge(station);
+            entityManager.merge(route);
             transaction.commit();
         }
         catch (Exception ex){
