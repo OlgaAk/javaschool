@@ -1,6 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
 :root {
     --main-color: #d5d5d1;
     --main-accent-color: #ffde11;
+    --main-text-color: #393938;
+}
+
+html {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--main-text-color);
+}
+a{
+   text-decoration: none;
+    color: var(--main-text-color);
 }
 
 .btn {
@@ -74,7 +87,7 @@
     display: grid;
     grid-column-gap: 60px;
     grid-template-columns: 1fr 1fr;
-    margin-top: 100px;
+    margin: 100px 40px;
 }
 
 #main-container-left-side {
@@ -124,14 +137,13 @@
     position: relative;
 }
 
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-
-.login_container{
+.login_container {
     height: 100%;
     display: flex;
     align-items: center;
     margin-right: 30px;
 }
+
 .login {
     padding: .25rem 0;
     margin: 0 0 0 0.3rem;
@@ -146,4 +158,66 @@
     font-size: 30px;
     color: var(--main-accent-color);
     bottom: 20px;
+}
+
+
+/*home*******************************/
+
+.main-container-home {
+margin: 100px 20px;
+}
+
+.train-search-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.train-search-container {
+    width: 960px;
+    height: 190px;
+    box-shadow: 0 0 0.375rem 0 #a7a1a1;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.train-search-input-group {
+    float: left;
+    margin: 0 15px;
+}
+
+.train-search-input-groups-box{
+    margin: 0 auto;
+    height: 40px;
+    width: fit-content;
+    display: flex;
+}
+
+.train-search-input-groups-container{
+    display: inline-block;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.train-search-btn {
+    padding: 10px 30px;
+    border-radius: 25px;
+    font-size: 18px;
+    line-height: 1;
+    border: 1px solid transparent;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    color: #555353;
+    background-color: var(--main-accent-color);
+}
+
+.train-search-btn:hover{
+    background-color: #dbc712;
+}
+
+.train-search-btn-container {
+    margin: 20px 0px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
 }
