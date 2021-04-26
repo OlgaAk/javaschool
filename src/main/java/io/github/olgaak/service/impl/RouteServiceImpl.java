@@ -27,6 +27,10 @@ public class RouteServiceImpl implements RouteService {
         return routeDao.getAllRoutes();
     }
 
+    public List<Route> getTrainRoutes(Long trainId) {
+        return routeDao.getTrainRoutes(trainId);
+    }
+
     @Override
     public void deleteRoute(long id) {
         routeDao.deleteRoute(id);

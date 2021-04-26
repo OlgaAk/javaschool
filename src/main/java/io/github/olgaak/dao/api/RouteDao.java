@@ -10,6 +10,8 @@ public interface RouteDao {
 
     List<Route> getAllRoutes();
 
+    List<Route> getTrainRoutes(Long trainId);
+
     void deleteRoute(long id);
 
     void editRoute(Route route);

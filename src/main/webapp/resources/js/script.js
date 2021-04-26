@@ -36,7 +36,8 @@ function openScheduleSection(stationId, stationName, trains) {
     }
 }
 
-function openRoutesSection(trainNumber, trainId, stations) {
+async function openRoutesSection(trainNumber, trainId, stations) {
+    let routes = await fetchRoutes(trainId);
     document.getElementById("schedule-section").classList.add("hidden");
     document.getElementById("routes-section").classList.remove("hidden");
     // insert saved values into fields
@@ -47,6 +48,8 @@ function openRoutesSection(trainNumber, trainId, stations) {
     for (let i = 0; i < select.options.length; i++) {
         select.options[i].selected = values.indexOf(select.options[i].text) >= 0;
     }
+// routes-table-content
+//     <span className="table-cell"></span>
 }
 function addNewSelect(){
     let container = document.getElementById("select_container");
@@ -68,3 +71,13 @@ function addNewSelect(){
 //     console.log(content);
 //
 // }
+
+async function fetchRoutes(trainId){
+    let response = await fetch("/routes/"+trainId);
+    if (response.ok) {
+        let json = await response.json();
+        console.log(json)
+    } else {
+        console.log("Ошибка HTTP: " + response.status);
+    }
+}

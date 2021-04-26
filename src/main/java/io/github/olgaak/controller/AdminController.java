@@ -98,4 +98,10 @@ public class AdminController {
         routeService.createNewRoute(route);
         return "redirect:/admin";
     }
+
+    @GetMapping("/routes/{trainId}")
+    public String getTrainRoutes(@PathVariable("trainId") Long trainId){
+        List<Route> routes = routeService.getTrainRoutes(trainId);
+        return "redirect:/admin";
+    }
 }

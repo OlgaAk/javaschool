@@ -39,6 +39,22 @@ public class RouteDaoImpl implements RouteDao {
         return routes;
     }
 
+    public List<Route> getTrainRoutes(Long trainId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        List<Route> routes = null;
+        try{
+            Query query = entityManager
+                    .createQuery("SELECT r FROM Route r JOIN FETCH r.train WHERE r.train.id  = :trainId", Route.class)
+                    .setParameter("trainId", trainId);
+            routes = query.getResultList();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return routes;
+    }
+
     @Override
     public void deleteRoute(long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
