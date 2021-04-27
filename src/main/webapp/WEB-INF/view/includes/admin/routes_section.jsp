@@ -27,6 +27,9 @@
             <div class="table-cell">Time</div>
         </div>
         <div id="routes-table-content" class="table-row table-row-train">
+            <c:forEach var="route" items="${routes}">
+                <option value="${route.id}">${route.id}</option>
+            </c:forEach>
         </div>
 
     </div>

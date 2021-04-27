@@ -1,5 +1,7 @@
 package io.github.olgaak.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,12 +17,15 @@ public class Station {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "station")
     private Set<TimetableItem> timetableItems;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "stations")
     private Set<Train> trains;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "stations")
     private Set<Route> routes;
 

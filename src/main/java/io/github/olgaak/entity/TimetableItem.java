@@ -1,5 +1,7 @@
 package io.github.olgaak.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -20,14 +22,16 @@ public class TimetableItem {
 //    @Column(name = "arrival_time")
 //    private Date arrivalTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "station_id")
     private Station station;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "train_id")
     private Train train;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "route_id")
     private Route route;

@@ -1,9 +1,6 @@
 package io.github.olgaak.controller;
 
-import io.github.olgaak.entity.Route;
-import io.github.olgaak.entity.Station;
-import io.github.olgaak.entity.TimetableItem;
-import io.github.olgaak.entity.Train;
+import io.github.olgaak.entity.*;
 import io.github.olgaak.service.api.RouteService;
 import io.github.olgaak.service.api.StationService;
 import io.github.olgaak.service.api.TimetableService;
@@ -100,8 +97,9 @@ public class AdminController {
     }
 
     @GetMapping("/routes/{trainId}")
-    public String getTrainRoutes(@PathVariable("trainId") Long trainId){
+    @ResponseBody
+    public List<Route> getTrainRoutes(@PathVariable("trainId") Long trainId, ModelMap model){
         List<Route> routes = routeService.getTrainRoutes(trainId);
-        return "redirect:/admin";
+        return routes;
     }
 }

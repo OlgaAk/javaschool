@@ -1,5 +1,7 @@
 package io.github.olgaak.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -13,14 +15,16 @@ public class Route {
     @Column(name = "id", nullable = false)
     private long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "train_id")
     private Train train;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "route_id")
     private List<TimetableItem> timetableItems;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "route_station",
             joinColumns = @JoinColumn(name = "route_id"),

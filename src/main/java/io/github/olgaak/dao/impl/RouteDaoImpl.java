@@ -5,6 +5,7 @@ import io.github.olgaak.entity.Route;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -39,6 +40,7 @@ public class RouteDaoImpl implements RouteDao {
         return routes;
     }
 
+    @Transactional
     public List<Route> getTrainRoutes(Long trainId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<Route> routes = null;
