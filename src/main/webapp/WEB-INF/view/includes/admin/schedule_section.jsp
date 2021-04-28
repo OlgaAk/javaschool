@@ -20,7 +20,7 @@
         </div>
         <div class="schedule-table">
             <h3>Schedule</h3>
-            <div class="table-row table-header table-row-4">
+            <div class="table-row table-header table-columns-4">
                 <div class="table-cell">Train number</div>
                 <div class="table-cell">Time</div>
                 <div class="table-cell"></div>

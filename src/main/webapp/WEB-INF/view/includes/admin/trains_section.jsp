@@ -16,7 +16,7 @@
         </div>
         <div class="train-table">
             <h3>Train list</h3>
-            <div class="table-row table-header table-row-5">
+            <div class="table-row table-header table-columns-5">
                 <div class="table-cell">Train number</div>
                 <div class="table-cell">Number of seats</div>
                 <div class="table-cell">Stations</div>
@@ -24,7 +24,7 @@
                 <div class="table-cell"></div>
             </div>
             <c:forEach var="train" items="${trains}">
-                <div class="table-row table-row-5">
+                <div class="table-row table-columns-5">
                     <span class="table-cell">${train.number}</span>
                     <span class="table-cell">${train.seat_count}</span>
                     <span class="table-cell" onclick="openRoutesSection(${train.number}, ${train.id},

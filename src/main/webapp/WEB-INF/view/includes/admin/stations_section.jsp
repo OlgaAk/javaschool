@@ -10,14 +10,14 @@
     </div>
     <div class="table">
         <h3>Station list</h3>
-        <div class="table-row table-header table-row-4">
+        <div class="table-row table-header table-columns-4">
             <div class="table-cell">Station name</div>
             <div class="table-cell"></div>
             <div class="table-cell"></div>
             <div class="table-cell"></div>
         </div>
         <c:forEach var="station" items="${stations}">
-            <div class="table-row table-row-4">
+            <div class="table-row table-columns-4">
                 <span class="table-cell">${station.name}</span>
                 <span class="table-cell" onclick="openScheduleSection(${station.id}, '${station.name}',
                         '<c:forEach var="train" items="${station.trains}">${train.number},</c:forEach>') ">View Schedule</span>

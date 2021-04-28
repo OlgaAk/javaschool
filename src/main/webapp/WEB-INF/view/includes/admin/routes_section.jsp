@@ -22,14 +22,12 @@
     </div>
     <div class="routes-table">
         <h3>Routes</h3>
-        <div class="table-row table-header table-row-4">
+        <div class="table-row table-header table-columns-2">
             <div class="table-cell">Station</div>
             <div class="table-cell">Time</div>
         </div>
-        <div id="routes-table-content" class="table-row table-row-train">
-            <c:forEach var="route" items="${routes}">
-                <option value="${route.id}">${route.id}</option>
-            </c:forEach>
+        <div id="routes-table-content" >
+
         </div>
 
     </div>

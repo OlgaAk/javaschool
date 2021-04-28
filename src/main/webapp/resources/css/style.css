@@ -43,12 +43,16 @@ a{
     border-right: 1px solid gray;
 }
 
-.table-row-5 {
+.table-columns-5 {
     grid-template-columns: 1fr 1fr 1fr 60px 60px;
 }
 
-.table-row-4 {
+.table-columns-4 {
     grid-template-columns: 1fr 1fr 60px 60px;
+}
+
+.table-columns-2{
+    grid-template-columns: 1fr 1fr;
 }
 
 .table-cell {
