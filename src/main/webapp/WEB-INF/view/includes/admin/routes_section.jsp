@@ -22,9 +22,9 @@
     </div>
     <div class="routes-table">
         <h3>Routes</h3>
-        <div class="table-row table-header table-columns-2">
-            <div class="table-cell">Station</div>
+        <div style="display: none" class="table-row table-header table-columns-2" id="routes-table-header">
             <div class="table-cell">Time</div>
+            <div class="table-cell">Station</div>
         </div>
         <div id="routes-table-content" >
 

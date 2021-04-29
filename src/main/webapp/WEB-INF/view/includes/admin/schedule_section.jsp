@@ -2,7 +2,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%--Schedule Section--%>
-<div id="main-container-right-side">
     <div id="schedule-section" class="hidden">
         <h3 id="schedule_title">Schedules for station ***</h3>
         <div class="addNew-section">
@@ -53,5 +52,4 @@
             <%--                </c:forEach>--%>
         </div>
     </div>
-</div>
 <%--Schedule section End--%>

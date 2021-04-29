@@ -8,7 +8,7 @@
     </div>
     <div class="nav-right">
         <div class="login_container">
-            <a href="/admin">
+            <a href="/login">
                 <span class="login">Log in</span>
             </a>
         </div>

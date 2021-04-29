@@ -36,37 +36,50 @@ function openScheduleSection(stationId, stationName, trains) {
     }
 }
 
-async function openRoutesSection(trainNumber, trainId, stations) {
+function createRouteTable(route, index, routesTable) {
+    let routesTableHeader = document.getElementById("routes-table-header").cloneNode(true);
+    routesTableHeader.style.display = "grid";
+    routesTableHeader.removeAttribute("id");
+    let routeTitle = document.createElement("h5");
+    routeTitle.innerText = "Route " + (index + 1);
+    routesTable.append(routeTitle, routesTableHeader);
+    createRouteTableRows(route, routesTable)
+}
+
+function hideScheduleShowRoutes(trainNumber, trainId) {
+    document.getElementById("schedule-section").classList.add("hidden");
+    document.getElementById("routes-section").classList.remove("hidden");
+    document.getElementById("routes_title").innerText = "Routes for train  " + trainNumber;
+    document.getElementById("routes_train_id").value = trainId;
+}
+
+async function openRoutesSection(trainNumber, trainId) {
+    hideScheduleShowRoutes(trainNumber, trainId);
     let routesTable = document.getElementById("routes-table-content");
-    if(routesTable.dataset.train == trainId) return;
+    if (routesTable.dataset.train == trainId) return;
     routesTable.dataset.train = trainId;
-    console.log(routesTable.dataset, trainId)
     routesTable.innerHTML = "";
     let routes = await fetchRoutes(trainId);
     if (routes != null) {
-        routes[0].timetableItems.forEach(timeTable => {
-            let newCellRow = document.createElement("div");
-            newCellRow.classList.add("table-row", "table-columns-2");
-            let routeTimeCell = document.createElement("span");
-            routeTimeCell.className = "table-cell";
-            routeTimeCell.innerText = timeTable.departureTime;
-            let routeStationCell = document.createElement("span");
-            routeStationCell.className = "table-cell";
-            routeStationCell.innerText = timeTable.station.name;
-            newCellRow.append(routeTimeCell, routeStationCell);
-            routesTable.append(newCellRow);
+        routes.forEach((route, index) => {
+            createRouteTable(route, index, routesTable)
         })
     }
-    document.getElementById("schedule-section").classList.add("hidden");
-    document.getElementById("routes-section").classList.remove("hidden");
-    // insert saved values into fields
-    document.getElementById("routes_title").innerText = "Routes for train  " + trainNumber;
-    document.getElementById("routes_train_id").value = trainId;
-    // let select = document.getElementById("routes_stations");
-    // let values = stations.split(',');
-    // for (let i = 0; i < select.options.length; i++) {
-    //     select.options[i].selected = values.indexOf(select.options[i].text) >= 0;
-    // }
+}
+
+function createRouteTableRows(route, routesTable) {
+    route.timetableItems.forEach(timeTable => {
+        let newCellRow = document.createElement("div");
+        newCellRow.classList.add("table-row", "table-columns-2");
+        let routeTimeCell = document.createElement("span");
+        routeTimeCell.className = "table-cell";
+        routeTimeCell.innerText = timeTable.departureTime;
+        let routeStationCell = document.createElement("span");
+        routeStationCell.className = "table-cell";
+        routeStationCell.innerText = timeTable.station.name;
+        newCellRow.append(routeTimeCell, routeStationCell);
+        routesTable.append(newCellRow);
+    })
 }
 
 function addNewSelect() {
