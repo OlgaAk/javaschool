@@ -16,6 +16,10 @@ a{
     color: var(--main-text-color);
 }
 
+.material-icons{
+    font-size: 20px;
+}
+
 .btn {
     border: none;
     padding: 5px 10px;
@@ -87,7 +91,6 @@ a{
 }
 
 .main-container {
-    width: 100%;
     display: grid;
     grid-column-gap: 60px;
     grid-template-columns: 1fr 1fr;
@@ -163,6 +166,7 @@ a{
     color: var(--main-accent-color);
     bottom: 20px;
 }
+
 
 
 /*home*******************************/

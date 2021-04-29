@@ -73,7 +73,8 @@ function createRouteTableRows(route, routesTable) {
         newCellRow.classList.add("table-row", "table-columns-2");
         let routeTimeCell = document.createElement("span");
         routeTimeCell.className = "table-cell";
-        routeTimeCell.innerText = timeTable.departureTime;
+        let time = new Date(timeTable.departureTime).toLocaleTimeString().substring(0,5); // format "13:43:00"
+        routeTimeCell.innerText = time;
         let routeStationCell = document.createElement("span");
         routeStationCell.className = "table-cell";
         routeStationCell.innerText = timeTable.station.name;

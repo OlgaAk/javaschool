@@ -28,7 +28,7 @@ public class Train implements Serializable {
     )
     private Set<Station> stations;
 
-    @OneToMany
+    @OneToMany(mappedBy = "train")
     private Set<Route> routes;
 
     public Train(int number, int seat_count) {

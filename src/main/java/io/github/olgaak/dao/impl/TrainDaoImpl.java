@@ -5,6 +5,7 @@ import io.github.olgaak.entity.Train;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -31,7 +32,7 @@ public class TrainDaoImpl implements TrainDao {
             entityManager.close();
         }
     }
-
+    @Transactional
     public List<Train> getAllTrains() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Query query = entityManager.createQuery("SELECT t FROM Train t");
