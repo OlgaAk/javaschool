@@ -11,7 +11,7 @@
     <div class="nav-right">
         <div class="login_container">
             <sec:authorize access="isAnonymous()">
-            <a href="/admin">
+            <a href="/profile">
                 <span class="login">Log in</span>
             </a>
             </sec:authorize>

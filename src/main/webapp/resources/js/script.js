@@ -94,16 +94,7 @@ function addNewSelect() {
     container.appendChild(clone);
 }
 
-// async function sendRequestAddRoute(){
-//     const rawResponse = await fetch('/add/route', {
-//         method: 'POST',
-//         body: '{ "train": "13","station": "2","departureTime": "2021-04-23T23:48"}'
-//     });
-//     const content = await rawResponse.json();
-//     console.log(content);
-//
-// }
-
+//get info about a train routes with REST
 async function fetchRoutes(trainId) {
     let response = await fetch("/routes/" + trainId);
     if (response.ok) {
@@ -115,3 +106,24 @@ async function fetchRoutes(trainId) {
         return null;
     }
 }
+
+function setEventListeners(){
+    setEventListenerOnProfileMenuItems();
+}
+
+// mark selected menu item with active color
+function setEventListenerOnProfileMenuItems(){
+    let profileMenuItemsList = document.querySelectorAll(".profile-menu-item p");
+    profileMenuItemsList.forEach(item=>
+        item.addEventListener("click", (e)=> {
+            removeActiveClassMenuItems(profileMenuItemsList);
+            e.target.classList.add("active");
+        }));
+}
+
+function removeActiveClassMenuItems(profileMenuItemsList){
+    profileMenuItemsList.forEach(item=>
+        item.classList.remove("active"))
+}
+
+setEventListeners();
