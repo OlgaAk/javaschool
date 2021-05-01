@@ -1,3 +1,5 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <header class="navbar">
     <div class="nav-left">
         <div class="logo">
@@ -8,9 +10,17 @@
     </div>
     <div class="nav-right">
         <div class="login_container">
-            <a href="/login">
+            <sec:authorize access="isAnonymous()">
+            <a href="/admin">
                 <span class="login">Log in</span>
             </a>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <a href="/logout">
+                    <span class="login">Log out</span>
+                </a>
+            </sec:authorize>
         </div>
+
     </div>
 </header>
