@@ -1,4 +1,4 @@
-package io.github.olgaak.entity;
+package io.github.olgaak.dto;
 
 
 public class TrainDto {

@@ -1,7 +1,9 @@
 package io.github.olgaak.config;
 
+import io.github.olgaak.security.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
@@ -17,10 +19,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity()
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
+@ComponentScan("io.github.olgaak.security")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private CustomAuthenticationProvider authProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -44,7 +50,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return roleHierarchy;
     }
 
-
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -59,7 +64,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("USER")
                 .and()
                 .withUser("admin")
-                .password(passwordEncoder.encode("Pswrd12!"))
+                .password(passwordEncoder.encode("password"))
                 .roles("USER", "ADMIN");
+
+        auth.authenticationProvider(authProvider);
     }
+
 }

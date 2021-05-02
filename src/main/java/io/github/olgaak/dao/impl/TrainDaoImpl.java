@@ -26,6 +26,7 @@ public class TrainDaoImpl implements TrainDao {
         catch (Exception ex){
             if(transaction != null){
                 transaction.rollback();
+
             }
             ex.printStackTrace();
         } finally {
