@@ -26,21 +26,26 @@ public class UserController {
         return "login_page";
     }
 
-    @PostMapping("/login/signup")
+    @GetMapping("/login/signup")
+    public String getSignupPage(){
+        return "signup_page";
+    }
+
+    @PostMapping("/login/processsignup")
     public String registerUserAccount(
             @ModelAttribute("user") @Valid UserDto userDto, ModelMap model) {
         try {
             User registered = userService.registerNewUserAccount(userDto);
             model.addAttribute("successRegister", registered);
         } catch (UserAlreadyExistException uaeEx) {
-            model.addAttribute("message",
+            model.addAttribute("errorMessage",
                     "An account for that username/email already exists.");
         }
-        return "redirect:/admin";
+        return "redirect:/profile";
     }
 
     @GetMapping("/profile")
-    public String getProfilePage(){
+    public String getProfilePage(ModelMap model){
         return "profile_page";
     }
 

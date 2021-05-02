@@ -8,6 +8,8 @@ import io.github.olgaak.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.modelmapper.ModelMapper;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -19,7 +21,8 @@ public class UserServiceImpl implements UserService {
         if(emailExist(userDto.getEmail())){
             throw new UserAlreadyExistException("Account with this email adress already exists.");
         }
-        User user = userDto._toConvertUserEntity();
+        ModelMapper modelMapper = new ModelMapper();
+        User user = modelMapper.map(userDto, User.class);
         userDao.createNewUser(user);
         return user;
     }

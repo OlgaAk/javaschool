@@ -1,6 +1,9 @@
 package io.github.olgaak.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name="user")
@@ -17,8 +20,6 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToOne
-    private Passenger passenger;
 
     public User() {
     }
@@ -52,11 +53,4 @@ public class User {
         this.password = password;
     }
 
-    public Passenger getPassenger() {
-        return passenger;
-    }
-
-    public void setPassenger(Passenger passenger) {
-        this.passenger = passenger;
-    }
 }

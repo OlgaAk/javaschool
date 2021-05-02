@@ -327,7 +327,10 @@ margin: 100px 20px;
 }
 
 .login-form-input-group {
-    margin: 0 15px;
+    margin: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
 }
 
 .login-form-input-group input {
@@ -338,13 +341,13 @@ margin: 100px 20px;
     margin: 0 auto;
     height: 40px;
     width: fit-content;
-    display: flex;
 }
 
 .login-form-input-groups-container{
     display: inline-block;
     width: 100%;
-    margin-top: 50px;
+    margin-top: 20px;
+    height: 80px;
 }
 
 .login-form-btn {

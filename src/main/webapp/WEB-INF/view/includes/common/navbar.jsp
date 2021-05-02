@@ -16,7 +16,7 @@
                 </a>
             </div>
             <div class="login_container signup_container">
-                <a href="/profile">
+                <a href="/login/signup">
                     <span class="signup">Sign up</span>
                 </a>
             </div>

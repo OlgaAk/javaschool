@@ -33,10 +33,4 @@ public class UserDto {
         this.password = password;
     }
 
-    public User _toConvertUserEntity(){
-        User entity = new User();
-        entity.setEmail(email);
-        entity.setPassword(password);
-        return entity ;
-    }
  }

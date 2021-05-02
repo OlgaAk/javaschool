@@ -20,7 +20,8 @@
     <div id="main-container-profile-left-side">
         <div class="profile-menu-container">
             <div class="profile-menu-item">
-                <p class="active">Profile</p>
+                <p class="active">Profile ${successRegister}</p>
+                <p>${errorMessage}</p>
             </div>
             <div class="profile-menu-item">
                 <p>Tickets</p>

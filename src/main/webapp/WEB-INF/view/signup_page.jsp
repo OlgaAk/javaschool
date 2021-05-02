@@ -17,10 +17,10 @@
 
 <div class="main-container-home">
     <div>
-        <h2 class="train-search-title">Login</h2>
+        <h2 class="train-search-title">Sign up</h2>
     </div>
     <div class="login-form-container">
-        <form method="post" action="/login">
+        <form method="post" action="/login/processsignup">
             <div class="login-form-input-groups-container">
                 <div class="login-form-input-groups-box">
                     <div class="login-form-input-group">
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="login-form-btn-container ">
-                <button class="login-form-btn" type="submit">Login</button>
+                <button class="login-form-btn" type="submit">Sign up</button>
             </div>
 
         </form>
