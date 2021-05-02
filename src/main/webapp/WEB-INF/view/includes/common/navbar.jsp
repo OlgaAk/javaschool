@@ -9,18 +9,30 @@
         </div>
     </div>
     <div class="nav-right">
-        <div class="login_container">
-            <sec:authorize access="isAnonymous()">
-            <a href="/profile">
-                <span class="login">Log in</span>
-            </a>
-            </sec:authorize>
-            <sec:authorize access="isAuthenticated()">
-                <a href="/logout">
-                    <span class="login">Log out</span>
+        <sec:authorize access="isAnonymous()">
+            <div class="login_container">
+                <a href="/profile">
+                    <span class="login">Log in</span>
                 </a>
-            </sec:authorize>
-        </div>
+            </div>
+            <div class="login_container signup_container">
+                <a href="/profile">
+                    <span class="signup">Sign up</span>
+                </a>
+            </div>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <div class="login_container">
+                <a href="/profile">
+                    <span class="login">Profile</span>
+                </a>
+            </div>
+            <div class="login_container logout_container">
+                <a href="/logout">
+                    <span class="logout">Log out</span>
+                </a>
+            </div>
+        </sec:authorize>
 
     </div>
 </header>

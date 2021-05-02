@@ -1,8 +1,6 @@
 package io.github.olgaak.controller;
 
-import io.github.olgaak.entity.Route;
-import io.github.olgaak.entity.Train;
-import io.github.olgaak.entity.TrainQueryDTO;
+import io.github.olgaak.dto.TrainQueryDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +19,8 @@ public class HomeController {
     public String trainQuery(@RequestParam("departure_station") String departureStation,
                              @RequestParam("arrival_station") String arrivalStation,
                              @RequestParam("departure_date") String departureDate){
-        TrainQueryDTO trainQuery = new TrainQueryDTO(departureStation,arrivalStation,departureDate);
-        return "redirect:/admin";
+        TrainQueryDto trainQuery = new TrainQueryDto(departureStation,arrivalStation,departureDate);
+        return "redirect:/";
     }
 
 }

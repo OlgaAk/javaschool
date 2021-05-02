@@ -5,6 +5,7 @@ import io.github.olgaak.entity.TimetableItem;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -32,6 +33,7 @@ public class TimetableDaoImpl implements TimetableDao {
         }
     }
 
+    @Transactional
     public List<TimetableItem> getAllTimetableItems() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Query query = entityManager.createQuery("SELECT t FROM TimetableItem t");

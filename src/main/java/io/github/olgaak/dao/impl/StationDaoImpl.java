@@ -5,6 +5,7 @@ import io.github.olgaak.entity.Station;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -32,6 +33,7 @@ public class StationDaoImpl implements StationDao {
         }
     }
 
+    @Transactional
     public List<Station> getAllStations() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Query query = entityManager.createQuery("SELECT t FROM Station t");

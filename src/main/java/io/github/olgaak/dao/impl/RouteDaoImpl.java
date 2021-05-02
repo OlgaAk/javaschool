@@ -13,7 +13,7 @@ public class RouteDaoImpl implements RouteDao {
 
     private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("railway_app");
 
-    public void createNewRoute(Route route){
+    public void createNewRoute(Route route) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
         try {
@@ -22,9 +22,8 @@ public class RouteDaoImpl implements RouteDao {
             entityManager.persist(route);
 //            entityManager.flush();
             transaction.commit();
-        }
-        catch (Exception ex){
-            if(transaction != null){
+        } catch (Exception ex) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();
@@ -33,6 +32,7 @@ public class RouteDaoImpl implements RouteDao {
         }
     }
 
+    @Transactional
     public List<Route> getAllRoutes() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Query query = entityManager.createQuery("SELECT t FROM Route t");
@@ -44,12 +44,12 @@ public class RouteDaoImpl implements RouteDao {
     public List<Route> getTrainRoutes(Long trainId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<Route> routes = null;
-        try{
+        try {
             Query query = entityManager
                     .createQuery("SELECT r FROM Route r JOIN FETCH r.train WHERE r.train.id  = :trainId", Route.class)
                     .setParameter("trainId", trainId);
             routes = query.getResultList();
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             entityManager.close();
@@ -67,9 +67,8 @@ public class RouteDaoImpl implements RouteDao {
             Route route = entityManager.find(Route.class, id);
             entityManager.remove(route);
             transaction.commit();
-        }
-        catch (Exception ex){
-            if(transaction != null){
+        } catch (Exception ex) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();
@@ -87,9 +86,8 @@ public class RouteDaoImpl implements RouteDao {
             transaction.begin();
             entityManager.merge(route);
             transaction.commit();
-        }
-        catch (Exception ex){
-            if(transaction != null){
+        } catch (Exception ex) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();

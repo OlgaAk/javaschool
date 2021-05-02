@@ -1,14 +1,14 @@
-package io.github.olgaak.entity;
+package io.github.olgaak.dto;
 
-public class TrainQueryDTO {
+public class TrainQueryDto {
     private String departureStation;
     private String arrivalStation;
     private String departureDate;
 
-    public TrainQueryDTO() {
+    public TrainQueryDto() {
     }
 
-    public TrainQueryDTO(String departureStation, String arrivalStation, String departureDate) {
+    public TrainQueryDto(String departureStation, String arrivalStation, String departureDate) {
         this.departureStation = departureStation;
         this.arrivalStation = arrivalStation;
         this.departureDate = departureDate;

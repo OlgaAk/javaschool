@@ -147,6 +147,7 @@ a{
     float: right;
     height: 100%;
     position: relative;
+    display: flex;
 }
 
 .login_container {
@@ -154,6 +155,14 @@ a{
     display: flex;
     align-items: center;
     margin-right: 30px;
+}
+
+.signup_container{
+    margin-left: 30px
+}
+
+.logout_container{
+    margin-left: 30px
 }
 
 .login {
@@ -172,6 +181,27 @@ a{
     bottom: 20px;
 }
 
+.signup::before {
+    content: "\ea4d";;
+    font-family: "Material Icons";
+    display: block;
+    position: absolute;
+    right: 48%;
+    font-size: 30px;
+    color: var(--main-accent-color);
+    bottom: 20px;
+}
+
+.logout::before {
+    content: "\e9ba";;
+    font-family: "Material Icons";
+    display: block;
+    position: absolute;
+    right: 44%;
+    font-size: 30px;
+    color: var(--main-accent-color);
+    bottom: 20px;
+}
 
 
 /*home*******************************/

@@ -20,18 +20,17 @@
         <h2 class="train-search-title">Login</h2>
     </div>
     <div class="train-search-container">
-        <form method="get" action="/train-query">
+        <form method="post" action="/login">
             <div class="train-search-input-groups-container">
                 <div class="train-search-input-groups-box">
                     <div class="train-search-input-group">
                         <label>Email</label>
-                        <input name="departure_station" type="search" required>
+                        <input name="username" type="text" required>
                     </div>
                     <div class="train-search-input-group">
                         <label>Password</label>
-                        <input name="arrival_station" type="search" required>
+                        <input name="password" type="password" required>
                     </div>
-
                 </div>
             </div>
             <div class="train-search-btn-container ">
