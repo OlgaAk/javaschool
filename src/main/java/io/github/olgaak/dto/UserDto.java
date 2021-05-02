@@ -1,8 +1,7 @@
 package io.github.olgaak.dto;
 
-import io.github.olgaak.entity.User;
-
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 public class UserDto {
 
@@ -11,6 +10,16 @@ public class UserDto {
 
     @NotBlank
     private String password;
+
+    @NotBlank
+    private String firstName;
+
+    @NotBlank
+    private String lastName;
+
+    private Date dateOfBirth;
+
+    public UserDto() { }
 
     public UserDto(String email, String password) {
         this.email = email;
@@ -33,4 +42,27 @@ public class UserDto {
         this.password = password;
     }
 
- }
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+}

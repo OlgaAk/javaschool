@@ -5,5 +5,8 @@ import io.github.olgaak.entity.User;
 import io.github.olgaak.exceptions.UserAlreadyExistException;
 
 public interface UserService {
+
     public User registerNewUserAccount(UserDto userDto) throws UserAlreadyExistException;
+
+    public UserDto findByEmail(String email);
 }

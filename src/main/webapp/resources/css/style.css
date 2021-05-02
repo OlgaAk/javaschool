@@ -326,6 +326,10 @@ margin: 100px 20px;
     border-radius: 20px;
 }
 
+.login-form-container.signup-form {
+    height: 250px;
+}
+
 .login-form-input-group {
     margin: 10px 15px;
     display: flex;
@@ -349,6 +353,11 @@ margin: 100px 20px;
     margin-top: 20px;
     height: 80px;
 }
+
+.login-form-input-groups-container.signup-form{
+    height: 120px;
+}
+
 
 .login-form-btn {
     padding: 10px 30px;

@@ -19,10 +19,18 @@
     <div>
         <h2 class="train-search-title">Sign up</h2>
     </div>
-    <div class="login-form-container">
+    <div class="login-form-container signup-form">
         <form method="post" action="/login/processsignup">
-            <div class="login-form-input-groups-container">
+            <div class="login-form-input-groups-container signup-form">
                 <div class="login-form-input-groups-box">
+                    <div class="login-form-input-group">
+                        <label>First Name</label>
+                        <input name="firstName" type="text" required>
+                    </div>
+                    <div class="login-form-input-group">
+                        <label>Last Name</label>
+                        <input name="lastName" type="text" required>
+                    </div>
                     <div class="login-form-input-group">
                         <label>Email</label>
                         <input name="email" type="text" required>

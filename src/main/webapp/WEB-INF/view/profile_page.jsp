@@ -20,8 +20,7 @@
     <div id="main-container-profile-left-side">
         <div class="profile-menu-container">
             <div class="profile-menu-item">
-                <p class="active">Profile ${successRegister}</p>
-                <p>${errorMessage}</p>
+                <p class="active">Profile</p>
             </div>
             <div class="profile-menu-item">
                 <p>Tickets</p>
@@ -32,9 +31,9 @@
     <div id="main-container-profile-right-side">
         <div class="profile-content-container">
             <div class="profile-personal-info">
-                <h3>Ivan Ivanov</h3>
-                <p>ivanov@email.com</p>
-                <p>05.01.2000</p>
+                <h3>${user.firstName} ${user.lastName}</h3>
+                <p>${user.email}</p>
+                <p>${user.dateOfBirth}</p>
             </div>
         </div>
     </div>

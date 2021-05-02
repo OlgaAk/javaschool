@@ -5,6 +5,7 @@ import io.github.olgaak.entity.User;
 import io.github.olgaak.exceptions.UserAlreadyExistException;
 import io.github.olgaak.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +46,10 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String getProfilePage(ModelMap model){
+    public String getProfilePage(ModelMap model, Authentication authentication){
+        String userEmail = authentication.getName();
+        UserDto userDto = userService.findByEmail(userEmail);
+        model.addAttribute("user", userDto);
         return "profile_page";
     }
 

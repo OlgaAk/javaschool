@@ -1,9 +1,7 @@
 package io.github.olgaak.entity;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Table(name="user")
@@ -20,6 +18,14 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "firstname", nullable = false)
+    private String firstName;
+
+    @Column(name = "lastname", nullable = false)
+    private String lastName;
+
+    @Column(name = "dateofbirth")
+    private Date dateOfBirth;
 
     public User() {
     }
@@ -53,4 +59,27 @@ public class User {
         this.password = password;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 }
