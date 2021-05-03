@@ -2,6 +2,7 @@ package io.github.olgaak.dao.impl;
 
 import io.github.olgaak.dao.api.TimetableDao;
 import io.github.olgaak.entity.TimetableItem;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -11,7 +12,8 @@ import java.util.List;
 @Repository
 public class TimetableDaoImpl implements TimetableDao {
 
-    private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("railway_app");
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
 
     public void createNewTimetableItem(TimetableItem timetableItem){
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -38,6 +40,7 @@ public class TimetableDaoImpl implements TimetableDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Query query = entityManager.createQuery("SELECT t FROM TimetableItem t");
         List<TimetableItem> timetableItems = query.getResultList();
+        entityManager.close();
         return timetableItems;
     }
 

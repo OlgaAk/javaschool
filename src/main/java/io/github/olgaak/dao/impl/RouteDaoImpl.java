@@ -2,6 +2,7 @@ package io.github.olgaak.dao.impl;
 
 import io.github.olgaak.dao.api.RouteDao;
 import io.github.olgaak.entity.Route;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -11,7 +12,8 @@ import java.util.List;
 @Repository
 public class RouteDaoImpl implements RouteDao {
 
-    private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("railway_app");
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
 
     public void createNewRoute(Route route) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -35,8 +37,15 @@ public class RouteDaoImpl implements RouteDao {
     @Transactional
     public List<Route> getAllRoutes() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Query query = entityManager.createQuery("SELECT t FROM Route t");
-        List<Route> routes = query.getResultList();
+        List<Route> routes = null;
+        try {
+            Query query = entityManager.createQuery("SELECT t FROM Route t");
+             routes = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
         return routes;
     }
 

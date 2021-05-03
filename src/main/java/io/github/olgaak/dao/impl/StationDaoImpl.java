@@ -2,6 +2,7 @@ package io.github.olgaak.dao.impl;
 
 import io.github.olgaak.dao.api.StationDao;
 import io.github.olgaak.entity.Station;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -11,9 +12,10 @@ import java.util.List;
 @Repository
 public class StationDaoImpl implements StationDao {
 
-    private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("railway_app");
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
 
-    public void createNewStation(Station station){
+    public void createNewStation(Station station) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
         try {
@@ -22,9 +24,8 @@ public class StationDaoImpl implements StationDao {
             entityManager.persist(station);
             entityManager.flush();
             transaction.commit();
-        }
-        catch (Exception ex){
-            if(transaction != null){
+        } catch (Exception ex) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();
@@ -36,8 +37,15 @@ public class StationDaoImpl implements StationDao {
     @Transactional
     public List<Station> getAllStations() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Query query = entityManager.createQuery("SELECT t FROM Station t");
-        List<Station> stations = query.getResultList();
+        List<Station> stations = null;
+        try {
+            Query query = entityManager.createQuery("SELECT t FROM Station t");
+            stations = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
         return stations;
     }
 
@@ -51,9 +59,8 @@ public class StationDaoImpl implements StationDao {
             Station station = entityManager.find(Station.class, id);
             entityManager.remove(station);
             transaction.commit();
-        }
-        catch (Exception ex){
-            if(transaction != null){
+        } catch (Exception ex) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();
@@ -71,9 +78,8 @@ public class StationDaoImpl implements StationDao {
             transaction.begin();
             entityManager.merge(station);
             transaction.commit();
-        }
-        catch (Exception ex){
-            if(transaction != null){
+        } catch (Exception ex) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();

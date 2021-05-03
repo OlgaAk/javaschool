@@ -2,6 +2,7 @@ package io.github.olgaak.dao.impl;
 
 import io.github.olgaak.dao.api.TrainDao;
 import io.github.olgaak.entity.Train;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -11,9 +12,10 @@ import java.util.List;
 @Repository
 public class TrainDaoImpl implements TrainDao {
 
-    private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("railway_app");
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
 
-    public void createNewTrain(Train train){
+    public void createNewTrain(Train train) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
         try {
@@ -22,22 +24,28 @@ public class TrainDaoImpl implements TrainDao {
             entityManager.persist(train);
 //            entityManager.flush();
             transaction.commit();
-        }
-        catch (Exception ex){
-            if(transaction != null){
+        } catch (Exception ex) {
+            if (transaction != null) {
                 transaction.rollback();
-
             }
             ex.printStackTrace();
         } finally {
             entityManager.close();
         }
     }
+
     @Transactional
     public List<Train> getAllTrains() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Query query = entityManager.createQuery("SELECT t FROM Train t");
-        List<Train> trains = query.getResultList();
+        List<Train> trains = null;
+        try {
+            Query query = entityManager.createQuery("SELECT t FROM Train t");
+            trains = query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
         return trains;
     }
 
@@ -51,9 +59,8 @@ public class TrainDaoImpl implements TrainDao {
             Train train = entityManager.find(Train.class, id);
             entityManager.remove(train);
             transaction.commit();
-        }
-        catch (Exception ex){
-            if(transaction != null){
+        } catch (Exception ex) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();
@@ -71,9 +78,8 @@ public class TrainDaoImpl implements TrainDao {
             transaction.begin();
             entityManager.merge(train);
             transaction.commit();
-        }
-        catch (Exception ex){
-            if(transaction != null){
+        } catch (Exception ex) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();

@@ -21,14 +21,14 @@ public class Train implements Serializable {
     @Column(name = "seat_count", nullable = false)
     private int seat_count;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
         @JoinTable(name = "train_station",
             joinColumns = @JoinColumn(name = "train_id"),
             inverseJoinColumns = @JoinColumn(name = "station_id")
     )
     private Set<Station> stations;
 
-    @OneToMany(mappedBy = "train")
+    @OneToMany(mappedBy = "train", fetch = FetchType.EAGER)
     private Set<Route> routes;
 
     public Train(int number, int seat_count) {

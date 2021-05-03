@@ -2,6 +2,7 @@ package io.github.olgaak.dao.impl;
 
 import io.github.olgaak.dao.api.UserDao;
 import io.github.olgaak.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -10,7 +11,8 @@ import javax.transaction.Transactional;
 @Repository
 public class UserDaoImpl implements UserDao {
 
-    private final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("railway_app");
+    @Autowired
+    private EntityManagerFactory entityManagerFactory;
 
     @Override
     @Transactional

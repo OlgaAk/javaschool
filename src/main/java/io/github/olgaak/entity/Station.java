@@ -18,15 +18,15 @@ public class Station {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "station")
+    @OneToMany(mappedBy = "station", fetch = FetchType.EAGER)
     private Set<TimetableItem> timetableItems;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "stations")
+    @ManyToMany(mappedBy = "stations", fetch = FetchType.EAGER)
     private Set<Train> trains;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "stations")
+    @ManyToMany(mappedBy = "stations", fetch = FetchType.EAGER)
     private Set<Route> routes;
 
     public Station() {}

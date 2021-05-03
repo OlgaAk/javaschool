@@ -10,6 +10,9 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 @EnableWebMvc
 @Configuration
 @ComponentScan(basePackages = {"io.github.olgaak.controller", "io.github.olgaak.service", "io.github.olgaak.dao.impl"})
@@ -32,4 +35,10 @@ public class WebConfig implements WebMvcConfigurer {
     public ModelMapper modelMapper(){
         return new ModelMapper();
     }
+
+    @Bean
+    public  EntityManagerFactory entityManagerFactory(){
+       return Persistence.createEntityManagerFactory("railway_app");
+    }
+
 }
