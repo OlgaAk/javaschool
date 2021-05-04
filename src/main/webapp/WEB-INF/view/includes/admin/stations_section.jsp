@@ -8,7 +8,7 @@
             <button class="btn btn-primary" type="submit">ADD</button>
         </form>
     </div>
-    <div class="table">
+    <div class="table scrollable">
         <h3>Station list</h3>
         <div class="table-row table-header table-columns-4">
             <div class="table-cell">Station name</div>

@@ -14,7 +14,7 @@
                 <button class="btn btn-primary" type="submit"> ADD</button>
             </form>
         </div>
-        <div class="train-table">
+        <div class="train-table scrollable" >
             <h3>Train list</h3>
             <div class="table-row table-header table-columns-5">
                 <div class="table-cell">Train number</div>

@@ -42,8 +42,14 @@ function createRouteTable(route, index, routesTable) {
     routesTableHeader.removeAttribute("id");
     let routeTitle = document.createElement("h5");
     routeTitle.innerText = "Route " + (index + 1);
+    routeTitle.classList.add("editable");
+    routeTitle.addEventListener("click", ()=> handleClickOnRouteTitle(route))
     routesTable.append(routeTitle, routesTableHeader);
     createRouteTableRows(route, routesTable)
+}
+
+function handleClickOnRouteTitle(route){
+    console.log(route)
 }
 
 function hideScheduleShowRoutes(trainNumber, trainId) {
