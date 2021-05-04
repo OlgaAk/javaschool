@@ -76,28 +76,39 @@ public class TimetableItem {
         return departureTime;
     }
 
-//    public void setDepartureTime(String departureTime) {
-//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-//        Date date = null;
-//        try {
-//            date = format.parse(departureTime);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        this.departureTime = date;
-//    }
-
-    public void setDepartureTime(Date departureTime) {
-        this.departureTime = departureTime;
+    public void setDepartureTime(String departureTime) {
+        DateFormat format = new SimpleDateFormat("HH:mm");
+        Date date = null;
+        try {
+            date = format.parse(departureTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.departureTime = date;
     }
+
+    public void setDepartureDate(String departureDate) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = format.parse(departureDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.departureDate = date;
+    }
+
+//    public void setDepartureTime(Date departureTime) {
+//        this.departureTime = departureTime;
+//    }
 
     public Date getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(Date departureDate) {
-        this.departureDate = departureDate;
-    }
+//    public void setDepartureDate(Date departureDate) {
+//        this.departureDate = departureDate;
+//    }
 
     //    public Date getArrivalTime() {
 //        return arrivalTime;
