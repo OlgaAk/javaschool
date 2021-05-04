@@ -16,7 +16,7 @@
         </div>
         <div class="train-search-result-item-right">
             <div class="train-search-result-item-price">$99</div>
-            <button class="buy-ticket">Buy</button>
+            <button class="buy-ticket">BUY</button>
         </div>
     </div>
 
@@ -37,7 +37,7 @@
         </div>
         <div class="train-search-result-item-right">
             <div class="train-search-result-item-price">$99</div>
-            <button class="buy-ticket">Buy</button>
+            <button class="buy-ticket">BUY</button>
         </div>
     </div>
 

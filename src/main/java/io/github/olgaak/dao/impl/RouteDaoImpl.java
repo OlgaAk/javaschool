@@ -71,10 +71,31 @@ public class RouteDaoImpl implements RouteDao {
     public List<Route> getTrainRoutesByQuery(TrainQueryDto trainQuery) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<Route> routes = null;
+        int id = 3;
+        int id2 = 1;
+        String date = "2021-05-10";
+        String sqlQuery = "";
+        String sqlQuery2 = "select distinct R.ID\n" +
+                "from (\n" +
+                "  select R.ID\n" +
+                "  from (\n" +
+                "    select R.ID\n" +
+                "    from ROUTE R\n" +
+                "      left outer join TIMETABLEITEM T\n" +
+                "        on T.ROUTE_ID = R.ID\n" +
+                "    where T.DEPARTURE_DATE = "+ date+ "\n" +
+                "  ) R\n" +
+                "    join TIMETABLEITEM T\n" +
+                "      on R.ID = T.ROUTE_ID\n" +
+                "  where STATION_ID = "+id+"\n" +
+                ") R\n" +
+                "  left outer join TIMETABLEITEM T\n" +
+                "    on R.ID = T.ROUTE_ID\n" +
+                "where T.STATION_ID in ("+id+", "+id2 +");";
         try {
             Query query = entityManager
-                    .createQuery("SELECT r FROM Route r JOIN FETCH r.timetableItems t WHERE t.station.name  = :station", Route.class)
-                    .setParameter("station", trainQuery.getDepartureStation());
+                    .createQuery("SELECT r FROM Route r JOIN FETCH TimetableItem t WHERE t.departureDate = '2021-05-10'", Route.class);
+
             routes = query.getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
