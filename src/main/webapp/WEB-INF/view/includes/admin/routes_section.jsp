@@ -17,7 +17,7 @@
                     <label><input type="time" name="timetableItems[0].departureTime">Time</label>
                 </div>
             </div>
-            <button type="button" onclick="addNewSelect()">+</button>
+            <button type="button" onclick="addNewSelect('select_container')">+</button>
             <button class="btn btn-primary" type="submit"> ADD</button>
         </form>
     </div>
@@ -34,4 +34,32 @@
 
     </div>
 </div>
+
+<%--EDIT POP-UP--%>
+<div id="route-edit-popup-container" class="edit-popup-container hidden">
+    <div id="train-edit-popup" class="edit-popup">
+        <h3>Edit route info</h3>
+        <form method="post" action="/add/route">
+            <input id="edit_route_id" name="route" type="hidden">
+            <div id="select-container-edit">
+                <div id="edit_routes_stations_div">
+                    <select name="timetableItems[0].station">
+                        <c:forEach var="station" items="${stations}">
+                            <option value="${station.id}">${station.name}</option>
+                        </c:forEach>
+                    </select>
+                    <label><input type="date" name="timetableItems[0].departureDate">Date</label>
+                    <label><input type="time" name="timetableItems[0].departureTime">Time</label>
+                </div>
+            </div>
+            <button type="button" onclick="addNewSelect('select-container-edit')">+</button>
+            <button class="btn btn-primary" type="submit">EDIT</button>
+            <button id="deleteRouteBtn" class="btn " type="button">DELETE</button>
+            <button class="btn btn-secondary" type="button" onclick="closeEditPopUp('route-edit-popup-container')">
+                CANCEL
+            </button>
+        </form>
+    </div>
+</div>
+
 

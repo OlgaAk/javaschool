@@ -96,6 +96,18 @@ public class AdminController {
         return "redirect:/admin";
     }
 
+    @PostMapping("/edit/route")
+    public String editRoute(@ModelAttribute("route")Route route){
+        routeService.editRoute(route);
+        return "redirect:/admin";
+    }
+
+    @GetMapping("/delete/route/{id}")
+    public String deleteRoute(@PathVariable("id") long id){
+        routeService.deleteRoute(id);
+        return "redirect:/admin";
+    }
+
     @GetMapping("/routes/{trainId}")
     @ResponseBody
     public List<Route> getTrainRoutes(@PathVariable("trainId") Long trainId, ModelMap model){

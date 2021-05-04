@@ -19,6 +19,25 @@ function openStationEditPopUp(id, name) {
     document.getElementById("edit_station_id").value = id;
 }
 
+function openRouteEditPopUp(route) {
+    document.getElementById("route-edit-popup-container").classList.remove("hidden");
+    // insert saved values into fields
+    document.getElementById("edit_route_id").value = route.id;
+    document.getElementById("deleteRouteBtn")
+        .addEventListener("click", ()=>deleteRoute(route.id))
+}
+
+async function deleteRoute(id){
+    let response = await fetch("/delete/route/" + id);
+    if (response.ok) {
+        console.log(response)
+        document.getElementById("route-edit-popup-container").classList.add("hidden");
+        document.getElementById("routes-section").classList.add("hidden");
+    } else {
+        console.log("Ошибка HTTP: " + response.status);
+    }
+}
+
 function closeEditPopUp(container) {
     document.getElementById(container).classList.add("hidden");
 }
@@ -43,14 +62,11 @@ function createRouteTable(route, index, routesTable) {
     let routeTitle = document.createElement("h5");
     routeTitle.innerText = "Route " + (index + 1);
     routeTitle.classList.add("editable");
-    routeTitle.addEventListener("click", ()=> handleClickOnRouteTitle(route))
+    routeTitle.addEventListener("click", ()=> openRouteEditPopUp(route))
     routesTable.append(routeTitle, routesTableHeader);
     createRouteTableRows(route, routesTable)
 }
 
-function handleClickOnRouteTitle(route){
-    console.log(route)
-}
 
 function hideScheduleShowRoutes(trainNumber, trainId) {
     document.getElementById("schedule-section").classList.add("hidden");
@@ -94,14 +110,16 @@ function createRouteTableRows(route, routesTable) {
     })
 }
 
-function addNewSelect() {
-    let container = document.getElementById("select_container");
+function addNewSelect(containerName) {
+    let container = document.getElementById(containerName);
     let clone = document.getElementById("routes_stations_div").cloneNode(true);
     let nextSelectIndex = container.children.length;
     let select = clone.children[0]
     select.name = "timetableItems[" + nextSelectIndex + "].station";
     let timeinput = clone.children[1].children[0];
     timeinput.name = "timetableItems[" + nextSelectIndex + "].departureTime";
+    let dateinput = clone.children[2].children[0];
+    dateinput.name = "timetableItems[" + nextSelectIndex + "].departureDate";
     container.appendChild(clone);
 }
 
