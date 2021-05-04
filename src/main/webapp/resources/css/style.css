@@ -129,7 +129,7 @@ a{
     display: grid;
     grid-column-gap: 60px;
     grid-template-columns: 1fr 1fr;
-    margin: 100px 40px;
+    margin: 100px 40px 10px 40px;
 }
 
 #main-container-left-side {

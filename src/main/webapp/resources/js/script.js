@@ -116,10 +116,10 @@ function addNewSelect(containerName) {
     let nextSelectIndex = container.children.length;
     let select = clone.children[0]
     select.name = "timetableItems[" + nextSelectIndex + "].station";
-    let timeinput = clone.children[1].children[0];
-    timeinput.name = "timetableItems[" + nextSelectIndex + "].departureTime";
-    let dateinput = clone.children[2].children[0];
+    let dateinput = clone.children[1].children[0];
     dateinput.name = "timetableItems[" + nextSelectIndex + "].departureDate";
+    let timeinput = clone.children[2].children[0];
+    timeinput.name = "timetableItems[" + nextSelectIndex + "].departureTime";
     container.appendChild(clone);
 }
 
