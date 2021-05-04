@@ -3,6 +3,7 @@
 
 :root {
     --main-color: #d5d5d1;
+    --main-color-dark: #afafac;
     --main-accent-color: #ffde11;
     --main-text-color: #393938;
 }
@@ -243,7 +244,7 @@ margin: 100px 20px;
     width: 960px;
     height: 190px;
     box-shadow: 0 0 0.375rem 0 #a7a1a1;
-    margin: 0 auto;
+    margin: 0 auto 50px;
     border-radius: 20px;
 }
 
@@ -293,6 +294,90 @@ margin: 100px 20px;
     text-align: center;
 }
 
+.train-search-result-container{
+    margin: 0 auto;
+}
+
+.train-search-result-container-inner{
+    margin: 0 auto;
+}
+
+.train-search-result-item{
+    position: relative;
+    max-width:800px;
+    height: 90px;
+    background-color: #fff;
+    border-width: 0.0625rem;
+    border-color: #d6d3cd;
+    border-style: solid;
+    border-radius: 0.5rem;
+    color: #000;
+    margin: 5px auto;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.train-search-result-item-left{
+    padding: 15px;
+}
+
+.train-search-result-item-row{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.train-search-result-item-time{
+    float: left;
+    font-weight: bold;
+}
+
+.train-search-result-item-station{
+}
+
+.train-search-result-item-duration{
+    float: left;
+    color: var(--main-color-dark);
+    font-size: 14px;
+}
+
+.train-search-result-item-change{
+    color: var(--main-color-dark);
+    font-size: 14px;
+}
+
+.train-search-result-item-right{
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.train-search-result-item-price{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.train-search-result-item-price::before {
+    content: "from";;
+    display: block;
+    position: absolute;
+    top: 16%;
+    font-size: 12px;
+    bottom: 20px;
+}
+
+.buy-ticket{
+    background-color: #f67878;
+    color: white;
+    padding: 16px;
+    border-radius: 8px;
+    border: none;
+}
+
+.buy-ticket:hover {
+cursor: pointer;
+    background-color: #bf5e5e;
+}
 
 /*profile***********************************/
 
