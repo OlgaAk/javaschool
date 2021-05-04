@@ -1,6 +1,7 @@
 package io.github.olgaak.dao.impl;
 
 import io.github.olgaak.dao.api.RouteDao;
+import io.github.olgaak.dto.TrainQueryDto;
 import io.github.olgaak.entity.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -57,6 +58,23 @@ public class RouteDaoImpl implements RouteDao {
             Query query = entityManager
                     .createQuery("SELECT r FROM Route r JOIN FETCH r.train WHERE r.train.id  = :trainId", Route.class)
                     .setParameter("trainId", trainId);
+            routes = query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return routes;
+    }
+
+    @Transactional
+    public List<Route> getTrainRoutesByQuery(TrainQueryDto trainQuery) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        List<Route> routes = null;
+        try {
+            Query query = entityManager
+                    .createQuery("SELECT r FROM Route r JOIN FETCH r.timetableItems t WHERE t.station.name  = :station", Route.class)
+                    .setParameter("station", trainQuery.getDepartureStation());
             routes = query.getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();

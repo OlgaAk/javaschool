@@ -1,6 +1,7 @@
 package io.github.olgaak.service.impl;
 
 import io.github.olgaak.dao.api.RouteDao;
+import io.github.olgaak.dto.TrainQueryDto;
 import io.github.olgaak.entity.Route;
 import io.github.olgaak.service.api.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,10 @@ public class RouteServiceImpl implements RouteService {
 
     public List<Route> getTrainRoutes(Long trainId) {
         return routeDao.getTrainRoutes(trainId);
+    }
+
+    public List<Route> getTrainRoutesByQuery(TrainQueryDto trainQuery) {
+        return routeDao.getTrainRoutesByQuery(trainQuery);
     }
 
     @Override

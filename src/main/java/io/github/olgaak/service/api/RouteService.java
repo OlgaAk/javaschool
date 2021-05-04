@@ -1,5 +1,6 @@
 package io.github.olgaak.service.api;
 
+import io.github.olgaak.dto.TrainQueryDto;
 import io.github.olgaak.entity.Route;
 
 import java.util.List;
@@ -11,6 +12,8 @@ Route createNewRoute(Route timetableItem);
 public List<Route> getAllRoutes();
 
 public List<Route> getTrainRoutes(Long trainId);
+
+public List<Route> getTrainRoutesByQuery(TrainQueryDto trainQuery);
 
 void deleteRoute(long id);
 

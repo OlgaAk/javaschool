@@ -85,6 +85,10 @@ a{
     grid-template-columns: 1fr 1fr 60px 60px;
 }
 
+.table-columns-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
 .table-columns-2{
     grid-template-columns: 1fr 1fr;
 }

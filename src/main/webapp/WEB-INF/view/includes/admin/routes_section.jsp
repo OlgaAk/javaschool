@@ -13,7 +13,8 @@
                             <option value="${station.id}">${station.name}</option>
                         </c:forEach>
                     </select>
-                    <label><input type="datetime-local" name="timetableItems[0].departureTime">Time</label>
+                    <label><input type="date" name="timetableItems[0].departureDate">Date</label>
+                    <label><input type="time" name="timetableItems[0].departureTime">Time</label>
                 </div>
             </div>
             <button type="button" onclick="addNewSelect()">+</button>
@@ -22,7 +23,8 @@
     </div>
     <div class="routes-table">
         <h3>Routes</h3>
-        <div style="display: none" class="table-row table-header table-columns-2" id="routes-table-header">
+        <div style="display: none" class="table-row table-header table-columns-3" id="routes-table-header">
+            <div class="table-cell">Date</div>
             <div class="table-cell">Time</div>
             <div class="table-cell">Station</div>
         </div>

@@ -76,15 +76,20 @@ async function openRoutesSection(trainNumber, trainId) {
 function createRouteTableRows(route, routesTable) {
     route.timetableItems.forEach(timeTable => {
         let newCellRow = document.createElement("div");
-        newCellRow.classList.add("table-row", "table-columns-2");
+        newCellRow.classList.add("table-row", "table-columns-3");
+        let routeDateCell = document.createElement("span");
+        routeDateCell.className = "table-cell";
+        console.log(timeTable.departureDate)
+        let date = new Date(timeTable.departureDate);
+        routeDateCell.innerText = date.toLocaleString().split(",")[0];
         let routeTimeCell = document.createElement("span");
         routeTimeCell.className = "table-cell";
-        let time = new Date(timeTable.departureTime).toLocaleTimeString().substring(0,5); // format "13:43:00"
+        let time = new Date(timeTable.departureTime).toLocaleTimeString().substring(0,5);
         routeTimeCell.innerText = time;
         let routeStationCell = document.createElement("span");
         routeStationCell.className = "table-cell";
         routeStationCell.innerText = timeTable.station.name;
-        newCellRow.append(routeTimeCell, routeStationCell);
+        newCellRow.append(routeDateCell, routeTimeCell, routeStationCell);
         routesTable.append(newCellRow);
     })
 }
