@@ -1,4 +1,4 @@
-package io.github.olgaak.exceptions;
+package io.github.olgaak.exception;
 
 public class UserAlreadyExistException extends Exception{
     public UserAlreadyExistException(String message){

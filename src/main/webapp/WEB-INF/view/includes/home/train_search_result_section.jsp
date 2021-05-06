@@ -1,44 +1,26 @@
 <div class="train-search-result-container">
+<c:forEach var="route" items="${routes}">
     <div class="train-search-result-item">
         <div class="train-search-result-item-left">
             <div class="train-search-result-item-row">
-                <div class="train-search-result-item-time">9:36</div>
-                <div class="train-search-result-item-station">ST.PETERSBURG</div>
+                <div class="train-search-result-item-time">${route.startTripTime}</div>
+                <div class="train-search-result-item-station">${route.startTripStation}</div>
             </div>
             <div class="train-search-result-item-row">
-                <div class="train-search-result-item-time">13:04</div>
-                <div class="train-search-result-item-station">MOSCOW</div>
+                <div class="train-search-result-item-time">${route.endTripTime}</div>
+                <div class="train-search-result-item-station">${route.endTripStation}</div>
             </div>
             <div class="train-search-result-item-row">
-                <div class="train-search-result-item-duration">3h28</div>
-                <div class="train-search-result-item-change">direct</div>
+                <div class="train-search-result-item-duration">${route.tripDuration}</div>
+                <div class="train-search-result-item-change">${route.changeType}</div>
             </div>
         </div>
         <div class="train-search-result-item-right">
-            <div class="train-search-result-item-price">$99</div>
+            <div class="train-search-result-item-price">$${route.price}</div>
             <button class="buy-ticket">BUY</button>
         </div>
     </div>
 
-    <div class="train-search-result-item">
-        <div class="train-search-result-item-left">
-            <div class="train-search-result-item-row">
-                <div class="train-search-result-item-time">9:36</div>
-                <div class="train-search-result-item-station">ST.PETERSBURG</div>
-            </div>
-            <div class="train-search-result-item-row">
-                <div class="train-search-result-item-time">13:04</div>
-                <div class="train-search-result-item-station">MOSCOW</div>
-            </div>
-            <div class="train-search-result-item-row">
-                <div class="train-search-result-item-duration">3h28</div>
-                <div class="train-search-result-item-change">direct</div>
-            </div>
-        </div>
-        <div class="train-search-result-item-right">
-            <div class="train-search-result-item-price">$99</div>
-            <button class="buy-ticket">BUY</button>
-        </div>
-    </div>
+</c:forEach>
 
 </div>

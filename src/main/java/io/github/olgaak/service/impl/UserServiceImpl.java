@@ -3,7 +3,7 @@ package io.github.olgaak.service.impl;
 import io.github.olgaak.dao.api.UserDao;
 import io.github.olgaak.dto.UserDto;
 import io.github.olgaak.entity.User;
-import io.github.olgaak.exceptions.UserAlreadyExistException;
+import io.github.olgaak.exception.UserAlreadyExistException;
 import io.github.olgaak.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

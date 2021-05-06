@@ -3,6 +3,7 @@ package io.github.olgaak.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -38,7 +39,6 @@ public class Route {
     public Route(String id) {
         this.id = Long.parseLong(id);
     }
-
 
     public long getId() {
         return id;

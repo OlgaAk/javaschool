@@ -98,26 +98,19 @@ public class TimetableItem {
         this.departureDate = date;
     }
 
-//    public void setDepartureTime(Date departureTime) {
-//        this.departureTime = departureTime;
-//    }
+    public Date getFullDepartureDate() {
+        Date date = departureDate;
+        int minutes = departureTime.getMinutes();
+        int hours = departureTime.getHours();
+        date.setMinutes(minutes);
+        date.setHours(hours);
+        return date;
+    }
 
     public Date getDepartureDate() {
         return departureDate;
     }
 
-//    public void setDepartureDate(Date departureDate) {
-//        this.departureDate = departureDate;
-//    }
-
-    //    public Date getArrivalTime() {
-//        return arrivalTime;
-//    }
-//
-//    public void setArrivalTime(Date arrivalTime) {
-//        this.arrivalTime = arrivalTime;
-//    }
-//
     public Station getStation() {
         return station;
     }

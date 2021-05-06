@@ -1,7 +1,7 @@
 package io.github.olgaak.controller;
 
+import io.github.olgaak.dto.RouteDto;
 import io.github.olgaak.dto.TrainQueryDto;
-import io.github.olgaak.entity.Route;
 import io.github.olgaak.service.api.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class HomeController {
                              @RequestParam("departure_date") String departureDate,
                                    ModelMap model){
         TrainQueryDto trainQuery = new TrainQueryDto(departureStation,arrivalStation,departureDate);
-        List<Route> routes = new ArrayList<>();
+        List<RouteDto> routes = new ArrayList<>();
         routes = routeService.getTrainRoutesByQuery(trainQuery);
         model.addAttribute("routes", routes);
         return "home_page";

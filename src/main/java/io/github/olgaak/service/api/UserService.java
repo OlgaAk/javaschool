@@ -2,7 +2,7 @@ package io.github.olgaak.service.api;
 
 import io.github.olgaak.dto.UserDto;
 import io.github.olgaak.entity.User;
-import io.github.olgaak.exceptions.UserAlreadyExistException;
+import io.github.olgaak.exception.UserAlreadyExistException;
 
 public interface UserService {
 

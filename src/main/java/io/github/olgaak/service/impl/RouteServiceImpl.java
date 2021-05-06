@@ -1,18 +1,26 @@
 package io.github.olgaak.service.impl;
 
 import io.github.olgaak.dao.api.RouteDao;
+import io.github.olgaak.dto.RouteDto;
 import io.github.olgaak.dto.TrainQueryDto;
 import io.github.olgaak.entity.Route;
 import io.github.olgaak.service.api.RouteService;
+import io.github.olgaak.util.RouteDtoConverter;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RouteServiceImpl implements RouteService {
 
     private RouteDao routeDao;
+
+    @Autowired
+    ModelMapper modelMapper;
 
     @Autowired
     public RouteServiceImpl(RouteDao routeDao){
@@ -32,8 +40,13 @@ public class RouteServiceImpl implements RouteService {
         return routeDao.getTrainRoutes(trainId);
     }
 
-    public List<Route> getTrainRoutesByQuery(TrainQueryDto trainQuery) {
-        return routeDao.getTrainRoutesByQuery(trainQuery);
+    public List<RouteDto> getTrainRoutesByQuery(TrainQueryDto trainQuery) {
+        List<Route> routesByQuery = routeDao.getTrainRoutesByQuery(trainQuery);
+        List<RouteDto> routeDtoList = new ArrayList<>();
+        routesByQuery.stream().forEach(route->{
+            routeDtoList.add(RouteDtoConverter.convertRouteEntityToDto(route));
+        });
+        return routeDtoList;
     }
 
     @Override
