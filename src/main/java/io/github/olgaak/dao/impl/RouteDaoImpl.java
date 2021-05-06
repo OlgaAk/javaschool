@@ -92,7 +92,7 @@ public class RouteDaoImpl implements RouteDao {
 //                "where T.STATION_ID in ("+id+", "+id2 +");";
         try {
             Query query = entityManager
-                    .createQuery("SELECT r FROM Route r JOIN TimetableItem t on r.id = t.route.id WHERE t.departureDate = '2021-05-10' and t.station.id = 3", Route.class);
+                    .createQuery("SELECT r FROM Route r JOIN TimetableItem t on r.id = t.route.id JOIN TimetableItem t2 on r.id = t2.route.id WHERE t2.departureDate = '2021-05-10' and t.departureDate = '2021-05-10' and t2.station.id = 1 and t.station.id = 3", Route.class);
 
             routes = query.getResultList();
         } catch (Exception ex) {
