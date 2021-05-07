@@ -17,7 +17,7 @@
         </div>
         <div class="train-search-result-item-right">
             <div class="train-search-result-item-price">$${route.price}</div>
-            <button class="buy-ticket">BUY</button>
+            <a href="/user/purchase/${route.id}"><button class="buy-ticket">BUY</button></a>
         </div>
     </div>
 

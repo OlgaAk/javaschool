@@ -2,6 +2,7 @@ package io.github.olgaak.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "passenger")
@@ -12,14 +13,22 @@ public class Passenger {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "firstname", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "lastname", nullable = false)
     private String lastName;
 
-    @Column(name = "birthday", nullable = false)
-    private Date birthday;
+    @Column(name = "dateofbirth")
+    private Date dateOfBirth;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "passenger_id")
+    private List<Ticket> tickets;
 
     public Passenger() { }
 
@@ -31,6 +40,21 @@ public class Passenger {
         this.id = id;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
     public String getFirstName() {
         return firstName;
     }
@@ -47,11 +71,11 @@ public class Passenger {
         this.lastName = lastName;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }

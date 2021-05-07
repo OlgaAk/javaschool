@@ -42,14 +42,8 @@ public class TimetableItem {
     public TimetableItem() {
     }
 
-//    public TimetableItem(String train, String station) {
-//        this.train = new Train(train);
-//        this.station = new Station(station);
-//    }
-
     public TimetableItem(String departureTime, String station) {
         this.station = new Station(station);
-//        setDepartureTime(departureTime);
     }
 
     public TimetableItem(String id) {

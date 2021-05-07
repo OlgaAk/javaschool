@@ -11,9 +11,7 @@
 
 <%@include file="includes/common/navbar.jsp" %>
 
-<%--<div class="header">--%>
-<%--    <p>Home Area</p>--%>
-<%--</div>--%>
+<p>${routeId}</p>
 
 <%--<div class="main-container-home">--%>
 <%--    <div>--%>

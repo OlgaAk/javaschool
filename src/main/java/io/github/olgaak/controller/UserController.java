@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -23,13 +20,19 @@ public class UserController {
     public UserService userService;
 
     @GetMapping("/login")
-    public String getLoginPage(){
+    public String getLoginPage() {
         return "login_page";
     }
 
     @GetMapping("/signup")
-    public String getSignupPage(){
+    public String getSignupPage() {
         return "signup_page";
+    }
+
+    @GetMapping("/purchase/{routeId}")
+    public String getPurchasePage(@PathVariable("routeId") long routeId, ModelMap model) {
+        model.addAttribute("routeId", routeId);
+        return "purchase_page";
     }
 
     @PostMapping("/login/processsignup")
@@ -46,7 +49,7 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String getProfilePage(ModelMap model, Authentication authentication){
+    public String getProfilePage(ModelMap model, Authentication authentication) {
         String userEmail = authentication.getName();
         UserDto userDto = userService.findByEmail(userEmail);
         model.addAttribute("user", userDto);
