@@ -20,7 +20,7 @@
         <h2 class="train-search-title">Login</h2>
     </div>
     <div class="login-form-container">
-        <form method="post" action="/login">
+        <form method="post" action="/user/login">
             <div class="login-form-input-groups-container">
                 <div class="login-form-input-groups-box">
                     <div class="login-form-input-group">

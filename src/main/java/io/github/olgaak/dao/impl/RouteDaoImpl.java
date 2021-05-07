@@ -23,7 +23,6 @@ public class RouteDaoImpl implements RouteDao {
             transaction = entityManager.getTransaction();
             transaction.begin();
             entityManager.persist(route);
-//            entityManager.flush();
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
@@ -71,25 +70,6 @@ public class RouteDaoImpl implements RouteDao {
     public List<Route> getTrainRoutesByQuery(TrainQueryDto trainQuery) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<Route> routes = null;
-
-        String sqlQuery = "";
-//        String sqlQuery2 = "select distinct R.ID\n" +
-//                "from (\n" +
-//                "  select R.ID\n" +
-//                "  from (\n" +
-//                "    select R.ID\n" +
-//                "    from ROUTE R\n" +
-//                "      left outer join TIMETABLEITEM T\n" +
-//                "        on T.ROUTE_ID = R.ID\n" +
-//                "    where T.DEPARTURE_DATE = "+ date+ "\n" +
-//                "  ) R\n" +
-//                "    join TIMETABLEITEM T\n" +
-//                "      on R.ID = T.ROUTE_ID\n" +
-//                "  where STATION_ID = "+id+"\n" +
-//                ") R\n" +
-//                "  left outer join TIMETABLEITEM T\n" +
-//                "    on R.ID = T.ROUTE_ID\n" +
-//                "where T.STATION_ID in ("+id+", "+id2 +");";
         try {
             Query query = entityManager
                     .createQuery("SELECT r FROM Route r JOIN TimetableItem t on r.id = t.route.id " +
@@ -97,7 +77,7 @@ public class RouteDaoImpl implements RouteDao {
                             "WHERE t2.departureDate = '2021-05-10' " +
                             "and t.departureDate = '2021-05-10' " +
                             "and t2.station.id = 1 and t.station.id = 3" +
-                            "and t2.departureTime>t.departureTime", Route.class);
+                            "and (t2.departureDate>t.departureDate or t2.departureTime>t.departureTime) ", Route.class);
 
             routes = query.getResultList();
         } catch (Exception ex) {

@@ -11,24 +11,24 @@
     <div class="nav-right">
         <sec:authorize access="isAnonymous()">
             <div class="login_container">
-                <a href="/profile">
+                <a href="/user/profile">
                     <span class="login">Log in</span>
                 </a>
             </div>
             <div class="login_container signup_container">
-                <a href="/login/signup">
+                <a href="/user/signup">
                     <span class="signup">Sign up</span>
                 </a>
             </div>
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
             <div class="login_container">
-                <a href="/profile">
+                <a href="/user/profile">
                     <span class="login">Profile</span>
                 </a>
             </div>
             <div class="login_container logout_container">
-                <a href="/logout">
+                <a href="/user/logout">
                     <span class="logout">Log out</span>
                 </a>
             </div>

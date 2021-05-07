@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -27,7 +27,7 @@ public class UserController {
         return "login_page";
     }
 
-    @GetMapping("/login/signup")
+    @GetMapping("/signup")
     public String getSignupPage(){
         return "signup_page";
     }
@@ -42,7 +42,7 @@ public class UserController {
             model.addAttribute("errorMessage",
                     "An account for that username/email already exists.");
         }
-        return "redirect:/profile";
+        return "redirect:/user/profile";
     }
 
     @GetMapping("/profile")

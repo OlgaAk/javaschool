@@ -49,19 +49,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/profile").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/login*").permitAll()
                 .and()
                 .anonymous()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/user/login")
                 .permitAll()
                 .usernameParameter("email")
-                .defaultSuccessUrl("/profile")
+                .defaultSuccessUrl("/user/profile")
                 .and()
-                .logout().logoutSuccessUrl("/");
+                .logout()
+                .logoutUrl("/user/logout").logoutSuccessUrl("/");
     }
 
 //    public RoleHierarchy roleHierarchy() {
