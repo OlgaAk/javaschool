@@ -27,7 +27,7 @@ public class Ticket {
     private Seat seat;
 
     @Column(name = "price", nullable = false)
-    private int price;
+    private float price;
 
     public Ticket() { }
 

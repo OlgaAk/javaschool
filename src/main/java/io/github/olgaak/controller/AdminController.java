@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class AdminController {
 
 
 
-    @GetMapping("/admin")
+    @GetMapping("")
     public String getAdminPage(ModelMap model){
         model.addAttribute("name", "Tom");
         List<Train> trains = trainService.getAllTrains();

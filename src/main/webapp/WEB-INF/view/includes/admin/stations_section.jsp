@@ -2,7 +2,7 @@
 
 <div class="station-section main-subsection">
     <div class="addNew-section">
-        <form method="post" action="/add/station">
+        <form method="post" action="/admin/add/station">
             <label>Station name</label>
             <input id="station-name" name="name" type="text" required>
             <button class="btn btn-primary" type="submit">ADD</button>
@@ -28,7 +28,7 @@
                     </span>
                      </span>
                 <span class="table-cell">
-                    <a href="/delete/station/${station.id}" class="icon">
+                    <a href="/admin/delete/station/${station.id}" class="icon">
                         <span class="material-icons">clear</span>
                     </a>
                 </span>

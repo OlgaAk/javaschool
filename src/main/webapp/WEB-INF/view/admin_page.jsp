@@ -28,7 +28,7 @@
 <div id="train-edit-popup-container" class="edit-popup-container hidden">
     <div id="train-edit-popup" class="edit-popup">
         <h3>Edit train info</h3>
-        <form method="post" action="/edit/train">
+        <form method="post" action="/admin/edit/train">
             <input id="edit_train_id" name="id" type="hidden">
             <label><input id="edit_train_number" name="number" required type="number">Train number</label>
             <label><input id="edit_train_seat_count" name="seat_count" required type="number">Number of seats </label>
@@ -49,7 +49,7 @@
 <div id="station-edit-popup-container" class="edit-popup-container hidden">
     <div id="station-edit-popup" class="edit-popup">
         <h3>Edit station info</h3>
-        <form method="post" action="/edit/station">
+        <form method="post" action="/admin/edit/station">
             <input id="edit_station_id" name="id" type="hidden">
             <label><input id="edit_station_name" name="name" required type="text">Station name</label>
             <button class="btn btn-primary" type="submit">EDIT</button>

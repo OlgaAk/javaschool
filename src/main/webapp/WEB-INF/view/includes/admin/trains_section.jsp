@@ -1,7 +1,7 @@
 <%--Trains    --%>
     <div class="train-section main-subsection">
         <div class="addNew-section">
-            <form method="post" action="/add/train">
+            <form method="post" action="/admin/add/train">
                 <label for="train-number">Train number</label>
                 <input id="train-number" name="number" type="number" required>
                 <label for="seat-count">Number of seats </label>
@@ -43,7 +43,7 @@
 
                 </span>
                     <span class="table-cell">
-                    <a href="/delete/train/${train.id}" class="icon">
+                    <a href="/admin/delete/train/${train.id}" class="icon">
                         <span class="material-icons md-18">clear</span>
                     </a>
                 </span>

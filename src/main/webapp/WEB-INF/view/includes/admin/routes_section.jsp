@@ -4,7 +4,7 @@
 <div id="routes-section" class="hidden">
     <h3 id="routes_title">Routes for train ***</h3>
     <div class="addNew-section">
-        <form method="post" action="/add/route">
+        <form method="post" action="/admin/add/route">
             <input id="routes_train_id" name="train" type="hidden">
             <div id="select_container">
                 <div id="routes_stations_div">
@@ -39,7 +39,7 @@
 <div id="route-edit-popup-container" class="edit-popup-container hidden">
     <div id="train-edit-popup" class="edit-popup">
         <h3>Edit route info</h3>
-        <form method="post" action="/add/route">
+        <form method="post" action="/admin/add/route">
             <input id="edit_route_id" name="route" type="hidden">
             <div id="select-container-edit">
                 <div id="edit_routes_stations_div">

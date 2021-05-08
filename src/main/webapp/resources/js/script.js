@@ -28,7 +28,7 @@ function openRouteEditPopUp(route) {
 }
 
 async function deleteRoute(id){
-    let response = await fetch("/delete/route/" + id);
+    let response = await fetch("/admin/delete/route/" + id);
     if (response.ok) {
         console.log(response)
         document.getElementById("route-edit-popup-container").classList.add("hidden");
@@ -125,7 +125,7 @@ function addNewSelect(containerName) {
 
 //get info about a train routes with REST
 async function fetchRoutes(trainId) {
-    let response = await fetch("/routes/" + trainId);
+    let response = await fetch("/admin/routes/" + trainId);
     if (response.ok) {
         let json = await response.json();
         console.log(json)

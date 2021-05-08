@@ -33,6 +33,10 @@ public class Route {
     )
     private Set<Station> stations;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "route_id")
+    private Set<Ticket> tickets;
+
     public Route() {
     }
 
@@ -71,4 +75,11 @@ public class Route {
         this.stations = stations;
     }
 
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
+    }
 }

@@ -2,6 +2,7 @@ package io.github.olgaak.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,6 +31,10 @@ public class Train implements Serializable {
 
     @OneToMany(mappedBy = "train", fetch = FetchType.EAGER)
     private Set<Route> routes;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "train_id")
+    private Set<Seat> seats;
 
     public Train(int number, int seat_count) {
         this.number = number;
@@ -73,5 +78,21 @@ public class Train implements Serializable {
 
     public void setStations(Set<Station> stations) {
         this.stations = stations;
+    }
+
+    public Set<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(Set<Route> routes) {
+        this.routes = routes;
+    }
+
+    public Set<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Set<Seat> seats) {
+        this.seats = seats;
     }
 }
