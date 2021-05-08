@@ -11,11 +11,13 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class RouteDaoImpl implements RouteDao {
 
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
+    @Transactional
     public void createNewRoute(Route route) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -34,13 +36,12 @@ public class RouteDaoImpl implements RouteDao {
         }
     }
 
-    @Transactional
     public List<Route> getAllRoutes() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<Route> routes = null;
         try {
             Query query = entityManager.createQuery("SELECT t FROM Route t");
-             routes = query.getResultList();
+            routes = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -49,7 +50,6 @@ public class RouteDaoImpl implements RouteDao {
         return routes;
     }
 
-    @Transactional
     public List<Route> getTrainRoutes(Long trainId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<Route> routes = null;
@@ -66,7 +66,23 @@ public class RouteDaoImpl implements RouteDao {
         return routes;
     }
 
-    @Transactional
+    public Route getRouteById(Long routeId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Route route = null;
+        try {
+            Query query = entityManager
+                    .createQuery("SELECT r FROM Route r WHERE r.id  = :routeId", Route.class)
+                    .setParameter("routeId", routeId);
+            route = (Route) query.getSingleResult();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return route;
+    }
+
+
     public List<Route> getTrainRoutesByQuery(TrainQueryDto trainQuery) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<Route> routes = null;
@@ -74,10 +90,13 @@ public class RouteDaoImpl implements RouteDao {
             Query query = entityManager
                     .createQuery("SELECT r FROM Route r JOIN TimetableItem t on r.id = t.route.id " +
                             "JOIN TimetableItem t2 on r.id = t2.route.id " +
-                            "WHERE t2.departureDate = '2021-05-10' " +
-                            "and t.departureDate = '2021-05-10' " +
-                            "and t2.station.id = 1 and t.station.id = 3" +
-                            "and (t2.departureDate>t.departureDate or t2.departureTime>t.departureTime) ", Route.class);
+                            "WHERE t2.departureDate = :departureDate " +
+                            "and t.departureDate = :departureDate " +
+                            "and t2.station.id = :arrivalStation and t.station.id = :departureStation " +
+                            "and (t2.departureDate>t.departureDate or t2.departureTime>t.departureTime) ", Route.class)
+                    .setParameter("departureDate", trainQuery.getDepartureDate())
+                    .setParameter("arrivalStation", trainQuery.getArrivalStationId())
+                    .setParameter("departureStation", trainQuery.getDepartureStationId());
 
             routes = query.getResultList();
         } catch (Exception ex) {
@@ -88,7 +107,7 @@ public class RouteDaoImpl implements RouteDao {
         return routes;
     }
 
-    @Override
+    @Transactional
     public void deleteRoute(long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -108,7 +127,7 @@ public class RouteDaoImpl implements RouteDao {
         }
     }
 
-    @Override
+    @Transactional
     public void editRoute(Route route) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;

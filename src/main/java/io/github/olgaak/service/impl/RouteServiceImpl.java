@@ -40,6 +40,14 @@ public class RouteServiceImpl implements RouteService {
         return routeDao.getTrainRoutes(trainId);
     }
 
+    public RouteDto getRouteById(Long routeId) {
+        RouteDto routeDto = new RouteDto();
+        Route route = routeDao.getRouteById(routeId);
+        if(route == null) return null;
+        routeDto = RouteDtoConverter.convertRouteEntityToDto(route);
+        return routeDto;
+    }
+
     public List<RouteDto> getTrainRoutesByQuery(TrainQueryDto trainQuery) {
         List<Route> routesByQuery = routeDao.getTrainRoutesByQuery(trainQuery);
         List<RouteDto> routeDtoList = new ArrayList<>();

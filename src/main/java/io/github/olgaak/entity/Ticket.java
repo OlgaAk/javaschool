@@ -22,6 +22,13 @@ public class Ticket {
     @JoinColumn(name = "route_id")
     private Route route;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seat_id", referencedColumnName = "id")
+    private Seat seat;
+
+    @Column(name = "price", nullable = false)
+    private int price;
+
     public Ticket() { }
 
     public long getId() {

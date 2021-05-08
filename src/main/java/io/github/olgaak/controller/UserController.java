@@ -1,8 +1,10 @@
 package io.github.olgaak.controller;
 
+import io.github.olgaak.dto.RouteDto;
 import io.github.olgaak.dto.UserDto;
 import io.github.olgaak.entity.User;
 import io.github.olgaak.exception.UserAlreadyExistException;
+import io.github.olgaak.service.api.RouteService;
 import io.github.olgaak.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -19,6 +21,9 @@ public class UserController {
     @Autowired
     public UserService userService;
 
+    @Autowired
+    public RouteService routeService;
+
     @GetMapping("/login")
     public String getLoginPage() {
         return "login_page";
@@ -31,7 +36,8 @@ public class UserController {
 
     @GetMapping("/purchase/{routeId}")
     public String getPurchasePage(@PathVariable("routeId") long routeId, ModelMap model) {
-        model.addAttribute("routeId", routeId);
+        RouteDto routeDto = routeService.getRouteById(routeId);
+        model.addAttribute("route", routeDto);
         return "purchase_page";
     }
 

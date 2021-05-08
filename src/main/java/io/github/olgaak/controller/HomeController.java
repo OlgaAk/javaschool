@@ -29,8 +29,12 @@ public class HomeController {
                              @RequestParam("arrival_station") String arrivalStation,
                              @RequestParam("departure_date") String departureDate,
                                    ModelMap model){
-        TrainQueryDto trainQuery = new TrainQueryDto(departureStation,arrivalStation,departureDate);
+        TrainQueryDto trainQuery = new TrainQueryDto();
         List<RouteDto> routes = new ArrayList<>();
+        // todo get from frontend stations id instead of name string (substitute input with js + list)
+        trainQuery.setDepartureDate("2021-05-10");
+        trainQuery.setDepartureStationId(3);
+        trainQuery.setArrivalStationId(1);
         routes = routeService.getTrainRoutesByQuery(trainQuery);
         model.addAttribute("routes", routes);
         return "home_page";

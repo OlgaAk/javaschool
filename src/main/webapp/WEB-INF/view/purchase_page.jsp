@@ -11,15 +11,27 @@
 
 <%@include file="includes/common/navbar.jsp" %>
 
-<p>${routeId}</p>
+<div class="main-container-home">
 
-<%--<div class="main-container-home">--%>
-<%--    <div>--%>
-<%--        <h2 class="train-search-title">Book a train ticket</h2>--%>
-<%--    </div>--%>
-<%--&lt;%&ndash;    <%@include file="includes/home/train_search_section.jsp" %>&ndash;%&gt;--%>
-<%--</div>--%>
+<div class="train-search-result-item">
+    <div class="train-search-result-item-left">
+        <div class="train-search-result-item-row">
+            <div class="train-search-result-item-time">${route.startTripTime}</div>
+            <div class="train-search-result-item-station">${route.startTripStation}</div>
+        </div>
+        <div class="train-search-result-item-row">
+            <div class="train-search-result-item-time">${route.endTripTime}</div>
+            <div class="train-search-result-item-station">${route.endTripStation}</div>
+        </div>
+        <div class="train-search-result-item-row">
+            <div class="train-search-result-item-duration">${route.tripDuration}</div>
+            <div class="train-search-result-item-change">${route.changeType}</div>
+        </div>
+    </div>
 
+</div>
+
+</div>
 
 <script src="/resources/js/script.js"/>
 ></script>

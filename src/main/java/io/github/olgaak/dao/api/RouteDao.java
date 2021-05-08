@@ -13,7 +13,9 @@ public interface RouteDao {
 
     List<Route> getTrainRoutes(Long trainId);
 
-    public List<Route> getTrainRoutesByQuery(TrainQueryDto trainQuery);
+    Route getRouteById(Long routeId);
+
+    List<Route> getTrainRoutesByQuery(TrainQueryDto trainQuery);
 
     void deleteRoute(long id);
 

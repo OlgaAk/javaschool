@@ -8,15 +8,17 @@ import java.util.List;
 
 public interface RouteService {
 
-Route createNewRoute(Route timetableItem);
+    Route createNewRoute(Route timetableItem);
 
-public List<Route> getAllRoutes();
+    List<Route> getAllRoutes();
 
-public List<Route> getTrainRoutes(Long trainId);
+    List<Route> getTrainRoutes(Long trainId);
 
-public List<RouteDto> getTrainRoutesByQuery(TrainQueryDto trainQuery);
+    RouteDto getRouteById(Long routeId);
 
-void deleteRoute(long id);
+    List<RouteDto> getTrainRoutesByQuery(TrainQueryDto trainQuery);
 
-void editRoute(Route timetableItem);
+    void deleteRoute(long id);
+
+    void editRoute(Route timetableItem);
 }

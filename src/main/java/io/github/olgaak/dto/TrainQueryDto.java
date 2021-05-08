@@ -1,41 +1,50 @@
 package io.github.olgaak.dto;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class TrainQueryDto {
-    private String departureStation;
-    private String arrivalStation;
-    private String departureDate;
+    private long departureStationId;
+    private long arrivalStationId;
+    private Date departureDate;
 
     public TrainQueryDto() {
     }
 
-    public TrainQueryDto(String departureStation, String arrivalStation, String departureDate) {
-        this.departureStation = departureStation;
-        this.arrivalStation = arrivalStation;
-        this.departureDate = departureDate;
+    public TrainQueryDto(int departureStation, int arrivalStation, String departureDate) {
     }
 
-    public String getDepartureStation() {
-        return departureStation;
+    public long getDepartureStationId() {
+        return departureStationId;
     }
 
-    public void setDepartureStation(String departureStation) {
-        this.departureStation = departureStation;
+    public void setDepartureStationId(int departureStationId) {
+        this.departureStationId = departureStationId;
     }
 
-    public String getArrivalStation() {
-        return arrivalStation;
+    public long getArrivalStationId() {
+        return arrivalStationId;
     }
 
-    public void setArrivalStation(String arrivalStation) {
-        this.arrivalStation = arrivalStation;
+    public void setArrivalStationId(int arrivalStationId) {
+        this.arrivalStationId = arrivalStationId;
     }
 
-    public String getDepartureDate() {
+    public Date getDepartureDate() {
         return departureDate;
     }
 
     public void setDepartureDate(String departureDate) {
-        this.departureDate = departureDate;
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = format.parse(departureDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.departureDate = date;
     }
 
 }
