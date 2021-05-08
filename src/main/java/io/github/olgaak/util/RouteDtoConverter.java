@@ -18,6 +18,7 @@ public class RouteDtoConverter {
         routeDto.setEndTripStation(lastStop.getStation().getName());
         routeDto.setEndTripTime(lastStop.getFullDepartureDate().toString());
         routeDto.setId(route.getId());
+        routeDto.setTrain_id(route.getTrain().getId());
         long duration = getDurationMilli(lastStop, firstStop);
         routeDto.setTripDurationMilli(duration);
         routeDto.setTripDuration(getDuration(duration));

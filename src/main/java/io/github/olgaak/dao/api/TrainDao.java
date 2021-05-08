@@ -10,6 +10,8 @@ public interface TrainDao {
 
     List<Train> getAllTrains();
 
+    Train getTrainById(long id);
+
     void deleteTrain(long id);
 
     void editTrain(Train train);

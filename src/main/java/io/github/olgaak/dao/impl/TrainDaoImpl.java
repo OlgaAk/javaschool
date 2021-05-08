@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class TrainDaoImpl implements TrainDao {
 
     @Autowired
@@ -22,7 +23,6 @@ public class TrainDaoImpl implements TrainDao {
             transaction = entityManager.getTransaction();
             transaction.begin();
             entityManager.persist(train);
-//            entityManager.flush();
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
@@ -34,7 +34,6 @@ public class TrainDaoImpl implements TrainDao {
         }
     }
 
-    @Transactional
     public List<Train> getAllTrains() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<Train> trains = null;
@@ -49,7 +48,23 @@ public class TrainDaoImpl implements TrainDao {
         return trains;
     }
 
-    @Override
+    public Train getTrainById(long id){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Train train = null;
+        try {
+            Query query = entityManager.createQuery("SELECT t FROM Train t WHERE t.id = :id" +
+                    "").setParameter("id", id);
+            train = (Train) query.getSingleResult();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return train;
+    }
+
+
+    @Transactional
     public void deleteTrain(long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
@@ -69,7 +84,7 @@ public class TrainDaoImpl implements TrainDao {
         }
     }
 
-    @Override
+    @Transactional
     public void editTrain(Train train) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;

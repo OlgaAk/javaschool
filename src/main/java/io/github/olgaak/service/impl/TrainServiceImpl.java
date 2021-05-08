@@ -1,9 +1,11 @@
 package io.github.olgaak.service.impl;
 
 import io.github.olgaak.dao.api.TrainDao;
+import io.github.olgaak.dto.TrainDto;
 import io.github.olgaak.entity.Seat;
 import io.github.olgaak.entity.Train;
 import io.github.olgaak.service.api.TrainService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,9 @@ import java.util.Set;
 public class TrainServiceImpl implements TrainService {
 
     private TrainDao trainDao;
+
+    @Autowired
+    ModelMapper modelMapper;
 
     @Autowired
     public TrainServiceImpl(TrainDao trainDao){
@@ -33,9 +38,13 @@ public class TrainServiceImpl implements TrainService {
         return null;
     }
 
-    @Transactional
     public List<Train> getAllTrains() {
         return trainDao.getAllTrains();
+    }
+
+    public TrainDto getTrainById(long id){
+        Train train = trainDao.getTrainById(id);
+        return modelMapper.map(train, TrainDto.class);
     }
 
     @Override

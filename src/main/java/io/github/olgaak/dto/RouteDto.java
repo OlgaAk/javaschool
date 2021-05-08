@@ -24,6 +24,8 @@ public class RouteDto {
 
     private long price;
 
+    private long train_id;
+
     List<TimetableItemDto> timetableItemDtoList;
 
     public RouteDto() {
@@ -114,5 +116,17 @@ public class RouteDto {
 
     public void setTripDurationMilli(long tripDurationMilli) {
         this.tripDurationMilli = tripDurationMilli;
+    }
+
+    public void setChangeType(String changeType) {
+        this.changeType = changeType;
+    }
+
+    public long getTrain_id() {
+        return train_id;
+    }
+
+    public void setTrain_id(long train_id) {
+        this.train_id = train_id;
     }
 }

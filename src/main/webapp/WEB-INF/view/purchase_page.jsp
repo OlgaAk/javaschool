@@ -31,7 +31,16 @@
 
 </div>
 
+    <div>
+       Train Number ${train.number}
+    </div>
+    <c:forEach var="seat" items="${train.seats}">
+        <button class="${seat.getVacant() ? '' : 'seat-occupied'}">${seat.number}</button>
+    </c:forEach>
+
 </div>
+
+
 
 <script src="/resources/js/script.js"/>
 ></script>

@@ -1,5 +1,6 @@
 package io.github.olgaak.service.api;
 
+import io.github.olgaak.dto.TrainDto;
 import io.github.olgaak.entity.Train;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,8 @@ public interface TrainService {
     Train createNewTrain(Train train);
 
     List<Train> getAllTrains();
+
+    TrainDto getTrainById(long id);
 
     void deleteTrain(long id);
 
