@@ -6,13 +6,14 @@ import io.github.olgaak.entity.TimetableItem;
 
 import java.util.Comparator;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class RouteDtoConverter {
 
-    public static RouteDto convertRouteEntityToDto(Route route){
+    public static RouteDto convertRouteEntityToDto(Route route) {
         RouteDto routeDto = new RouteDto();
         TimetableItem firstStop = getFirstStation(route);
-        TimetableItem  lastStop = getLastStation(route);
+        TimetableItem lastStop = getLastStation(route);
         routeDto.setStartTripStation(firstStop.getStation().getName());
         routeDto.setStartTripTime(firstStop.getFullDepartureDate().toString());
         routeDto.setEndTripStation(lastStop.getStation().getName());
@@ -20,6 +21,7 @@ public class RouteDtoConverter {
         routeDto.setId(route.getId());
         routeDto.setTrain_id(route.getTrain().getId());
         long duration = getDurationMilli(lastStop, firstStop);
+        routeDto.setSeats(route.getSeats().stream().map(seat -> SeatDtoConverter.convertSeatEntityToDto(seat)).collect(Collectors.toList()));
         routeDto.setTripDurationMilli(duration);
         routeDto.setTripDuration(getDuration(duration));
         return routeDto;
@@ -39,14 +41,14 @@ public class RouteDtoConverter {
                 .get();
     }
 
-    private static long getDurationMilli(TimetableItem lastStop, TimetableItem firstStop){
-        return  lastStop.getFullDepartureDate().getTime() - firstStop.getFullDepartureDate().getTime();
+    private static long getDurationMilli(TimetableItem lastStop, TimetableItem firstStop) {
+        return lastStop.getFullDepartureDate().getTime() - firstStop.getFullDepartureDate().getTime();
     }
 
-    private static String getDuration(long duration){
+    private static String getDuration(long duration) {
         long diffInMinutes = TimeUnit.MINUTES.convert(duration, TimeUnit.MILLISECONDS);
-        long hours = diffInMinutes/60;
-        long minutes = diffInMinutes%60;
-        return hours+":" + (minutes<10? "0" : "") + minutes;
+        long hours = diffInMinutes / 60;
+        long minutes = diffInMinutes % 60;
+        return hours + ":" + (minutes < 10 ? "0" : "") + minutes;
     }
 }

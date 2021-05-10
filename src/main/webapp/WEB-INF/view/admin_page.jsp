@@ -38,8 +38,8 @@
                 </c:forEach>
             </select>
             <button class="btn btn-primary" type="submit">EDIT</button>
-            <button class="btn btn-secondary" type="button" onclick="closeEditPopUp('train-edit-popup-container')">
-                CANCEL
+            <button class="btn btn-close-popup" type="button" onclick="closeEditPopUp('train-edit-popup-container')">
+                <span class="material-icons md-18">close</span>
             </button>
         </form>
     </div>
@@ -53,8 +53,8 @@
             <input id="edit_station_id" name="id" type="hidden">
             <label><input id="edit_station_name" name="name" required type="text">Station name</label>
             <button class="btn btn-primary" type="submit">EDIT</button>
-            <button class="btn btn-secondary" type="button" onclick="closeEditPopUp('station-edit-popup-container')">
-                CANCEL
+            <button class="btn btn-close-popup" type="button" onclick="closeEditPopUp('station-edit-popup-container')">
+                <span class="material-icons md-18">close</span>
             </button>
         </form>
     </div>

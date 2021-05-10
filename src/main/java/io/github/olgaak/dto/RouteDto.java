@@ -1,6 +1,8 @@
 package io.github.olgaak.dto;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class RouteDto {
 
@@ -25,6 +27,8 @@ public class RouteDto {
     private long price;
 
     private long train_id;
+
+    private List<SeatDto> seats;
 
     List<TimetableItemDto> timetableItemDtoList;
 
@@ -56,12 +60,12 @@ public class RouteDto {
     }
 
     public String getChangeType() {
-        if(isDirect) return "direct";
+        if (isDirect) return "direct";
         return "change";
     }
 
     public long getPrice() {
-        return tripDurationMilli/60000/15;
+        return tripDurationMilli / 60000 / 15;
     }
 
     public void setPrice(long price) {
@@ -128,5 +132,13 @@ public class RouteDto {
 
     public void setTrain_id(long train_id) {
         this.train_id = train_id;
+    }
+
+    public List<SeatDto> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<SeatDto> seats) {
+        this.seats = seats.stream().sorted().collect(Collectors.toList());
     }
 }

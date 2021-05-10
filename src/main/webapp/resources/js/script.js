@@ -23,11 +23,35 @@ function openRouteEditPopUp(route) {
     document.getElementById("route-edit-popup-container").classList.remove("hidden");
     // insert saved values into fields
     document.getElementById("edit_route_id").value = route.id;
+    let routeEditTable = document.getElementById("route-table-edit-content");
+    routeEditTable.innerHTML = "";
+    addRouteEditContent(route, routeEditTable);
     document.getElementById("deleteRouteBtn")
-        .addEventListener("click", ()=>deleteRoute(route.id))
+        .addEventListener("click", () => deleteRoute(route.id))
 }
 
-async function deleteRoute(id){
+function addRouteEditContent(route, routeEditTable) {
+    route.timetableItems.forEach((timeTable, index) => {
+        let clone = document.getElementById("routes_stations_div").cloneNode(true);
+        let select = clone.children[0];
+        select.name = "timetableItems[" + index + "].station";
+        select.value = timeTable.station.id;
+        let dateinput = clone.children[1].children[0];
+        dateinput.name = "timetableItems[" + index + "].departureDate";
+        dateinput.value = getFormattedDateYYYYMMDD(timeTable.fullDepartureDate);
+        let timeinput = clone.children[2].children[0];
+        timeinput.name = "timetableItems[" + index + "].departureTime";
+        timeinput.value = getFormattedTime(timeTable.departureTime);
+        let inputForId = document.createElement("input");
+        inputForId.type = "hidden"
+        inputForId.name = "timetableItems["+ index+"].id"
+        clone.id =""
+        clone.classList.add("route-timetable-item")
+        routeEditTable.appendChild(clone);
+    })
+}
+
+async function deleteRoute(id) {
     let response = await fetch("/admin/delete/route/" + id);
     if (response.ok) {
         console.log(response)
@@ -55,18 +79,6 @@ function openScheduleSection(stationId, stationName, trains) {
     }
 }
 
-function createRouteTable(route, index, routesTable) {
-    let routesTableHeader = document.getElementById("routes-table-header").cloneNode(true);
-    routesTableHeader.style.display = "grid";
-    routesTableHeader.removeAttribute("id");
-    let routeTitle = document.createElement("h5");
-    routeTitle.innerText = "Route " + (index + 1);
-    routeTitle.classList.add("editable");
-    routeTitle.addEventListener("click", ()=> openRouteEditPopUp(route))
-    routesTable.append(routeTitle, routesTableHeader);
-    createRouteTableRows(route, routesTable)
-}
-
 
 function hideScheduleShowRoutes(trainNumber, trainId) {
     document.getElementById("schedule-section").classList.add("hidden");
@@ -89,19 +101,40 @@ async function openRoutesSection(trainNumber, trainId) {
     }
 }
 
+function createRouteTable(route, index, routesTable) {
+    let routesTableHeader = document.getElementById("routes-table-header").cloneNode(true);
+    routesTableHeader.style.display = "grid";
+    routesTableHeader.removeAttribute("id");
+    let routeTitle = document.createElement("h5");
+    routeTitle.innerText = "Route " + (index + 1);
+    routeTitle.classList.add("editable");
+    routeTitle.addEventListener("click", () => openRouteEditPopUp(route))
+    routesTable.append(routeTitle, routesTableHeader);
+    createRouteTableRows(route, routesTable)
+}
+
+function getFormattedDate(date){
+    return new Date(date).toLocaleString().split(",")[0];
+}
+
+function getFormattedDateYYYYMMDD(date){
+    return new Date(date).toISOString().split("T")[0];
+}
+
+function getFormattedTime(time){
+    return new Date(time).toLocaleTimeString().substring(0, 5);
+}
+
 function createRouteTableRows(route, routesTable) {
     route.timetableItems.forEach(timeTable => {
         let newCellRow = document.createElement("div");
         newCellRow.classList.add("table-row", "table-columns-3");
         let routeDateCell = document.createElement("span");
         routeDateCell.className = "table-cell";
-        console.log(timeTable.departureDate)
-        let date = new Date(timeTable.departureDate);
-        routeDateCell.innerText = date.toLocaleString().split(",")[0];
+        routeDateCell.innerText = getFormattedDate(timeTable.departureDate)
         let routeTimeCell = document.createElement("span");
         routeTimeCell.className = "table-cell";
-        let time = new Date(timeTable.departureTime).toLocaleTimeString().substring(0,5);
-        routeTimeCell.innerText = time;
+        routeTimeCell.innerText = getFormattedTime(timeTable.departureTime);
         let routeStationCell = document.createElement("span");
         routeStationCell.className = "table-cell";
         routeStationCell.innerText = timeTable.station.name;
@@ -136,27 +169,27 @@ async function fetchRoutes(trainId) {
     }
 }
 
-function setEventListeners(){
+function setEventListeners() {
     setEventListenerOnProfileMenuItems();
 }
 
 // mark selected menu item with active color
-function setEventListenerOnProfileMenuItems(){
+function setEventListenerOnProfileMenuItems() {
     let profileMenuItemsList = document.querySelectorAll(".profile-menu-item p");
     let profileContentItemsList = document.querySelectorAll(".profile-content-item");
-    profileMenuItemsList.forEach(item=>
-        item.addEventListener("click", (e)=> {
+    profileMenuItemsList.forEach(item =>
+        item.addEventListener("click", (e) => {
             removeActiveClassMenuItems(profileMenuItemsList, profileContentItemsList);
             e.target.classList.add("active");
-            let contentToShow = document.getElementById("profile-content-item-"+ e.target.innerText.toLowerCase())
-           contentToShow.classList.remove("hidden");
+            let contentToShow = document.getElementById("profile-content-item-" + e.target.innerText.toLowerCase())
+            contentToShow.classList.remove("hidden");
         }));
 }
 
-function removeActiveClassMenuItems(profileMenuItemsList, profileContentItemsList){
-    profileMenuItemsList.forEach(item=>
+function removeActiveClassMenuItems(profileMenuItemsList, profileContentItemsList) {
+    profileMenuItemsList.forEach(item =>
         item.classList.remove("active"))
-    profileContentItemsList.forEach(item=> item
+    profileContentItemsList.forEach(item => item
         .classList.add("hidden"))
 }
 

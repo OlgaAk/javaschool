@@ -18,6 +18,7 @@
 <div class="main-container-home">
     <div>
         <h2 class="train-search-title">Login</h2>
+        <p class="error">${errorMessage}</p>
     </div>
     <div class="login-form-container">
         <form method="post" action="/user/login">

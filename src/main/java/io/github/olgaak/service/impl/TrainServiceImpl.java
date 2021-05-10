@@ -28,12 +28,6 @@ public class TrainServiceImpl implements TrainService {
     }
 
     public Train createNewTrain(Train train) {
-        Set<Seat> seats = new HashSet<>();
-        for(int i= 1; i<= train.getSeat_count(); i++){
-            Seat seat = new Seat(i, train);
-            seats.add(seat);
-        }
-        train.setSeats(seats);
         trainDao.createNewTrain(train);
         return null;
     }

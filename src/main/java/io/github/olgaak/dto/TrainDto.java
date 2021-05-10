@@ -9,15 +9,15 @@ public class TrainDto {
 
     private int number;
     private int seat_count;
-    private List<SeatDto> seats;
+
+    private List<RouteDto> routes;
 
     public TrainDto() {
     }
 
-    public TrainDto(int number, int seat_count, Set<SeatDto> seats) {
+    public TrainDto(int number, int seat_count) {
         this.number = number;
         this.seat_count = seat_count;
-        this.seats = seats.stream().sorted().collect(Collectors.toList());
     }
 
     public int getNumber() {
@@ -36,11 +36,11 @@ public class TrainDto {
         this.seat_count = seat_count;
     }
 
-    public List<SeatDto> getSeats() {
-        return seats;
+    public List<RouteDto> getRoutes() {
+        return routes;
     }
 
-    public void setSeats(Set<SeatDto> seats) {
-        this.seats = seats.stream().sorted().collect(Collectors.toList());
+    public void setRoutes(List<RouteDto> routes) {
+        this.routes = routes;
     }
 }

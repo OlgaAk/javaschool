@@ -32,9 +32,9 @@
 </div>
 
     <div>
-       Train Number ${train.number}
+       Train Number ${route.startTripStation} - ${route.endTripStation}
     </div>
-    <c:forEach var="seat" items="${train.seats}">
+    <c:forEach var="seat" items="${route.seats}">
         <button class="${seat.getVacant() ? '' : 'seat-occupied'}">${seat.number}</button>
     </c:forEach>
 

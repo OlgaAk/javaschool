@@ -1,10 +1,17 @@
 package io.github.olgaak.dto;
 
+import io.github.olgaak.entity.RouteSection;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class SeatDto implements Comparable <SeatDto>{
 
     private int id;
     private int number;
-    private boolean isVacant;
+    private boolean isVacant = true;
+
+    private List<RouteSectionDto> takenRouteSections;
 
     public SeatDto() {
     }
@@ -32,7 +39,7 @@ public class SeatDto implements Comparable <SeatDto>{
     }
 
     public boolean getVacant() {
-        return isVacant;
+        return takenRouteSections.size() == 0;
     }
 
     public void setVacant(boolean vacant) {
@@ -44,4 +51,13 @@ public class SeatDto implements Comparable <SeatDto>{
     public int compareTo(SeatDto s) {
         return number - s.number;
     }
+
+    public List<RouteSectionDto> getTakenRouteSections() {
+        return takenRouteSections;
+    }
+
+    public void setTakenRouteSections(List<RouteSectionDto> takenRouteSections) {
+        this.takenRouteSections = takenRouteSections.stream().sorted().collect(Collectors.toList());
+    }
+
 }

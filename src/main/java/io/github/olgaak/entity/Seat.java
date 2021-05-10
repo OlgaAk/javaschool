@@ -1,6 +1,7 @@
 package io.github.olgaak.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "seat")
@@ -13,23 +14,21 @@ public class Seat {
 
     @Column(name = "number", nullable = false)
     private int number;
+//
+//    @Column(name = "is_vacant", nullable = false)
+//    private boolean isVacant = true;
 
-    @Column(name = "is_vacant", nullable = false)
-    private boolean isVacant = true;
-
-//    @ManyToOne
-//    @JoinColumn(name = "route_id")
-//    private Route route;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "seat_id")
+    private Set<RouteSection> takenRouteSections;
 
     @ManyToOne
-    @JoinColumn(name = "train_id")
-    private Train train;
+    @JoinColumn(name = "route_id")
+    private Route route;
 
-    public Seat(int number, Train train) {
+    public Seat(int number) {
         this.number = number;
-        this.train = train;
     }
-
 
     public Seat() {
     }
@@ -50,19 +49,11 @@ public class Seat {
         this.number = number;
     }
 
-    public boolean isVacant() {
-        return isVacant;
+    public Set<RouteSection> getTakenRouteSections() {
+        return takenRouteSections;
     }
 
-    public void setVacant(boolean vacant) {
-        isVacant = vacant;
-    }
-
-    public Train getTrain() {
-        return train;
-    }
-
-    public void setTrain(Train train) {
-        this.train = train;
+    public void setTakenRouteSections(Set<RouteSection> takenRouteSections) {
+        this.takenRouteSections = takenRouteSections;
     }
 }

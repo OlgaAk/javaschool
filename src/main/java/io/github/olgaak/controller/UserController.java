@@ -10,10 +10,15 @@ import io.github.olgaak.service.api.TrainService;
 import io.github.olgaak.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -34,6 +39,21 @@ public class UserController {
         return "login_page";
     }
 
+    @GetMapping("/login-error")
+    public String getLoginErrorPage(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        String errorMessage = null;
+        if (session != null) {
+            AuthenticationException ex = (AuthenticationException) session
+                    .getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+            if (ex != null) {
+                errorMessage = ex.getMessage();
+            }
+        }
+        model.addAttribute("errorMessage", errorMessage);
+        return "login_page";
+    }
+
     @GetMapping("/signup")
     public String getSignupPage() {
         return "signup_page";
@@ -44,7 +64,7 @@ public class UserController {
         RouteDto routeDto = routeService.getRouteById(routeId);
         TrainDto trainDto =  trainService.getTrainById(routeDto.getTrain_id());
         model.addAttribute("route", routeDto);
-        model.addAttribute("train", trainDto);
+//        model.addAttribute("train", trainDto);
         return "purchase_page";
     }
 

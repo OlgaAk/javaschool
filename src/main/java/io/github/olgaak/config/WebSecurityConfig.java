@@ -47,8 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/user/signup").hasRole("ANONYMOUS")
-                .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/admin/**").hasRole("ADMIN")
+//                .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+//                .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
                 .anonymous()
                 .and()
@@ -57,6 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .usernameParameter("email")
                 .defaultSuccessUrl("/user/profile")
+                .failureUrl("/user/login-error")
                 .and()
                 .logout()
                 .logoutUrl("/user/logout").logoutSuccessUrl("/");

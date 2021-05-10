@@ -37,12 +37,12 @@
 
 <%--EDIT POP-UP--%>
 <div id="route-edit-popup-container" class="edit-popup-container hidden">
-    <div id="train-edit-popup" class="edit-popup">
+    <div class="edit-popup">
         <h3>Edit route info</h3>
-        <form method="post" action="/admin/add/route">
+        <form method="post" action="/admin/edit/route">
             <input id="edit_route_id" name="route" type="hidden">
             <div id="select-container-edit">
-                <div id="edit_routes_stations_div">
+                <div id="route-table-edit-content">
                     <select name="timetableItems[0].station">
                         <c:forEach var="station" items="${stations}">
                             <option value="${station.id}">${station.name}</option>
@@ -55,10 +55,11 @@
             <button type="button" onclick="addNewSelect('select-container-edit')">+</button>
             <button class="btn btn-primary" type="submit">EDIT</button>
             <button id="deleteRouteBtn" class="btn " type="button">DELETE</button>
-            <button class="btn btn-secondary" type="button" onclick="closeEditPopUp('route-edit-popup-container')">
-                CANCEL
+            <button class="btn btn-close-popup" type="button" onclick="closeEditPopUp('route-edit-popup-container')">
+                <span class="material-icons md-18">close</span>
             </button>
         </form>
+
     </div>
 </div>
 

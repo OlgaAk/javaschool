@@ -3,8 +3,6 @@ package io.github.olgaak.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -23,7 +21,7 @@ public class Route {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "route_id")
-    private List<TimetableItem> timetableItems;
+    private Set<TimetableItem> timetableItems;
 
     @JsonIgnore
     @ManyToMany
@@ -36,6 +34,10 @@ public class Route {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "route_id")
     private Set<Ticket> tickets;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "route_id")
+    private Set<Seat> seats;
 
     public Route() {
     }
@@ -60,11 +62,11 @@ public class Route {
         this.train = train;
     }
 
-    public List<TimetableItem> getTimetableItems() {
+    public Set<TimetableItem> getTimetableItems() {
         return timetableItems;
     }
 
-    public void setTimetableItems(List<TimetableItem> timetableItems) {
+    public void setTimetableItems(Set<TimetableItem> timetableItems) {
         this.timetableItems = timetableItems;
     }
     public Set<Station> getStations() {
@@ -81,5 +83,13 @@ public class Route {
 
     public void setTickets(Set<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public Set<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Set<Seat> seats) {
+        this.seats = seats;
     }
 }

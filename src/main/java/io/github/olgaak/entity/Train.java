@@ -32,10 +32,6 @@ public class Train implements Serializable {
     @OneToMany(mappedBy = "train", fetch = FetchType.EAGER)
     private Set<Route> routes;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "train_id")
-    private Set<Seat> seats;
-
     public Train(int number, int seat_count) {
         this.number = number;
         this.seat_count = seat_count;
@@ -88,11 +84,4 @@ public class Train implements Serializable {
         this.routes = routes;
     }
 
-    public Set<Seat> getSeats() {
-        return seats;
-    }
-
-    public void setSeats(Set<Seat> seats) {
-        this.seats = seats;
-    }
 }

@@ -26,6 +26,10 @@ a{
     font-size: 20px;
 }
 
+.error{
+    color: #fa3f3f;
+}
+
 .btn {
     border: none;
     padding: 5px 10px;
@@ -120,6 +124,12 @@ a{
     border-radius: 10px;
 }
 
+.btn-close-popup{
+    position: absolute;
+    top:10px;
+    right: 10px;
+}
+
 .icon {
     color: #666565;
     text-decoration: none;
@@ -151,6 +161,15 @@ a{
 .hidden {
     display: none;
 }
+
+
+/*routes******************************/
+
+.route-timetable-item{
+    margin: 20px 0px;
+}
+
+
 
 
 /*header*******************************/
