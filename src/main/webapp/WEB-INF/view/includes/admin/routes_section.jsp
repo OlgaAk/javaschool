@@ -53,8 +53,8 @@
                 </div>
             </div>
             <button type="button" onclick="addNewSelect('select-container-edit')">+</button>
-            <button class="btn btn-primary" type="submit">EDIT</button>
-            <button id="deleteRouteBtn" class="btn " type="button">DELETE</button>
+            <button class="btn btn-primary btn-edit" type="submit">EDIT</button>
+            <button id="deleteRouteBtn" class="btn btn-delete" type="button">DELETE</button>
             <button class="btn btn-close-popup" type="button" onclick="closeEditPopUp('route-edit-popup-container')">
                 <span class="material-icons md-18">close</span>
             </button>

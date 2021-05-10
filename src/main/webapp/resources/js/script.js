@@ -43,9 +43,11 @@ function addRouteEditContent(route, routeEditTable) {
         timeinput.name = "timetableItems[" + index + "].departureTime";
         timeinput.value = getFormattedTime(timeTable.departureTime);
         let inputForId = document.createElement("input");
-        inputForId.type = "hidden"
-        inputForId.name = "timetableItems["+ index+"].id"
-        clone.id =""
+        inputForId.type = "hidden";
+        inputForId.name = "timetableItems[" + index + "].id";
+        inputForId.value=timeTable.id;
+        clone.appendChild(inputForId);
+        clone.id = ""
         clone.classList.add("route-timetable-item")
         routeEditTable.appendChild(clone);
     })
@@ -113,15 +115,15 @@ function createRouteTable(route, index, routesTable) {
     createRouteTableRows(route, routesTable)
 }
 
-function getFormattedDate(date){
+function getFormattedDate(date) {
     return new Date(date).toLocaleString().split(",")[0];
 }
 
-function getFormattedDateYYYYMMDD(date){
+function getFormattedDateYYYYMMDD(date) {
     return new Date(date).toISOString().split("T")[0];
 }
 
-function getFormattedTime(time){
+function getFormattedTime(time) {
     return new Date(time).toLocaleTimeString().substring(0, 5);
 }
 

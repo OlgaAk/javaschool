@@ -1,7 +1,6 @@
 package io.github.olgaak.dto;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class RouteDto {
@@ -30,7 +29,7 @@ public class RouteDto {
 
     private List<SeatDto> seats;
 
-    List<TimetableItemDto> timetableItemDtoList;
+    List<TimetableItemDto> timetableItems;
 
     public RouteDto() {
     }
@@ -73,7 +72,7 @@ public class RouteDto {
     }
 
     public String getStartTripStation() {
-        return startTripStation.toUpperCase();
+        return startTripStation;
     }
 
     public void setStartTripStation(String startTripStation) {
@@ -81,7 +80,7 @@ public class RouteDto {
     }
 
     public String getEndTripStation() {
-        return endTripStation.toUpperCase();
+        return endTripStation;
     }
 
     public void setEndTripStation(String endTripStation) {
@@ -106,12 +105,12 @@ public class RouteDto {
         this.startTripTime = startTripTime;
     }
 
-    public List<TimetableItemDto> getTimetableItemDtoList() {
-        return timetableItemDtoList;
+    public List<TimetableItemDto> getTimetableItems() {
+        return timetableItems;
     }
 
-    public void setTimetableItemDtoList(List<TimetableItemDto> timetableItemDtoList) {
-        this.timetableItemDtoList = timetableItemDtoList;
+    public void setTimetableItems(List<TimetableItemDto> timetableItems) {
+        this.timetableItems = timetableItems;
     }
 
     public long getTripDurationMilli() {

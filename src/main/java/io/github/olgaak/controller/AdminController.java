@@ -1,5 +1,7 @@
 package io.github.olgaak.controller;
 
+import io.github.olgaak.dto.RouteDto;
+import io.github.olgaak.dto.TrainDto;
 import io.github.olgaak.entity.*;
 import io.github.olgaak.service.api.RouteService;
 import io.github.olgaak.service.api.StationService;
@@ -35,7 +37,7 @@ public class AdminController {
     @GetMapping("")
     public String getAdminPage(ModelMap model){
         model.addAttribute("name", "Tom");
-        List<Train> trains = trainService.getAllTrains();
+        List<TrainDto> trains = trainService.getAllTrains();
         model.addAttribute("trains", trains);
         List<Station> stations = stationService.getAllStations();
         model.addAttribute("stations", stations);
@@ -97,8 +99,8 @@ public class AdminController {
     }
 
     @PostMapping("/edit/route")
-    public String editRoute(@ModelAttribute("route")Route route){
-        routeService.editRoute(route);
+    public String editRoute(@ModelAttribute("route") RouteDto route){
+//        routeService.editRoute(route);
         return "redirect:/admin";
     }
 

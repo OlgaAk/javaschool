@@ -10,7 +10,7 @@ import java.util.List;
 public interface TrainService {
     Train createNewTrain(Train train);
 
-    List<Train> getAllTrains();
+    List<TrainDto> getAllTrains();
 
     TrainDto getTrainById(long id);
 

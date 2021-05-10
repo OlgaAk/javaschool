@@ -44,6 +44,10 @@ a{
     background-color: var(--main-color);
 }
 
+.btn-edit, .btn-delete{
+    float: right;
+}
+
 .editable{
     position: relative;
 }
@@ -160,6 +164,13 @@ a{
 
 .hidden {
     display: none;
+}
+
+/*trains*******************/
+.station-names-cell{
+    text-transform: capitalize;
+    font-size: 12px;
+    justify-content: left;
 }
 
 

@@ -27,17 +27,17 @@
                 <div class="table-row table-columns-5">
                     <span class="table-cell">${train.number}</span>
                     <span class="table-cell">${train.seat_count}</span>
-                    <span class="table-cell" onclick="openRoutesSection(${train.number}, ${train.id},
-                            '<c:forEach var="station" items="${train.stations}">${station.name},</c:forEach>')">
-<%--                        <c:forEach var="station" items="${train.stations}" varStatus="loop">--%>
-<%--                            ${station.name}<c:if test="${!loop.last}">,&nbsp;</c:if>--%>
-<%--                        </c:forEach>--%>
+                    <span class="table-cell station-names-cell" onclick="openRoutesSection(${train.number}, ${train.id},
+                            '<c:forEach var="station" items="${train.stationsUnique}">${station},</c:forEach>')">
+                        <c:forEach var="station" items="${train.stationsUnique}" varStatus="loop">
+                            ${station}<c:if test="${!loop.last}">,&nbsp;</c:if>
+                        </c:forEach>
                     </span>
                     <span class="table-cell">
 
                     <span class="material-icons md-18"
                           onclick="openTrainEditPopUp(${train.id}, ${train.number}, ${train.seat_count},
-                                  '<c:forEach var="station" items="${train.stations}">${station.name},</c:forEach>')">
+                                  '<c:forEach var="station" items="${train.stations}">${station},</c:forEach>')">
                         edit
                     </span>
 
