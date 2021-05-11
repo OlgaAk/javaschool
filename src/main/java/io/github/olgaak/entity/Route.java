@@ -3,6 +3,7 @@ package io.github.olgaak.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,22 +21,22 @@ public class Route {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "route_id")
-    private Set<TimetableItem> timetableItems;
+    private Set<TimetableItem> timetableItems = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "route_station",
             joinColumns = @JoinColumn(name = "route_id"),
-            inverseJoinColumns = @JoinColumn(name = "station_id")
+            inverseJoinColumns = @JoinColumn(name = "station_id", updatable=false)
     )
-    private Set<Station> stations;
+    private Set<Station> stations = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "route_id")
-    private Set<Ticket> tickets;
+    private Set<Ticket> tickets = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "route_id")
-    private Set<Seat> seats;
+    @JoinColumn(name = "route_id", updatable=false)
+    private Set<Seat> seats = new HashSet<>();
 
     public Route() {
     }
