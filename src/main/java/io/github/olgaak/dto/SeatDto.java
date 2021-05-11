@@ -2,6 +2,7 @@ package io.github.olgaak.dto;
 
 import io.github.olgaak.entity.RouteSection;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +12,7 @@ public class SeatDto implements Comparable <SeatDto>{
     private int number;
     private boolean isVacant = true;
 
-    private List<RouteSectionDto> takenRouteSections;
+    private List<RouteSectionDto> takenRouteSections = new ArrayList<>();
 
     public SeatDto() {
     }

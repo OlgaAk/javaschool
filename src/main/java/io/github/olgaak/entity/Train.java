@@ -23,7 +23,7 @@ public class Train implements Serializable {
     private int seat_count;
 
     @ManyToMany(fetch = FetchType.EAGER)
-        @JoinTable(name = "train_station",
+    @JoinTable(name = "train_station",
             joinColumns = @JoinColumn(name = "train_id"),
             inverseJoinColumns = @JoinColumn(name = "station_id")
     )
@@ -40,8 +40,8 @@ public class Train implements Serializable {
     public Train() {
     }
 
-    public Train(String id) {
-        this.id = Long.parseLong(id);
+    public Train(long id) {
+        this.id = id;
     }
 
     public long getId() {

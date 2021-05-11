@@ -1,6 +1,9 @@
 package io.github.olgaak.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,8 +23,9 @@ public class Seat {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "seat_id")
-    private Set<RouteSection> takenRouteSections;
+    private Set<RouteSection> takenRouteSections = new HashSet<>();
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "route_id")
     private Route route;
@@ -55,5 +59,13 @@ public class Seat {
 
     public void setTakenRouteSections(Set<RouteSection> takenRouteSections) {
         this.takenRouteSections = takenRouteSections;
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
     }
 }

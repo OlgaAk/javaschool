@@ -42,8 +42,8 @@ public class TimetableItem {
     public TimetableItem() {
     }
 
-    public TimetableItem(String departureTime, String station) {
-        this.station = new Station(station);
+    public TimetableItem(String departureTime, long stationId) {
+        this.station = new Station(stationId);
     }
 
     public TimetableItem(String id) {
@@ -70,25 +70,11 @@ public class TimetableItem {
         return departureTime;
     }
 
-    public void setDepartureTime(String departureTime) {
-        DateFormat format = new SimpleDateFormat("HH:mm");
-        Date date = null;
-        try {
-            date = format.parse(departureTime);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        this.departureTime = date;
+    public void setDepartureTime(Date departureTime) {
+        this.departureTime = departureTime;
     }
 
-    public void setDepartureDate(String departureDate) {
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = null;
-        try {
-            date = format.parse(departureDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+    public void setDepartureDate(Date date) {
         this.departureDate = date;
     }
 

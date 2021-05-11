@@ -14,7 +14,6 @@ public class Route {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "train_id")
     private Train train;
@@ -23,7 +22,6 @@ public class Route {
     @JoinColumn(name = "route_id")
     private Set<TimetableItem> timetableItems;
 
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "route_station",
             joinColumns = @JoinColumn(name = "route_id"),
@@ -69,6 +67,7 @@ public class Route {
     public void setTimetableItems(Set<TimetableItem> timetableItems) {
         this.timetableItems = timetableItems;
     }
+
     public Set<Station> getStations() {
         return stations;
     }

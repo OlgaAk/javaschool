@@ -10,6 +10,10 @@ public class StationDto {
     public StationDto() {
     }
 
+    public StationDto(String id){
+        this.id = Long.parseLong(id);
+    }
+
     public long getId() {
         return id;
     }

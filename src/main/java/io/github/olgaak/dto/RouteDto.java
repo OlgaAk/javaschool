@@ -25,13 +25,17 @@ public class RouteDto {
 
     private long price;
 
-    private long train_id;
+    private long trainId;
 
     private List<SeatDto> seats;
 
     List<TimetableItemDto> timetableItems;
 
     public RouteDto() {
+    }
+
+    public RouteDto(String id) {
+        this.id = Long.parseLong(id);
     }
 
     public long getId() {
@@ -125,12 +129,12 @@ public class RouteDto {
         this.changeType = changeType;
     }
 
-    public long getTrain_id() {
-        return train_id;
+    public long getTrainId() {
+        return trainId;
     }
 
-    public void setTrain_id(long train_id) {
-        this.train_id = train_id;
+    public void setTrainId(long trainId) {
+        this.trainId = trainId;
     }
 
     public List<SeatDto> getSeats() {

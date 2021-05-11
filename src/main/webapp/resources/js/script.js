@@ -23,6 +23,8 @@ function openRouteEditPopUp(route) {
     document.getElementById("route-edit-popup-container").classList.remove("hidden");
     // insert saved values into fields
     document.getElementById("edit_route_id").value = route.id;
+    console.log(route)
+    document.getElementById("edit_route_train_id").value = route.trainId;
     let routeEditTable = document.getElementById("route-table-edit-content");
     routeEditTable.innerHTML = "";
     addRouteEditContent(route, routeEditTable);
@@ -41,7 +43,7 @@ function addRouteEditContent(route, routeEditTable) {
         dateinput.value = getFormattedDateYYYYMMDD(timeTable.fullDepartureDate);
         let timeinput = clone.children[2].children[0];
         timeinput.name = "timetableItems[" + index + "].departureTime";
-        timeinput.value = getFormattedTime(timeTable.departureTime);
+        timeinput.value = getFormattedTime(timeTable.departureTimeAsDate);
         let inputForId = document.createElement("input");
         inputForId.type = "hidden";
         inputForId.name = "timetableItems[" + index + "].id";
@@ -133,10 +135,10 @@ function createRouteTableRows(route, routesTable) {
         newCellRow.classList.add("table-row", "table-columns-3");
         let routeDateCell = document.createElement("span");
         routeDateCell.className = "table-cell";
-        routeDateCell.innerText = getFormattedDate(timeTable.departureDate)
+        routeDateCell.innerText = getFormattedDate(timeTable.departureDateAsDate)
         let routeTimeCell = document.createElement("span");
         routeTimeCell.className = "table-cell";
-        routeTimeCell.innerText = getFormattedTime(timeTable.departureTime);
+        routeTimeCell.innerText = getFormattedTime(timeTable.departureTimeAsDate);
         let routeStationCell = document.createElement("span");
         routeStationCell.className = "table-cell";
         routeStationCell.innerText = timeTable.station.name;

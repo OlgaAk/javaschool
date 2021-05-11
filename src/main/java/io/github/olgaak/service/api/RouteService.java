@@ -12,7 +12,7 @@ public interface RouteService {
 
     List<Route> getAllRoutes();
 
-    List<Route> getTrainRoutes(Long trainId);
+    List<RouteDto> getTrainRoutes(Long trainId);
 
     RouteDto getRouteById(Long routeId);
 
@@ -20,5 +20,5 @@ public interface RouteService {
 
     void deleteRoute(long id);
 
-    void editRoute(Route timetableItem);
+    void editRoute(RouteDto route);
 }

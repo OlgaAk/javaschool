@@ -1,10 +1,15 @@
 package io.github.olgaak.util;
 
 import io.github.olgaak.dto.RouteDto;
+import io.github.olgaak.dto.TimetableItemDto;
 import io.github.olgaak.entity.Route;
 import io.github.olgaak.entity.TimetableItem;
+import io.github.olgaak.entity.Train;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -19,11 +24,18 @@ public class RouteDtoConverter {
         routeDto.setEndTripStation(lastStop.getStation().getName());
         routeDto.setEndTripTime(lastStop.getFullDepartureDate().toString());
         routeDto.setId(route.getId());
-        routeDto.setTrain_id(route.getTrain().getId());
+        routeDto.setTrainId(route.getTrain().getId());
         long duration = getDurationMilli(lastStop, firstStop);
         routeDto.setSeats(route.getSeats().stream().map(seat -> SeatDtoConverter.convertSeatEntityToDto(seat)).collect(Collectors.toList()));
         routeDto.setTripDurationMilli(duration);
         routeDto.setTripDuration(getDuration(duration));
+        List<TimetableItemDto> timetableItemDtoList = route
+                .getTimetableItems()
+                .stream()
+                .map(timetableItem ->
+                        TimetableDtoConverter.convertTimetableItemEntityToDto(timetableItem))
+                .collect(Collectors.toList());
+        routeDto.setTimetableItems(timetableItemDtoList);
         return routeDto;
     }
 
@@ -50,5 +62,22 @@ public class RouteDtoConverter {
         long hours = diffInMinutes / 60;
         long minutes = diffInMinutes % 60;
         return hours + ":" + (minutes < 10 ? "0" : "") + minutes;
+    }
+
+    public static Route convertRouteDtoToEntity(RouteDto routeDto) {
+        Route route = new Route();
+        route.setId(routeDto.getId());
+        route.setTrain(new Train(routeDto.getTrainId()));
+        List<TimetableItem> timetableItems;
+        timetableItems = routeDto.getTimetableItems()
+                .stream()
+                .map(timetableItemDto -> {
+                    timetableItemDto.setTrainId(routeDto.getTrainId());
+                    return TimetableDtoConverter.convertTimetableItemDtoToEntity(timetableItemDto, route);
+                })
+                .collect(Collectors.toList());
+        ;
+        route.setTimetableItems(new HashSet<>(timetableItems));
+        return route;
     }
 }

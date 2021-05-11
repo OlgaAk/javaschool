@@ -62,7 +62,7 @@ public class UserController {
     @GetMapping("/purchase/{routeId}")
     public String getPurchasePage(@PathVariable("routeId") long routeId, ModelMap model) {
         RouteDto routeDto = routeService.getRouteById(routeId);
-        TrainDto trainDto =  trainService.getTrainById(routeDto.getTrain_id());
+        TrainDto trainDto =  trainService.getTrainById(routeDto.getTrainId());
         model.addAttribute("route", routeDto);
 //        model.addAttribute("train", trainDto);
         return "purchase_page";

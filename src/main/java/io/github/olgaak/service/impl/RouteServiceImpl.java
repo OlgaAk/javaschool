@@ -34,6 +34,7 @@ public class RouteServiceImpl implements RouteService {
         Set<Seat> seats = new HashSet<>();
         for(int i= 1; i<= route.getTrain().getSeat_count(); i++){
             Seat seat = new Seat(i);
+            seat.setRoute(route);
             seats.add(seat);
         }
         route.setSeats(seats);
@@ -45,8 +46,11 @@ public class RouteServiceImpl implements RouteService {
         return routeDao.getAllRoutes();
     }
 
-    public List<Route> getTrainRoutes(Long trainId) {
-        return routeDao.getTrainRoutes(trainId);
+    public List<RouteDto> getTrainRoutes(Long trainId) {
+        List<RouteDto> routeDtoList = new ArrayList<>();
+        List<Route> routes = routeDao.getTrainRoutes(trainId);
+        routeDtoList = routes.stream().map(route -> RouteDtoConverter.convertRouteEntityToDto(route)).collect(Collectors.toList());
+        return routeDtoList;
     }
 
     public RouteDto getRouteById(Long routeId) {
@@ -72,7 +76,8 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public void editRoute(Route route) {
+    public void editRoute(RouteDto routeDto) {
+        Route route = RouteDtoConverter.convertRouteDtoToEntity(routeDto);
         routeDao.editRoute(route);
     }
 

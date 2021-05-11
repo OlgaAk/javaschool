@@ -41,6 +41,7 @@
         <h3>Edit route info</h3>
         <form method="post" action="/admin/edit/route">
             <input id="edit_route_id" name="route" type="hidden">
+            <input id="edit_route_train_id" name="trainId" type="hidden">
             <div id="select-container-edit">
                 <div id="route-table-edit-content">
                     <select name="timetableItems[0].station">

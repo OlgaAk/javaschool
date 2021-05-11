@@ -31,8 +31,8 @@ public class Station {
 
     public Station() {}
 
-    public Station(String id) {
-        this.id = Long.parseLong(id);
+    public Station(long id) {
+        this.id = id;
     }
 
     public Set<TimetableItem> getTimetableItems() {
