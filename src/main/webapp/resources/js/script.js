@@ -206,7 +206,7 @@ function selectSeat(element, seatNumber) {
     seatNumberNode.innerText = "Selected seat " + seatNumber;
     let ticketPriceNode = document.createElement("p");
     ticketPriceNode.innerText= "Price $100";
-    seatInfoContainer.innerText=""
+    seatInfoContainer.innerText="";
     seatInfoContainer.append(seatNumberNode, ticketPriceNode);
 }
 
@@ -223,8 +223,32 @@ function goToSection(sectionId){
     document.getElementById(tabId).classList.add("active");
 }
 
-function purchaseTicket(){
-    alert("Ticket purchased")
+async function purchaseTicket(){
+    let ticketData={
+        ticket: {
+            price: 100,
+            seatNumber: 5,
+            routeId: 1,
+            'passenger.firstName': 'Ivan',
+            'passenger.lastName': 'Smith',
+        }
+    }
+    postData('/user/purchase', JSON.stringify(ticketData))
+        .then((result) => {
+            console.log(result);
+        });
+}
+
+async function postData(url = '', data = {}) {
+    console.log(url, data)
+    const response = await fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+    return await response.json();
 }
 
 setEventListeners();

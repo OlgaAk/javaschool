@@ -1,6 +1,7 @@
 package io.github.olgaak.controller;
 
 import io.github.olgaak.dto.RouteDto;
+import io.github.olgaak.dto.TicketDto;
 import io.github.olgaak.dto.TrainDto;
 import io.github.olgaak.dto.UserDto;
 import io.github.olgaak.entity.User;
@@ -62,10 +63,16 @@ public class UserController {
     @GetMapping("/purchase/{routeId}")
     public String getPurchasePage(@PathVariable("routeId") long routeId, ModelMap model) {
         RouteDto routeDto = routeService.getRouteById(routeId);
-        TrainDto trainDto =  trainService.getTrainById(routeDto.getTrainId());
+        TrainDto trainDto = trainService.getTrainById(routeDto.getTrainId());
         model.addAttribute("route", routeDto);
 //        model.addAttribute("train", trainDto);
         return "purchase_page";
+    }
+
+    @PostMapping("/purchase")
+    public String makePurchase(@RequestBody TicketDto ticketDto, ModelMap model) {
+        TicketDto ticketBought = userService.buyTicket(ticketDto);
+        return "redirect:/user/profile";
     }
 
     @PostMapping("/login/processsignup")

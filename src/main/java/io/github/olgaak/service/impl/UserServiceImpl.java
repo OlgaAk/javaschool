@@ -1,6 +1,7 @@
 package io.github.olgaak.service.impl;
 
 import io.github.olgaak.dao.api.UserDao;
+import io.github.olgaak.dto.TicketDto;
 import io.github.olgaak.dto.UserDto;
 import io.github.olgaak.entity.User;
 import io.github.olgaak.exception.UserAlreadyExistException;
@@ -43,6 +44,11 @@ public class UserServiceImpl implements UserService {
         }
         UserDto userDto = modelMapper.map(user, UserDto.class);
         return userDto;
+    }
+
+    @Override
+    public TicketDto buyTicket(TicketDto ticketDto) {
+        return null;
     }
 
     private boolean emailExist(String email) {
