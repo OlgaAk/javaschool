@@ -47,7 +47,7 @@ function addRouteEditContent(route, routeEditTable) {
         let inputForId = document.createElement("input");
         inputForId.type = "hidden";
         inputForId.name = "timetableItems[" + index + "].id";
-        inputForId.value=timeTable.id;
+        inputForId.value = timeTable.id;
         clone.appendChild(inputForId);
         clone.id = ""
         clone.classList.add("route-timetable-item")
@@ -197,5 +197,34 @@ function removeActiveClassMenuItems(profileMenuItemsList, profileContentItemsLis
         .classList.add("hidden"))
 }
 
+function selectSeat(element, seatNumber) {
+    let seatBtnList = document.querySelectorAll(".seat-btn");
+    seatBtnList.forEach(btn => btn.classList.remove("seat-selected"))
+    element.classList.add("seat-selected")
+    let seatInfoContainer = document.getElementById("selected-seat-info");
+    let seatNumberNode = document.createElement("p");
+    seatNumberNode.innerText = "Selected seat " + seatNumber;
+    let ticketPriceNode = document.createElement("p");
+    ticketPriceNode.innerText= "Price $100";
+    seatInfoContainer.innerText=""
+    seatInfoContainer.append(seatNumberNode, ticketPriceNode);
+}
+
+function goToSection(sectionId){
+    let sectionsList = document.querySelectorAll(".purchase-section")
+    sectionsList.forEach(section =>
+        section.classList.remove("active"))
+    document.getElementById(sectionId).classList.add("active");
+    let tabsList = document.querySelectorAll(".purchase-tab")
+    tabsList.forEach(tab =>
+        tab.classList.remove("active"))
+    let tabId = sectionId.replace("section", "tab");
+    console.log(tabId)
+    document.getElementById(tabId).classList.add("active");
+}
+
+function purchaseTicket(){
+    alert("Ticket purchased")
+}
 
 setEventListeners();

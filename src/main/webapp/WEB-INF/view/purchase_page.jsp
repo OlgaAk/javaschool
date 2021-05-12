@@ -13,33 +13,97 @@
 
 <div class="main-container-home">
 
-<div class="train-search-result-item">
-    <div class="train-search-result-item-left">
-        <div class="train-search-result-item-row">
-            <div class="train-search-result-item-time">${route.startTripTime}</div>
-            <div class="train-search-result-item-station">${route.startTripStation}</div>
+    <h2>Selected Trip</h2>
+    <div class="train-search-result-item">
+        <div class="train-search-result-item-left">
+            <div class="train-search-result-item-row">
+                <div class="train-search-result-item-time">${route.startTripTime}</div>
+                <div class="train-search-result-item-station">${route.startTripStation}</div>
+            </div>
+            <div class="train-search-result-item-row">
+                <div class="train-search-result-item-time">${route.endTripTime}</div>
+                <div class="train-search-result-item-station">${route.endTripStation}</div>
+            </div>
+            <div class="train-search-result-item-row">
+                <div class="train-search-result-item-duration">${route.tripDuration}</div>
+                <div class="train-search-result-item-change">${route.changeType}</div>
+            </div>
         </div>
-        <div class="train-search-result-item-row">
-            <div class="train-search-result-item-time">${route.endTripTime}</div>
-            <div class="train-search-result-item-station">${route.endTripStation}</div>
+
+    </div>
+
+    <div class="purchase-tabs">
+        <div id="purchase-tab-seat-select" class="purchase-tab active">Seat selection</div>
+        <div id="purchase-tab-passenger" class="purchase-tab">Passenger Information</div>
+        <div id="purchase-tab-confirm" class="purchase-tab">Confirmation</div>
+    </div>
+
+    <div class="purchase-sections">
+        <div id="purchase-section-seat-select" class="purchase-section active">
+            <div class="seats-container">
+                <c:forEach var="seat" items="${route.seats}">
+                    <button onclick="selectSeat(this, ${seat.number})" id="${seat.number}"
+                            class="seat-btn ${seat.getVacant() ? '' : 'seat-occupied'}">${seat.number}</button>
+                </c:forEach>
+            </div>
+
+            <div id="selected-seat-info"></div>
+
+            <button class="purchase-section-next-btn purchase-section-btn"
+                    onclick="goToSection('purchase-section-passenger')">Next
+            </button>
         </div>
-        <div class="train-search-result-item-row">
-            <div class="train-search-result-item-duration">${route.tripDuration}</div>
-            <div class="train-search-result-item-change">${route.changeType}</div>
+
+
+        <div id="purchase-section-passenger" class="purchase-section">
+            <div class="">
+                <h3>Passenger Details</h3>
+
+                <div class="">
+                    <div class="">
+                        <div class="login-form-input-group">
+                            <label>First Name</label>
+                            <input name="firstName" type="text" required>
+                        </div>
+                        <div class="login-form-input-group">
+                            <label>Last Name</label>
+                            <input name="lastName" type="text" required>
+                        </div>
+                        <div class="login-form-input-group">
+                            <label>Date of birth</label>
+                            <input name="dateOfBirth" type="date" required>
+                        </div>
+                        <div class="login-form-input-group">
+                            <label>Passport</label>
+                            <input name="passport" type="number" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="purchase-section-back-btn purchase-section-btn"
+                    onclick="goToSection('purchase-section-seat-select')">Back
+            </button>
+            <button class="purchase-section-next-btn purchase-section-btn"
+                    onclick="goToSection('purchase-section-confirm')">Next
+            </button>
+        </div>
+
+
+        <div id="purchase-section-confirm" class="purchase-section">
+            <h3>Please confirm your booking</h3>
+            <p>Trip details</p>
+            <p>Passenger details</p>
+            <p>Price</p>
+            <button class="purchase-section-back-btn purchase-section-btn"
+                    onclick="goToSection('purchase-section-passenger')">Back
+            </button>
+            <button class="purchase-section-next-btn purchase-section-btn" onclick="purchaseTicket()">Purchase</button>
         </div>
     </div>
 
-</div>
-
-    <div>
-       Train Number ${route.startTripStation} - ${route.endTripStation}
-    </div>
-    <c:forEach var="seat" items="${route.seats}">
-        <button class="${seat.getVacant() ? '' : 'seat-occupied'}">${seat.number}</button>
-    </c:forEach>
 
 </div>
-
 
 
 <script src="/resources/js/script.js"/>

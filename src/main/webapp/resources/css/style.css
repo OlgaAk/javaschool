@@ -527,3 +527,66 @@ cursor: pointer;
     width: 100%;
     text-align: center;
 }
+
+/*purchase page ***************/
+
+.purchase-tabs{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 30px 10px;
+}
+
+.purchase-tab{
+    border: #555353 solid 1px;
+    border-radius: 10px;
+    text-align: center;
+   padding: 5px;
+}
+
+.purchase-tab.active{
+    background-color: #e3dcdc;
+    border: none;
+}
+
+.purchase-sections{
+
+}
+
+.purchase-section{
+display: none;
+}
+
+.purchase-section.active{
+    display: block;
+}
+
+.seat-selected{
+    background-color: #ebc50e;
+    color: white;
+}
+
+.seat-btn{
+
+}
+
+.seat-occupied {
+    background-color: #bf5e5e;
+}
+
+.purchase-section-btn{
+    line-height: 30px;
+    padding: 0 16px;
+    font-size: 14px;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid #BABACC;
+    border-color: #F2F2F7;
+    background-color: #e3dcdc
+}
+
+.purchase-section-next-btn{
+    float: right;
+    background-color: #ebc50e;
+}
+
