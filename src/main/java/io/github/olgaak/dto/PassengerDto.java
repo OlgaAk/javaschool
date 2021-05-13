@@ -5,6 +5,8 @@ public class PassengerDto {
     private String firstName;
     private String lastName;
 
+    PassengerDto() {}
+
     public PassengerDto(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;

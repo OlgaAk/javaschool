@@ -4,16 +4,19 @@ public class TicketDto {
 
     private String id;
 
-    private PassengerDto passengerDto;
+    private PassengerDto passenger;
 
-    private long routeId;
+    private int routeId;
 
     private int seatNumber;
 
     private float price;
 
-    public TicketDto(PassengerDto passengerDto, long routeId, int seatNumber, float price) {
-        this.passengerDto = passengerDto;
+    public TicketDto(){ System.out.println("ticketdto constructer 1");}
+
+    public TicketDto(int routeId, int seatNumber, float price, PassengerDto passenger) {
+        System.out.println("ticketdto constructer 2");
+        this.passenger = passenger;
         this.routeId = routeId;
         this.seatNumber = seatNumber;
         this.price = price;
@@ -27,19 +30,19 @@ public class TicketDto {
         this.id = id;
     }
 
-    public PassengerDto getPassengerDto() {
-        return passengerDto;
+    public PassengerDto getPassenger() {
+        return passenger;
     }
 
-    public void setPassengerDto(PassengerDto passengerDto) {
-        this.passengerDto = passengerDto;
+    public void setPassengerDto(PassengerDto passenger) {
+        this.passenger = passenger;
     }
 
-    public long getRouteId() {
+    public int getRouteId() {
         return routeId;
     }
 
-    public void setRouteId(long routeId) {
+    public void setRouteId(int routeId) {
         this.routeId = routeId;
     }
 

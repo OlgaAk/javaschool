@@ -205,12 +205,12 @@ function selectSeat(element, seatNumber) {
     let seatNumberNode = document.createElement("p");
     seatNumberNode.innerText = "Selected seat " + seatNumber;
     let ticketPriceNode = document.createElement("p");
-    ticketPriceNode.innerText= "Price $100";
-    seatInfoContainer.innerText="";
+    ticketPriceNode.innerText = "Price $100";
+    seatInfoContainer.innerText = "";
     seatInfoContainer.append(seatNumberNode, ticketPriceNode);
 }
 
-function goToSection(sectionId){
+function goToSection(sectionId) {
     let sectionsList = document.querySelectorAll(".purchase-section")
     sectionsList.forEach(section =>
         section.classList.remove("active"))
@@ -223,17 +223,18 @@ function goToSection(sectionId){
     document.getElementById(tabId).classList.add("active");
 }
 
-async function purchaseTicket(){
-    let ticketData={
-        ticket: {
-            price: 100,
-            seatNumber: 5,
-            routeId: 1,
-            'passenger.firstName': 'Ivan',
-            'passenger.lastName': 'Smith',
+async function purchaseTicket() {
+    let ticket = {
+        price: 100,
+        seatNumber: 5,
+        routeId: 1,
+        passenger: {
+            firstName: 'Ivan',
+            lastName: 'Smith',
         }
+
     }
-    postData('/user/purchase', JSON.stringify(ticketData))
+    postData('/user/purchase', ticket)
         .then((result) => {
             console.log(result);
         });
@@ -242,7 +243,7 @@ async function purchaseTicket(){
 async function postData(url = '', data = {}) {
     console.log(url, data)
     const response = await fetch(url, {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
