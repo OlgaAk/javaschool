@@ -6,21 +6,17 @@ public class TicketDto {
 
     private PassengerDto passenger;
 
-    private int routeId;
+    private long routeId;
 
-    private int seatNumber;
+    private long tripStartStationId;
+
+    private long tripEndStationId;
+
+    private SeatDto seat;
 
     private float price;
 
-    public TicketDto(){ System.out.println("ticketdto constructer 1");}
-
-    public TicketDto(int routeId, int seatNumber, float price, PassengerDto passenger) {
-        System.out.println("ticketdto constructer 2");
-        this.passenger = passenger;
-        this.routeId = routeId;
-        this.seatNumber = seatNumber;
-        this.price = price;
-    }
+    public TicketDto(){ }
 
     public String getId() {
         return id;
@@ -34,24 +30,24 @@ public class TicketDto {
         return passenger;
     }
 
-    public void setPassengerDto(PassengerDto passenger) {
+    public void setPassenger(PassengerDto passenger) {
         this.passenger = passenger;
     }
 
-    public int getRouteId() {
+    public long getRouteId() {
         return routeId;
     }
 
-    public void setRouteId(int routeId) {
+    public void setRouteId(long routeId) {
         this.routeId = routeId;
     }
 
-    public int getSeatNumber() {
-        return seatNumber;
+    public SeatDto getSeat() {
+        return seat;
     }
 
-    public void setSeatNumber(int seatNumber) {
-        this.seatNumber = seatNumber;
+    public void setSeat(SeatDto seat) {
+        this.seat = seat;
     }
 
     public float getPrice() {
@@ -60,5 +56,21 @@ public class TicketDto {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public long getTripStartStationId() {
+        return tripStartStationId;
+    }
+
+    public void setTripStartStationId(long tripStartStationId) {
+        this.tripStartStationId = tripStartStationId;
+    }
+
+    public long getTripEndStationId() {
+        return tripEndStationId;
+    }
+
+    public void setTripEndStationId(long tripEndStationId) {
+        this.tripEndStationId = tripEndStationId;
     }
 }

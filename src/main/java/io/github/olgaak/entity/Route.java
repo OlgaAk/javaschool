@@ -41,8 +41,8 @@ public class Route {
     public Route() {
     }
 
-    public Route(String id) {
-        this.id = Long.parseLong(id);
+    public Route(long id) {
+        this.id = id;
     }
 
     public long getId() {

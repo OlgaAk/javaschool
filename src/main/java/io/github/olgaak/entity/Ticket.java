@@ -22,8 +22,8 @@ public class Ticket {
     @JoinColumn(name = "route_id")
     private Route route;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "seat_id", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seat_id")
     private Seat seat;
 
     @Column(name = "price", nullable = false)
@@ -62,5 +62,21 @@ public class Ticket {
 
     public void setRoute(Route route) {
         this.route = route;
+    }
+
+    public Seat getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 }

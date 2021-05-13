@@ -228,9 +228,13 @@ async function purchaseTicket() {
         price: 100,
         seatNumber: 5,
         routeId: 1,
+        tripStartStationId: 2,
+        tripEndStationId: 3,
         passenger: {
             firstName: 'Ivan',
             lastName: 'Smith',
+            passportNumber: '4004123456',
+            dateOfBirth: '2021-05-20'
         }
 
     }

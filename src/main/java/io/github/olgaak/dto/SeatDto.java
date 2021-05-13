@@ -1,14 +1,12 @@
 package io.github.olgaak.dto;
 
-import io.github.olgaak.entity.RouteSection;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class SeatDto implements Comparable <SeatDto>{
 
-    private int id;
+    private long id;
     private int number;
     private boolean isVacant = true;
 
@@ -17,17 +15,16 @@ public class SeatDto implements Comparable <SeatDto>{
     public SeatDto() {
     }
 
-    public SeatDto(int id, int number, boolean isVacant) {
+    public SeatDto(long id, int number) {
         this.id = id;
         this.number = number;
-        this.isVacant = isVacant;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

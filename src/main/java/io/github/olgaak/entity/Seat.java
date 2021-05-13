@@ -30,8 +30,8 @@ public class Seat {
     @JoinColumn(name = "route_id")
     private Route route;
 
-    public Seat(int number) {
-        this.number = number;
+    public Seat(long id) {
+        this.id = id;
     }
 
     public Seat() {

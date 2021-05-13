@@ -19,6 +19,9 @@ public class Passenger {
     @Column(name = "lastname", nullable = false)
     private String lastName;
 
+    @Column(name = "passport_number", nullable = false)
+    private String passportNumber;
+
     @Column(name = "dateofbirth")
     private Date dateOfBirth;
 
@@ -77,5 +80,13 @@ public class Passenger {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
     }
 }

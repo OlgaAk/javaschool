@@ -3,9 +3,11 @@ package io.github.olgaak.service.impl;
 import io.github.olgaak.dao.api.UserDao;
 import io.github.olgaak.dto.TicketDto;
 import io.github.olgaak.dto.UserDto;
+import io.github.olgaak.entity.Ticket;
 import io.github.olgaak.entity.User;
 import io.github.olgaak.exception.UserAlreadyExistException;
 import io.github.olgaak.service.api.UserService;
+import io.github.olgaak.util.TicketDtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -48,7 +50,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public TicketDto buyTicket(TicketDto ticketDto) {
-        return null;
+        Ticket ticket = TicketDtoConverter.convertTicketDtoToEntity(ticketDto);
+        userDao.saveTicket(ticket);
+        return ticketDto; //todo fix
     }
 
     private boolean emailExist(String email) {
