@@ -2,9 +2,12 @@
     <form method="get" action="/train-query">
         <div class="train-search-input-groups-container">
             <div class="train-search-input-groups-box">
-                <div class="train-search-input-group">
+                <div class="train-search-input-group" id="departure-station-input-container">
                     <label>From</label>
-                    <input name="departure_station" type="search" required>
+                    <input id="departure-station-input" autocomplete="off" name="departure_station" type="search" required
+                           onclick="showAllDepartureStationsList([<c:forEach var="station"
+                                                                             items="${stations}">{'id':'${station.id}', 'name':'${station.name}'},</c:forEach>])">
+               <div id="departure-station-popup"></div>
                 </div>
                 <div class="train-search-input-group">
                     <label>To</label>

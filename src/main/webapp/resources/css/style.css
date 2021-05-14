@@ -268,6 +268,22 @@ a {
     margin: 100px 20px;
 }
 
+#departure-station-popup {
+    background: white;
+    min-height: 200px;
+    position: absolute;
+    left:50px;
+    top: 30px;
+    width: 170px;
+    z-index: 100;
+    display: none;
+    font-size: 13px;
+}
+
+#departure-station-input-container{
+    position: relative;
+}
+
 .train-search-title {
     text-align: center;
     margin-bottom: 40px;
@@ -589,4 +605,6 @@ a {
 .purchase-section-next-btn {
     float: right;
 }
+
+
 

@@ -12,4 +12,11 @@ public class StationDtoConverter {
         return stationDto;
     }
 
+    public static Station convertStationDtoToEntity(StationDto stationDto){
+        Station station = new Station();
+        station.setId(stationDto.getId());
+        station.setName(stationDto.getName());
+        return station;
+    }
+
 }

@@ -1,6 +1,7 @@
 package io.github.olgaak.controller;
 
 import io.github.olgaak.dto.RouteDto;
+import io.github.olgaak.dto.StationDto;
 import io.github.olgaak.dto.TrainDto;
 import io.github.olgaak.entity.*;
 import io.github.olgaak.service.api.RouteService;
@@ -38,7 +39,7 @@ public class AdminController {
         model.addAttribute("name", "Tom");
         List<TrainDto> trains = trainService.getAllTrains();
         model.addAttribute("trains", trains);
-        List<Station> stations = stationService.getAllStations();
+        List<StationDto> stations = stationService.getAllStations();
         model.addAttribute("stations", stations);
         return "admin_page";
     }

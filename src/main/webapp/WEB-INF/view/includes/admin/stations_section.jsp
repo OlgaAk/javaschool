@@ -20,7 +20,8 @@
             <div class="table-row table-columns-4">
                 <span class="table-cell">${station.name}</span>
                 <span class="table-cell" onclick="openScheduleSection(${station.id}, '${station.name}',
-                        '<c:forEach var="train" items="${station.trains}">${train.number},</c:forEach>') ">View Schedule</span>
+                        <%--'<c:forEach var="train" items="${station.trains}">${train.number},</c:forEach>') --%>
+                        ">View Schedule</span>
                 <span class="table-cell">
                     <span class="material-icons"
                           onclick="openStationEditPopUp(${station.id}, '${station.name}')">
