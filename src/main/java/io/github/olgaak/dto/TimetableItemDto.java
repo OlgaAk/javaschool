@@ -2,7 +2,7 @@ package io.github.olgaak.dto;
 
 import java.util.Date;
 
-public class TimetableItemDto {
+public class TimetableItemDto implements Comparable<TimetableItemDto> {
 
     private long id;
 
@@ -20,7 +20,8 @@ public class TimetableItemDto {
 
     private Date fullDepartureDate;
 
-    public TimetableItemDto() {    }
+    public TimetableItemDto() {
+    }
 
     public long getId() {
         return id;
@@ -84,5 +85,11 @@ public class TimetableItemDto {
 
     public void setTrainId(long trainId) {
         this.trainId = trainId;
+    }
+
+    //This method is sorting timetable by departure time
+    @Override
+    public int compareTo(TimetableItemDto tI) {
+        return (int) (fullDepartureDate.getTime() - (tI.getFullDepartureDate().getTime()));
     }
 }

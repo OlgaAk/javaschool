@@ -27,11 +27,21 @@ public class RouteDto {
 
     private long trainId;
 
+    private int seatCount;
+
     private List<SeatDto> seats;
 
     List<TimetableItemDto> timetableItems;
 
     public RouteDto() {
+    }
+
+    public int getSeatCount() {
+        return seatCount;
+    }
+
+    public void setSeatCount(int seatCount) {
+        this.seatCount = seatCount;
     }
 
     public RouteDto(String id) {

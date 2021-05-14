@@ -5,6 +5,8 @@ import io.github.olgaak.dto.RouteDto;
 import io.github.olgaak.dto.TrainQueryDto;
 import io.github.olgaak.entity.Route;
 import io.github.olgaak.entity.Seat;
+import io.github.olgaak.entity.Station;
+import io.github.olgaak.entity.TimetableItem;
 import io.github.olgaak.service.api.RouteService;
 import io.github.olgaak.util.RouteDtoConverter;
 import org.modelmapper.ModelMapper;
@@ -30,9 +32,16 @@ public class RouteServiceImpl implements RouteService {
         this.routeDao = routeDao;
     }
 
-    public Route createNewRoute(Route route) {
+    public Route createNewRoute(RouteDto routeDto) {
+        Route route = RouteDtoConverter.convertRouteDtoToEntity(routeDto);
+        Set<Station> stations = new HashSet<>();
+        for (TimetableItem timetable : route.getTimetableItems()) {
+            timetable.setTrain(route.getTrain());
+            stations.add(timetable.getStation());
+        }
+        route.setStations(stations);
         Set<Seat> seats = new HashSet<>();
-        for(int i= 1; i<= route.getTrain().getSeat_count(); i++){
+        for(int i = 1; i<= routeDto.getSeatCount(); i++){
             Seat seat = new Seat(i);
             seat.setRoute(route);
             seats.add(seat);

@@ -5,7 +5,8 @@
     <h3 id="routes_title">Routes for train ***</h3>
     <div class="addNew-section">
         <form method="post" action="/admin/add/route">
-            <input id="routes_train_id" name="train" type="hidden">
+            <input id="routes_train_id" name="trainId" type="hidden">
+            <input id="routes_seat_count" name="seatCount" type="hidden">
             <div id="select_container">
                 <div id="routes_stations_div">
                     <select name="timetableItems[0].station">

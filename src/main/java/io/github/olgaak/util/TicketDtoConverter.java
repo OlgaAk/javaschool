@@ -23,7 +23,8 @@ public class TicketDtoConverter {
         ticket.setRoute(new Route(ticketDto.getRouteId()));
         ticket.setPrice(ticketDto.getPrice());
         ticket.setPassenger(PassengerDtoConverter.convertPassengerDtoToEntity(ticketDto.getPassenger()));
-        Seat seat = new Seat(ticketDto.getSeat().getId());
+        Seat seat = new Seat(ticketDto.getSeat().getNumber());
+        seat.setId(ticketDto.getSeat().getId());
         Set<RouteSection> routeSectionList = new HashSet<>();
         RouteSection routeSection = new RouteSection(new Station(ticketDto.getTripStartStationId()),
                 new Station(ticketDto.getTripEndStationId()));

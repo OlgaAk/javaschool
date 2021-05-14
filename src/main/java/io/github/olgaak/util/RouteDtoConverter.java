@@ -34,6 +34,7 @@ public class RouteDtoConverter {
                 .stream()
                 .map(timetableItem ->
                         TimetableDtoConverter.convertTimetableItemEntityToDto(timetableItem))
+                .sorted()
                 .collect(Collectors.toList());
         routeDto.setTimetableItems(timetableItemDtoList);
         return routeDto;

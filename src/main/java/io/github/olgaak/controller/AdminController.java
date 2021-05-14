@@ -86,13 +86,7 @@ public class AdminController {
     }
 
     @PostMapping(path = "/add/route")
-    public String addRoute(@ModelAttribute("route") Route route) {
-        Set<Station> stations = new HashSet<>();
-        for (TimetableItem timetable : route.getTimetableItems()) {
-            timetable.setTrain(route.getTrain());
-            stations.add(timetable.getStation());
-        }
-        route.setStations(stations);
+    public String addRoute(@ModelAttribute("route") RouteDto route) {
         routeService.createNewRoute(route);
         return "redirect:/admin";
     }

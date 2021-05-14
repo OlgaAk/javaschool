@@ -4,14 +4,12 @@ package io.github.olgaak.dto;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class TrainDto {
 
     private long id;
     private int number;
-    private int seat_count;
+    private int seatCount;
 
     private List<String> stations;
 
@@ -22,7 +20,7 @@ public class TrainDto {
 
     public TrainDto(int number, int seat_count) {
         this.number = number;
-        this.seat_count = seat_count;
+        this.seatCount = seat_count;
     }
 
     public long getId() {
@@ -41,12 +39,12 @@ public class TrainDto {
         this.number = number;
     }
 
-    public int getSeat_count() {
-        return seat_count;
+    public int getSeatCount() {
+        return seatCount;
     }
 
-    public void setSeat_count(int seat_count) {
-        this.seat_count = seat_count;
+    public void setSeatCount(int seatCount) {
+        this.seatCount = seatCount;
     }
 
     public List<String> getStations() {

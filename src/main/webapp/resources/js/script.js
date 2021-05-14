@@ -84,15 +84,16 @@ function openScheduleSection(stationId, stationName, trains) {
 }
 
 
-function hideScheduleShowRoutes(trainNumber, trainId) {
+function hideScheduleShowRoutes(trainNumber, trainId, seatCount) {
     document.getElementById("schedule-section").classList.add("hidden");
     document.getElementById("routes-section").classList.remove("hidden");
     document.getElementById("routes_title").innerText = "Routes for train  " + trainNumber;
     document.getElementById("routes_train_id").value = trainId;
+    document.getElementById("routes_seat_count").value = seatCount;
 }
 
-async function openRoutesSection(trainNumber, trainId) {
-    hideScheduleShowRoutes(trainNumber, trainId);
+async function openRoutesSection(trainNumber, trainId, seatCount) {
+    hideScheduleShowRoutes(trainNumber, trainId, seatCount);
     let routesTable = document.getElementById("routes-table-content");
     if (routesTable.dataset.train == trainId) return;
     routesTable.dataset.train = trainId;
@@ -226,7 +227,10 @@ function goToSection(sectionId) {
 async function purchaseTicket() {
     let ticket = {
         price: 100,
-        seatNumber: 5,
+        seat: {
+            id: 1,
+            number: 5
+        },
         routeId: 1,
         tripStartStationId: 2,
         tripEndStationId: 3,

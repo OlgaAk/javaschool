@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RouteService {
 
-    Route createNewRoute(Route timetableItem);
+    Route createNewRoute(RouteDto timetableItem);
 
     List<Route> getAllRoutes();
 
