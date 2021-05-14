@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SeatDto implements Comparable <SeatDto>{
+public class SeatDto implements Comparable<SeatDto> {
 
     private long id;
     private int number;
@@ -26,6 +26,10 @@ public class SeatDto implements Comparable <SeatDto>{
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void setId(String id) {
+        this.id = Long.parseLong(id);
     }
 
     public int getNumber() {

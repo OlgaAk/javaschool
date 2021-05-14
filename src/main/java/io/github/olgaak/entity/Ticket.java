@@ -23,7 +23,7 @@ public class Ticket {
     private Route route;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "seat_id")
+    @JoinColumn(name = "seat_id", updatable = false)
     private Seat seat;
 
     @Column(name = "price", nullable = false)

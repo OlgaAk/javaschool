@@ -198,17 +198,22 @@ function removeActiveClassMenuItems(profileMenuItemsList, profileContentItemsLis
         .classList.add("hidden"))
 }
 
-function selectSeat(element, seatNumber) {
-    let seatBtnList = document.querySelectorAll(".seat-btn");
-    seatBtnList.forEach(btn => btn.classList.remove("seat-selected"))
-    element.classList.add("seat-selected")
+function fillSeatInfoContainerWithText(seatNumber) {
     let seatInfoContainer = document.getElementById("selected-seat-info");
+    seatInfoContainer.innerText = "";
     let seatNumberNode = document.createElement("p");
     seatNumberNode.innerText = "Selected seat " + seatNumber;
     let ticketPriceNode = document.createElement("p");
     ticketPriceNode.innerText = "Price $100";
-    seatInfoContainer.innerText = "";
     seatInfoContainer.append(seatNumberNode, ticketPriceNode);
+}
+
+function selectSeat(element, seatNumber) {
+    let seatBtnList = document.querySelectorAll(".seat-btn");
+    seatBtnList.forEach(btn => btn.classList.remove("seat-selected"))
+    element.classList.add("seat-selected")
+    fillSeatInfoContainerWithText(seatNumber);
+    document.getElementsByClassName("purchase-section-next-btn")[0].disabled = false;
 }
 
 function goToSection(sectionId) {
@@ -224,23 +229,50 @@ function goToSection(sectionId) {
     document.getElementById(tabId).classList.add("active");
 }
 
-async function purchaseTicket() {
-    let ticket = {
-        price: 100,
-        seat: {
-            id: 1,
-            number: 5
-        },
-        routeId: 1,
-        tripStartStationId: 2,
-        tripEndStationId: 3,
-        passenger: {
-            firstName: 'Ivan',
-            lastName: 'Smith',
-            passportNumber: '4004123456',
-            dateOfBirth: '2021-05-20'
-        }
+function checkPassengerDataValidity(seatId, firstName, lastName, passportNumber, dateOfBirth) {
+    let errorMessage = "";
+    if (!seatId) errorMessage += "Please select a seat. \n";
+    if (!firstName) errorMessage += "Please fill in your first name. \n";
+    if (!lastName) errorMessage += "Please fill in your last name. \n";
+    if (!passportNumber) errorMessage += "Please fill in your passport number. \n";
+    if (!dateOfBirth) errorMessage += "Please fill in your date of birth. \n";
+    return errorMessage;
+}
 
+function addPassengerDataErrorMessage(errorMessage) {
+    let container = document.getElementById("passanger-data-error-message-box");
+    container.innerText = "";
+    container.innerText = errorMessage;
+}
+
+async function purchaseTicket() {
+    let seatId = document.getElementsByClassName("seat-selected")[0].dataset.id;
+    let firstName = document.getElementById("passengerFirstname").value;
+    let lastName = document.getElementById("passengerLastname").value;
+    let passportNumber = document.getElementById("passengerPassportNumber").value;
+    let dateOfBirth = document.getElementById("passengerDateOfBirth").value;
+    let tripStartStationId = document.getElementById("startTripStation").dataset.id;
+    let tripEndStationId = document.getElementById("endTripStation").dataset.id;
+    let routeId = document.getElementById("startTripStation").dataset.routeid;
+    let errorMessage = checkPassengerDataValidity(seatId, firstName, lastName, passportNumber, dateOfBirth);
+    if (errorMessage != "") {
+        addPassengerDataErrorMessage(errorMessage);
+        return;
+    }
+    let ticket = {
+        price: 100, //todo make dynamic
+        seat: {
+            id: seatId
+        },
+        routeId,
+        tripStartStationId,
+        tripEndStationId,
+        passenger: {
+            firstName,
+            lastName,
+            passportNumber,
+            dateOfBirth,
+        }
     }
     postData('/user/purchase', ticket)
         .then((result) => {

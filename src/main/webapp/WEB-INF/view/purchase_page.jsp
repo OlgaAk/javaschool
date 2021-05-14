@@ -18,11 +18,13 @@
         <div class="train-search-result-item-left">
             <div class="train-search-result-item-row">
                 <div class="train-search-result-item-time">${route.startTripTime}</div>
-                <div class="train-search-result-item-station">${route.startTripStation}</div>
+                <div id="startTripStation" data-id="${route.startTripStation.id}" data-routeid="${route.id}"
+                     class="train-search-result-item-station">${route.startTripStation.name}</div>
             </div>
             <div class="train-search-result-item-row">
                 <div class="train-search-result-item-time">${route.endTripTime}</div>
-                <div class="train-search-result-item-station">${route.endTripStation}</div>
+                <div id="endTripStation" data-id="${route.endTripStation.id}"
+                     class="train-search-result-item-station">${route.endTripStation.name}</div>
             </div>
             <div class="train-search-result-item-row">
                 <div class="train-search-result-item-duration">${route.tripDuration}</div>
@@ -40,42 +42,42 @@
 
     <div class="purchase-sections">
         <div id="purchase-section-seat-select" class="purchase-section active">
+            <h3>Select a seat</h3>
             <div class="seats-container">
                 <c:forEach var="seat" items="${route.seats}">
-                    <button onclick="selectSeat(this, ${seat.number})" id="${seat.number}"
+                    <button data-id="${seat.id}" onclick="selectSeat(this, ${seat.number})" id="${seat.number}"
                             class="seat-btn ${seat.getVacant() ? '' : 'seat-occupied'}">${seat.number}</button>
                 </c:forEach>
             </div>
 
             <div id="selected-seat-info"></div>
 
-            <button class="purchase-section-next-btn purchase-section-btn"
+            <button disabled class="purchase-section-next-btn purchase-section-btn"
                     onclick="goToSection('purchase-section-passenger')">Next
             </button>
         </div>
 
 
         <div id="purchase-section-passenger" class="purchase-section">
+            <h3>Enter passenger information</h3>
             <div class="">
-                <h3>Passenger Details</h3>
-
                 <div class="">
                     <div class="">
                         <div class="login-form-input-group">
                             <label>First Name</label>
-                            <input name="firstName" type="text" required>
+                            <input id="passengerFirstname" name="firstName" type="text" required>
                         </div>
                         <div class="login-form-input-group">
                             <label>Last Name</label>
-                            <input name="lastName" type="text" required>
+                            <input id="passengerLastname" name="lastName" type="text" required>
                         </div>
                         <div class="login-form-input-group">
                             <label>Date of birth</label>
-                            <input name="dateOfBirth" type="date" required>
+                            <input id="passengerDateOfBirth" name="dateOfBirth" type="date" required>
                         </div>
                         <div class="login-form-input-group">
                             <label>Passport</label>
-                            <input name="passport" type="number" required>
+                            <input id="passengerPassportNumber" name="passport" type="number" required>
                         </div>
                     </div>
                 </div>
@@ -91,7 +93,8 @@
 
 
         <div id="purchase-section-confirm" class="purchase-section">
-            <h3>Please confirm your booking</h3>
+            <div id="passanger-data-error-message-box" class="error"></div>
+            <h3>Confirm your booking</h3>
             <p>Trip details</p>
             <p>Passenger details</p>
             <p>Price</p>

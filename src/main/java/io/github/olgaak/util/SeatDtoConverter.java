@@ -8,7 +8,6 @@ public class SeatDtoConverter {
     public static SeatDto convertSeatEntityToDto(Seat seat){
         SeatDto seatDto = new SeatDto();
         seatDto.setNumber(seat.getNumber());
-
         return seatDto;
     }
 

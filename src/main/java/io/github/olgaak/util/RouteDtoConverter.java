@@ -19,9 +19,9 @@ public class RouteDtoConverter {
         RouteDto routeDto = new RouteDto();
         TimetableItem firstStop = getFirstStation(route);
         TimetableItem lastStop = getLastStation(route);
-        routeDto.setStartTripStation(firstStop.getStation().getName());
+        routeDto.setStartTripStation(StationDtoConverter.convertStationEntityToDto(firstStop.getStation()));
         routeDto.setStartTripTime(firstStop.getFullDepartureDate().toString());
-        routeDto.setEndTripStation(lastStop.getStation().getName());
+        routeDto.setEndTripStation(StationDtoConverter.convertStationEntityToDto(lastStop.getStation()));
         routeDto.setEndTripTime(lastStop.getFullDepartureDate().toString());
         routeDto.setId(route.getId());
         routeDto.setTrainId(route.getTrain().getId());

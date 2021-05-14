@@ -41,8 +41,8 @@ public class TrainServiceImpl implements TrainService {
             List<String> stations = new ArrayList<>();
             for(Route route : train.getRoutes()){
                 RouteDto routeDto = RouteDtoConverter.convertRouteEntityToDto(route);
-                stations.add(routeDto.getStartTripStation());
-                stations.add(routeDto.getEndTripStation());
+                stations.add(routeDto.getStartTripStation().getName());
+                stations.add(routeDto.getEndTripStation().getName());
             }
             trainDto.setStations(stations);
             return trainDto;

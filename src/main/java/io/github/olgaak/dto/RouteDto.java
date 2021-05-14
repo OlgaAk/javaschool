@@ -7,9 +7,9 @@ public class RouteDto {
 
     private long id;
 
-    private String startTripStation;
+    private StationDto startTripStation;
 
-    private String endTripStation;
+    private StationDto endTripStation;
 
     private String endTripTime;
 
@@ -85,19 +85,19 @@ public class RouteDto {
         this.price = price;
     }
 
-    public String getStartTripStation() {
+    public StationDto getStartTripStation() {
         return startTripStation;
     }
 
-    public void setStartTripStation(String startTripStation) {
+    public void setStartTripStation(StationDto startTripStation) {
         this.startTripStation = startTripStation;
     }
 
-    public String getEndTripStation() {
+    public StationDto getEndTripStation() {
         return endTripStation;
     }
 
-    public void setEndTripStation(String endTripStation) {
+    public void setEndTripStation(StationDto endTripStation) {
         this.endTripStation = endTripStation;
     }
 
