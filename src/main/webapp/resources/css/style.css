@@ -268,7 +268,7 @@ a {
     margin: 100px 20px;
 }
 
-#departure-station-popup {
+#departure-station-popup, #arrival-station-popup {
     background: white;
     min-height: 200px;
     position: absolute;
@@ -280,7 +280,7 @@ a {
     font-size: 13px;
 }
 
-#departure-station-input-container{
+#departure-station-input-container, #arrival-station-container{
     position: relative;
 }
 

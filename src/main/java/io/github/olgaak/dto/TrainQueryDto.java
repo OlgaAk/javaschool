@@ -24,12 +24,20 @@ public class TrainQueryDto {
         this.departureStationId = departureStationId;
     }
 
+    public void setDepartureStationId(String departureStationId) {
+        this.departureStationId = Long.parseLong(departureStationId);
+    }
+
     public long getArrivalStationId() {
         return arrivalStationId;
     }
 
     public void setArrivalStationId(int arrivalStationId) {
         this.arrivalStationId = arrivalStationId;
+    }
+
+    public void setArrivalStationId(String arrivalStationId) {
+        this.arrivalStationId = Long.parseLong(arrivalStationId);
     }
 
     public Date getDepartureDate() {
