@@ -44,12 +44,12 @@ async function getRoutesByQuery(departureStationInputValue, arrivalStationInputV
     }
 }
 
-function submitSearchForm() {
+async function submitSearchForm() {
     let departureStationInputValue = document.getElementById("departure-station-input").dataset.stationid;
     let arrivalStationInputValue = document.getElementById("arrival-station-input").dataset.stationid;
     let departureDate = document.getElementById("departure-date-input").value;
     if (departureStationInputValue != "" && arrivalStationInputValue != "" && departureDate != "") {
-        let routes = getRoutesByQuery(departureStationInputValue, arrivalStationInputValue, departureDate);
+        let routes = await getRoutesByQuery(departureStationInputValue, arrivalStationInputValue, departureDate);
         if (routes != null) {
             routes.forEach(route => createSearchResult(route))
         } else alert("No routes found")
@@ -60,15 +60,15 @@ function submitSearchForm() {
 
 function createSearchResult(route) {
     let container = document.getElementById("train-search-result-container");
-    let resultItem = container.children[0].cloneNode();
-    resultItem.style.display = "block";
+    let resultItem = container.children[0].cloneNode(true);
+    resultItem.style.display = "grid";
     resultItem.querySelector(".train-search-result-item-time").innerHTML = route.startTripTime;
-    resultItem.querySelector(".train-search-result-item-station").innerHTML = route.startTripStation;
+    resultItem.querySelector(".train-search-result-item-station").innerHTML = route.startTripStation.name;
     resultItem.querySelectorAll(".train-search-result-item-time")[1].innerHTML = route.endTripTime;
-    resultItem.querySelectorAll(".train-search-result-item-station")[1].innerHTML = route.endTripStation;
+    resultItem.querySelectorAll(".train-search-result-item-station")[1].innerHTML = route.endTripStation.name;
     resultItem.querySelector(".train-search-result-item-duration").innerHTML = route.tripDuration;
     resultItem.querySelector(".train-search-result-item-change").innerHTML = route.changeType;
-    resultItem.querySelector(".train-search-result-item-price").innerHTML = route.price;
+    resultItem.querySelector(".train-search-result-item-price").innerHTML = "$"+route.price;
     resultItem.querySelector("a").href = "/user/purchase/" + route.id;
     container.appendChild(resultItem);
 }
