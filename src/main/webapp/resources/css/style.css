@@ -278,6 +278,11 @@ a {
     z-index: 100;
     display: none;
     font-size: 13px;
+    padding: 0 10px;
+}
+
+#arrival-station-popup {
+    left:20px;
 }
 
 #departure-station-input-container, #arrival-station-container{

@@ -1,6 +1,5 @@
-<div class="train-search-result-container">
-<c:forEach var="route" items="${routes}">
-    <div class="train-search-result-item">
+<div id="train-search-result-container" class="train-search-result-container" >
+    <div class="train-search-result-item" style="display: none">
         <div class="train-search-result-item-left">
             <div class="train-search-result-item-row">
                 <div class="train-search-result-item-time">${route.startTripTime}</div>
@@ -20,7 +19,5 @@
             <a href="/user/purchase/${route.id}"><button class="buy-ticket">BUY</button></a>
         </div>
     </div>
-
-</c:forEach>
 
 </div>
