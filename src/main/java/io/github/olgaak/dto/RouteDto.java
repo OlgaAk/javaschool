@@ -27,7 +27,7 @@ public class RouteDto {
 
     private long trainId;
 
-    private int seatCount;
+    private int seatCount; // used to get seatcount from input form and generate seats in entity
 
     private List<SeatDto> seats;
 

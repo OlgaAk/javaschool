@@ -2,6 +2,7 @@ package io.github.olgaak.util;
 
 import io.github.olgaak.dto.PassengerDto;
 import io.github.olgaak.entity.Passenger;
+import io.github.olgaak.entity.User;
 
 public class PassengerDtoConverter {
 
@@ -12,6 +13,7 @@ public class PassengerDtoConverter {
         passengerDto.setDateOfBirth(passenger.getDateOfBirth());
         passengerDto.setFirstName(passenger.getFirstName());
         passengerDto.setLastName(passenger.getLastName());
+        passengerDto.setUserId(passenger.getUser().getId());
         return passengerDto;
     }
 
@@ -22,6 +24,7 @@ public class PassengerDtoConverter {
         passenger.setFirstName(passengerDto.getFirstName());
         passenger.setLastName(passengerDto.getLastName());
         passenger.setId(passengerDto.getId());
+        passenger.setUser(new User(passengerDto.getUserId()));
         return passenger;
     }
 }

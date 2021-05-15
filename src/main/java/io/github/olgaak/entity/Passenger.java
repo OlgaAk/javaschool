@@ -25,7 +25,7 @@ public class Passenger {
     @Column(name = "dateofbirth")
     private Date dateOfBirth;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 

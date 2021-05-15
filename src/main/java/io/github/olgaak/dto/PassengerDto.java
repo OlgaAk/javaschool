@@ -11,6 +11,7 @@ public class PassengerDto {
     private String passportNumber;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
+    private long userId;
 
     public PassengerDto() {
     }
@@ -58,5 +59,13 @@ public class PassengerDto {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 }

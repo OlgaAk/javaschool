@@ -11,7 +11,7 @@ public class Ticket {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "passenger_id")
     private Passenger passenger;
 
@@ -22,8 +22,8 @@ public class Ticket {
     @JoinColumn(name = "route_id")
     private Route route;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "seat_id", updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "seat_id")
     private Seat seat;
 
     @Column(name = "price", nullable = false)

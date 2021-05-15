@@ -45,7 +45,7 @@
             <h3>Select a seat</h3>
             <div class="seats-container">
                 <c:forEach var="seat" items="${route.seats}">
-                    <button data-id="${seat.id}" onclick="selectSeat(this, ${seat.number})" id="${seat.number}"
+                    <button data-id="${seat.id}" onclick="selectSeat(this, ${seat.number})" data-number="${seat.number}"
                             class="seat-btn ${seat.getVacant() ? '' : 'seat-occupied'}">${seat.number}</button>
                 </c:forEach>
             </div>
@@ -109,7 +109,7 @@
 </div>
 
 
-<script src="/resources/js/script.js"/>
+<script src="/resources/js/purchase.js"/>
 ></script>
 </body>
 </html>
