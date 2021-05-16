@@ -13,4 +13,12 @@ public class RouteSectionDtoConverter {
         return routeSectionDto;
     }
 
+    public static RouteSection convertRouteSectionDtoToEntity(RouteSectionDto routeSectionDto){
+        RouteSection routeSection = new RouteSection();
+        routeSection.setId(routeSectionDto.getId());
+        routeSection.setStartStation(StationDtoConverter.convertStationDtoToEntity(routeSectionDto.getStartStation()));
+        routeSection.setEndStation(StationDtoConverter.convertStationDtoToEntity(routeSectionDto.getEndStation()));
+        return routeSection;
+    }
+
 }

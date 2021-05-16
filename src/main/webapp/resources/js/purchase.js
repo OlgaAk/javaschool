@@ -64,9 +64,15 @@ async function purchaseTicket() {
         seat: {
             id: seatId
         },
-        routeId,
-        tripStartStationId,
-        tripEndStationId,
+        route: {
+            id: routeId
+        },
+        startStation:{
+            id: tripStartStationId
+        },
+        endStation:{
+            id: tripEndStationId
+        },
         passenger: {
             firstName,
             lastName,

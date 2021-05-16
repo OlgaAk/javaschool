@@ -71,6 +71,8 @@ function closeEditPopUp(container) {
 }
 
 function openScheduleSection(stationId, stationName, trains) {
+    console.log("opening schedule")
+    console.log(stationId, stationName, trains)
     document.getElementById("routes-section").classList.add("hidden");
     document.getElementById("schedule-section").classList.remove("hidden");
     // insert saved values into fields

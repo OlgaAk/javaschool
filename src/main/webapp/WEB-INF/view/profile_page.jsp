@@ -20,24 +20,39 @@
     <div id="main-container-profile-left-side">
         <div class="profile-menu-container">
             <div class="profile-menu-item">
-                <p class="active">Profile</p>
+                <p >Profile</p>
             </div>
             <div class="profile-menu-item">
-                <p>Tickets</p>
+                <p class="active">Tickets</p>
             </div>
         </div>
     </div>
 
     <div id="main-container-profile-right-side">
         <div class="profile-content-container">
-            <div class="profile-personal-info profile-content-item" id="profile-content-item-profile">
+            <div class="profile-personal-info profile-content-item hidden" id="profile-content-item-profile">
                 <h3>${user.firstName} ${user.lastName}</h3>
                 <p>${user.email}</p>
                 <p>${user.dateOfBirth}</p>
             </div>
 
-            <div class="profile-content-item hidden" id="profile-content-item-tickets">
-                <p>No tickets yet</p>
+            <div class="profile-content-item " id="profile-content-item-tickets">
+                <c:choose>
+                    <c:when test="${tickets==null}">
+                        <p>No tickets yet</p>
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach items="${tickets}" var="ticket">
+                            <h5>Ticket</h5>
+                            <p>Train number: ${ticket.route.train.number}</p>
+                            <p>${ticket.startStation.name} - ${ticket.endStation.name}</p>
+                            <p>Passenger: ${ticket.passenger.firstName} ${ticket.passenger.lastName}</p>
+                            <p>Seat ${ticket.seat.number}</p>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+
+
             </div>
         </div>
     </div>

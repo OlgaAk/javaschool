@@ -2,15 +2,23 @@ package io.github.olgaak.dto;
 
 public class TicketDto {
 
-    private String id;
+    private long id;
 
     private PassengerDto passenger;
 
     private long routeId;
 
-    private long tripStartStationId;
+    private RouteDto route;
 
-    private long tripEndStationId;
+    private RouteSectionDto routeSection;
+
+    private StationDto startStation;
+
+    private StationDto endStation;
+
+//    private long tripStartStationId;
+//
+//    private long tripEndStationId;
 
     private SeatDto seat;
 
@@ -18,11 +26,11 @@ public class TicketDto {
 
     public TicketDto(){ }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -58,19 +66,53 @@ public class TicketDto {
         this.price = price;
     }
 
-    public long getTripStartStationId() {
-        return tripStartStationId;
+    public RouteSectionDto getRouteSection() {
+        return routeSection;
     }
 
-    public void setTripStartStationId(long tripStartStationId) {
-        this.tripStartStationId = tripStartStationId;
+    public void setRouteSection(RouteSectionDto routeSection) {
+        this.routeSection = routeSection;
     }
 
-    public long getTripEndStationId() {
-        return tripEndStationId;
+    public RouteDto getRoute() {
+        return route;
     }
 
-    public void setTripEndStationId(long tripEndStationId) {
-        this.tripEndStationId = tripEndStationId;
+    public void setRoute(RouteDto route) {
+        this.route = route;
     }
+
+    public StationDto getStartStation() {
+        return startStation;
+    }
+
+    public void setStartStation(StationDto startStation) {
+        this.startStation = startStation;
+    }
+
+    public StationDto getEndStation() {
+        return endStation;
+    }
+
+    public void setEndStation(StationDto endStation) {
+        this.endStation = endStation;
+    }
+
+
+    //
+//    public long getTripStartStationId() {
+//        return tripStartStationId;
+//    }
+//
+//    public void setTripStartStationId(long tripStartStationId) {
+//        this.tripStartStationId = tripStartStationId;
+//    }
+//
+//    public long getTripEndStationId() {
+//        return tripEndStationId;
+//    }
+//
+//    public void setTripEndStationId(long tripEndStationId) {
+//        this.tripEndStationId = tripEndStationId;
+//    }
 }

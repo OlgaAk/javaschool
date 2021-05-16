@@ -53,27 +53,4 @@ public class UserDaoImpl implements UserDao {
                 entityManager.close();
             }
         }
-
-    @Override
-    public void saveTicket(Ticket ticket) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = null;
-        try {
-            transaction = entityManager.getTransaction();
-            transaction.begin();
-            entityManager.persist(ticket);
-            System.out.println(ticket.getId());
-            entityManager.flush();
-            System.out.println(ticket.getId());
-            transaction.commit();
-        }
-        catch (Exception ex){
-            if(transaction != null){
-                transaction.rollback();
-            }
-            ex.printStackTrace();
-        } finally {
-            entityManager.close();
-        }
-    }
 }

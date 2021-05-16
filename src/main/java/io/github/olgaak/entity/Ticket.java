@@ -29,6 +29,14 @@ public class Ticket {
     @Column(name = "price", nullable = false)
     private float price;
 
+    @ManyToOne
+    @JoinColumn(name = "start_station_id")
+    private Station startStation;
+
+    @ManyToOne
+    @JoinColumn(name = "end_station_id")
+    private Station endStation;
+
     public Ticket() { }
 
     public long getId() {
@@ -46,7 +54,6 @@ public class Ticket {
 //    public void setTrainId(long trainId) {
 //        this.trainId = trainId;
 //    }
-
 
     public Passenger getPassenger() {
         return passenger;
@@ -78,5 +85,21 @@ public class Ticket {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public Station getStartStation() {
+        return startStation;
+    }
+
+    public void setStartStation(Station startStation) {
+        this.startStation = startStation;
+    }
+
+    public Station getEndStation() {
+        return endStation;
+    }
+
+    public void setEndStation(Station endStation) {
+        this.endStation = endStation;
     }
 }

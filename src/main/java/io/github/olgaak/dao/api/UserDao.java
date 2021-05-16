@@ -7,6 +7,4 @@ public interface UserDao {
     public User findByEmail(String email);
 
     void createNewUser(User user);
-
-    void saveTicket(Ticket ticket);
 }

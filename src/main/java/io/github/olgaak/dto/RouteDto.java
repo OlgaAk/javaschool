@@ -27,6 +27,8 @@ public class RouteDto {
 
     private long trainId;
 
+    private TrainDto train;
+
     private int seatCount; // used to get seatcount from input form and generate seats in entity
 
     private List<SeatDto> seats;
@@ -153,5 +155,13 @@ public class RouteDto {
 
     public void setSeats(List<SeatDto> seats) {
         this.seats = seats.stream().sorted().collect(Collectors.toList());
+    }
+
+    public TrainDto getTrain() {
+        return train;
+    }
+
+    public void setTrain(TrainDto train) {
+        this.train = train;
     }
 }
