@@ -110,4 +110,11 @@ public class AdminController {
         List<RouteDto> routes = routeService.getTrainRoutes(trainId);
         return routes;
     }
+
+    @GetMapping("/station/{stationId}")
+    @ResponseBody
+    public StationDto getTrainRoutes(@PathVariable("stationId") long stationId, ModelMap model) {
+        StationDto station = stationService.getStationById(stationId);
+        return station;
+    }
 }

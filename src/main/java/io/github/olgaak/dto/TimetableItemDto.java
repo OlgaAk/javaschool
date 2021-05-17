@@ -1,14 +1,19 @@
 package io.github.olgaak.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 public class TimetableItemDto implements Comparable<TimetableItemDto> {
 
     private long id;
 
+    @JsonIgnore
     private StationDto station;
 
     private long trainId;
+
+    private int trainNumber;
 
     private String departureTime;
 
@@ -19,6 +24,10 @@ public class TimetableItemDto implements Comparable<TimetableItemDto> {
     private Date departureDateAsDate;
 
     private Date fullDepartureDate;
+
+    private String startTripStationName;
+
+    private String endTripStationName;
 
     public TimetableItemDto() {
     }
@@ -92,4 +101,30 @@ public class TimetableItemDto implements Comparable<TimetableItemDto> {
     public int compareTo(TimetableItemDto tI) {
         return (int) (fullDepartureDate.getTime() - (tI.getFullDepartureDate().getTime()));
     }
+
+    public int getTrainNumber() {
+        return trainNumber;
+    }
+
+    public void setTrainNumber(int trainNumber) {
+        this.trainNumber = trainNumber;
+    }
+
+    public String getStartTripStationName() {
+        return startTripStationName;
+    }
+
+    public void setStartTripStationName(String startTripStationName) {
+        this.startTripStationName = startTripStationName;
+    }
+
+    public String getEndTripStationName() {
+        return endTripStationName;
+    }
+
+    public void setEndTripStationName(String endTripStationName) {
+        this.endTripStationName = endTripStationName;
+    }
+
 }
+

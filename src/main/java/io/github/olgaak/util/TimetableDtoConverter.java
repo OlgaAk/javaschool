@@ -1,5 +1,6 @@
 package io.github.olgaak.util;
 
+import io.github.olgaak.dto.StationDto;
 import io.github.olgaak.dto.TimetableItemDto;
 import io.github.olgaak.entity.Route;
 import io.github.olgaak.entity.Station;
@@ -22,6 +23,19 @@ public class TimetableDtoConverter {
         timetableItemDto.setId(timetableItem.getId());
         timetableItemDto.setStation(StationDtoConverter
                 .convertStationEntityToDto(timetableItem.getStation()));
+        return timetableItemDto;
+    }
+
+    public static TimetableItemDto convertTimetableItemEntityToDto(TimetableItem timetableItem, StationDto stationDto) {
+        TimetableItemDto timetableItemDto = new TimetableItemDto();
+        timetableItemDto.setDepartureTimeAsDate(timetableItem.getDepartureTime());
+        timetableItemDto.setDepartureDateAsDate(timetableItem.getDepartureDate());
+        timetableItemDto.setFullDepartureDate(timetableItem.getFullDepartureDate());
+        timetableItemDto.setId(timetableItem.getId());
+        timetableItemDto.setStation(stationDto);
+        timetableItemDto.setTrainNumber(timetableItem.getTrain().getNumber());
+        timetableItemDto.setStartTripStationName(RouteDtoConverter.getFirstStation(timetableItem.getRoute()).getStation().getName());
+        timetableItemDto.setEndTripStationName(RouteDtoConverter.getLastStation(timetableItem.getRoute()).getStation().getName());
         return timetableItemDto;
     }
 

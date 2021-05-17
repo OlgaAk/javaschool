@@ -1,6 +1,7 @@
 package io.github.olgaak.dao.impl;
 
 import io.github.olgaak.dao.api.StationDao;
+import io.github.olgaak.entity.Route;
 import io.github.olgaak.entity.Station;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -86,5 +87,22 @@ public class StationDaoImpl implements StationDao {
         } finally {
             entityManager.close();
         }
+    }
+
+    @Override
+    public Station getStationById(long id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Station station = null;
+        try {
+            Query query = entityManager
+                    .createQuery("SELECT s FROM Station s WHERE s.id  = :stationId", Station.class)
+                    .setParameter("stationId", id);
+            station = (Station) query.getSingleResult();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return station;
     }
 }

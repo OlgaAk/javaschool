@@ -10,6 +10,8 @@ public interface StationService {
 
     List<StationDto> getAllStations();
 
+    StationDto getStationById(long id);
+
     void deleteStation(long id);
 
     void editStation(Station station);

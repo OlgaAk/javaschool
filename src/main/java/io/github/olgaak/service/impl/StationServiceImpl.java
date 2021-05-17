@@ -36,6 +36,12 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
+    public StationDto getStationById(long id) {
+        Station station = stationDao.getStationById(id);
+        return StationDtoConverter.convertStationEntityToDto(station);
+    }
+
+    @Override
     public void deleteStation(long id) {
         stationDao.deleteStation(id);
     }

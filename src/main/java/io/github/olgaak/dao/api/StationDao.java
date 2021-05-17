@@ -12,4 +12,6 @@ public interface StationDao {
     void deleteStation(long id);
 
     void editStation(Station station);
+
+    Station getStationById(long id);
 }

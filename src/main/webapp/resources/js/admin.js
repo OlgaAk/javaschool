@@ -70,21 +70,33 @@ function closeEditPopUp(container) {
     document.getElementById(container).classList.add("hidden");
 }
 
-function openScheduleSection(stationId, stationName, trains) {
-    console.log("opening schedule")
-    console.log(stationId, stationName, trains)
-    document.getElementById("routes-section").classList.add("hidden");
-    document.getElementById("schedule-section").classList.remove("hidden");
-    // insert saved values into fields
-    document.getElementById("schedule_station_id").value = stationId;
-    document.getElementById("schedule_title").innerText = "Schedule for station " + stationName;
+async function openScheduleSection(stationId, stationName, trains) {
+    hideRoutesShowSchedule(stationId, stationName);
+    let station = await fetchStation(stationId);
     let select = document.getElementById("schedule_station_trains");
-    let values = trains.split(',');
-    for (let i = 0; i < select.options.length; i++) {
-        select.options[i].selected = values.indexOf(select.options[i].text) >= 0;
-    }
+    // let values = trains.split(',');
+    // for (let i = 0; i < select.options.length; i++) {
+    //     select.options[i].selected = values.indexOf(select.options[i].text) >= 0;
+    // }
+    let scheduleTable = document.getElementById("schedule-table");
+    scheduleTable.innerHTML="";
+    station.timetableItems.forEach(item => {
+        let div = document.createElement(("div"));
+        div.classList.add("schedule-item")
+        div.innerHTML = getFormattedDate(item.departureDateAsDate) +
+            " " + getFormattedTime(item.departureTimeAsDate)
+            + " Train №" + item.trainNumber + " " +
+            item.startTripStationName + "-" + item.endTripStationName
+        scheduleTable.append(div);
+    })
 }
 
+function hideRoutesShowSchedule(stationId, stationName) {
+    document.getElementById("routes-section").classList.add("hidden");
+    document.getElementById("schedule-section").classList.remove("hidden");
+    // document.getElementById("schedule_station_id").value = stationId;
+    document.getElementById("schedule_title").innerText = "Schedule for station " + stationName;
+}
 
 function hideScheduleShowRoutes(trainNumber, trainId, seatCount) {
     document.getElementById("schedule-section").classList.add("hidden");
@@ -197,6 +209,19 @@ function addNewSelect(containerName) {
 //get info about a train routes with REST
 async function fetchRoutes(trainId) {
     let response = await fetch("/admin/routes/" + trainId);
+    if (response.ok) {
+        let json = await response.json();
+        console.log(json)
+        return json;
+    } else {
+        console.log("Ошибка HTTP: " + response.status);
+        return null;
+    }
+}
+
+
+async function fetchStation(id) {
+    let response = await fetch("/admin/station/" + id);
     if (response.ok) {
         let json = await response.json();
         console.log(json)

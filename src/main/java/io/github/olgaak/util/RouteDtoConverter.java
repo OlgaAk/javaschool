@@ -52,14 +52,14 @@ public class RouteDtoConverter {
         return routeDto;
     }
 
-    private static TimetableItem getFirstStation(Route route) {
+    public static TimetableItem getFirstStation(Route route) {
         return route.getTimetableItems().stream()
                 .min(Comparator.comparing(
                         timetableItem -> timetableItem.getFullDepartureDate()))
                 .get();
     }
 
-    private static TimetableItem getLastStation(Route route) {
+    public static TimetableItem getLastStation(Route route) {
         return route.getTimetableItems().stream()
                 .max(Comparator.comparing(
                         timetableItem -> timetableItem.getFullDepartureDate()))
