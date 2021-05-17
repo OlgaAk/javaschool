@@ -90,7 +90,6 @@
 }
 
 
-
 /*trains*******************/
 .station-names-cell {
     text-transform: capitalize;
@@ -105,7 +104,14 @@
     margin: 20px 0px;
 }
 
-
+.passenger-info-title{
+    font-size: 14px;
+    margin: 10px 0 4px 0;
+    font-weight: bold;
+}
+.passenger-info-row {
+    font-size: 13px;
+}
 
 
 

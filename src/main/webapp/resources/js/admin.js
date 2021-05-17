@@ -117,19 +117,38 @@ function createRouteTable(route, index, routesTable) {
     routeTitle.classList.add("editable");
     routeTitle.addEventListener("click", () => openRouteEditPopUp(route))
     routesTable.append(routeTitle, routesTableHeader);
-    createRouteTableRows(route, routesTable)
+    createRouteTableRows(route, routesTable);
+    createTicketsInfoContainer(route.tickets, routesTable);
 }
 
-function getFormattedDate(date) {
-    return new Date(date).toLocaleString().split(",")[0];
+function createTicketsInfoContainer(tickets, routesTable) {
+    let passengerInfoTitle = document.createElement("p");
+    passengerInfoTitle.innerHTML = "Passengers:";
+    passengerInfoTitle.classList.add("passenger-info-title");
+    routesTable.append(passengerInfoTitle);
+    if (tickets.length == 0) {
+        let passengerInfoRow = document.createElement("div");
+        passengerInfoRow.innerHTML = "No passengers yet on this train."
+        passengerInfoRow.classList.add("passenger-info-row");
+        routesTable.append(passengerInfoRow);
+    } else {
+        tickets.forEach(ticket => createTicketsInfoRow(ticket, routesTable))
+    }
+    let divider = document.createElement("hr");
+    routesTable.append(divider);
 }
 
-function getFormattedDateYYYYMMDD(date) {
-    return new Date(date).toISOString().split("T")[0];
-}
-
-function getFormattedTime(time) {
-    return new Date(time).toLocaleTimeString().substring(0, 5);
+function createTicketsInfoRow(ticket, routesTable) {
+    let passengerInfoRow = document.createElement("div");
+    let span = document.createElement("span");
+    let spanSeat = document.createElement("span");
+    let spanPassenger = document.createElement("span");
+    spanSeat.innerHTML = "Seat " + ticket.seatNumber + " - ";
+    spanPassenger.innerHTML = ticket.passenger.firstName + " " + ticket.passenger.lastName;
+    span.append(spanSeat, spanPassenger);
+    passengerInfoRow.append(span);
+    passengerInfoRow.classList.add("passenger-info-row");
+    routesTable.append(passengerInfoRow);
 }
 
 function createRouteTableRows(route, routesTable) {
@@ -148,6 +167,18 @@ function createRouteTableRows(route, routesTable) {
         newCellRow.append(routeDateCell, routeTimeCell, routeStationCell);
         routesTable.append(newCellRow);
     })
+}
+
+function getFormattedDate(date) {
+    return new Date(date).toLocaleString().split(",")[0];
+}
+
+function getFormattedDateYYYYMMDD(date) {
+    return new Date(date).toISOString().split("T")[0];
+}
+
+function getFormattedTime(time) {
+    return new Date(time).toLocaleTimeString().substring(0, 5);
 }
 
 function addNewSelect(containerName) {
@@ -176,29 +207,3 @@ async function fetchRoutes(trainId) {
     }
 }
 
-function setEventListeners() {
-    setEventListenerOnProfileMenuItems();
-}
-
-// mark selected menu item with active color
-function setEventListenerOnProfileMenuItems() {
-    let profileMenuItemsList = document.querySelectorAll(".profile-menu-item p");
-    let profileContentItemsList = document.querySelectorAll(".profile-content-item");
-    profileMenuItemsList.forEach(item =>
-        item.addEventListener("click", (e) => {
-            removeActiveClassMenuItems(profileMenuItemsList, profileContentItemsList);
-            e.target.classList.add("active");
-            let contentToShow = document.getElementById("profile-content-item-" + e.target.innerText.toLowerCase())
-            contentToShow.classList.remove("hidden");
-        }));
-}
-
-function removeActiveClassMenuItems(profileMenuItemsList, profileContentItemsList) {
-    profileMenuItemsList.forEach(item =>
-        item.classList.remove("active"))
-    profileContentItemsList.forEach(item => item
-        .classList.add("hidden"))
-}
-
-
-setEventListeners();

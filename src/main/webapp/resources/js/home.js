@@ -51,7 +51,8 @@ async function submitSearchForm() {
     let departureDate = document.getElementById("departure-date-input").value;
     if (departureStationInputValue != "" && arrivalStationInputValue != "" && departureDate != "") {
         let routes = await getRoutesByQuery(departureStationInputValue, arrivalStationInputValue, departureDate);
-        if (routes != null || routes.length > 0) {
+        console.log(routes, routes != null || routes.length > 0, routes.length, routes.length > 0)
+            if (routes != null || routes.length > 0) {
             routes.forEach(route => createSearchResult(route))
         } else createSearchResultError("No trains found");
     } else {

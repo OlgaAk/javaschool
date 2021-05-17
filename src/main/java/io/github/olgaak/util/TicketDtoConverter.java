@@ -31,6 +31,19 @@ public class TicketDtoConverter {
         return ticketDto;
     }
 
+    public static TicketDto convertTicketEntityToDto(Ticket ticket, RouteDto routeDto) {
+        TicketDto ticketDto = new TicketDto();
+        ticketDto.setRoute(routeDto);
+        ticketDto.setPrice(ticket.getPrice());
+        ticketDto.setId(ticket.getId());
+        ticketDto.setPassenger(PassengerDtoConverter.convertPassengerEntityToDto(ticket.getPassenger()));
+        ticketDto.setSeat(SeatDtoConverter.convertSeatEntityToDto(ticket.getSeat(), ticketDto));
+        ticketDto.setSeatNumber(ticket.getSeat().getNumber());
+        ticketDto.setStartStation(StationDtoConverter.convertStationEntityToDto(ticket.getStartStation()));
+        ticketDto.setEndStation(StationDtoConverter.convertStationEntityToDto(ticket.getEndStation()));
+        return ticketDto;
+    }
+
 
     public static Ticket convertTicketDtoToEntity(TicketDto ticketDto) {
         Ticket ticket = new Ticket();

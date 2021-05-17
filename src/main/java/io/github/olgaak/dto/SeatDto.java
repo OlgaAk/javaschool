@@ -1,5 +1,7 @@
 package io.github.olgaak.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 public class SeatDto implements Comparable<SeatDto> {
@@ -8,7 +10,6 @@ public class SeatDto implements Comparable<SeatDto> {
     private int number;
     private boolean isVacant = true;
 
-//    private List<RouteSectionDto> takenRouteSections = new ArrayList<>();
 
     private List<TicketDto> tickets;
 

@@ -19,7 +19,7 @@
 <div class="main-container-home">
     <div>
         <h2 class="train-search-title">Login</h2>
-        <p class="error">${errorMessage}</p>
+        <p class="error center">${errorMessage}</p>
     </div>
     <div class="login-form-container">
         <form method="post" action="/user/login">
@@ -44,7 +44,7 @@
 </div>
 
 
-<script src="/resources/js/script.js"/>
+<script src="/resources/js/admin.js"/>
 ></script>
 </body>
 </html>

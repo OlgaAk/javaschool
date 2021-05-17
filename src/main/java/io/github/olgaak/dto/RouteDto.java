@@ -35,6 +35,8 @@ public class RouteDto {
 
     List<TimetableItemDto> timetableItems;
 
+    List<TicketDto> tickets;
+
     public RouteDto() {
     }
 
@@ -165,5 +167,11 @@ public class RouteDto {
         this.train = train;
     }
 
+    public List<TicketDto> getTickets() {
+        return tickets;
+    }
 
+    public void setTickets(List<TicketDto> tickets) {
+        this.tickets = tickets;
+    }
 }

@@ -1,6 +1,7 @@
 package io.github.olgaak.util;
 
 import io.github.olgaak.dto.RouteDto;
+import io.github.olgaak.dto.SeatDto;
 import io.github.olgaak.dto.TimetableItemDto;
 import io.github.olgaak.entity.Route;
 import io.github.olgaak.entity.TimetableItem;
@@ -43,6 +44,11 @@ public class RouteDtoConverter {
                 .collect(Collectors.toList());
         routeDto.setTimetableItems(timetableItemDtoList);
         routeDto.setTrain(TrainDtoConverter.convertTrainEntityToDto(route.getTrain()));
+        routeDto.setTickets(route
+                .getTickets()
+                .stream()
+                .map(ticket -> TicketDtoConverter.convertTicketEntityToDto(ticket, routeDto))
+                .collect(Collectors.toList()));
         return routeDto;
     }
 

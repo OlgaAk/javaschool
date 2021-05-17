@@ -61,7 +61,7 @@
     </div>
 </div>
 
-<script src="/resources/js/script.js"/>
+<script src="/resources/js/admin.js"/>
 ></script>
 </body>
 </html>

@@ -63,7 +63,7 @@
 </div>
 
 
-<script src="/resources/js/script.js"/>
+<script src="/resources/js/profile.js"/>
 ></script>
 </body>
 </html>

@@ -24,7 +24,7 @@
 </div>
 
 
-<script src="/resources/js/homepage_script.js"/>
+<script src="/resources/js/home.js"/>
 ></script>
 </body>
 </html>

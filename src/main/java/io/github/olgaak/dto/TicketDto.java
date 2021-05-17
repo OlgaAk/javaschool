@@ -19,18 +19,17 @@ public class TicketDto {
 
     private StationDto endStation;
 
-//    private long tripStartStationId;
-//
-//    private long tripEndStationId;
-
     @JsonIgnore
     private SeatDto seat;
 
     private long seatId;
 
+    private int seatNumber;
+
     private float price;
 
-    public TicketDto(){ }
+    public TicketDto() {
+    }
 
     public long getId() {
         return id;
@@ -112,20 +111,11 @@ public class TicketDto {
         this.routeId = routeId;
     }
 
-    //
-//    public long getTripStartStationId() {
-//        return tripStartStationId;
-//    }
-//
-//    public void setTripStartStationId(long tripStartStationId) {
-//        this.tripStartStationId = tripStartStationId;
-//    }
-//
-//    public long getTripEndStationId() {
-//        return tripEndStationId;
-//    }
-//
-//    public void setTripEndStationId(long tripEndStationId) {
-//        this.tripEndStationId = tripEndStationId;
-//    }
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
+    }
 }

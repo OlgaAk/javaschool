@@ -34,6 +34,10 @@ a {
     color: #fa3f3f;
 }
 
+.center{
+    text-align: center;
+}
+
 .btn {
     border: none;
     padding: 5px 10px;
