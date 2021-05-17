@@ -1,0 +1,72 @@
+
+/*login *******************************/
+
+.login-form-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.login-form-container {
+    width: 400px;
+    height: 190px;
+    box-shadow: 0 0 0.375rem 0 #a7a1a1;
+    margin: 0 auto;
+    border-radius: 20px;
+}
+
+.login-form-container.signup-form {
+    height: 250px;
+}
+
+.login-form-input-group {
+    margin: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+}
+
+.login-form-input-group input {
+    /*!*height: 30px;*! safari issue*/
+}
+
+.login-form-input-groups-box {
+    margin: 0 auto;
+    height: 40px;
+    width: fit-content;
+}
+
+.login-form-input-groups-container {
+    display: inline-block;
+    width: 100%;
+    margin-top: 20px;
+    height: 80px;
+}
+
+.login-form-input-groups-container.signup-form {
+    height: 120px;
+}
+
+
+.login-form-btn {
+    padding: 10px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    line-height: 1;
+    border: 1px solid transparent;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    color: #555353;
+    background-color: var(--main-accent-color);
+}
+
+.login-form-btn:hover {
+    background-color: #dbc712;
+}
+
+.login-form-btn-container {
+    margin: 35px 0 0 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}

@@ -1,0 +1,51 @@
+/*profile***********************************/
+
+.main-container-profile {
+    display: grid;
+    grid-column-gap: 60px;
+    grid-template-columns: 1fr 3fr;
+    margin: 40px 0 0 0;
+}
+
+#main-container-profile-left-side {
+    background-color: var(--main-color);
+    min-height: 100vh;
+}
+
+.profile-menu-container {
+    margin-top: 40px
+}
+
+.profile-menu-item {
+    padding: 5px;
+}
+
+.profile-menu-item p:hover {
+    cursor: pointer;
+}
+
+.profile-menu-item p {
+    margin: 0 10px;
+    padding: 10px;
+}
+
+.profile-menu-item p.active {
+    background-color: var(--main-accent-color);
+    border-radius: 10px;
+}
+
+.profile-content-container {
+    margin-top: 40px
+}
+
+.ticket-container{
+    width: 400px;
+    background-color: #fff;
+    border-width: 0.0625rem;
+    border-color: #d6d3cd;
+    border-style: solid;
+    border-radius: 0.5rem;
+    color: #000;
+    margin: 15px 0;
+    padding: 0 10px;
+}

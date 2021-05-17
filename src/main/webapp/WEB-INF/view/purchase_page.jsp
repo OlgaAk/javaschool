@@ -2,8 +2,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Home</title>
-    <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet">
+    <title>Ticket</title>
+    <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/purchase.css"/>" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
 </head>
@@ -46,6 +47,7 @@
             <div class="seats-container">
                 <c:forEach var="seat" items="${route.seats}">
                     <button data-id="${seat.id}" onclick="selectSeat(this, ${seat.number})" data-number="${seat.number}"
+                            <c:if test="${!seat.getVacant()}">disabled</c:if>
                             class="seat-btn ${seat.getVacant() ? '' : 'seat-occupied'}">${seat.number}</button>
                 </c:forEach>
             </div>
@@ -93,11 +95,12 @@
 
 
         <div id="purchase-section-confirm" class="purchase-section">
-            <div id="passanger-data-error-message-box" class="error"></div>
+            <div id="passenger-data-error-message-box" class="error"></div>
             <h3>Confirm your booking</h3>
-            <p>Trip details</p>
-            <p>Passenger details</p>
-            <p>Price</p>
+            <p id="confirmation-passenger-seat">Seat</p>
+            <p>Passenger details:</p>
+            <div id="confirmation-passenger-details"></div>
+            <p id="confirmation-passenger-price">Price: </p>
             <button class="purchase-section-back-btn purchase-section-btn"
                     onclick="goToSection('purchase-section-passenger')">Back
             </button>

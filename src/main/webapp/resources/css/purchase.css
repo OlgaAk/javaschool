@@ -1,0 +1,76 @@
+/*purchase page ***************/
+
+.purchase-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 30px 10px;
+}
+
+.purchase-tab {
+    border: #555353 solid 1px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 5px;
+}
+
+.purchase-tab.active {
+    background-color: #ebc50e;
+    border: none;
+}
+
+.purchase-sections {
+
+}
+
+.purchase-section {
+    display: none;
+}
+
+.purchase-section.active {
+    display: block;
+}
+
+
+.seat-btn {
+    background-color: white;
+    border-radius: 4px;
+    border: 1px solid gray;
+    width: 40px;
+    padding: 5px 10px;
+    margin: 4px;
+}
+
+.seat-btn.seat-selected {
+    background-color: #ebc50e;
+    color: white;
+}
+
+.seat-occupied {
+    background-color: #bf5e5e;
+}
+
+.purchase-section-btn {
+    line-height: 30px;
+    padding: 0 16px;
+    font-size: 14px;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid #BABACC;
+    background-color: #ebc50e;
+}
+
+.purchase-section-btn:disabled {
+    background-color: #e3dcdc
+}
+
+.purchase-section-next-btn {
+    float: right;
+}
+
+.login-form-input-group {
+    margin: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+}

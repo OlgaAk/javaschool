@@ -25,14 +25,14 @@ public class RouteDtoConverter {
         routeDto.setId(route.getId());
         routeDto.setTrainId(route.getTrain().getId());
         long duration = getDurationMilli(lastStop, firstStop);
+        routeDto.setTripDurationMilli(duration);
+        routeDto.setTripDuration(getDuration(duration));
         routeDto.setSeats(route
                 .getSeats()
                 .stream()
                 .map(seat -> SeatDtoConverter
-                        .convertSeatEntityToDto(seat))
+                        .convertSeatEntityToDto(seat, routeDto)) //2nd parameter to avoid circular calls
                 .collect(Collectors.toList()));
-        routeDto.setTripDurationMilli(duration);
-        routeDto.setTripDuration(getDuration(duration));
         List<TimetableItemDto> timetableItemDtoList = route
                 .getTimetableItems()
                 .stream()

@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Home</title>
-    <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/admin.css"/>" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
 </head>
@@ -11,20 +11,13 @@
 
 <%@include file="includes/common/navbar.jsp" %>
 
-<div class="header">
-    <p>Home Area</p>
-</div>
-
 <div class="main-container-home">
     <div>
-        <h2 class="train-search-title">Book a train ticket</h2>
+        <h2 class="train-search-title">404</h2>
     </div>
-    <%@include file="includes/home/train_search_section.jsp" %>
-    <%@include file="includes/home/train_search_result_section.jsp" %>
+
 </div>
 
 
-<script src="/resources/js/homepage_script.js"/>
-></script>
 </body>
 </html>

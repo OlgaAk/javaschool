@@ -45,22 +45,42 @@ async function getRoutesByQuery(departureStationInputValue, arrivalStationInputV
 }
 
 async function submitSearchForm() {
+    cleanSearchResultContent();
     let departureStationInputValue = document.getElementById("departure-station-input").dataset.stationid;
     let arrivalStationInputValue = document.getElementById("arrival-station-input").dataset.stationid;
     let departureDate = document.getElementById("departure-date-input").value;
     if (departureStationInputValue != "" && arrivalStationInputValue != "" && departureDate != "") {
         let routes = await getRoutesByQuery(departureStationInputValue, arrivalStationInputValue, departureDate);
-        if (routes != null) {
+        if (routes != null || routes.length > 0) {
             routes.forEach(route => createSearchResult(route))
-        } else alert("No routes found")
+        } else createSearchResultError("No trains found");
     } else {
-        alert("Invalid data")
+        createSearchResultError("Invalid Data")
     }
 }
 
-function createSearchResult(route) {
+function createSearchResultError(errorMsg) {
+    let container = document.getElementById("train-search-result-container");
+    let node = document.createElement("div");
+    node.id = "not-found-error-div"
+    node.innerText = errorMsg;
+    container.appendChild(node);
+}
+
+function cleanSearchResultContent() {
     let container = document.getElementById("train-search-result-container");
     let resultItem = container.children[0].cloneNode(true);
+    let errordiv = document.getElementById("not-found-error-div");
+    if (errordiv) errordiv.remove();
+    container.innerHTML = "";
+    container.appendChild(resultItem);
+}
+
+function createSearchResult(route) {
+    cleanSearchResultContent();
+    let container = document.getElementById("train-search-result-container");
+    let resultItem = container.children[0].cloneNode(true);
+    cleanSearchResultContent();
     resultItem.style.display = "grid";
     resultItem.querySelector(".train-search-result-item-time").innerHTML = route.startTripTime;
     resultItem.querySelector(".train-search-result-item-station").innerHTML = route.startTripStation.name;
@@ -68,11 +88,10 @@ function createSearchResult(route) {
     resultItem.querySelectorAll(".train-search-result-item-station")[1].innerHTML = route.endTripStation.name;
     resultItem.querySelector(".train-search-result-item-duration").innerHTML = route.tripDuration;
     resultItem.querySelector(".train-search-result-item-change").innerHTML = route.changeType;
-    resultItem.querySelector(".train-search-result-item-price").innerHTML = "$"+route.price;
+    resultItem.querySelector(".train-search-result-item-price").innerHTML = "$" + route.price;
     resultItem.querySelector("a").href = "/user/purchase/" + route.id;
     container.appendChild(resultItem);
 }
-
 
 
 function setEventListenerOnSearchButton() {
@@ -83,8 +102,8 @@ function setEventListenerOnSearchButton() {
     let input2 = document.getElementById("arrival-station-input");
     let popup2 = document.getElementById("arrival-station-popup");
     document.body.addEventListener("click", (event) => {
-        if (event.target != popup && event.target != input && popup.style.display=== "block")   popup.style.display = "none";
-        if (event.target != popup2 && event.target != input2 && popup2.style.display=== "block")   popup2.style.display = "none"
+        if (event.target != popup && event.target != input && popup.style.display === "block") popup.style.display = "none";
+        if (event.target != popup2 && event.target != input2 && popup2.style.display === "block") popup2.style.display = "none"
     })
 
 }

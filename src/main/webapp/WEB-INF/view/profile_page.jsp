@@ -2,8 +2,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Home</title>
-    <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet">
+    <title>Profile</title>
+    <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/profile.css"/>" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
 </head>
@@ -20,7 +21,7 @@
     <div id="main-container-profile-left-side">
         <div class="profile-menu-container">
             <div class="profile-menu-item">
-                <p >Profile</p>
+                <p>Profile</p>
             </div>
             <div class="profile-menu-item">
                 <p class="active">Tickets</p>
@@ -43,11 +44,13 @@
                     </c:when>
                     <c:otherwise>
                         <c:forEach items="${tickets}" var="ticket">
-                            <h5>Ticket</h5>
-                            <p>Train number: ${ticket.route.train.number}</p>
-                            <p>${ticket.startStation.name} - ${ticket.endStation.name}</p>
-                            <p>Passenger: ${ticket.passenger.firstName} ${ticket.passenger.lastName}</p>
-                            <p>Seat ${ticket.seat.number}</p>
+                            <div class="ticket-container">
+                                <h5>Ticket</h5>
+                                <p>Train number: ${ticket.route.train.number}</p>
+                                <p>${ticket.startStation.name} - ${ticket.endStation.name}</p>
+                                <p>Passenger: ${ticket.passenger.firstName} ${ticket.passenger.lastName}</p>
+                                <p>Seat ${ticket.seat.number}</p>
+                            </div>
                         </c:forEach>
                     </c:otherwise>
                 </c:choose>

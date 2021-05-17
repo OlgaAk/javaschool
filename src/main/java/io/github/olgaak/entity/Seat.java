@@ -1,7 +1,5 @@
 package io.github.olgaak.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,17 +19,24 @@ public class Seat {
 //    @Column(name = "is_vacant", nullable = false)
 //    private boolean isVacant = true;
 
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "seat_id")
+//    private Set<RouteSection> takenRouteSections = new HashSet<>();
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "seat_id")
-    private Set<RouteSection> takenRouteSections = new HashSet<>();
+    private Set<Ticket> tickets = new HashSet<>();
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "route_id")
     private Route route;
 
     public Seat(int number) {
         this.number = number;
+    }
+
+    public Seat(long id) {
+        this.id = id;
     }
 
     public Seat() {
@@ -53,13 +58,13 @@ public class Seat {
         this.number = number;
     }
 
-    public Set<RouteSection> getTakenRouteSections() {
-        return takenRouteSections;
-    }
-
-    public void setTakenRouteSections(Set<RouteSection> takenRouteSections) {
-        this.takenRouteSections = takenRouteSections;
-    }
+//    public Set<RouteSection> getTakenRouteSections() {
+//        return takenRouteSections;
+//    }
+//
+//    public void setTakenRouteSections(Set<RouteSection> takenRouteSections) {
+//        this.takenRouteSections = takenRouteSections;
+//    }
 
     public Route getRoute() {
         return route;
@@ -67,5 +72,13 @@ public class Seat {
 
     public void setRoute(Route route) {
         this.route = route;
+    }
+
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

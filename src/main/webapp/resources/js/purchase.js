@@ -9,6 +9,7 @@ function fillSeatInfoContainerWithText(seatNumber) {
 }
 
 function selectSeat(element, seatNumber) {
+    if (element.classList.contains("seat-occupied")) return;
     let seatBtnList = document.querySelectorAll(".seat-btn");
     seatBtnList.forEach(btn => btn.classList.remove("seat-selected"))
     element.classList.add("seat-selected")
@@ -16,7 +17,26 @@ function selectSeat(element, seatNumber) {
     document.getElementsByClassName("purchase-section-next-btn")[0].disabled = false;
 }
 
+function fillConfirmInformation() {
+    addPassengerDataErrorMessage("");
+    let seatNumber = document.getElementsByClassName("seat-selected")[0].dataset.number;
+    let price = 100; //todo un hardcode
+    let firstName = document.getElementById("passengerFirstname").value;
+    let lastName = document.getElementById("passengerLastname").value;
+    let dateOfBirth = document.getElementById("passengerDateOfBirth").value;
+    let passportNumber = document.getElementById("passengerPassportNumber").value;
+    document.getElementById("confirmation-passenger-details").innerHTML =
+        firstName + " " + lastName + "<br>" + dateOfBirth + "<br>" + passportNumber;
+    document.getElementById("confirmation-passenger-seat").innerHTML = "Seat: " + seatNumber;
+    document.getElementById("confirmation-passenger-price").innerHTML = "Price: $" + price;
+    let errorMessage = checkPassengerDataValidity(seatNumber, firstName, lastName, passportNumber, dateOfBirth);
+    if (errorMessage != "") {
+        addPassengerDataErrorMessage(errorMessage);
+    }
+}
+
 function goToSection(sectionId) {
+    if (sectionId == "purchase-section-confirm") fillConfirmInformation();
     let sectionsList = document.querySelectorAll(".purchase-section")
     sectionsList.forEach(section =>
         section.classList.remove("active"))
@@ -40,7 +60,7 @@ function checkPassengerDataValidity(seatId, firstName, lastName, passportNumber,
 }
 
 function addPassengerDataErrorMessage(errorMessage) {
-    let container = document.getElementById("passanger-data-error-message-box");
+    let container = document.getElementById("passenger-data-error-message-box");
     container.innerText = "";
     container.innerText = errorMessage;
 }
@@ -61,16 +81,12 @@ async function purchaseTicket() {
     }
     let ticket = {
         price: 100, //todo make dynamic
-        seat: {
-            id: seatId
-        },
-        route: {
-            id: routeId
-        },
-        startStation:{
+        seatId,
+        routeId,
+        startStation: {
             id: tripStartStationId
         },
-        endStation:{
+        endStation: {
             id: tripEndStationId
         },
         passenger: {
@@ -82,7 +98,8 @@ async function purchaseTicket() {
     }
     const result = await postData('/user/purchase', ticket)
     console.log(result);
-    if(result.redirected == true) window.location.href = result.url;
+    if (result.redirected == true) window.location.href = result.url;
+    if (result.status == 500) alert("Server error 500")
 }
 
 async function postData(url = '', data = {}) {

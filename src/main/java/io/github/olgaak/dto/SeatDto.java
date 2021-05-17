@@ -1,8 +1,6 @@
 package io.github.olgaak.dto;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SeatDto implements Comparable<SeatDto> {
 
@@ -10,7 +8,9 @@ public class SeatDto implements Comparable<SeatDto> {
     private int number;
     private boolean isVacant = true;
 
-    private List<RouteSectionDto> takenRouteSections = new ArrayList<>();
+//    private List<RouteSectionDto> takenRouteSections = new ArrayList<>();
+
+    private List<TicketDto> tickets;
 
     public SeatDto() {
     }
@@ -41,7 +41,7 @@ public class SeatDto implements Comparable<SeatDto> {
     }
 
     public boolean getVacant() {
-        return takenRouteSections.size() == 0;
+        return tickets.size() == 0;
     }
 
     public void setVacant(boolean vacant) {
@@ -54,12 +54,19 @@ public class SeatDto implements Comparable<SeatDto> {
         return number - s.number;
     }
 
-    public List<RouteSectionDto> getTakenRouteSections() {
-        return takenRouteSections;
+//    public List<RouteSectionDto> getTakenRouteSections() {
+//        return takenRouteSections;
+//    }
+//
+//    public void setTakenRouteSections(List<RouteSectionDto> takenRouteSections) {
+//        this.takenRouteSections = takenRouteSections.stream().sorted().collect(Collectors.toList());
+//    }
+
+    public List<TicketDto> getTickets() {
+        return tickets;
     }
 
-    public void setTakenRouteSections(List<RouteSectionDto> takenRouteSections) {
-        this.takenRouteSections = takenRouteSections.stream().sorted().collect(Collectors.toList());
+    public void setTickets(List<TicketDto> tickets) {
+        this.tickets = tickets;
     }
-
 }

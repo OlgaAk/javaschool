@@ -21,7 +21,7 @@ public class RouteDto {
 
     private boolean isDirect = true;
 
-    private String changeType;
+    private String changeType = "direct";
 
     private long price;
 
@@ -38,16 +38,16 @@ public class RouteDto {
     public RouteDto() {
     }
 
+    public RouteDto(String id) {
+        this.id = Long.parseLong(id);
+    }
+
     public int getSeatCount() {
         return seatCount;
     }
 
     public void setSeatCount(int seatCount) {
         this.seatCount = seatCount;
-    }
-
-    public RouteDto(String id) {
-        this.id = Long.parseLong(id);
     }
 
     public long getId() {
@@ -164,4 +164,6 @@ public class RouteDto {
     public void setTrain(TrainDto train) {
         this.train = train;
     }
+
+
 }

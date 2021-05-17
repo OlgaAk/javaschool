@@ -1,14 +1,17 @@
 package io.github.olgaak.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class TicketDto {
 
     private long id;
 
     private PassengerDto passenger;
 
-    private long routeId;
-
+    @JsonIgnore
     private RouteDto route;
+
+    private long routeId;
 
     private RouteSectionDto routeSection;
 
@@ -20,7 +23,10 @@ public class TicketDto {
 //
 //    private long tripEndStationId;
 
+    @JsonIgnore
     private SeatDto seat;
+
+    private long seatId;
 
     private float price;
 
@@ -40,14 +46,6 @@ public class TicketDto {
 
     public void setPassenger(PassengerDto passenger) {
         this.passenger = passenger;
-    }
-
-    public long getRouteId() {
-        return routeId;
-    }
-
-    public void setRouteId(long routeId) {
-        this.routeId = routeId;
     }
 
     public SeatDto getSeat() {
@@ -98,6 +96,21 @@ public class TicketDto {
         this.endStation = endStation;
     }
 
+    public long getSeatId() {
+        return seatId;
+    }
+
+    public void setSeatId(long seatId) {
+        this.seatId = seatId;
+    }
+
+    public long getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(long routeId) {
+        this.routeId = routeId;
+    }
 
     //
 //    public long getTripStartStationId() {

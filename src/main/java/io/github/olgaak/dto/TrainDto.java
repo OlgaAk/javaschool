@@ -11,9 +11,9 @@ public class TrainDto {
     private int number;
     private int seatCount;
 
-    private List<String> stations;
+    private List<String> stations  = new ArrayList<>();;
 
-    private List<String> stationsUnique;
+    private List<String> stationsUnique = new ArrayList<>();
 
     public TrainDto() {
     }
