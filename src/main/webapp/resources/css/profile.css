@@ -48,4 +48,20 @@
     color: #000;
     margin: 15px 0;
     padding: 0 10px;
+    display: grid;
+}
+
+.ticket-container-content p{
+    margin: 6px 0;
+    font-size: 14px;
+}
+
+.ticket-container-content h5{
+    text-align: center;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.ticket-container-btn{
+    margin: 10px 0;
 }

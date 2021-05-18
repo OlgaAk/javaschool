@@ -60,20 +60,18 @@ public class TicketDaoImpl implements TicketDao {
     @Transactional
     public void deleteTicket(long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = null;
+        entityManager.getTransaction().begin();
         try {
-            transaction = entityManager.getTransaction();
-            transaction.begin();
-            Ticket ticket = entityManager.find(Ticket.class, id);
-            entityManager.remove(ticket);
-            transaction.commit();
+            Query query = entityManager
+                    .createQuery("delete FROM Ticket t WHERE t.id  = :ticketId")
+                    .setParameter("ticketId", id);
+            query.executeUpdate();
+            entityManager.getTransaction().commit();
         } catch (Exception ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             ex.printStackTrace();
         } finally {
             entityManager.close();
         }
+
     }
 }

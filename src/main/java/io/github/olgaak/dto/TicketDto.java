@@ -2,6 +2,8 @@ package io.github.olgaak.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.Date;
+
 public class TicketDto {
 
     private long id;
@@ -16,6 +18,10 @@ public class TicketDto {
     private RouteSectionDto routeSection;
 
     private StationDto startStation;
+
+    private String departureTime;
+
+    private String arrivalTime;
 
     private StationDto endStation;
 
@@ -117,5 +123,21 @@ public class TicketDto {
 
     public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
+    }
+
+    public String getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(String departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public String getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 }

@@ -45,11 +45,18 @@
                     <c:otherwise>
                         <c:forEach items="${tickets}" var="ticket">
                             <div class="ticket-container">
-                                <h5>Ticket</h5>
-                                <p>Train number: ${ticket.route.train.number}</p>
-                                <p>${ticket.startStation.name} - ${ticket.endStation.name}</p>
-                                <p>Passenger: ${ticket.passenger.firstName} ${ticket.passenger.lastName}</p>
-                                <p>Seat ${ticket.seat.number}</p>
+                                <div class="ticket-container-content">
+                                    <h5>Ticket</h5>
+                                    <p>Train number: ${ticket.route.train.number}</p>
+                                    <p>${ticket.departureTime} - ${ticket.arrivalTime}</p>
+                                    <p>${ticket.startStation.name} - ${ticket.endStation.name}</p>
+                                    <p>Passenger: ${ticket.passenger.firstName} ${ticket.passenger.lastName}</p>
+                                    <p>Seat ${ticket.seat.number}</p>
+                                </div>
+                                <button class="btn-delete btn btn-primary ticket-container-btn" onclick="openCancelTicketPopUp(${ticket.id})">Cancel
+                                    ticket
+                                </button>
+
                             </div>
                         </c:forEach>
                     </c:otherwise>
@@ -62,6 +69,18 @@
 
 </div>
 
+<%--DELETE POP-UP--%>
+<div id="ticket-edit-popup-container" class="edit-popup-container hidden">
+    <div id="ticket-edit-popup" class="edit-popup">
+        <h3>Delete ticket?</h3>
+        <button class="btn btn-close-popup" type="button" onclick="closeEditPopUp('ticket-edit-popup-container')">
+            <span class="material-icons md-18">close</span>
+        </button>
+        <a class="btn btn-primary btn-delete ticket-container-btn">
+            Confirm
+        </a>
+    </div>
+</div>
 
 <script src="/resources/js/profile.js"/>
 ></script>

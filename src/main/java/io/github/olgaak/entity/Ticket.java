@@ -11,7 +11,7 @@ public class Ticket {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "passenger_id")
     private Passenger passenger;
 

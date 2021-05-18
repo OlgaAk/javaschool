@@ -41,4 +41,10 @@ public class TicketController {
         TicketDto ticketBought = ticketService.buyTicket(ticketDto);
         return "redirect:/user/profile";
     }
+
+    @GetMapping("/delete/ticket/{id}")
+    public String deleteTicket(@PathVariable("id") long id) {
+        ticketService.deleteTicket(id);
+        return "redirect:/user/profile";
+    }
 }

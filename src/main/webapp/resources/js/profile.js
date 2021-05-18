@@ -22,5 +22,14 @@ function removeActiveClassMenuItems(profileMenuItemsList, profileContentItemsLis
         .classList.add("hidden"))
 }
 
+function openCancelTicketPopUp(ticketId) {
+    document.getElementById("ticket-edit-popup-container").classList.remove("hidden");
+    document.querySelector("#ticket-edit-popup a").href = "/user/delete/ticket/" + ticketId
+
+}
+
+function closeEditPopUp(container) {
+    document.getElementById(container).classList.add("hidden");
+}
 
 setEventListeners();
