@@ -1,5 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+
 <html>
 <head>
     <title>Signup</title>
@@ -21,32 +23,35 @@
         <h2 class="train-search-title">Sign up</h2>
     </div>
     <div class="login-form-container signup-form">
-        <form method="post" action="/login/processsignup">
+        <sf:form method="post" action="/user/login/processsignup" modelAttribute="user">
             <div class="login-form-input-groups-container signup-form">
                 <div class="login-form-input-groups-box">
                     <div class="login-form-input-group">
-                        <label>First Name</label>
-                        <input name="firstName" type="text" required>
+                        <sf:label path="firstName">First Name</sf:label>
+                        <sf:input path="firstName" type="text" ></sf:input>
+                        <sf:errors path="firstName" class="login-form-error"/>
                     </div>
                     <div class="login-form-input-group">
-                        <label>Last Name</label>
-                        <input name="lastName" type="text" required>
+                        <sf:label path="lastName">Last Name</sf:label>
+                        <sf:input path="lastName" type="text" />
+                        <sf:errors path="lastName" class="login-form-error"/>
                     </div>
                     <div class="login-form-input-group">
-                        <label>Email</label>
-                        <input name="email" type="text" required>
+                        <sf:label path="email">Email</sf:label>
+                        <sf:input path="email" type="text" />
+                        <sf:errors path="email" class="login-form-error"/>
                     </div>
                     <div class="login-form-input-group">
-                        <label>Password</label>
-                        <input name="password" type="password" required>
+                        <sf:label path="password">Password</sf:label>
+                        <sf:input path="password" type="password" />
+                        <sf:errors path="password" class="login-form-error"/>
                     </div>
                 </div>
             </div>
             <div class="login-form-btn-container ">
                 <button class="login-form-btn" type="submit">Sign up</button>
             </div>
-
-        </form>
+        </sf:form>
     </div>
 </div>
 

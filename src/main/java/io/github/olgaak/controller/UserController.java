@@ -14,6 +14,7 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,21 +53,25 @@ public class UserController {
     }
 
     @GetMapping("/signup")
-    public String getSignupPage() {
+    public String getSignupPage(Model model) {
+        model.addAttribute("user", new UserDto());
         return "signup_page";
     }
 
 
     @PostMapping("/login/processsignup")
     public String registerUserAccount(
-            @ModelAttribute("user") @Valid UserDto userDto, ModelMap model) {
-        try {
-            User registered = userService.registerNewUserAccount(userDto);
-            model.addAttribute("successRegister", registered);
-        } catch (UserAlreadyExistException uaeEx) {
-            model.addAttribute("errorMessage",
-                    "An account for that username/email already exists.");
+            @ModelAttribute("user") @Valid UserDto user, BindingResult result, ModelMap model) {
+        if (result.hasErrors()) {
+            return "signup_page";
         }
+//        try {
+//            User registered = userService.registerNewUserAccount(user);
+//            model.addAttribute("successRegister", registered);
+//        } catch (UserAlreadyExistException uaeEx) {
+//            model.addAttribute("errorMessage",
+//                    "An account for that username/email already exists.");
+//        }
         return "redirect:/user/profile";
     }
 

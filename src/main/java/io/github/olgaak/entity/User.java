@@ -1,7 +1,6 @@
 package io.github.olgaak.entity;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name="user")

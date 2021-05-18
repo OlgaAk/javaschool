@@ -1,22 +1,25 @@
 package io.github.olgaak.dto;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.*;
 import java.util.Date;
+
 
 public class UserDto {
 
-    @NotBlank
+    @Email
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "Password is required")
+    @Size(min = 4, message = "Password should have at least 4 characters")
     private String password;
 
-    @NotBlank
+    @NotBlank(message = "Firstname is required")
     private String firstName;
 
-    @NotBlank
+    @NotBlank(message = "Lastname is required")
     private String lastName;
 
+    @NotNull(message = "Date of birth is required")
     private Date dateOfBirth;
 
     public UserDto() { }

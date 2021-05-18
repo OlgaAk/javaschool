@@ -70,3 +70,16 @@
     width: 100%;
     text-align: center;
 }
+
+
+.login-form-error{
+    color: #ef2727;
+    font-size: 12px;
+    position: absolute;
+}
+
+.login-form-input-group{
+    position: relative;
+    left: 270px;
+    width: 100%;
+}
