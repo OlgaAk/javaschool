@@ -5,6 +5,7 @@ import io.github.olgaak.dto.TicketDto;
 import io.github.olgaak.entity.Ticket;
 import io.github.olgaak.service.api.TicketService;
 import io.github.olgaak.util.TicketDtoConverter;
+import io.github.olgaak.util.TicketValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,12 @@ public class TicketServiceImpl implements TicketService {
     private TicketDao ticketDao;
 
     @Override
-    public TicketDto buyTicket(TicketDto ticketDto) {
-        Ticket ticket = TicketDtoConverter.convertTicketDtoToEntity(ticketDto);
-        ticketDao.saveTicket(ticket);
-        return ticketDto; //todo fix
+    public void buyTicket(TicketDto ticketDto) {
+        boolean purchaseIsValid = TicketValidator.checkIfCanBuyTicket(ticketDto);
+        if(purchaseIsValid) {
+            Ticket ticket = TicketDtoConverter.convertTicketDtoToEntity(ticketDto);
+            ticketDao.saveTicket(ticket);
+        }
     }
 
     @Override

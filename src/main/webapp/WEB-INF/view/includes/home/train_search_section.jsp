@@ -20,6 +20,7 @@
                 <div class="train-search-input-group">
                     <label>Date</label>
                     <input id="departure-date-input" name="departure_date" type="date" required>
+<%--                    todo min max--%>
                 </div>
             </div>
         </div>

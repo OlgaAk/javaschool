@@ -38,7 +38,7 @@ public class TicketController {
         CustomUserDetails details = (CustomUserDetails) authentication.getPrincipal();
         long userId = details.getUserId();
         ticketDto.getPassenger().setUserId(userId);
-        TicketDto ticketBought = ticketService.buyTicket(ticketDto);
+        ticketService.buyTicket(ticketDto);
         return "redirect:/user/profile";
     }
 

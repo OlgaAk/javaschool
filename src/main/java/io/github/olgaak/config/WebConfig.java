@@ -15,7 +15,8 @@ import javax.persistence.Persistence;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = {"io.github.olgaak.controller", "io.github.olgaak.service", "io.github.olgaak.dao.impl"})
+@ComponentScan(basePackages = {"io.github.olgaak.controller",
+        "io.github.olgaak.service", "io.github.olgaak.dao.impl", "io.github.olgaak.exception"})
 public class WebConfig implements WebMvcConfigurer {
 
     @Bean

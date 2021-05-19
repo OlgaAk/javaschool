@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TicketService {
 
-    TicketDto buyTicket(TicketDto ticketDto);
+    void buyTicket(TicketDto ticketDto);
 
     List<TicketDto> getUserTickets(long userId);
 
