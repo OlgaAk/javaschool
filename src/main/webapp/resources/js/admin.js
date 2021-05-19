@@ -175,7 +175,7 @@ function createRouteTableRows(route, routesTable) {
         routeTimeCell.innerText = getFormattedTime(timeTable.departureTimeAsDate);
         let routeStationCell = document.createElement("span");
         routeStationCell.className = "table-cell";
-        routeStationCell.innerText = timeTable.station.name;
+        routeStationCell.innerText = timeTable.startTripStationName;
         newCellRow.append(routeDateCell, routeTimeCell, routeStationCell);
         routesTable.append(newCellRow);
     })

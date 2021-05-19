@@ -76,10 +76,11 @@
     color: #ef2727;
     font-size: 12px;
     position: absolute;
+    left: 270px;
+    width: 100%;
 }
 
 .login-form-input-group{
     position: relative;
-    left: 270px;
-    width: 100%;
+
 }
