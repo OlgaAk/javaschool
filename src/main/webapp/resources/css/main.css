@@ -34,7 +34,7 @@ a {
     color: #fa3f3f;
 }
 
-.center{
+.center {
     text-align: center;
 }
 
@@ -97,6 +97,9 @@ a {
 
 .nav-left {
     float: left;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .nav-right {
@@ -163,6 +166,10 @@ a {
     margin: 100px 20px;
 }
 
+.main-container-home-with-hero {
+    margin: 60px 20px;
+}
+
 /*home*******************************/
 
 
@@ -170,7 +177,7 @@ a {
     background: white;
     min-height: 200px;
     position: absolute;
-    left:50px;
+    left: 50px;
     top: 30px;
     width: 170px;
     z-index: 100;
@@ -180,10 +187,10 @@ a {
 }
 
 #arrival-station-popup {
-    left:20px;
+    left: 20px;
 }
 
-#departure-station-input-container, #arrival-station-container{
+#departure-station-input-container, #arrival-station-container {
     position: relative;
 }
 
@@ -333,7 +340,6 @@ a {
 }
 
 
-
 .edit-popup-container {
     width: 100%;
     height: 100%;
@@ -359,3 +365,68 @@ a {
     top: 10px;
     right: 10px;
 }
+
+#train-img-container {
+    position: relative;
+    margin-top: 60px;
+}
+
+#train-img {
+    height: 250px;
+    width: 100%;
+    filter: brightness(0.25);
+}
+
+#train-img-container h1 {
+    position: absolute;
+    width: fit-content;
+    top: 50%;
+    left: 0;
+    right: 0;
+    color: white;
+    text-align: center;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid var(--main-accent-color); /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em;
+    animation: typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+    from {
+        width: 0
+    }
+    to {
+        width: 60%
+    }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent
+    }
+    50% {
+        border-color: var(--main-accent-color);
+    }
+}
+
+
+.brand {
+    font-weight: bold;
+    margin-left: 20px;
+    font-size: 32px;
+    letter-spacing: -8px;
+    position: absolute;
+    left: 80px;
+    top: 22px;
+}
+
+.brand span {
+    color: var(--main-accent-color);
+    letter-spacing:-1px;
+}
+

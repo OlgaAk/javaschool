@@ -7,6 +7,7 @@
                 <%@include file="train.svg" %>
             </a>
         </div>
+        <div  class="brand"><span>S</span>BB</div>
     </div>
     <div class="nav-right">
         <sec:authorize access="isAnonymous()">

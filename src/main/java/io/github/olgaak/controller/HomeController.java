@@ -1,5 +1,8 @@
 package io.github.olgaak.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import io.github.olgaak.dto.DatePickerMaxMinDto;
 import io.github.olgaak.dto.RouteDto;
 import io.github.olgaak.dto.StationDto;
 import io.github.olgaak.dto.TrainQueryDto;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Controller
 @RequestMapping("/")
 public class HomeController {
@@ -23,10 +27,16 @@ public class HomeController {
     @Autowired
     public StationService stationService;
 
+    private static final Logger logger
+            = LoggerFactory.getLogger(HomeController.class);
+
     @GetMapping("/")
     public String getHomePage(ModelMap model) {
         List<StationDto> stationDtos = stationService.getAllStations();
+        DatePickerMaxMinDto datePickerMaxMin = new DatePickerMaxMinDto();
         model.addAttribute("stations", stationDtos);
+        model.addAttribute("datePickerMaxMin", datePickerMaxMin);
+        logger.info("Example log from {}", HomeController.class);
         return "home_page";
     }
 

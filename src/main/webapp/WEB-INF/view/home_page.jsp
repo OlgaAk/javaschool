@@ -15,10 +15,13 @@
     <p>Home Area</p>
 </div>
 
-<div class="main-container-home">
-    <div>
-        <h2 class="train-search-title">Book a train ticket</h2>
-    </div>
+<div id="train-img-container">
+    <img id="train-img" src="/resources/img/train-img.jpeg"/>
+    <h1 class="train-search-title">Book a train ticket now</h1>
+</div>
+
+<div class="main-container-home-with-hero">
+
     <%@include file="includes/home/train_search_section.jsp" %>
     <%@include file="includes/home/train_search_result_section.jsp" %>
 </div>
