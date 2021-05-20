@@ -2,6 +2,7 @@ package io.github.olgaak.controller;
 
 import io.github.olgaak.dto.RouteDto;
 import io.github.olgaak.dto.TicketDto;
+import io.github.olgaak.exception.ActionNotAllowedException;
 import io.github.olgaak.security.CustomUserDetails;
 import io.github.olgaak.service.api.RouteService;
 import io.github.olgaak.service.api.TicketService;
@@ -30,7 +31,7 @@ public class TicketController {
     }
 
     @PostMapping("/purchase")
-    public String makePurchase(@RequestBody TicketDto ticketDto, ModelMap model) {
+    public String makePurchase(@RequestBody TicketDto ticketDto, ModelMap model) throws ActionNotAllowedException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication.getPrincipal() == "anonymousUser") {
             return "redirect:/user/login-error";

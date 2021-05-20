@@ -20,6 +20,10 @@ public class TimetableDtoConverter {
         timetableItemDto.setDepartureTimeAsDate(timetableItem.getDepartureTime());
         timetableItemDto.setDepartureDateAsDate(timetableItem.getDepartureDate());
         timetableItemDto.setFullDepartureDate(timetableItem.getFullDepartureDate());
+        timetableItemDto.setStationId(timetableItem.getStation().getId());
+        timetableItemDto.setStationName(timetableItem.getStation().getName());
+        timetableItemDto.setStartTripStationName(RouteDtoConverter.getFirstStation(timetableItem.getRoute()).getStation().getName());
+        timetableItemDto.setEndTripStationName(RouteDtoConverter.getLastStation(timetableItem.getRoute()).getStation().getName());
         timetableItemDto.setId(timetableItem.getId());
         timetableItemDto.setStation(StationDtoConverter
                 .convertStationEntityToDto(timetableItem.getStation()));
@@ -31,6 +35,8 @@ public class TimetableDtoConverter {
         timetableItemDto.setDepartureTimeAsDate(timetableItem.getDepartureTime());
         timetableItemDto.setDepartureDateAsDate(timetableItem.getDepartureDate());
         timetableItemDto.setFullDepartureDate(timetableItem.getFullDepartureDate());
+        timetableItemDto.setStationId(timetableItem.getStation().getId());
+        timetableItemDto.setStationName(timetableItem.getStation().getName());
         timetableItemDto.setId(timetableItem.getId());
         timetableItemDto.setStation(stationDto);
         timetableItemDto.setTrainNumber(timetableItem.getTrain().getNumber());

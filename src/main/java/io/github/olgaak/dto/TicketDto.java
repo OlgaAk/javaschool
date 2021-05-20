@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
-public class TicketDto {
+public class TicketDto implements Comparable<TicketDto> {
 
     private long id;
 
@@ -169,5 +169,10 @@ public class TicketDto {
 
     public void setIsArchived(boolean archived) {
         isArchived = archived;
+    }
+
+    @Override
+    public int compareTo(TicketDto o) {
+        return (int) (o.departureTimeAsDAte.getTime() - departureTimeAsDAte.getTime());
     }
 }

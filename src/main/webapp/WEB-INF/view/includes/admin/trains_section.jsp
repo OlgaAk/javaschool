@@ -1,20 +1,24 @@
 <%--Trains    --%>
-<div class="train-section main-subsection">
+<div id="train-section" class="train-section main-subsection hidden">
     <div class="addNew-section">
         <form method="post" action="/admin/add/train">
-            <label for="train-number">Train number</label>
-            <input id="train-number" name="number" type="number" required>
-            <label for="seat-count">Number of seats </label>
-            <input id="seat-count" name="seatCount" type="number" required>
-            <select multiple name="stations">
-                <c:forEach var="station" items="${stations}">
-                    <option value="${station.id}">${station.name}</option>
-                </c:forEach>
-            </select>
-            <button class="btn btn-primary" type="submit"> ADD</button>
+            <div class="input-box">
+                <label for="train-number">Train number</label>
+                <input id="train-number" name="number" type="number" required>
+            </div>
+            <div class="input-box">
+                <label for="seat-count">Number of seats </label>
+                <input id="seat-count" name="seatCount" type="number" required>
+            </div>
+            <%--            <select multiple name="stations">--%>
+            <%--                <c:forEach var="station" items="${stations}">--%>
+            <%--                    <option value="${station.id}">${station.name}</option>--%>
+            <%--                </c:forEach>--%>
+            <%--            </select>--%>
+            <button class="btn btn-primary" type="submit">ADD NEW TRAIN</button>
         </form>
     </div>
-    <div class="train-table scrollable">
+    <div class="train-table ">
         <h3>Train list</h3>
         <div class="table-row table-header table-columns-5">
             <div class="table-cell">Train number</div>
@@ -30,9 +34,17 @@
                 <span class="table-cell station-names-cell"
                       onclick="openRoutesSection(${train.number}, ${train.id},${train.seatCount},
                               '<c:forEach var="station" items="${train.stationsUnique}">${station},</c:forEach>')">
-                        <c:forEach var="station" items="${train.stationsUnique}" varStatus="loop">
-                            ${station}<c:if test="${!loop.last}">,&nbsp;</c:if>
-                        </c:forEach>
+                    <c:choose>
+                        <c:when test="${train.stationsUnique.size()==0}">
+                           no stations yet
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach var="station" items="${train.stationsUnique}" varStatus="loop">
+                                ${station}<c:if test="${!loop.last}">,&nbsp;</c:if>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
+
                     </span>
                 <span class="table-cell">
 
@@ -45,7 +57,7 @@
                 </span>
                 <span class="table-cell">
                     <a href="/admin/delete/train/${train.id}" class="icon">
-                        <span class="material-icons md-18">clear</span>
+                        <span class="material-icons md-18">delete</span>
                     </a>
                 </span>
             </div>

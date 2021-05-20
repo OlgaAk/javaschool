@@ -34,12 +34,11 @@
             <div class="profile-personal-info profile-content-item hidden" id="profile-content-item-profile">
                 <h3>${user.firstName} ${user.lastName}</h3>
                 <p>${user.email}</p>
-                <p>${user.dateOfBirth}</p>
             </div>
 
             <div class="profile-content-item " id="profile-content-item-tickets">
                 <c:choose>
-                    <c:when test="${tickets==null}">
+                    <c:when test="${tickets.size()==0}">
                         <p>No tickets yet</p>
                     </c:when>
                     <c:otherwise>

@@ -31,15 +31,15 @@
                 </div>
             </sec:authorize>
             <sec:authorize access="hasRole('ADMIN')">
-                <div class="login_container">
-                    <a>
-                        <span class="login">Stations</span>
-                    </a>
-                </div>
-                <div class="login_container">
-                    <a>
-                        <span class="login">Trains</span>
-                    </a>
+                <div class="admin_menu_items_container">
+                    <div class="admin_menu_item">
+                            <span class="active" id="admin_menu_item_stations">Stations</span>
+                    </div>
+                    <div class="admin_menu_item">
+                        <a>
+                            <span id="admin_menu_item_trains">Trains</span>
+                        </a>
+                    </div>
                 </div>
             </sec:authorize>
             <div class="login_container logout_container">

@@ -19,7 +19,8 @@
 }
 
 .purchase-sections {
-
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .purchase-section {
@@ -73,4 +74,14 @@
     display: flex;
     justify-content: space-between;
     width: 250px;
+}
+
+
+#passanger-form{
+    margin: 30px auto;
+    width: fit-content;
+}
+
+#confirm-booking{
+    margin: 0 auto;
 }

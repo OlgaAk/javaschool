@@ -7,6 +7,7 @@ import io.github.olgaak.entity.Route;
 import io.github.olgaak.entity.Seat;
 import io.github.olgaak.entity.Station;
 import io.github.olgaak.entity.TimetableItem;
+import io.github.olgaak.exception.ActionNotAllowedException;
 import io.github.olgaak.service.api.RouteService;
 import io.github.olgaak.util.RouteDtoConverter;
 import org.modelmapper.ModelMapper;
@@ -80,8 +81,13 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
-    public void deleteRoute(long id) {
-        routeDao.deleteRoute(id);
+    public void deleteRoute(long id) throws ActionNotAllowedException {
+        Route route = routeDao.getRouteById(id);
+        if(route.getTickets().size()>0){
+            throw new ActionNotAllowedException("Route has tickets");
+        } else {
+            routeDao.deleteRoute(id);
+        }
     }
 
     @Override

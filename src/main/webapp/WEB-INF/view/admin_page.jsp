@@ -14,8 +14,9 @@
 <div class="main-container">
 
     <div id="main-container-left-side">
-        <%@include file="includes/admin/trains_section.jsp" %>
         <%@include file="includes/admin/stations_section.jsp" %>
+        <%@include file="includes/admin/trains_section.jsp" %>
+
     </div>
 
     <div id="main-container-right-side">
@@ -33,11 +34,11 @@
             <input id="edit_train_id" name="id" type="hidden">
             <label><input id="edit_train_number" name="number" required type="number">Train number</label>
             <label><input id="edit_train_seat_count" name="seat_count" required type="number">Number of seats </label>
-            <select multiple name="stations" id="edit_train_select_stations">
-                <c:forEach var="station" items="${stations}">
-                    <option value="${station.id}">${station.name}</option>
-                </c:forEach>
-            </select>
+<%--            <select multiple name="stations" id="edit_train_select_stations">--%>
+<%--                <c:forEach var="station" items="${stations}">--%>
+<%--                    <option value="${station.id}">${station.name}</option>--%>
+<%--                </c:forEach>--%>
+<%--            </select>--%>
             <button class="btn btn-primary" type="submit">EDIT</button>
             <button class="btn btn-close-popup" type="button" onclick="closeEditPopUp('train-edit-popup-container')">
                 <span class="material-icons md-18">close</span>

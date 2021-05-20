@@ -1,14 +1,14 @@
 <%--Stations--%>
 
-<div class="station-section main-subsection">
+<div id="station-section" class="station-section main-subsection">
     <div class="addNew-section">
         <form method="post" action="/admin/add/station">
             <label>Station name</label>
             <input id="station-name" name="name" type="text" required>
-            <button class="btn btn-primary" type="submit">ADD</button>
+            <button class="btn btn-primary" type="submit">ADD NEW STATION</button>
         </form>
     </div>
-    <div class="table scrollable">
+    <div class="table">
         <h3>Station list</h3>
         <div class="table-row table-header table-columns-4">
             <div class="table-cell">Station name</div>
@@ -30,7 +30,7 @@
                      </span>
                 <span class="table-cell">
                     <a href="/admin/delete/station/${station.id}" class="icon">
-                        <span class="material-icons">clear</span>
+                        <span class="material-icons">delete</span>
                     </a>
                 </span>
             </div>

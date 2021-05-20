@@ -8,18 +8,19 @@
             <input id="routes_train_id" name="trainId" type="hidden">
             <input id="routes_seat_count" name="seatCount" type="hidden">
             <div id="select_container">
+                <button type="button" onclick="addNewSelect('select_container')">+</button>
                 <div id="routes_stations_div">
                     <select name="timetableItems[0].station">
                         <c:forEach var="station" items="${stations}">
                             <option value="${station.id}">${station.name}</option>
                         </c:forEach>
                     </select>
-                    <label><input type="date" name="timetableItems[0].departureDate">Date</label>
-                    <label><input type="time" name="timetableItems[0].departureTime">Time</label>
+                    <label><input type="date" name="timetableItems[0].departureDate" required>Date</label>
+                    <label><input type="time" name="timetableItems[0].departureTime" required>Time</label>
                 </div>
             </div>
-            <button type="button" onclick="addNewSelect('select_container')">+</button>
-            <button class="btn btn-primary" type="submit"> ADD</button>
+
+            <button class="btn btn-primary" type="submit">SAVE</button>
         </form>
     </div>
     <div class="routes-table">

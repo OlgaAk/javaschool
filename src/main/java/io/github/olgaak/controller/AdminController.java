@@ -4,6 +4,7 @@ import io.github.olgaak.dto.RouteDto;
 import io.github.olgaak.dto.StationDto;
 import io.github.olgaak.dto.TrainDto;
 import io.github.olgaak.entity.*;
+import io.github.olgaak.exception.ActionNotAllowedException;
 import io.github.olgaak.service.api.RouteService;
 import io.github.olgaak.service.api.StationService;
 import io.github.olgaak.service.api.TimetableService;
@@ -99,7 +100,7 @@ public class AdminController {
     }
 
     @GetMapping("/delete/route/{id}")
-    public String deleteRoute(@PathVariable("id") long id) {
+    public String deleteRoute(@PathVariable("id") long id) throws ActionNotAllowedException {
         routeService.deleteRoute(id);
         return "redirect:/admin";
     }

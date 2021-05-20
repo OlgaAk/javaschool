@@ -64,7 +64,7 @@
             <h3>Enter passenger information</h3>
             <div class="">
                 <div class="">
-                    <div class="">
+                    <div id="passanger-form ">
                         <div class="login-form-input-group">
                             <label>First Name</label>
                             <input id="passengerFirstname" name="firstName" type="text" required>
@@ -96,11 +96,13 @@
 
         <div id="purchase-section-confirm" class="purchase-section">
             <div id="passenger-data-error-message-box" class="error"></div>
-            <h3>Confirm your booking</h3>
-            <p id="confirmation-passenger-seat">Seat</p>
-            <p>Passenger details:</p>
-            <div id="confirmation-passenger-details"></div>
-            <p id="confirmation-passenger-price">Price: </p>
+            <div id="confirm-booking">
+                <h3>Confirm your booking</h3>
+                <p id="confirmation-passenger-seat">Seat</p>
+                <p>Passenger details:</p>
+                <div id="confirmation-passenger-details"></div>
+                <p id="confirmation-passenger-price">Price: </p>
+            </div>
             <button class="purchase-section-back-btn purchase-section-btn"
                     onclick="goToSection('purchase-section-passenger')">Back
             </button>

@@ -65,13 +65,13 @@ public class UserController {
         if (result.hasErrors()) {
             return "signup_page";
         }
-//        try {
-//            User registered = userService.registerNewUserAccount(user);
-//            model.addAttribute("successRegister", registered);
-//        } catch (UserAlreadyExistException uaeEx) {
-//            model.addAttribute("errorMessage",
-//                    "An account for that username/email already exists.");
-//        }
+        try {
+            User registered = userService.registerNewUserAccount(user);
+            model.addAttribute("successRegister", registered);
+        } catch (UserAlreadyExistException uaeEx) {
+            model.addAttribute("errorMessage",
+                    "An account for that username/email already exists.");
+        }
         return "redirect:/user/profile";
     }
 

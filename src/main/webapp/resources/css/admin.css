@@ -8,12 +8,13 @@
     width: 100%;
     display: grid;
     grid-gap: 1px;
-    grid-auto-rows: 30px;
-    border-right: 1px solid gray;
+    padding: 2px 0;
+    /*grid-auto-rows: 30px;*/
+    /*border-right: 1px solid gray;*/
 }
 
 .table-columns-5 {
-    grid-template-columns: 1fr 1fr 1fr 60px 60px;
+    grid-template-columns: 1fr 1fr 2fr 60px 60px;
 }
 
 .table-columns-4 {
@@ -33,7 +34,7 @@
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid gray;
-    border-left: 1px solid gray;
+    /*border-left: 1px solid gray;*/
 }
 
 
@@ -62,17 +63,20 @@
 }
 
 .station-section {
-    margin-top: 50px;
+
 }
 
 
 /*trains*******************/
 .station-names-cell {
     text-transform: capitalize;
-    font-size: 12px;
+    /*font-size: 12px;*/
     justify-content: left;
 }
 
+#train-section .input-box{
+    margin: 10px 0;
+}
 
 /*routes******************************/
 
@@ -84,6 +88,7 @@
     font-size: 14px;
     margin: 10px 0 4px 0;
     font-weight: bold;
+    background-color: var(--main-color);
 }
 .passenger-info-row {
     font-size: 13px;

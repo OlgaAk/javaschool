@@ -37,7 +37,8 @@ function addRouteEditContent(route, routeEditTable) {
         let clone = document.getElementById("routes_stations_div").cloneNode(true);
         let select = clone.children[0];
         select.name = "timetableItems[" + index + "].station";
-        select.value = timeTable.station.id;
+        console.log(timeTable)
+        select.value = timeTable.stationId;
         let dateinput = clone.children[1].children[0];
         dateinput.name = "timetableItems[" + index + "].departureDate";
         dateinput.value = getFormattedDateYYYYMMDD(timeTable.fullDepartureDate);
@@ -79,7 +80,7 @@ async function openScheduleSection(stationId, stationName, trains) {
     //     select.options[i].selected = values.indexOf(select.options[i].text) >= 0;
     // }
     let scheduleTable = document.getElementById("schedule-table");
-    scheduleTable.innerHTML="";
+    scheduleTable.innerHTML = "";
     station.timetableItems.forEach(item => {
         let div = document.createElement(("div"));
         div.classList.add("schedule-item")
@@ -175,7 +176,8 @@ function createRouteTableRows(route, routesTable) {
         routeTimeCell.innerText = getFormattedTime(timeTable.departureTimeAsDate);
         let routeStationCell = document.createElement("span");
         routeStationCell.className = "table-cell";
-        routeStationCell.innerText = timeTable.startTripStationName;
+        console.log(timeTable)
+        routeStationCell.innerText = timeTable.stationName;
         newCellRow.append(routeDateCell, routeTimeCell, routeStationCell);
         routesTable.append(newCellRow);
     })
@@ -196,7 +198,7 @@ function getFormattedTime(time) {
 function addNewSelect(containerName) {
     let container = document.getElementById(containerName);
     let clone = document.getElementById("routes_stations_div").cloneNode(true);
-    let nextSelectIndex = container.children.length;
+    let nextSelectIndex = container.children.length-1; // button excluded
     let select = clone.children[0]
     select.name = "timetableItems[" + nextSelectIndex + "].station";
     let dateinput = clone.children[1].children[0];
@@ -231,4 +233,38 @@ async function fetchStation(id) {
         return null;
     }
 }
+
+
+setOnclickListenerOnAdminMenuItems()
+
+function openTrainsSection(event) {
+    document.querySelectorAll(".admin_menu_item span").forEach(span=>{
+        span.classList.remove("active")
+    })
+    event.target.classList.add("active");
+    document.getElementById("schedule-section").classList.add("hidden");
+    document.getElementById("routes-section").classList.add("hidden");
+    document.getElementById("train-section").classList.remove("hidden");
+    document.getElementById("station-section").classList.add("hidden");
+}
+
+function openStationsSection(event) {
+    document.querySelectorAll(".admin_menu_item span").forEach(span=>{
+        span.classList.remove("active")
+    })
+    event.target.classList.add("active");
+    document.getElementById("schedule-section").classList.add("hidden");
+    document.getElementById("routes-section").classList.add("hidden");
+    document.getElementById("train-section").classList.add("hidden");
+    document.getElementById("station-section").classList.remove("hidden");
+}
+
+function setOnclickListenerOnAdminMenuItems() {
+    document.getElementById("admin_menu_item_trains").addEventListener("click", (event)=> openTrainsSection(event))
+    document.getElementById("admin_menu_item_stations").addEventListener("click", (event)=>openStationsSection(event))
+}
+
+
+
+
 

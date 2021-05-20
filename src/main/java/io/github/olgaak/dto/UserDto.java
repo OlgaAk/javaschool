@@ -7,6 +7,7 @@ import java.util.Date;
 public class UserDto {
 
     @Email
+    @NotBlank(message = "Email is required")
     private String email;
 
     @NotBlank(message = "Password is required")
@@ -18,9 +19,6 @@ public class UserDto {
 
     @NotBlank(message = "Lastname is required")
     private String lastName;
-
-    @NotNull(message = "Date of birth is required")
-    private Date dateOfBirth;
 
     public UserDto() { }
 
@@ -61,11 +59,4 @@ public class UserDto {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
 }

@@ -11,6 +11,10 @@ public class TimetableItemDto implements Comparable<TimetableItemDto> {
     @JsonIgnore
     private StationDto station;
 
+    private long stationId;
+
+    private String stationName;
+
     private long trainId;
 
     private int trainNumber;
@@ -26,6 +30,7 @@ public class TimetableItemDto implements Comparable<TimetableItemDto> {
     private Date fullDepartureDate;
 
     private String startTripStationName;
+
 
     private String endTripStationName;
 
@@ -126,5 +131,20 @@ public class TimetableItemDto implements Comparable<TimetableItemDto> {
         this.endTripStationName = endTripStationName;
     }
 
+    public long getStationId() {
+        return stationId;
+    }
+
+    public void setStationId(long stationId) {
+        this.stationId = stationId;
+    }
+
+    public String getStationName() {
+        return stationName;
+    }
+
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
+    }
 }
 
