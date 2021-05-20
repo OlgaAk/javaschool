@@ -213,7 +213,8 @@ a {
 }
 
 .train-search-input-group input {
-    /*!*height: 30px;*! safari issue*/
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
 }
 
 .train-search-input-groups-box {
@@ -368,13 +369,13 @@ a {
 
 #train-img-container {
     position: relative;
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 #train-img {
-    height: 250px;
+    height: 280px;
     width: 100%;
-    filter: brightness(0.25);
+    filter: brightness(0.35);
 }
 
 #train-img-container h1 {
@@ -400,7 +401,7 @@ a {
         width: 0
     }
     to {
-        width: 60%
+        width: 50%
     }
 }
 
@@ -422,7 +423,7 @@ a {
     letter-spacing: -8px;
     position: absolute;
     left: 80px;
-    top: 22px;
+    top: 21px;
 }
 
 .brand span {

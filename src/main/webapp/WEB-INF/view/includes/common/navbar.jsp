@@ -7,7 +7,7 @@
                 <%@include file="train.svg" %>
             </a>
         </div>
-        <div  class="brand"><span>S</span>BB</div>
+        <div class="brand"><span>S</span>BB</div>
     </div>
     <div class="nav-right">
         <sec:authorize access="isAnonymous()">
@@ -23,11 +23,25 @@
             </div>
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
-            <div class="login_container">
-                <a href="/user/profile">
-                    <span class="login">Profile</span>
-                </a>
-            </div>
+            <sec:authorize access="!hasRole('ADMIN')">
+                <div class="login_container">
+                    <a href="/user/profile">
+                        <span class="login">Profile</span>
+                    </a>
+                </div>
+            </sec:authorize>
+            <sec:authorize access="hasRole('ADMIN')">
+                <div class="login_container">
+                    <a>
+                        <span class="login">Stations</span>
+                    </a>
+                </div>
+                <div class="login_container">
+                    <a>
+                        <span class="login">Trains</span>
+                    </a>
+                </div>
+            </sec:authorize>
             <div class="login_container logout_container">
                 <a href="/user/logout">
                     <span class="logout">Log out</span>

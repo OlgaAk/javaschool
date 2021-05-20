@@ -21,6 +21,10 @@ public class TicketDto {
 
     private String departureTime;
 
+    private Date departureTimeAsDAte;
+
+    private Date arrivalTimeAsDate;
+
     private String arrivalTime;
 
     private StationDto endStation;
@@ -33,6 +37,8 @@ public class TicketDto {
     private int seatNumber;
 
     private float price;
+
+    private boolean isArchived = false;
 
     public TicketDto() {
     }
@@ -139,5 +145,29 @@ public class TicketDto {
 
     public void setArrivalTime(String arrivalTime) {
         this.arrivalTime = arrivalTime;
+    }
+
+    public Date getArrivalTimeAsDate() {
+        return arrivalTimeAsDate;
+    }
+
+    public void setArrivalTimeAsDate(Date arrivalTimeAsDate) {
+        this.arrivalTimeAsDate = arrivalTimeAsDate;
+    }
+
+    public Date getDepartureTimeAsDAte() {
+        return departureTimeAsDAte;
+    }
+
+    public void setDepartureTimeAsDAte(Date departureTimeAsDAte) {
+        this.departureTimeAsDAte = departureTimeAsDAte;
+    }
+
+    public boolean getIsArchived() {
+        return isArchived;
+    }
+
+    public void setIsArchived(boolean archived) {
+        isArchived = archived;
     }
 }

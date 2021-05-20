@@ -27,16 +27,12 @@ public class HomeController {
     @Autowired
     public StationService stationService;
 
-    private static final Logger logger
-            = LoggerFactory.getLogger(HomeController.class);
-
     @GetMapping("/")
     public String getHomePage(ModelMap model) {
         List<StationDto> stationDtos = stationService.getAllStations();
         DatePickerMaxMinDto datePickerMaxMin = new DatePickerMaxMinDto();
         model.addAttribute("stations", stationDtos);
         model.addAttribute("datePickerMaxMin", datePickerMaxMin);
-        logger.info("Example log from {}", HomeController.class);
         return "home_page";
     }
 

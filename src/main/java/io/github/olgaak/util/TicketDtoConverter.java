@@ -16,15 +16,22 @@ public class TicketDtoConverter {
         ticketDto.setRoute(RouteDtoConverter.convertRouteEntityToDto(ticket.getRoute()));
         ticketDto.setPrice(ticket.getPrice());
         ticketDto.setId(ticket.getId());
+
         ticketDto.setPassenger(PassengerDtoConverter.convertPassengerEntityToDto(ticket.getPassenger()));
         ticketDto.setStartStation(StationDtoConverter.convertStationEntityToDto(ticket.getStartStation()));
         ticketDto.setEndStation(StationDtoConverter.convertStationEntityToDto(ticket.getEndStation()));
-        ticketDto.setDepartureTime(getTicketDepartureDate(ticket, ticket.getStartStation().getId()));
-        ticketDto.setArrivalTime(getTicketDepartureDate(ticket, ticket.getEndStation().getId()));
+        Date departureDate = getTicketDepartureDate(ticket, ticket.getEndStation().getId());
+        Date arrivalDate = getTicketDepartureDate(ticket, ticket.getEndStation().getId());
+        ticketDto.setArrivalTimeAsDate(arrivalDate);
+        ticketDto.setDepartureTimeAsDAte(departureDate);
+        ticketDto.setDepartureTime(DateTimeConverter.parseDateToString(departureDate));
+        ticketDto.setArrivalTime(DateTimeConverter.parseDateToString(arrivalDate));
+        ticketDto.setIsArchived(new Date().getTime()>arrivalDate.getTime());
         ticketDto.setSeat(SeatDtoConverter.convertSeatEntityToDto(ticket.getSeat(), ticketDto));
         return ticketDto;
     }
 
+    // Used by conversion of Seat to SeatDto
     public static TicketDto convertTicketEntityToDto(Ticket ticket, RouteDto routeDto, SeatDto seatDto) {
         TicketDto ticketDto = new TicketDto();
         ticketDto.setRoute(routeDto);
@@ -37,7 +44,7 @@ public class TicketDtoConverter {
         return ticketDto;
     }
 
-    public static String getTicketDepartureDate(Ticket ticket, long id) {
+    public static Date getTicketDepartureDate(Ticket ticket, long id) {
         List<TimetableItem> timetableItemList = ticket
                 .getRoute()
                 .getTimetableItems()
@@ -49,9 +56,10 @@ public class TicketDtoConverter {
             throw new IllegalStateException("Expected exactly one timetableItem but got " + timetableItemList);
         }
         TimetableItem timetableItem = timetableItemList.get(0);
-        return DateTimeConverter.parseDateToString(timetableItem.getFullDepartureDate());
+        return timetableItem.getFullDepartureDate();
     }
 
+    // Used by conversion of Route to RouteDto
     public static TicketDto convertTicketEntityToDto(Ticket ticket, RouteDto routeDto) {
         TicketDto ticketDto = new TicketDto();
         ticketDto.setRoute(routeDto);

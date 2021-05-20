@@ -7,7 +7,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{WebConfig.class, WebSecurityConfig.class};
+        return new Class[]{WebSecurityConfig.class, AopConfig.class, WebConfig.class};
     }
 
     @Override
@@ -20,6 +20,8 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
         return new String[]{"/"};
     }
 
+
+    // Enables custom 404 page handling
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
         registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");

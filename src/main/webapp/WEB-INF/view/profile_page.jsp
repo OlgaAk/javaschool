@@ -44,18 +44,20 @@
                     </c:when>
                     <c:otherwise>
                         <c:forEach items="${tickets}" var="ticket">
-                            <div class="ticket-container">
+                            <div class="ticket-container ${ticket.isArchived? "ticket-archived" : ""}">
                                 <div class="ticket-container-content">
-                                    <h5>Ticket</h5>
+                                    <h5>Ticket ${ticket.isArchived? "(archived)" : ""}</h5>
                                     <p>Train number: ${ticket.route.train.number}</p>
                                     <p>${ticket.departureTime} - ${ticket.arrivalTime}</p>
                                     <p>${ticket.startStation.name} - ${ticket.endStation.name}</p>
                                     <p>Passenger: ${ticket.passenger.firstName} ${ticket.passenger.lastName}</p>
                                     <p>Seat ${ticket.seat.number}</p>
                                 </div>
-                                <button class="btn-delete btn btn-primary ticket-container-btn" onclick="openCancelTicketPopUp(${ticket.id})">Cancel
-                                    ticket
-                                </button>
+                                <c:if test="${!ticket.isArchived}">
+                                    <button class="btn-delete btn btn-primary ticket-container-btn"
+                                            onclick="openCancelTicketPopUp(${ticket.id})">Cancel ticket
+                                    </button>
+                                </c:if>
 
                             </div>
                         </c:forEach>

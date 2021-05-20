@@ -65,3 +65,7 @@
 .ticket-container-btn{
     margin: 10px 0;
 }
+
+.ticket-archived {
+    background-color: var(--main-color);
+}
