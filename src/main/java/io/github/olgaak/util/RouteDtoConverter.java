@@ -1,7 +1,6 @@
 package io.github.olgaak.util;
 
 import io.github.olgaak.dto.RouteDto;
-import io.github.olgaak.dto.SeatDto;
 import io.github.olgaak.dto.TimetableItemDto;
 import io.github.olgaak.entity.Route;
 import io.github.olgaak.entity.TimetableItem;
@@ -23,6 +22,8 @@ public class RouteDtoConverter {
         routeDto.setStartTripTime(firstStop.getFullDepartureDate().toString());
         routeDto.setEndTripStation(StationDtoConverter.convertStationEntityToDto(lastStop.getStation()));
         routeDto.setEndTripTime(lastStop.getFullDepartureDate().toString());
+        routeDto.setStartTripTimeHours(DateTimeConverter.parseDateToString(firstStop.getFullDepartureDate(), "HH:mm"));
+        routeDto.setEndTripTimeHours(DateTimeConverter.parseDateToString(lastStop.getFullDepartureDate(), "HH:mm"));
         routeDto.setId(route.getId());
         routeDto.setTrainId(route.getTrain().getId());
         long duration = getDurationMilli(lastStop, firstStop);

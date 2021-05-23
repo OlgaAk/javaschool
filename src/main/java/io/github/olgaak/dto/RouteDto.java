@@ -13,7 +13,11 @@ public class RouteDto {
 
     private String endTripTime;
 
+    private String endTripTimeHours;
+
     private String startTripTime;
+
+    private String startTripTimeHours;
 
     private String tripDuration;
 
@@ -107,7 +111,7 @@ public class RouteDto {
 
     public String getEndTripTime() {
 
-        return endTripTime.split(" ")[1].substring(0, 5);
+        return endTripTime;
     }
 
     public void setEndTripTime(String endTripTime) {
@@ -116,7 +120,7 @@ public class RouteDto {
 
     public String getStartTripTime() {
 
-        return startTripTime.split(" ")[1].substring(0, 5);
+        return startTripTime;
     }
 
     public void setStartTripTime(String startTripTime) {
@@ -173,5 +177,21 @@ public class RouteDto {
 
     public void setTickets(List<TicketDto> tickets) {
         this.tickets = tickets;
+    }
+
+    public String getEndTripTimeHours() {
+        return endTripTimeHours;
+    }
+
+    public void setEndTripTimeHours(String endTripTimeHours) {
+        this.endTripTimeHours = endTripTimeHours;
+    }
+
+    public String getStartTripTimeHours() {
+        return startTripTimeHours;
+    }
+
+    public void setStartTripTimeHours(String startTripTimeHours) {
+        this.startTripTimeHours = startTripTimeHours;
     }
 }

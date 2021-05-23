@@ -51,7 +51,6 @@ async function submitSearchForm() {
     let departureDate = document.getElementById("departure-date-input").value;
     if (departureStationInputValue != "" && arrivalStationInputValue != "" && departureDate != "") {
         let routes = await getRoutesByQuery(departureStationInputValue, arrivalStationInputValue, departureDate);
-        console.log(routes, routes != null || routes.length > 0, routes.length, routes.length > 0)
             if (routes != null || routes.length > 0) {
             routes.forEach(route => createSearchResult(route))
         } else createSearchResultError("No trains found");
@@ -83,9 +82,9 @@ function createSearchResult(route) {
     let resultItem = container.children[0].cloneNode(true);
     cleanSearchResultContent();
     resultItem.style.display = "grid";
-    resultItem.querySelector(".train-search-result-item-time").innerHTML = route.startTripTime;
+    resultItem.querySelector(".train-search-result-item-time").innerHTML = getFormattedTime(route.startTripTime);
     resultItem.querySelector(".train-search-result-item-station").innerHTML = route.startTripStation.name;
-    resultItem.querySelectorAll(".train-search-result-item-time")[1].innerHTML = route.endTripTime;
+    resultItem.querySelectorAll(".train-search-result-item-time")[1].innerHTML = getFormattedTime(route.endTripTime);
     resultItem.querySelectorAll(".train-search-result-item-station")[1].innerHTML = route.endTripStation.name;
     resultItem.querySelector(".train-search-result-item-duration").innerHTML = route.tripDuration;
     resultItem.querySelector(".train-search-result-item-change").innerHTML = route.changeType;
@@ -127,3 +126,7 @@ function setMinMaxInputDateRange(){
 setEventListenerOnSearchButton();
 
 //setMinMaxInputDateRange();
+
+function getFormattedTime(time) {
+    return new Date(time).toLocaleTimeString().substring(0, 5);
+}

@@ -52,6 +52,11 @@ public class UserController {
         return "login_page";
     }
 
+    @GetMapping("/403")
+    public String getForbiddenPage(){
+        return "403";
+    }
+
     @GetMapping("/signup")
     public String getSignupPage(Model model) {
         model.addAttribute("user", new UserDto());
