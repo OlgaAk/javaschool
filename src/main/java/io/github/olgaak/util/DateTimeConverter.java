@@ -5,6 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateTimeConverter {
+    /**
+     * @param date Date
+     * @param pattern String
+     * @return String
+     */
     public static String parseDateToString(Date date, String pattern) {
         DateFormat format = new SimpleDateFormat(pattern);
         String dateString = "";
