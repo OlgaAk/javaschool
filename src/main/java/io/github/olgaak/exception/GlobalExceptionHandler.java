@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.util.NestedServletException;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +45,8 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<Object>(body, headers, status);
     }
 
+    @ExceptionHandler(NestedServletException.class)
+    public String handleServerSideError(HttpServletRequest request, Exception e) { return "500";}
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public String handleError404(HttpServletRequest request, Exception e) {

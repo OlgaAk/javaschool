@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class DateTimeConverter {
     /**
+     * Static util method to convert date to a string with any pattern
      * @param date Date
      * @param pattern String
      * @return String

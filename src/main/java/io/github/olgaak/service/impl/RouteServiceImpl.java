@@ -8,6 +8,7 @@ import io.github.olgaak.entity.Seat;
 import io.github.olgaak.entity.Station;
 import io.github.olgaak.entity.TimetableItem;
 import io.github.olgaak.exception.ActionNotAllowedException;
+import io.github.olgaak.service.MessageSender;
 import io.github.olgaak.service.api.RouteService;
 import io.github.olgaak.util.RouteDtoConverter;
 import org.modelmapper.ModelMapper;
@@ -25,12 +26,15 @@ public class RouteServiceImpl implements RouteService {
 
     private RouteDao routeDao;
 
+    private MessageSender messageSender;
+
     @Autowired
     ModelMapper modelMapper;
 
     @Autowired
-    public RouteServiceImpl(RouteDao routeDao){
+    public RouteServiceImpl(RouteDao routeDao, MessageSender messageSender){
         this.routeDao = routeDao;
+        this.messageSender = messageSender;
     }
 
     public Route createNewRoute(RouteDto routeDto) {
@@ -49,6 +53,7 @@ public class RouteServiceImpl implements RouteService {
         }
         route.setSeats(seats);
         routeDao.createNewRoute(route);
+        messageSender.sendMessage();
         return null;
     }
 
