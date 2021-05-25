@@ -1,11 +1,10 @@
-package io.github.olgaak.config;
+package io.github.olgaak.selenium;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumConfig {
@@ -27,7 +26,7 @@ public class SeleniumConfig {
     }
 
     static {
-        System.setProperty("webdriver.gecko.driver", "/Users/olgaaktas/Developer/geckodriver.exec");
+        System.setProperty("webdriver.gecko.driver", "/Users/olgaaktas/Developer/geckodriver");
     }
 
 
