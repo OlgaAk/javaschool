@@ -1,5 +1,6 @@
 package io.github.olgaak.controller;
 
+import io.github.olgaak.service.MessageSender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import io.github.olgaak.dto.DatePickerMaxMinDto;
@@ -25,6 +26,9 @@ public class HomeController {
     public RouteService routeService;
 
     @Autowired
+    MessageSender messageSender;
+
+    @Autowired
     public StationService stationService;
 
     @GetMapping("/")
@@ -33,6 +37,7 @@ public class HomeController {
         DatePickerMaxMinDto datePickerMaxMin = new DatePickerMaxMinDto();
         model.addAttribute("stations", stationDtos);
         model.addAttribute("datePickerMaxMin", datePickerMaxMin);
+        messageSender.sendMessage();
         return "home_page";
     }
 

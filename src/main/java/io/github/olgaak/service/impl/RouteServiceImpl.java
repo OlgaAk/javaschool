@@ -26,15 +26,12 @@ public class RouteServiceImpl implements RouteService {
 
     private RouteDao routeDao;
 
-    private MessageSender messageSender;
-
     @Autowired
     ModelMapper modelMapper;
 
     @Autowired
-    public RouteServiceImpl(RouteDao routeDao, MessageSender messageSender){
+    public RouteServiceImpl(RouteDao routeDao){
         this.routeDao = routeDao;
-        this.messageSender = messageSender;
     }
 
     public Route createNewRoute(RouteDto routeDto) {
@@ -53,7 +50,6 @@ public class RouteServiceImpl implements RouteService {
         }
         route.setSeats(seats);
         routeDao.createNewRoute(route);
-        messageSender.sendMessage();
         return null;
     }
 
