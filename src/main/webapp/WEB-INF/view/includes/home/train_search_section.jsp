@@ -19,7 +19,7 @@
                 </div>
                 <div class="train-search-input-group">
                     <label>Date</label>
-                    <input id="departure-date-input" value="${datePickerMaxMin.min}" min="${datePickerMaxMin.min}" max="${datePickerMaxMin.max}" name="departure_date" type="date" required>
+                    <input id="departure-date-input" value="${datePickerMaxMin.min}"  max="${datePickerMaxMin.max}" name="departure_date" type="date" required>
 <%--                    todo min max--%>
                 </div>
             </div>

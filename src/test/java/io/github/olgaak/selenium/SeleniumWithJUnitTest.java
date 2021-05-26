@@ -26,4 +26,10 @@ public class SeleniumWithJUnitTest {
         Assert.assertNotNull(actualTitle);
         Assert.assertEquals(expectedTitle, actualTitle);
     }
+
+    @Test
+    public void whenTrainSearched_thenSearchResultAppears(){
+        seleniumTest.searchForResult();
+        Assert.assertTrue(seleniumTest.isSearchResultDisplayed());
+    }
 }
