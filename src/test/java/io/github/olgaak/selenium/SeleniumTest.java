@@ -73,8 +73,8 @@ public class SeleniumTest {
 
     public void clickBuyTicketButton() {
         JavascriptExecutor js = (JavascriptExecutor) config.getDriver();
-        js.executeScript("document.querySelector('.buy-ticket').click()");
-        waitMS(10000);
+        js.executeScript("document.querySelectorAll('.buy-ticket-link')[1].click()");
+        waitMS(1000);
     }
 
     public String getCurrantUrl() {
@@ -89,5 +89,13 @@ public class SeleniumTest {
         js.executeScript(String.format("document.getElementById('login-input-email').value ='%s'",testEmail));
         js.executeScript(String.format("document.getElementById('login-input-password').value ='%s'",testPassword));
         js.executeScript("document.getElementById('login-form-btn').click()");
+        waitMS(1000);
+    }
+
+    public String getPurchasePageTitle() {
+        WebElement title = this.config.getDriver()
+                .findElement(By.className("main-container-home"))
+                .findElement(By.tagName("h2"));
+        return  title.getText();
     }
 }

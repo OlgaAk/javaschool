@@ -36,21 +36,22 @@ public class SeleniumWithJUnitTest {
     @Test
     public void test3_whenBuyTicketBtnClicked_thenRedirectToLogin(){
         String expectedLoginUrl = "http://localhost:8080/user/login";
-//        seleniumTest.searchForResult();
         seleniumTest.clickBuyTicketButton();
         Assert.assertEquals( expectedLoginUrl, seleniumTest.getCurrantUrl());
     }
 
     @Test
     public void test4_whenLoginSubmitted_thenRedirectToPurchase(){
-//        seleniumTest.searchForResult();
-//        seleniumTest.clickBuyTicketButton();
         seleniumTest.submitLoginForm();
         String expectedPurchaseUrl = "http://localhost:8080/user/purchase";
-        System.out.println(seleniumTest.getCurrantUrl());
         Assert.assertTrue(seleniumTest.getCurrantUrl().contains(expectedPurchaseUrl) );
     }
 
+    @Test
+    public void test5_whenPurchasePageOpened_thenHasTitle() {
+        String expectedTitle = "Selected Trip";
+        Assert.assertEquals(expectedTitle, seleniumTest.getPurchasePageTitle());
+    }
 
 
 }
