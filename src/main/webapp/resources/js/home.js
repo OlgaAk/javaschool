@@ -57,6 +57,7 @@ async function submitSearchForm() {
     } else {
         createSearchResultError("Invalid Data")
     }
+    document.getElementById("train-search-result-container").scrollIntoView();
 }
 
 function createSearchResultError(errorMsg) {

@@ -27,16 +27,16 @@
                 <div class="login-form-input-groups-box">
                     <div class="login-form-input-group">
                         <label>Email</label>
-                        <input name="email" type="text" required>
+                        <input id="login-input-email" name="email" type="text" required>
                     </div>
                     <div class="login-form-input-group">
                         <label>Password</label>
-                        <input name="password" type="password" required>
+                        <input id="login-input-password" name="password" type="password" required>
                     </div>
                 </div>
             </div>
             <div class="login-form-btn-container ">
-                <button class="login-form-btn" type="submit">Login</button>
+                <button class="login-form-btn" id="login-form-btn" type="submit">Login</button>
             </div>
 
         </form>
