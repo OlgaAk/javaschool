@@ -1,5 +1,5 @@
 <%--Trains    --%>
-<div id="train-section" class="train-section main-subsection hidden">
+<div id="train-section" class="train-section main-subsection">
     <div class="addNew-section">
         <form method="post" action="/admin/add/train">
             <div class="input-box">

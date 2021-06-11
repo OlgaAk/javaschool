@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-<div id="routes-section" class="hidden">
+<div id="routes-section" >
     <h3 id="routes_title">Routes for train ***</h3>
     <div class="addNew-section">
         <form method="post" action="/admin/add/route">
@@ -16,7 +16,8 @@
                         </c:forEach>
                     </select>
                     <label><input type="date" name="timetableItems[0].departureDate" required>Date</label>
-                    <label><input type="time" name="timetableItems[0].departureTime" required>Time</label>
+                    <label><input type="time" name="timetableItems[0].arrivalTime" required>Arrival Time</label>
+                    <label><input type="time" name="timetableItems[0].departureTime" required>Departure Time</label>
                 </div>
             </div>
 

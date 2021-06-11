@@ -43,14 +43,18 @@
     text-decoration: none;
 }
 
-.main-container {
+.admin-subpage{
     display: grid;
     grid-column-gap: 60px;
     grid-template-columns: 1fr 1fr;
     margin: 100px 40px 10px 40px;
 }
 
-#main-container-left-side {
+.admin-subpage.hidden{
+    display: none;
+}
+
+.main-container-left-side {
     display: grid;
     grid-template-rows: 1fr 1fr;
 }

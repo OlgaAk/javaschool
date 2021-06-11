@@ -93,14 +93,14 @@ async function openScheduleSection(stationId, stationName, trains) {
 }
 
 function hideRoutesShowSchedule(stationId, stationName) {
-    document.getElementById("routes-section").classList.add("hidden");
+    // document.getElementById("routes-section").classList.add("hidden");
     document.getElementById("schedule-section").classList.remove("hidden");
     // document.getElementById("schedule_station_id").value = stationId;
     document.getElementById("schedule_title").innerText = "Schedule for station " + stationName;
 }
 
 function hideScheduleShowRoutes(trainNumber, trainId, seatCount) {
-    document.getElementById("schedule-section").classList.add("hidden");
+    // document.getElementById("schedule-section").classList.add("hidden");
     document.getElementById("routes-section").classList.remove("hidden");
     document.getElementById("routes_title").innerText = "Routes for train  " + trainNumber;
     document.getElementById("routes_train_id").value = trainId;
@@ -242,10 +242,8 @@ function openTrainsSection(event) {
         span.classList.remove("active")
     })
     event.target.classList.add("active");
-    document.getElementById("schedule-section").classList.add("hidden");
-    document.getElementById("routes-section").classList.add("hidden");
-    document.getElementById("train-section").classList.remove("hidden");
-    document.getElementById("station-section").classList.add("hidden");
+    document.getElementById("stations-subpage").classList.add("hidden");
+    document.getElementById("trains-subpage").classList.remove("hidden");
 }
 
 function openStationsSection(event) {
@@ -253,10 +251,8 @@ function openStationsSection(event) {
         span.classList.remove("active")
     })
     event.target.classList.add("active");
-    document.getElementById("schedule-section").classList.add("hidden");
-    document.getElementById("routes-section").classList.add("hidden");
-    document.getElementById("train-section").classList.add("hidden");
-    document.getElementById("station-section").classList.remove("hidden");
+    document.getElementById("trains-subpage").classList.add("hidden");
+    document.getElementById("stations-subpage").classList.remove("hidden");
 }
 
 function setOnclickListenerOnAdminMenuItems() {
