@@ -168,17 +168,17 @@ function createRouteTableRows(route, routesTable) {
     route.timetableItems.forEach(timeTable => {
         let newCellRow = document.createElement("div");
         newCellRow.classList.add("table-row", "table-columns-3");
-        let routeDateCell = document.createElement("span");
-        routeDateCell.className = "table-cell";
-        routeDateCell.innerText = getFormattedDate(timeTable.departureDateAsDate)
-        let routeTimeCell = document.createElement("span");
-        routeTimeCell.className = "table-cell";
-        routeTimeCell.innerText = getFormattedTime(timeTable.departureTimeAsDate);
+        let routeArrivalTimeCell = document.createElement("span");
+        routeArrivalTimeCell.className = "table-cell";
+        routeArrivalTimeCell.innerText = getFormattedTime(timeTable.arrivalTimeAsDate)
+        let routeDeparureTimeCell = document.createElement("span");
+        routeDeparureTimeCell.className = "table-cell";
+        routeDeparureTimeCell.innerText = getFormattedTime(timeTable.departureTimeAsDate);
         let routeStationCell = document.createElement("span");
         routeStationCell.className = "table-cell";
         console.log(timeTable)
         routeStationCell.innerText = timeTable.stationName;
-        newCellRow.append(routeDateCell, routeTimeCell, routeStationCell);
+        newCellRow.append(routeStationCell, routeArrivalTimeCell, routeDeparureTimeCell);
         routesTable.append(newCellRow);
     })
 }

@@ -5,6 +5,7 @@ import io.github.olgaak.dto.StationDto;
 import io.github.olgaak.dto.TrainDto;
 import io.github.olgaak.entity.*;
 import io.github.olgaak.exception.ActionNotAllowedException;
+import io.github.olgaak.service.MessageSender;
 import io.github.olgaak.service.api.RouteService;
 import io.github.olgaak.service.api.StationService;
 import io.github.olgaak.service.api.TimetableService;
@@ -34,6 +35,9 @@ public class AdminController {
     @Autowired
     public RouteService routeService;
 
+    @Autowired
+    public MessageSender messageSender;
+
 
     @GetMapping("")
     public String getAdminPage(ModelMap model) {
@@ -48,6 +52,7 @@ public class AdminController {
     @PostMapping("/add/train")
     public String addTrain(@ModelAttribute("train") Train train) {
         trainService.createNewTrain(train);
+        messageSender.sendMessage();//todo aop
         return "redirect:/admin";
     }
 

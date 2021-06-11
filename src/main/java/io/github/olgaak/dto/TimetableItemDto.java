@@ -1,6 +1,5 @@
 package io.github.olgaak.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
@@ -8,31 +7,23 @@ public class TimetableItemDto implements Comparable<TimetableItemDto> {
 
     private long id;
 
-    @JsonIgnore
-    private StationDto station;
-
     private long stationId;
 
     private String stationName;
 
-    private long trainId;
-
-    private int trainNumber;
-
     private String departureTime;
 
-    private String departureDate;
+    private String arrivalTime;
 
     private Date departureTimeAsDate;
 
-    private Date departureDateAsDate;
-
-    private Date fullDepartureDate;
+    private Date arrivalTimeAsDate;
 
     private String startTripStationName;
 
-
     private String endTripStationName;
+
+    private int order;
 
     public TimetableItemDto() {
     }
@@ -45,29 +36,13 @@ public class TimetableItemDto implements Comparable<TimetableItemDto> {
         this.id = id;
     }
 
-    public StationDto getStation() {
-        return station;
-    }
-
-    public void setStation(StationDto station) {
-        this.station = station;
-    }
-
     public String getDepartureTime() {
         return departureTime;
     }
 
     public void setDepartureTime(String departureTime) {
         this.departureTime = departureTime;
-    }
-
-    public String getDepartureDate() {
-        return departureDate;
-    }
-
-    public void setDepartureDate(String departureDate) {
-        this.departureDate = departureDate;
-    }
+    } // get data from request
 
     public Date getDepartureTimeAsDate() {
         return departureTimeAsDate;
@@ -77,42 +52,16 @@ public class TimetableItemDto implements Comparable<TimetableItemDto> {
         this.departureTimeAsDate = departureTimeAsDate;
     }
 
-    public Date getDepartureDateAsDate() {
-        return departureDateAsDate;
+    public void setArrivalTimeAsDate(Date arrivalTimeAsDate) {
+        this.arrivalTimeAsDate = arrivalTimeAsDate;
     }
 
-    public void setDepartureDateAsDate(Date departureDateAsDate) {
-        this.departureDateAsDate = departureDateAsDate;
+    public String getArrivalTime() {
+        return arrivalTime;
     }
 
-    public Date getFullDepartureDate() {
-        return fullDepartureDate;
-    }
-
-    public void setFullDepartureDate(Date fullDepartureDate) {
-        this.fullDepartureDate = fullDepartureDate;
-    }
-
-    public long getTrainId() {
-        return trainId;
-    }
-
-    public void setTrainId(long trainId) {
-        this.trainId = trainId;
-    }
-
-    //This method is sorting timetable by departure time
-    @Override
-    public int compareTo(TimetableItemDto tI) {
-        return (int) (fullDepartureDate.getTime() - (tI.getFullDepartureDate().getTime()));
-    }
-
-    public int getTrainNumber() {
-        return trainNumber;
-    }
-
-    public void setTrainNumber(int trainNumber) {
-        this.trainNumber = trainNumber;
+    public void setArrivalTime(String arrivalTime) { // get data from request
+        this.arrivalTime = arrivalTime;
     }
 
     public String getStartTripStationName() {
@@ -145,6 +94,23 @@ public class TimetableItemDto implements Comparable<TimetableItemDto> {
 
     public void setStationName(String stationName) {
         this.stationName = stationName;
+    }
+
+    public Date getArrivalTimeAsDate() {
+        return arrivalTimeAsDate;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    @Override
+    public int compareTo(TimetableItemDto o) {
+       return o.getOrder() - order;
     }
 }
 

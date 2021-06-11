@@ -88,12 +88,12 @@ public class RouteDaoImpl implements RouteDao {
         List<Route> routes = null;
         try {
             Query query = entityManager
-                    .createQuery("SELECT r FROM Route r JOIN TimetableItem t on r.id = t.route.id " +
-                            "JOIN TimetableItem t2 on r.id = t2.route.id " +
-                            "WHERE t2.departureDate = :departureDate " +
-                            "and t.departureDate = :departureDate " +
-                            "and t2.station.id = :arrivalStation and t.station.id = :departureStation " +
-                            "and (t2.departureDate>t.departureDate or t2.departureTime>t.departureTime) ", Route.class)
+                    .createQuery("SELECT r FROM Route r " +
+                            "JOIN RoutePlan rp on r.routePlan.id = rp.id " +
+                            "JOIN TimetableItem t on rp.id = t.routePlan.id " +
+                            "JOIN TimetableItem t2 on rp.id = t2.routePlan.id " +
+                            "WHERE r.departureDate = :departureDate " +
+                            "and t2.station.id = :arrivalStation and t.station.id = :departureStation ", Route.class)
                     .setParameter("departureDate", trainQuery.getDepartureDate())
                     .setParameter("arrivalStation", trainQuery.getArrivalStationId())
                     .setParameter("departureStation", trainQuery.getDepartureStationId());

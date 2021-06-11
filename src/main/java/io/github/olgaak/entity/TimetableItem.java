@@ -16,14 +16,15 @@ public class TimetableItem {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @Column(name = "departure_time", nullable = false)
+    @Column(name = "departure_time")
     private Date departureTime;
 
-    @Column(name = "departure_date")
-    private Date departureDate;
+    @Column(name = "arrival_time")
+    private Date arrivalTime;
 
-//    @Column(name = "arrival_time")
-//    private Date arrivalTime;
+    @Column(name = "order_num") // order items (order by departure time
+    // is complicated because if several days - date is needed, but date belongs to route entity )
+    private int order;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "station_id")
@@ -36,8 +37,8 @@ public class TimetableItem {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "route_id")
-    private Route route;
+    @JoinColumn(name = "routeplan_id")
+    private RoutePlan routePlan;
 
     public TimetableItem() {
     }
@@ -50,12 +51,12 @@ public class TimetableItem {
         this.id = Long.parseLong(id);
     }
 
-    public Route getRoute() {
-        return route;
+    public RoutePlan getRoutePlan() {
+        return routePlan;
     }
 
-    public void setRoute(Route route) {
-        this.route = route;
+    public void setRoutePlan(RoutePlan routePlan) {
+        this.routePlan = routePlan;
     }
 
     public long getId() {
@@ -74,21 +75,20 @@ public class TimetableItem {
         this.departureTime = departureTime;
     }
 
-    public void setDepartureDate(Date date) {
-        this.departureDate = date;
+    public Date getArrivalTime() {
+        return arrivalTime;
     }
 
-    public Date getFullDepartureDate() {
-        Date date = departureDate;
+    public void setArrivalTime(Date arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public Date getFullDepartureDate(Date date) {
         int minutes = departureTime.getMinutes();
         int hours = departureTime.getHours();
         date.setMinutes(minutes);
         date.setHours(hours);
         return date;
-    }
-
-    public Date getDepartureDate() {
-        return departureDate;
     }
 
     public Station getStation() {
@@ -107,4 +107,11 @@ public class TimetableItem {
         this.train = train;
     }
 
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
 }

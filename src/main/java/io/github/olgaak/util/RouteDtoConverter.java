@@ -3,6 +3,7 @@ package io.github.olgaak.util;
 import io.github.olgaak.dto.RouteDto;
 import io.github.olgaak.dto.TimetableItemDto;
 import io.github.olgaak.entity.Route;
+import io.github.olgaak.entity.RoutePlan;
 import io.github.olgaak.entity.TimetableItem;
 import io.github.olgaak.entity.Train;
 
@@ -10,23 +11,25 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class RouteDtoConverter {
 
     public static RouteDto convertRouteEntityToDto(Route route) {
         RouteDto routeDto = new RouteDto();
-        TimetableItem firstStop = getFirstStation(route);
-        TimetableItem lastStop = getLastStation(route);
+        TimetableItem firstStop = getFirstStation(route.getRoutePlan());
+        TimetableItem lastStop = getLastStation(route.getRoutePlan());
         routeDto.setStartTripStation(StationDtoConverter.convertStationEntityToDto(firstStop.getStation()));
-        routeDto.setStartTripTime(firstStop.getFullDepartureDate().toString());
+        routeDto.setStartTripTime(firstStop.getFullDepartureDate(route.getDepartureDate()).toString());
         routeDto.setEndTripStation(StationDtoConverter.convertStationEntityToDto(lastStop.getStation()));
-        routeDto.setEndTripTime(lastStop.getFullDepartureDate().toString());
-        routeDto.setStartTripTimeHours(DateTimeConverter.parseDateToString(firstStop.getFullDepartureDate(), "HH:mm"));
-        routeDto.setEndTripTimeHours(DateTimeConverter.parseDateToString(lastStop.getFullDepartureDate(), "HH:mm"));
+        routeDto.setEndTripTime(lastStop.getFullDepartureDate(route.getDepartureDate()).toString());
+        routeDto.setStartTripTimeHours(DateTimeConverter.parseDateToString(firstStop.getFullDepartureDate(route.getDepartureDate()), "HH:mm"));
+        routeDto.setEndTripTimeHours(DateTimeConverter.parseDateToString(lastStop.getFullDepartureDate(route.getDepartureDate()), "HH:mm"));
         routeDto.setId(route.getId());
         routeDto.setTrainId(route.getTrain().getId());
-        long duration = getDurationMilli(lastStop, firstStop);
+        long duration = getDurationMilli(route, lastStop);
         routeDto.setTripDurationMilli(duration);
         routeDto.setTripDuration(getDuration(duration));
         routeDto.setSeats(route
@@ -36,6 +39,7 @@ public class RouteDtoConverter {
                         .convertSeatEntityToDto(seat, routeDto)) //2nd parameter to avoid circular calls
                 .collect(Collectors.toList()));
         List<TimetableItemDto> timetableItemDtoList = route
+                .getRoutePlan()
                 .getTimetableItems()
                 .stream()
                 .map(timetableItem ->
@@ -53,22 +57,28 @@ public class RouteDtoConverter {
         return routeDto;
     }
 
-    public static TimetableItem getFirstStation(Route route) {
-        return route.getTimetableItems().stream()
+    public static TimetableItem getFirstStation(RoutePlan routePlan) {
+        return routePlan.getTimetableItems().stream()
                 .min(Comparator.comparing(
-                        timetableItem -> timetableItem.getFullDepartureDate()))
+                        timetableItem -> timetableItem.getOrder()))
                 .get();
     }
 
-    public static TimetableItem getLastStation(Route route) {
-        return route.getTimetableItems().stream()
+    public static TimetableItem getLastStation(RoutePlan routePlan) {
+        return routePlan.getTimetableItems().stream()
                 .max(Comparator.comparing(
-                        timetableItem -> timetableItem.getFullDepartureDate()))
+                        timetableItem -> timetableItem.getOrder()))
                 .get();
     }
 
-    private static long getDurationMilli(TimetableItem lastStop, TimetableItem firstStop) {
-        return lastStop.getFullDepartureDate().getTime() - firstStop.getFullDepartureDate().getTime();
+    private static long getDurationMilli(Route route, TimetableItem lastStop) {
+        AtomicLong duration = new AtomicLong();
+        route.getRoutePlan().getTimetableItems().stream().forEach(item -> {
+            if (item.getId() != lastStop.getId()) duration.addAndGet(item.getDepartureTime().getTime());
+            else duration.addAndGet(item.getArrivalTime().getTime());
+        });
+
+        return duration.longValue();
     }
 
     private static String getDuration(long duration) {
@@ -82,16 +92,11 @@ public class RouteDtoConverter {
         Route route = new Route();
         route.setId(routeDto.getId());
         route.setTrain(new Train(routeDto.getTrainId()));
-        List<TimetableItem> timetableItems;
-        timetableItems = routeDto.getTimetableItems()
-                .stream()
-                .map(timetableItemDto -> {
-                    timetableItemDto.setTrainId(routeDto.getTrainId());
-                    return TimetableDtoConverter.convertTimetableItemDtoToEntity(timetableItemDto, route);
-                })
+        List<TimetableItem> timetableItems =
+        IntStream.range(0, routeDto.getTimetableItems().size())
+                .mapToObj(i -> TimetableDtoConverter.convertTimetableItemDtoToEntity(routeDto.getTimetableItems().get(i), route, i))
                 .collect(Collectors.toList());
-        ;
-        route.setTimetableItems(new HashSet<>(timetableItems));
+        route.getRoutePlan().setTimetableItems(new HashSet<>(timetableItems));
         return route;
     }
 }

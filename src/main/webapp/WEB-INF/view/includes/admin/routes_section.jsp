@@ -27,9 +27,9 @@
     <div class="routes-table">
         <h3>Routes</h3>
         <div style="display: none" class="table-row table-header table-columns-3" id="routes-table-header">
-            <div class="table-cell">Date</div>
-            <div class="table-cell">Time</div>
             <div class="table-cell">Station</div>
+            <div class="table-cell">Arrival Time</div>
+            <div class="table-cell">Departure Time</div>
         </div>
         <div id="routes-table-content" >
 

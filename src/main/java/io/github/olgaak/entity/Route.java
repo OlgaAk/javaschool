@@ -1,6 +1,7 @@
 package io.github.olgaak.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,12 +15,15 @@ public class Route {
     private long id;
 
     @ManyToOne
+    @JoinColumn(name = "routeplan_id")
+    private RoutePlan routePlan;
+
+    @Column(name = "date", nullable = false)
+    private Date departureDate;
+
+    @ManyToOne
     @JoinColumn(name = "train_id")
     private Train train;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "route_id")
-    private Set<TimetableItem> timetableItems = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "route_station",
@@ -37,6 +41,14 @@ public class Route {
     private Set<Seat> seats = new HashSet<>();
 
     public Route() {
+    }
+
+    public RoutePlan getRoutePlan() {
+        return routePlan;
+    }
+
+    public void setRoutePlan(RoutePlan routePlan) {
+        this.routePlan = routePlan;
     }
 
     public Route(long id) {
@@ -57,14 +69,6 @@ public class Route {
 
     public void setTrain(Train train) {
         this.train = train;
-    }
-
-    public Set<TimetableItem> getTimetableItems() {
-        return timetableItems;
-    }
-
-    public void setTimetableItems(Set<TimetableItem> timetableItems) {
-        this.timetableItems = timetableItems;
     }
 
     public Set<Station> getStations() {
@@ -89,5 +93,13 @@ public class Route {
 
     public void setSeats(Set<Seat> seats) {
         this.seats = seats;
+    }
+
+    public Date getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
     }
 }

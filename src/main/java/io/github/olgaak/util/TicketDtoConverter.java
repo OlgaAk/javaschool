@@ -47,6 +47,7 @@ public class TicketDtoConverter {
     public static Date getTicketDepartureDate(Ticket ticket, long id) {
         List<TimetableItem> timetableItemList = ticket
                 .getRoute()
+                .getRoutePlan()
                 .getTimetableItems()
                 .stream()
                 .filter(timetableItem ->
@@ -56,7 +57,7 @@ public class TicketDtoConverter {
             throw new IllegalStateException("Expected exactly one timetableItem but got " + timetableItemList);
         }
         TimetableItem timetableItem = timetableItemList.get(0);
-        return timetableItem.getFullDepartureDate();
+        return timetableItem.getFullDepartureDate(ticket.getRoute().getDepartureDate());
     }
 
     // Used by conversion of Route to RouteDto
