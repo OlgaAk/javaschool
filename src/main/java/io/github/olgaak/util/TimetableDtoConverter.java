@@ -2,6 +2,7 @@ package io.github.olgaak.util;
 
 import io.github.olgaak.dto.TimetableItemDto;
 import io.github.olgaak.entity.Route;
+import io.github.olgaak.entity.RoutePlan;
 import io.github.olgaak.entity.Station;
 import io.github.olgaak.entity.TimetableItem;
 
@@ -19,8 +20,8 @@ public class TimetableDtoConverter {
         timetableItemDto.setArrivalTimeAsDate(timetableItem.getArrivalTime());
         timetableItemDto.setStationId(timetableItem.getStation().getId());
         timetableItemDto.setStationName(timetableItem.getStation().getName());
-        timetableItemDto.setStartTripStationName(RouteDtoConverter.getFirstStation(timetableItem.getRoutePlan()).getStation().getName());
-        timetableItemDto.setEndTripStationName(RouteDtoConverter.getLastStation(timetableItem.getRoutePlan()).getStation().getName());
+        timetableItemDto.setStartTripStationName(RoutePlanDtoConverter.getFirstStation(timetableItem.getRoutePlan()).getStation().getName());
+        timetableItemDto.setEndTripStationName(RoutePlanDtoConverter.getLastStation(timetableItem.getRoutePlan()).getStation().getName());
         timetableItemDto.setId(timetableItem.getId());
         timetableItemDto.setStationId(timetableItem.getStation().getId());
         timetableItemDto.setStationName(timetableItem.getStation().getName());
@@ -29,10 +30,10 @@ public class TimetableDtoConverter {
     }
 
 
-    public static TimetableItem convertTimetableItemDtoToEntity(TimetableItemDto timetableItemDto, Route route, int order) {
+    public static TimetableItem convertTimetableItemDtoToEntity(TimetableItemDto timetableItemDto, RoutePlan routePlan, int order) {
         TimetableItem timetableItem = new TimetableItem();
         timetableItem.setId(timetableItemDto.getId());
-        timetableItem.setRoutePlan(route.getRoutePlan());
+        timetableItem.setRoutePlan(routePlan);
         timetableItem.setOrder(order);
         timetableItem.setDepartureTime(parseTimeString(timetableItemDto.getDepartureTime()));
         timetableItem.setArrivalTime(parseDateString(timetableItemDto.getArrivalTime()));

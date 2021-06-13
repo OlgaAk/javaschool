@@ -21,6 +21,11 @@ public class RoutePlan {
     @JoinColumn(name = "routeplan_id")
     private Set<Route> routes = new HashSet<>();
 
+    @OneToOne
+    @JoinColumn(name = "train_id", referencedColumnName = "id")
+    private Train train;
+
+
     public RoutePlan() {
     }
 
@@ -44,5 +49,19 @@ public class RoutePlan {
         this.timetableItems = timetableItems;
     }
 
+    public Set<Route> getRoutes() {
+        return routes;
+    }
 
+    public void setRoutes(Set<Route> routes) {
+        this.routes = routes;
+    }
+
+    public Train getTrain() {
+        return train;
+    }
+
+    public void setTrain(Train train) {
+        this.train = train;
+    }
 }

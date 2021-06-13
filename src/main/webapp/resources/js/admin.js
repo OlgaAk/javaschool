@@ -35,19 +35,19 @@ function openRouteEditPopUp(route) {
 function addRouteEditContent(route, routeEditTable) {
     route.timetableItems.forEach((timeTable, index) => {
         let clone = document.getElementById("routes_stations_div").cloneNode(true);
-        let select = clone.children[0];
-        select.name = "timetableItems[" + index + "].station";
+        let select = clone.children[1].children[0];
+        select.name = "routePlan.timetableItems[" + index + "].stationId";
         console.log(timeTable)
         select.value = timeTable.stationId;
-        let dateinput = clone.children[1].children[0];
-        dateinput.name = "timetableItems[" + index + "].departureDate";
-        dateinput.value = getFormattedDateYYYYMMDD(timeTable.fullDepartureDate);
         let timeinput = clone.children[2].children[0];
-        timeinput.name = "timetableItems[" + index + "].departureTime";
-        timeinput.value = getFormattedTime(timeTable.departureTimeAsDate);
+        timeinput.name = "routePlan.timetableItems[" + index + "].arrivalTime";
+        timeinput.value = getFormattedTime(timeTable.arrivalTimeAsDate);
+        let timeinput2 = clone.children[3].children[0];
+        timeinput2.name = "routePlan.timetableItems[" + index + "].departureTime";
+        timeinput2.value = getFormattedTime(timeTable.departureTimeAsDate);
         let inputForId = document.createElement("input");
         inputForId.type = "hidden";
-        inputForId.name = "timetableItems[" + index + "].id";
+        inputForId.name = "routePlan.timetableItems[" + index + "].id";
         inputForId.value = timeTable.id;
         clone.appendChild(inputForId);
         clone.id = ""
@@ -195,16 +195,19 @@ function getFormattedTime(time) {
     return new Date(time).toLocaleTimeString().substring(0, 5);
 }
 
-function addNewSelect(containerName) {
-    let container = document.getElementById(containerName);
-    let clone = document.getElementById("routes_stations_div").cloneNode(true);
-    let nextSelectIndex = container.children.length-1; // button excluded
-    let select = clone.children[0]
-    select.name = "timetableItems[" + nextSelectIndex + "].station";
-    let dateinput = clone.children[1].children[0];
-    dateinput.name = "timetableItems[" + nextSelectIndex + "].departureDate";
-    let timeinput = clone.children[2].children[0];
-    timeinput.name = "timetableItems[" + nextSelectIndex + "].departureTime";
+function addNewSelect() {
+    let container = document.getElementById("routes_stations_div");
+    let clone = document.querySelector(".routes_stations_div_item").cloneNode(true);
+    let nextSelectIndex = container.children.length; // button excluded
+    console.log(nextSelectIndex)
+    let select = clone.children[1].children[0]  // first child is an icon x
+    select.name = "routePlan.timetableItems[" + nextSelectIndex + "].stationId";
+    let timeinputArrival = clone.children[2].children[0]; //input is inside label
+    timeinputArrival.name = "routePlan.timetableItems[" + nextSelectIndex + "].arrivalTime";
+    timeinputArrival.value = null;
+    let timeinputDeparture = clone.children[3].children[0];
+    timeinputDeparture.name = "routePlan.timetableItems[" + nextSelectIndex + "].departureTime";
+    timeinputDeparture.value = null;
     container.appendChild(clone);
 }
 
@@ -238,7 +241,7 @@ async function fetchStation(id) {
 setOnclickListenerOnAdminMenuItems()
 
 function openTrainsSection(event) {
-    document.querySelectorAll(".admin_menu_item span").forEach(span=>{
+    document.querySelectorAll(".admin_menu_item span").forEach(span => {
         span.classList.remove("active")
     })
     event.target.classList.add("active");
@@ -247,7 +250,7 @@ function openTrainsSection(event) {
 }
 
 function openStationsSection(event) {
-    document.querySelectorAll(".admin_menu_item span").forEach(span=>{
+    document.querySelectorAll(".admin_menu_item span").forEach(span => {
         span.classList.remove("active")
     })
     event.target.classList.add("active");
@@ -256,9 +259,36 @@ function openStationsSection(event) {
 }
 
 function setOnclickListenerOnAdminMenuItems() {
-    document.getElementById("admin_menu_item_trains").addEventListener("click", (event)=> openTrainsSection(event))
-    document.getElementById("admin_menu_item_stations").addEventListener("click", (event)=>openStationsSection(event))
+    document.getElementById("admin_menu_item_trains").addEventListener("click", (event) => openTrainsSection(event))
+    document.getElementById("admin_menu_item_stations").addEventListener("click", (event) => openStationsSection(event))
 }
+
+
+function showCreateTrainPopUp() {
+    document.getElementById("train-create-popup-container").classList.remove("hidden");
+}
+
+function fixInputNames(htmlElement) {
+    console.log(htmlElement)
+    for (let index = 0; index < htmlElement.children.length; index++) {
+        let div = htmlElement.children[index];
+        console.log(div)
+        div.children[1].children[0].name = "routePlan.timetableItems[" + index + "].stationId";
+        div.children[2].children[0].name = "routePlan.timetableItems[" + index + "].arrivalTime";
+        div.children[3].children[0].name = "routePlan.timetableItems[" + index + "].departureTime";
+    }
+}
+
+function removeParent(e) {
+    let parent = e.parentElement;
+    if (document.getElementsByClassName(parent.className).length > 1) {
+        let container = parent.parentElement
+        parent.remove();
+        fixInputNames(container);
+    }
+}
+
+
 
 
 

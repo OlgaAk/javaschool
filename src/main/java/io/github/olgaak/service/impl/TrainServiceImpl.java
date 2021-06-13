@@ -2,12 +2,15 @@ package io.github.olgaak.service.impl;
 
 import io.github.olgaak.dao.api.TrainDao;
 import io.github.olgaak.dto.RouteDto;
+import io.github.olgaak.dto.RoutePlanDto;
 import io.github.olgaak.dto.StationDto;
 import io.github.olgaak.dto.TrainDto;
 import io.github.olgaak.entity.Route;
+import io.github.olgaak.entity.RoutePlan;
 import io.github.olgaak.entity.Train;
 import io.github.olgaak.service.api.TrainService;
 import io.github.olgaak.util.RouteDtoConverter;
+import io.github.olgaak.util.RoutePlanDtoConverter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +28,7 @@ public class TrainServiceImpl implements TrainService {
     ModelMapper modelMapper;
 
     @Autowired
-    public TrainServiceImpl(TrainDao trainDao){
+    public TrainServiceImpl(TrainDao trainDao) {
         this.trainDao = trainDao;
     }
 
@@ -36,21 +39,18 @@ public class TrainServiceImpl implements TrainService {
 
     public List<TrainDto> getAllTrains() {
         List<Train> trains = trainDao.getAllTrains();
-        return trains.stream().map(train-> {
+        return trains.stream().map(train -> {
             TrainDto trainDto = modelMapper.map(train, TrainDto.class);
             List<String> stations = new ArrayList<>();
-            for(Route route : train.getRoutes()){
-                RouteDto routeDto = RouteDtoConverter.convertRouteEntityToDto(route);
-                stations.add(routeDto.getStartTripStation().getName());
-                stations.add(routeDto.getEndTripStation().getName());
-            }
+            RoutePlanDto routePlanDto = RoutePlanDtoConverter.convertRoutePlanEntityToDto(train.getRoutePlan());
+            stations.add(routePlanDto.getStartTripStation().getName());
+            stations.add(routePlanDto.getEndTripStation().getName());
             trainDto.setStations(stations);
             return trainDto;
         }).collect(Collectors.toList());
-
     }
 
-    public TrainDto getTrainById(long id){
+    public TrainDto getTrainById(long id) {
         Train train = trainDao.getTrainById(id);
         return modelMapper.map(train, TrainDto.class);
     }

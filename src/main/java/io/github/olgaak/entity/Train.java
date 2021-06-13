@@ -28,6 +28,10 @@ public class Train implements Serializable {
     )
     private Set<Station> stations;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "routeplan_id", referencedColumnName = "id")
+    private RoutePlan routePlan;
+
     @OneToMany(mappedBy = "train", fetch = FetchType.EAGER)
     private Set<Route> routes;
 
@@ -83,4 +87,11 @@ public class Train implements Serializable {
         this.routes = routes;
     }
 
+    public RoutePlan getRoutePlan() {
+        return routePlan;
+    }
+
+    public void setRoutePlan(RoutePlan routePlan) {
+        this.routePlan = routePlan;
+    }
 }

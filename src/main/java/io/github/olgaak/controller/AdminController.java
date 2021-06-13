@@ -50,9 +50,9 @@ public class AdminController {
     }
 
     @PostMapping("/add/train")
-    public String addTrain(@ModelAttribute("train") Train train) {
-        trainService.createNewTrain(train);
-        messageSender.sendMessage();//todo aop
+    public String addTrain(@ModelAttribute("train") TrainDto train) {
+//        trainService.createNewTrain(train);
+//        messageSender.sendMessage();//todo aop
         return "redirect:/admin";
     }
 
@@ -112,14 +112,14 @@ public class AdminController {
 
     @GetMapping("/routes/{trainId}")
     @ResponseBody
-    public List<RouteDto> getTrainRoutes(@PathVariable("trainId") Long trainId, ModelMap model) {
+    public List<RouteDto> getTrainRoutes(@PathVariable("trainId") Long trainId) {
         List<RouteDto> routes = routeService.getTrainRoutes(trainId);
         return routes;
     }
 
     @GetMapping("/station/{stationId}")
     @ResponseBody
-    public StationDto getTrainRoutes(@PathVariable("stationId") long stationId, ModelMap model) {
+    public StationDto getTrainRoutes(@PathVariable("stationId") long stationId) {
         StationDto station = stationService.getStationById(stationId);
         return station;
     }

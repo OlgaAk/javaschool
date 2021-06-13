@@ -1,6 +1,8 @@
 package io.github.olgaak.dto;
 
 
+import io.github.olgaak.entity.RoutePlan;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,12 +17,22 @@ public class TrainDto {
 
     private List<String> stationsUnique = new ArrayList<>();
 
+    private RoutePlanDto routePlan;
+
     public TrainDto() {
     }
 
     public TrainDto(int number, int seat_count) {
         this.number = number;
         this.seatCount = seat_count;
+    }
+
+    public RoutePlanDto getRoutePlan() {
+        return routePlan;
+    }
+
+    public void setRoutePlan(RoutePlanDto routePlan) {
+        this.routePlan = routePlan;
     }
 
     public long getId() {

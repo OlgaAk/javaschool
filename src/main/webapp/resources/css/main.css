@@ -367,16 +367,21 @@ a {
     left: 0;
     position: absolute;
     background-color: rgba(22, 22, 22, 0.5);
+    overflow: auto;
+}
+
+.add-circle{
+    color: gray;
 }
 
 .edit-popup {
     min-height: 90px;
-    max-width: 300px;
+    max-width: 400px;
     position: relative;
     margin: 0 auto;
-    top: 25%;
+    top: 15%;
     background-color: white;
-    padding: 20px;
+    padding: 60px 40px;
     border-radius: 10px;
 }
 
@@ -450,3 +455,15 @@ a {
     letter-spacing:-1px;
 }
 
+.float-right{
+    float: right;
+}
+
+.input-row{
+    margin-bottom: 20px;
+}
+
+
+.bold{
+    font-weight: bold;
+}

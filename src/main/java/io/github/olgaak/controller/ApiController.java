@@ -1,6 +1,9 @@
 package io.github.olgaak.controller;
 
 import io.github.olgaak.dto.RouteDto;
+import io.github.olgaak.dto.StationDto;
+import io.github.olgaak.service.api.StationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +20,15 @@ import java.util.Random;
 @RequestMapping("/api")
 public class ApiController {
 
-    @GetMapping("/station/{stationId}/{date}")
+    @Autowired
+    private StationService stationService;
+
+    @GetMapping("/station/{stationId}")
     @ResponseBody
-    public List<String> getStationTimetable(@PathVariable("stationId") long stationId, @PathVariable("date") String date) {
-        Random random = new Random();
-        return Arrays.asList("foo"+random.nextInt(), "bar"+random.nextInt());
-    }
+    public StationDto getStationTimetable(@PathVariable("stationId") long stationId) {
+        StationDto station = stationService.getStationById(stationId);
+        return station;
+ }
 
 }
 

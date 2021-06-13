@@ -11,13 +11,13 @@ public class StationDtoConverter {
         StationDto stationDto = new StationDto();
         stationDto.setId(station.getId());
         stationDto.setName(station.getName());
-//        stationDto.setTimetableItems(station
-//                .getTimetableItems()
-//                .stream()
-//                .map(item -> TimetableDtoConverter
-//                        .convertTimetableItemEntityToDto(item, stationDto))
-//                .sorted()
-//                .collect(Collectors.toList()));
+        stationDto.setTimetableItems(station
+                .getTimetableItems()
+                .stream()
+                .map(item -> TimetableDtoConverter
+                        .convertTimetableItemEntityToDto(item))
+                .sorted()
+                .collect(Collectors.toList()));
         return stationDto;
     }
 

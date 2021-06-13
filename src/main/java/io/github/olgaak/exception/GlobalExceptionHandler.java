@@ -1,5 +1,8 @@
 package io.github.olgaak.exception;
 
+import io.github.olgaak.aspect.LogAspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +20,12 @@ import java.util.List;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    private static final Logger logger
+            = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     @ExceptionHandler({PassengerAlreadyExistsOnTrainException.class})
     public final ResponseEntity<Object> handleException(Exception ex, WebRequest request) {
+        logger.warn(ex.getMessage());
         HttpHeaders headers = new HttpHeaders();
 
         if (ex instanceof PassengerAlreadyExistsOnTrainException) {
@@ -33,12 +40,14 @@ public class GlobalExceptionHandler {
     }
 
     protected ResponseEntity<Object> handlePassengerAlreadyExistsOnTrainException(PassengerAlreadyExistsOnTrainException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        logger.warn(ex.getMessage());
         List<String> errors = Collections.singletonList(ex.getMessage());
         return handleExceptionInternal(ex, errors, headers, status, request);
     }
 
 
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
+       logger.warn(ex.getMessage());
         if (HttpStatus.INTERNAL_SERVER_ERROR.equals(status)) {
             request.setAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE, ex, WebRequest.SCOPE_REQUEST);
         }
@@ -46,10 +55,28 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NestedServletException.class)
-    public String handleServerSideError(HttpServletRequest request, Exception e) { return "500";}
+    public String handleServerSideError(HttpServletRequest request, Exception e) {
+        logger.warn(e.getMessage());
+        return "500";
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public String handleRuntimeException(HttpServletRequest request, Exception e) {
+        logger.error(e.getLocalizedMessage());
+        logger.error(e.getCause().getLocalizedMessage());
+        logger.error(e.getClass().getName());
+        return "500";
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    public String handleNullPointer(HttpServletRequest request, Exception e) {
+        logger.error(e.getMessage(), e.getCause());
+        return "500";
+    }
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public String handleError404(HttpServletRequest request, Exception e) {
+        logger.warn(e.getMessage());
         return "404";
     }
 }

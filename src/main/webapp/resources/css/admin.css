@@ -61,7 +61,7 @@
 
 
 .main-subsection {
-    min-width: 550px;
+    min-width: 680px;
     background-color: #f3f2f2;
     padding: 20px;
 }
@@ -105,6 +105,64 @@
     margin: 8px;
 }
 
+.routes_stations_div_item{
+    display: grid;
+    grid-template-columns: 15px 1fr 1fr 1fr;
+    grid-row-gap: 10px;
+    margin: 10px 0;
+}
+
+.routes_stations_div_item span{
+    font-size: 14px;
+    vertical-align: middle;
+    align-self: end;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    color: #a52b2b;
+}
+
+.timetable-input{
+    width: 100px;
+    height: 24px;
+}
+
+.route-day-of-week{
+    text-align: center;
+    font-size: 12px;
+}
+#route-days-of-week{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+.routes_stations_div_item label{
+    color: #a7a1a1;
+    font-size: 14px;
+}
+
+.train-input-info label{
+    width: 150px;
+    display: block;
+}
+
+.train-input-info{
+    display: flex;
+}
+
+.timetable-input-left{
+    position: relative;
+}
+
+.timetable-input-left::after{
+    content: "\e14c";;
+    font-family: "Material Icons";
+    display: block;
+    position: absolute;
+    left: 55px;
+    font-size: 12px;
+    color: var(--main-color);
+    bottom: 0;
+}
 
 
 
