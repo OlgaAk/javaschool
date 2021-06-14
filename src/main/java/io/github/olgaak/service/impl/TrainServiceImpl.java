@@ -8,6 +8,7 @@ import io.github.olgaak.dto.TrainDto;
 import io.github.olgaak.entity.Route;
 import io.github.olgaak.entity.RoutePlan;
 import io.github.olgaak.entity.Train;
+import io.github.olgaak.service.api.RouteService;
 import io.github.olgaak.service.api.TrainService;
 import io.github.olgaak.util.RouteDtoConverter;
 import io.github.olgaak.util.RoutePlanDtoConverter;
@@ -26,6 +27,9 @@ public class TrainServiceImpl implements TrainService {
     private TrainDao trainDao;
 
     @Autowired
+    public RouteService routeService;
+
+    @Autowired
     ModelMapper modelMapper;
 
     @Autowired
@@ -35,7 +39,8 @@ public class TrainServiceImpl implements TrainService {
 
     public void createNewTrain(TrainDto trainDto) {
         Train train = TrainDtoConverter.convertTrainDtoToEntity(trainDto);
-        trainDao.createNewTrain(train);
+        Train savedTrain = trainDao.createNewTrain(train);
+        routeService.createNewRoute(savedTrain);
     }
 
     public List<TrainDto> getAllTrains() {

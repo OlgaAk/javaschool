@@ -17,7 +17,7 @@ public class TrainDaoImpl implements TrainDao {
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
-    public void createNewTrain(Train train) {
+    public Train createNewTrain(Train train) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
         try {
@@ -32,6 +32,7 @@ public class TrainDaoImpl implements TrainDao {
             ex.printStackTrace();
         } finally {
             entityManager.close();
+            return train;
         }
     }
 

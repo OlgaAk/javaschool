@@ -1,5 +1,8 @@
 package io.github.olgaak.dto;
 
+import io.github.olgaak.util.DateTimeConverter;
+
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +23,8 @@ public class RouteDto {
     private List<SeatDto> seats;
 
     List<TicketDto> tickets;
+
+    private Date departureDate;
 
     public RouteDto() {
     }
@@ -75,5 +80,33 @@ public class RouteDto {
 
     public void setTickets(List<TicketDto> tickets) {
         this.tickets = tickets;
+    }
+
+    public RoutePlanDto getRoutePlan() {
+        return routePlan;
+    }
+
+    public void setRoutePlan(RoutePlanDto routePlan) {
+        this.routePlan = routePlan;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
+    }
+
+    public Date getDepartureDate() {
+        return departureDate;
+    }
+
+    public String getFormattedDepartureDate(){
+        return DateTimeConverter.parseDateToString(departureDate, "dd.MM.yyyy");
+    }
+
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
     }
 }

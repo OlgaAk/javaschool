@@ -31,6 +31,8 @@ public class RoutePlanDto {
 
     List<TimetableItemDto> timetableItems;
 
+    List<RouteDto> routes;
+
     public List<String> getDaysOfWeekNames() {
         return Arrays.asList("Monday", "Tuesday","Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
     }
@@ -146,5 +148,13 @@ public class RoutePlanDto {
 
     public void setWeekdays(List<Integer> weekdays) {
         this.weekdays = weekdays;
+    }
+
+    public List<RouteDto> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(List<RouteDto> routes) {
+        this.routes = routes;
     }
 }

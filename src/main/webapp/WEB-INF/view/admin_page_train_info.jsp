@@ -24,18 +24,19 @@
                         </button>
                         <h2>Train number ${train.number}</h2>
                         <span>Total seat count ${train.seatCount}</span>
+                        <h3>Schedule</h3>
+                        <span>Days:
+                        <c:forEach var="dayIndex" items="${train.routePlan.weekdays}">
+                            ${train.routePlan.daysOfWeekNames[dayIndex].substring(0,2)}
+                        </c:forEach>
+                    </span>
                     </div>
                     <div>
                         <%@include file="includes/common/calender.jsp" %>
                     </div>
                 </div>
                 <div class="train-table ">
-                    <h3>Schedule</h3>
-                    <span>Days:
-                        <c:forEach var="dayIndex" items="${train.routePlan.weekdays}">
-                            ${train.routePlan.daysOfWeekNames[dayIndex].substring(0,2)}
-                        </c:forEach>
-                    </span>
+
                     <div class="table-row table-header table-columns-3">
                         <div class="table-cell">Station</div>
                         <div class="table-cell">Arrival time</div>
@@ -51,8 +52,26 @@
 
                 </div>
             </div>
+            <div class="train-table ">
+                <h2>Trains</h2>
+                <div class="table-row table-header table-columns-3">
+                    <div class="table-cell">Date</div>
+                    <div class="table-cell">Tickets sold</div>
+                </div>
+                <c:forEach var="route" items="${train.routePlan.routes}">
+                    <div class="table-row table-columns-3">
+                        <span class="table-cell">${route.formattedDepartureDate}</span>
+                        <span class="table-cell">${route.tickets.size()}</span>
+                        <span class="table-cell"><a href="/admin/delete/route/${route.id}" class="icon">
+                            <span class="material-icons md-18">delete</span>
+                        </a></span>
+                    </div>
+                </c:forEach>
+            </div>
+
         </div>
     </div>
+</div>
 </div>
 
 

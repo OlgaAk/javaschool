@@ -3,6 +3,7 @@ package io.github.olgaak.service.api;
 import io.github.olgaak.dto.RouteDto;
 import io.github.olgaak.dto.TrainQueryDto;
 import io.github.olgaak.entity.Route;
+import io.github.olgaak.entity.Train;
 import io.github.olgaak.exception.ActionNotAllowedException;
 
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.List;
 public interface RouteService {
 
     Route createNewRoute(RouteDto timetableItem);
+
+    void createNewRoute(Train train);
 
     List<Route> getAllRoutes();
 

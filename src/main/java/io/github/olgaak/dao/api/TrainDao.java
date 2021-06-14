@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TrainDao {
 
-    void createNewTrain(Train train);
+    Train createNewTrain(Train train);
 
     List<Train> getAllTrains();
 

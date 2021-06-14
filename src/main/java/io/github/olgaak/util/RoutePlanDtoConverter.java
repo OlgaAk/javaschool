@@ -40,8 +40,9 @@ public class RoutePlanDtoConverter {
                 .sorted()
                 .collect(Collectors.toList());
         routePlanDto.setTimetableItems(timetableItemDtoList);
-        List<Integer> weekdays = routePlan.getWeekdays().stream().map(weekday -> weekday.ordinal()).collect(Collectors.toList());
+        List<Integer> weekdays = routePlan.getWeekdays().stream().distinct().map(weekday -> weekday.ordinal()).collect(Collectors.toList());
         routePlanDto.setWeekdays(weekdays);
+        routePlanDto.setRoutes(routePlan.getRoutes().stream().map(route -> RouteDtoConverter.convertRouteEntityToDto(route)).collect(Collectors.toList()));
        return routePlanDto;
     }
 
