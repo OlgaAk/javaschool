@@ -36,7 +36,7 @@ public class TimetableDtoConverter {
         timetableItem.setRoutePlan(routePlan);
         timetableItem.setOrder(order);
         timetableItem.setDepartureTime(parseTimeString(timetableItemDto.getDepartureTime()));
-        timetableItem.setArrivalTime(parseDateString(timetableItemDto.getArrivalTime()));
+        timetableItem.setArrivalTime(parseTimeString(timetableItemDto.getArrivalTime()));
         timetableItem.setStation(new Station(timetableItemDto.getStationId()));
         return timetableItem;
     }
@@ -44,10 +44,12 @@ public class TimetableDtoConverter {
     public static Date parseTimeString(String time) {
         DateFormat format = new SimpleDateFormat("HH:mm");
         Date date = null;
-        try {
-            date = format.parse(time);
-        } catch (ParseException e) {
-            e.printStackTrace();
+        if(!time.isEmpty()){
+            try {
+                date = format.parse(time);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         return date;
     }

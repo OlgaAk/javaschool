@@ -28,7 +28,7 @@ public class Train implements Serializable {
     )
     private Set<Station> stations;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "routeplan_id", referencedColumnName = "id")
     private RoutePlan routePlan;
 

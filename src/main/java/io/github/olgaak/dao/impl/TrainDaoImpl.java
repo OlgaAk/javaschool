@@ -1,6 +1,7 @@
 package io.github.olgaak.dao.impl;
 
 import io.github.olgaak.dao.api.TrainDao;
+import io.github.olgaak.dto.TrainDto;
 import io.github.olgaak.entity.Train;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

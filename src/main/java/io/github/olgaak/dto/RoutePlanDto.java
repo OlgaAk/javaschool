@@ -1,5 +1,6 @@
 package io.github.olgaak.dto;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class RoutePlanDto {
@@ -29,6 +30,10 @@ public class RoutePlanDto {
     private TrainDto train;
 
     List<TimetableItemDto> timetableItems;
+
+    public List<String> getDaysOfWeekNames() {
+        return Arrays.asList("Monday", "Tuesday","Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+    }
 
     public RoutePlanDto() {
     }

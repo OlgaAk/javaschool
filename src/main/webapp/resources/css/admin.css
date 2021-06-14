@@ -34,6 +34,7 @@
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid gray;
+    height: 30px;
     /*border-left: 1px solid gray;*/
 }
 
@@ -164,6 +165,10 @@
     bottom: 0;
 }
 
+#train-info-header{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
 
 
 

@@ -38,7 +38,6 @@ public class RouteServiceImpl implements RouteService {
         Route route = RouteDtoConverter.convertRouteDtoToEntity(routeDto);
         Set<Station> stations = new HashSet<>();
         for (TimetableItem timetable : route.getRoutePlan().getTimetableItems()) {
-            timetable.setTrain(route.getTrain());
             stations.add(timetable.getStation());
         }
         route.setStations(stations);

@@ -1,5 +1,6 @@
 package io.github.olgaak.dao.api;
 
+import io.github.olgaak.dto.TrainDto;
 import io.github.olgaak.entity.Train;
 
 import java.util.List;

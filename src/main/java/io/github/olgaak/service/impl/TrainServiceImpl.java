@@ -11,6 +11,7 @@ import io.github.olgaak.entity.Train;
 import io.github.olgaak.service.api.TrainService;
 import io.github.olgaak.util.RouteDtoConverter;
 import io.github.olgaak.util.RoutePlanDtoConverter;
+import io.github.olgaak.util.TrainDtoConverter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,15 +33,15 @@ public class TrainServiceImpl implements TrainService {
         this.trainDao = trainDao;
     }
 
-    public Train createNewTrain(Train train) {
+    public void createNewTrain(TrainDto trainDto) {
+        Train train = TrainDtoConverter.convertTrainDtoToEntity(trainDto);
         trainDao.createNewTrain(train);
-        return null;
     }
 
     public List<TrainDto> getAllTrains() {
         List<Train> trains = trainDao.getAllTrains();
         return trains.stream().map(train -> {
-            TrainDto trainDto = modelMapper.map(train, TrainDto.class);
+            TrainDto trainDto = TrainDtoConverter.convertTrainEntityToDto(train);
             List<String> stations = new ArrayList<>();
             RoutePlanDto routePlanDto = RoutePlanDtoConverter.convertRoutePlanEntityToDto(train.getRoutePlan());
             stations.add(routePlanDto.getStartTripStation().getName());
@@ -52,7 +53,7 @@ public class TrainServiceImpl implements TrainService {
 
     public TrainDto getTrainById(long id) {
         Train train = trainDao.getTrainById(id);
-        return modelMapper.map(train, TrainDto.class);
+        return TrainDtoConverter.convertTrainEntityToDto(train);
     }
 
     @Override

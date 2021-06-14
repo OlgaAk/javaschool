@@ -1,6 +1,8 @@
 package io.github.olgaak.dto;
 
 
+import io.github.olgaak.util.DateTimeConverter;
+
 import java.util.Date;
 
 public class TimetableItemDto implements Comparable<TimetableItemDto> {
@@ -38,11 +40,11 @@ public class TimetableItemDto implements Comparable<TimetableItemDto> {
 
     public String getDepartureTime() {
         return departureTime;
-    }
+    } //  data from frontend
 
     public void setDepartureTime(String departureTime) {
         this.departureTime = departureTime;
-    } // get data from request
+    } // get data from frontend
 
     public Date getDepartureTimeAsDate() {
         return departureTimeAsDate;
@@ -58,11 +60,11 @@ public class TimetableItemDto implements Comparable<TimetableItemDto> {
 
     public String getArrivalTime() {
         return arrivalTime;
-    }
+    } //  data from frontend
 
     public void setArrivalTime(String arrivalTime) { // get data from request
         this.arrivalTime = arrivalTime;
-    }
+    } //  data from frontend
 
     public String getStartTripStationName() {
         return startTripStationName;
@@ -96,6 +98,16 @@ public class TimetableItemDto implements Comparable<TimetableItemDto> {
         this.stationName = stationName;
     }
 
+    public String getFormattedArrivalTime(){
+        if(arrivalTimeAsDate == null) return "-";
+        return DateTimeConverter.parseDateToString(arrivalTimeAsDate, "HH:mm");
+    } // display on frontend
+
+    public String getFormattedDepartureTime(){
+        if(departureTimeAsDate == null) return "-";
+        return DateTimeConverter.parseDateToString(departureTimeAsDate, "HH:mm");
+    } // display on frontend
+
     public Date getArrivalTimeAsDate() {
         return arrivalTimeAsDate;
     }
@@ -110,7 +122,7 @@ public class TimetableItemDto implements Comparable<TimetableItemDto> {
 
     @Override
     public int compareTo(TimetableItemDto o) {
-       return o.getOrder() - order;
+       return order - o.getOrder();
     }
 }
 

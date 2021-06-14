@@ -32,11 +32,6 @@ public class TimetableItem {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "train_id")
-    private Train train;
-
-    @JsonIgnore
-    @ManyToOne
     @JoinColumn(name = "routeplan_id")
     private RoutePlan routePlan;
 
@@ -97,14 +92,6 @@ public class TimetableItem {
 
     public void setStation(Station station) {
         this.station = station;
-    }
-
-    public Train getTrain() {
-        return train;
-    }
-
-    public void setTrain(Train train) {
-        this.train = train;
     }
 
     public int getOrder() {

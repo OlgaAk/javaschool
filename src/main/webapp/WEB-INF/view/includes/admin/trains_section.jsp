@@ -22,7 +22,7 @@
             <c:otherwise>
                 <c:forEach var="train" items="${trains}">
                     <div class="table-row table-columns-5">
-                        <span class="table-cell">${train.number}</span>
+                        <a href="/admin/train/${train.id}"><span class="table-cell">${train.number}</span></a>
                         <span class="table-cell">${train.seatCount}</span>
                         <span class="table-cell station-names-cell"
                               onclick="openRoutesSection(${train.number}, ${train.id},${train.seatCount},

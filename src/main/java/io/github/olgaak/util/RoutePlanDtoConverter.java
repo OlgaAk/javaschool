@@ -5,6 +5,7 @@ import io.github.olgaak.dto.TimetableItemDto;
 import io.github.olgaak.entity.RoutePlan;
 import io.github.olgaak.entity.TimetableItem;
 import io.github.olgaak.entity.Train;
+import io.github.olgaak.entity.Weekday;
 
 import java.util.Comparator;
 import java.util.HashSet;
@@ -39,8 +40,9 @@ public class RoutePlanDtoConverter {
                 .sorted()
                 .collect(Collectors.toList());
         routePlanDto.setTimetableItems(timetableItemDtoList);
-        routePlanDto.setTrain(TrainDtoConverter.convertTrainEntityToDto(routePlan.getTrain()));
-        return routePlanDto;
+        List<Integer> weekdays = routePlan.getWeekdays().stream().map(weekday -> weekday.ordinal()).collect(Collectors.toList());
+        routePlanDto.setWeekdays(weekdays);
+       return routePlanDto;
     }
 
     public static TimetableItem getFirstStation(RoutePlan routePlan) {
@@ -77,12 +79,13 @@ public class RoutePlanDtoConverter {
     public static RoutePlan convertRoutePlanDtoToEntity(RoutePlanDto routePlanDto) {
         RoutePlan routePlan = new RoutePlan();
         routePlan.setId(routePlanDto.getId());
-        routePlan.setTrain(new Train(routePlanDto.getTrainId()));
         List<TimetableItem> timetableItems =
         IntStream.range(0, routePlanDto.getTimetableItems().size())
                 .mapToObj(i -> TimetableDtoConverter.convertTimetableItemDtoToEntity(routePlanDto.getTimetableItems().get(i), routePlan, i))
                 .collect(Collectors.toList());
         routePlan.setTimetableItems(new HashSet<>(timetableItems));
+        List<Weekday> weekdays = routePlanDto.getWeekdays().stream().map(weekday-> Weekday.values()[weekday]).collect(Collectors.toList());
+        routePlan.setWeekdays(weekdays);
         return routePlan;
     }
 }

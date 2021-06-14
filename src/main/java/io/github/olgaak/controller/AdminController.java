@@ -50,8 +50,8 @@ public class AdminController {
     }
 
     @PostMapping("/add/train")
-    public String addTrain(@ModelAttribute("train") TrainDto train) {
-//        trainService.createNewTrain(train);
+    public String addTrain(@ModelAttribute("train") TrainDto trainDto) {
+        trainService.createNewTrain(trainDto);
 //        messageSender.sendMessage();//todo aop
         return "redirect:/admin";
     }
@@ -67,6 +67,14 @@ public class AdminController {
         trainService.editTrain(train);
         return "redirect:/admin";
     }
+
+    @GetMapping("/train/{trainId}")
+    public String getPurchasePage(@PathVariable("trainId") long trainId, ModelMap model) {
+        TrainDto trainDto = trainService.getTrainById(trainId);
+        model.addAttribute("train", trainDto);
+        return "admin_page_train_info";
+    }
+
 
     @PostMapping("/add/station")
     public String addStation(@ModelAttribute("station") Station station) {

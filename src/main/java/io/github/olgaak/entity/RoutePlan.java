@@ -1,8 +1,7 @@
 package io.github.olgaak.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "routeplan")
@@ -21,10 +20,15 @@ public class RoutePlan {
     @JoinColumn(name = "routeplan_id")
     private Set<Route> routes = new HashSet<>();
 
-    @OneToOne
-    @JoinColumn(name = "train_id", referencedColumnName = "id")
-    private Train train;
+    @JoinTable(name = "routeplan_weekday", joinColumns = @JoinColumn(name = "routeplan_id"))
+    @Column(name = "weekday_id")
+    @Enumerated(EnumType.ORDINAL)
+    @ElementCollection(targetClass =Weekday.class, fetch = FetchType.EAGER)
+    private Collection<Weekday> weekdays;
 
+    @OneToOne
+    @JoinColumn(name = "train_id")
+    private Train train;
 
     public RoutePlan() {
     }
@@ -57,6 +61,14 @@ public class RoutePlan {
         this.routes = routes;
     }
 
+    public Collection<Weekday> getWeekdays() {
+        return weekdays;
+    }
+
+    public void setWeekdays(Collection<Weekday> weekdays) {
+        this.weekdays = weekdays;
+    }
+
     public Train getTrain() {
         return train;
     }
@@ -64,4 +76,5 @@ public class RoutePlan {
     public void setTrain(Train train) {
         this.train = train;
     }
+
 }

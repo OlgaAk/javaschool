@@ -9,6 +9,8 @@ public class TrainDtoConverter {
         TrainDto trainDto = new TrainDto();
         trainDto.setId(train.getId());
         trainDto.setNumber(train.getNumber());
+        trainDto.setSeatCount(train.getSeatCount());
+        trainDto.setRoutePlan(RoutePlanDtoConverter.convertRoutePlanEntityToDto(train.getRoutePlan()));
         return trainDto;
     }
 
@@ -16,6 +18,8 @@ public class TrainDtoConverter {
         Train train = new Train();
         train.setId(trainDto.getId());
         train.setNumber(trainDto.getNumber());
+        train.setSeatCount(trainDto.getSeatCount());
+        train.setRoutePlan(RoutePlanDtoConverter.convertRoutePlanDtoToEntity(trainDto.getRoutePlan()));
         return train;
     }
 
