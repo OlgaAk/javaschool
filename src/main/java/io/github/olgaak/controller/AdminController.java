@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class AdminController {
 
     @GetMapping("")
     public String getAdminPage(ModelMap model) {
-        model.addAttribute("name", "Tom");
+//        model.addAttribute("name", "Tom");
         List<TrainDto> trains = trainService.getAllTrains();
         model.addAttribute("trains", trains);
         List<StationDto> stations = stationService.getAllStations();
@@ -51,7 +50,7 @@ public class AdminController {
     @PostMapping("/add/train")
     public String addTrain(@ModelAttribute("train") TrainDto trainDto) {
         trainService.createNewTrain(trainDto);
-//        messageSender.sendMessage();//todo aop
+        messageSender.sendMessage();
         return "redirect:/admin";
     }
 
@@ -64,6 +63,7 @@ public class AdminController {
             model.addAttribute("adminPageError", adminPageError );
             return "redirect:/admin";
         }
+        messageSender.sendMessage();
         return "redirect:/admin";
     }
 
@@ -71,6 +71,7 @@ public class AdminController {
     @PostMapping("/edit/train")
     public String editTrain(@ModelAttribute("train") Train train) {
         trainService.editTrain(train);
+        messageSender.sendMessage();
         return "redirect:/admin";
     }
 

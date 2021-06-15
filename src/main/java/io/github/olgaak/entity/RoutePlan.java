@@ -26,7 +26,7 @@ public class RoutePlan {
     @ElementCollection(targetClass =Weekday.class, fetch = FetchType.EAGER)
     private Collection<Weekday> weekdays;
 
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "train_id")
     private Train train;
 
