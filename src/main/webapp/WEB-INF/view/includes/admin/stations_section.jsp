@@ -12,7 +12,7 @@
         <h3>Station list</h3>
         <div class="table-row table-header table-columns-4">
             <div class="table-cell">Station name</div>
-            <div class="table-cell"></div>
+            <div class="table-cell">Schedule</div>
             <div class="table-cell"></div>
             <div class="table-cell"></div>
         </div>
@@ -23,14 +23,14 @@
                         <%--'<c:forEach var="train" items="${station.trains}">${train.number},</c:forEach>') --%>
                         ">View Schedule</span>
                 <span class="table-cell">
-                    <span class="material-icons"
+                    <span class="material-icons icon"
                           onclick="openStationEditPopUp(${station.id}, '${station.name}')">
                         edit
                     </span>
                      </span>
                 <span class="table-cell">
                     <a href="/admin/delete/station/${station.id}" class="icon">
-                        <span class="material-icons">delete</span>
+                        <span class="material-icons icon">delete</span>
                     </a>
                 </span>
             </div>

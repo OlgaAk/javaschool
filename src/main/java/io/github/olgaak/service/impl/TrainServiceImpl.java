@@ -7,7 +7,9 @@ import io.github.olgaak.dto.StationDto;
 import io.github.olgaak.dto.TrainDto;
 import io.github.olgaak.entity.Route;
 import io.github.olgaak.entity.RoutePlan;
+import io.github.olgaak.entity.Ticket;
 import io.github.olgaak.entity.Train;
+import io.github.olgaak.exception.ActionNotAllowedException;
 import io.github.olgaak.service.api.RouteService;
 import io.github.olgaak.service.api.TrainService;
 import io.github.olgaak.util.RouteDtoConverter;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,8 +65,25 @@ public class TrainServiceImpl implements TrainService {
     }
 
     @Override
-    public void deleteTrain(long id) {
-        trainDao.deleteTrain(id);
+    public void deleteTrain(long id) throws ActionNotAllowedException {
+        Train train = trainDao.getTrainById(id);
+        List<Integer> tickets = train.getRoutePlan().getRoutes().stream()
+                .map(route -> route.getTickets().size())
+                .filter(size-> size>0).collect(Collectors.toList());
+        if(tickets.size()>0) {
+            throw new ActionNotAllowedException("Train has tickets");
+        } else {
+            train.getRoutePlan().getRoutes().forEach(route -> {
+                try {
+                    routeService.deleteRoute(route.getId());
+                } catch (ActionNotAllowedException e) {
+                    e.printStackTrace();
+                }
+            });
+            trainDao.deleteTrain(id);
+        }
+
+
     }
 
     @Override

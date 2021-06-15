@@ -42,7 +42,7 @@
                     </span>
                         <span class="table-cell">
 
-                    <span class="material-icons md-18"
+                    <span class="material-icons icon md-18"
                           onclick="openTrainEditPopUp(${train.id}, ${train.number}, ${train.seatCount},
                                   '<c:forEach var="station" items="${train.stations}">${station},</c:forEach>')">
                         edit
@@ -51,7 +51,7 @@
                 </span>
                         <span class="table-cell">
                     <a href="/admin/delete/train/${train.id}" class="icon">
-                        <span class="material-icons md-18">delete</span>
+                        <span class="material-icons icon md-18">delete</span>
                     </a>
                 </span>
                     </div>
@@ -104,35 +104,35 @@
                 <div id="route-days-of-week" class="input-row">
 
                     <div class="route-day-of-week">
-                        <input type="checkbox" id="monday" name="routePlan.weekdays" value="0">
+                        <input type="checkbox" id="monday" name="routePlan.weekdays" value="1">
                         <label for="monday">Monday</label>
                     </div>
                     <div class="route-day-of-week">
-                        <input type="checkbox" id="tuesday" name="routePlan.weekdays" value="1">
+                        <input type="checkbox" id="tuesday" name="routePlan.weekdays" value="2">
                         <label for="tuesday">Tuesday</label>
                     </div>
                     <div class="route-day-of-week">
-                        <input type="checkbox" id="wednesday" name="routePlan.weekdays" value="2">
+                        <input type="checkbox" id="wednesday" name="routePlan.weekdays" value="3">
                         <label for="wednesday">Wednesday</label>
                     </div>
                     <div class="route-day-of-week">
-                        <input type="checkbox" id="thursday" name="routePlan.weekdays" value="3">
+                        <input type="checkbox" id="thursday" name="routePlan.weekdays" value="4">
                         <label for="thursday">Thursday</label>
                     </div>
                     <div class="route-day-of-week">
-                        <input type="checkbox" id="friday" name="routePlan.weekdays" value="4">
+                        <input type="checkbox" id="friday" name="routePlan.weekdays" value="5">
                         <label for="friday">Friday</label>
                     </div>
                     <div class="route-day-of-week">
-                        <input type="checkbox" id="saturday" name="routePlan.weekdays" value="5">
+                        <input type="checkbox" id="saturday" name="routePlan.weekdays" value="6">
                         <label for="saturday">Saturday</label>
                     </div>
                     <div class="route-day-of-week">
-                        <input type="checkbox" id="sunday" name="routePlan.weekdays" value="6">
+                        <input type="checkbox" id="sunday" name="routePlan.weekdays" value="0">
                         <label for="sunday">Sunday</label>
                     </div>
                     <div class="route-day-of-week">
-                        <input type="checkbox" id="everyday" name="routePlan.weekdays" value="7"
+                        <input type="checkbox" id="everyday" name="routePlan.weekdays" value="0,1,2,3,4,5,6"
                                checked>
                         <label for="everyday">Every day</label>
                     </div>

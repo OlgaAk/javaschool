@@ -1,11 +1,11 @@
 <div class="color-calendar glass color-calendar--large" style="--cal-color-primary:#ffd335; --cal-header-background-color:#ffde11;">
   <div class="calendar__header">
-    <div class="calendar__arrow calendar__arrow-prev"><div class="calendar__arrow-inner"></div></div>
+<%--    <div class="calendar__arrow calendar__arrow-prev"><div class="calendar__arrow-inner"></div></div>--%>
     <div class="calendar__monthyear">
       <span class="calendar__month" style="opacity: 1;">June</span>&nbsp;
       <span class="calendar__year" style="opacity: 1;">2021</span>
     </div>
-    <div class="calendar__arrow calendar__arrow-next"><div class="calendar__arrow-inner"></div></div>
+<%--    <div class="calendar__arrow calendar__arrow-next"><div class="calendar__arrow-inner"></div></div>--%>
   </div>
   <div class="calendar__body">
     <div class="calendar__weekdays">
@@ -28,185 +28,13 @@
 
       <div class="calendar__day calendar__day-other">31</div>
 
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">1</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">2</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">3</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">4</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">5</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">6</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">7</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">8</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">9</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">10</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">11</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">12</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">13</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-today calendar__day-no-event calendar__day-selected">
-        <span class="calendar__day-text">14</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">15</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">16</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">17</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">18</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">19</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">20</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">21</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">22</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">23</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">24</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">25</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">26</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">27</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">28</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">29</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
-
-      <div class="calendar__day calendar__day-active calendar__day-no-event">
-        <span class="calendar__day-text">30</span>
-        <div class="calendar__day-bullet"></div>
-        <div class="calendar__day-box"></div>
-      </div>
+      <c:forEach begin="1" end="30" var="val">
+        <div class="calendar__day calendar__day-active calendar__day-no-event ${train.routePlan.checkIfRouteDate(val) ? "calendar__day-selected" : "" }">
+          <span class="calendar__day-text">${val}</span>
+          <div class="calendar__day-bullet"></div>
+          <div class="calendar__day-box"></div>
+        </div>
+      </c:forEach>
 
       <div class="calendar__day calendar__day-other">1</div>
 

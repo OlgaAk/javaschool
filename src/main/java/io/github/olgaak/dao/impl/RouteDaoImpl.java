@@ -114,8 +114,12 @@ public class RouteDaoImpl implements RouteDao {
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-            Route route = entityManager.find(Route.class, id);
-            entityManager.remove(route);
+//            Route route = entityManager.find(Route.class, id);
+//            entityManager.remove(route); // doesnt work
+            Query query = entityManager
+                    .createQuery("DELETE FROM Route r WHERE r.id  = :routeId")
+                    .setParameter("routeId", id);
+            query.executeUpdate();
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {

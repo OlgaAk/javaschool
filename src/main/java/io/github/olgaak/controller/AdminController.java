@@ -14,10 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
@@ -57,10 +56,17 @@ public class AdminController {
     }
 
     @GetMapping("/delete/train/{id}")
-    public String deleteTrain(@PathVariable("id") long id) {
-        trainService.deleteTrain(id);
+    public String deleteTrain(@PathVariable("id") long id,  ModelMap model ) {
+        try {
+            trainService.deleteTrain(id);
+        } catch (ActionNotAllowedException e) {
+            String adminPageError = "train has tickets";
+            model.addAttribute("adminPageError", adminPageError );
+            return "redirect:/admin";
+        }
         return "redirect:/admin";
     }
+
 
     @PostMapping("/edit/train")
     public String editTrain(@ModelAttribute("train") Train train) {

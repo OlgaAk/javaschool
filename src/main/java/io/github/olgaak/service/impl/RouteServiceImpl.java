@@ -50,14 +50,14 @@ public class RouteServiceImpl implements RouteService {
 
     public void createNewRoute(Train train) {
         List<Integer> weekdays = train.getRoutePlan().getWeekdays().stream().map(d -> d.ordinal()).collect(Collectors.toList());
-        int periodLimitDays = 7;
+        int periodLimitDays = 30;
         Calendar calendar = DateTimeConverter.createCalender();
         Set<Station> stations = new HashSet<>();
         for (TimetableItem timetable : train.getRoutePlan().getTimetableItems()) {
             stations.add(timetable.getStation());
         }
         for (int i = 0; i < periodLimitDays; i++) {
-            if (weekdays.contains(calendar.get(Calendar.DAY_OF_WEEK))) {
+            if (weekdays.contains(calendar.get(Calendar.DAY_OF_WEEK)-1)) {
                 Route route = new Route();
                 route.setRoutePlan(train.getRoutePlan());
                 route.setTrain(train);
@@ -110,7 +110,7 @@ public class RouteServiceImpl implements RouteService {
     public void deleteRoute(long id) throws ActionNotAllowedException {
         Route route = routeDao.getRouteById(id);
         if(route.getTickets().size()>0){
-            throw new ActionNotAllowedException("Route has tickets");
+            throw new ActionNotAllowedException("Route has tickets. You should cancel tickets first.");
         } else {
             routeDao.deleteRoute(id);
         }

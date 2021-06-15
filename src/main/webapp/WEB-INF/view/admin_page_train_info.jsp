@@ -15,21 +15,25 @@
 <div class="main-container">
 
     <div id="trains-subpage" class="admin-subpage">
-        <div class="main-container-left-side">
+        <div>
             <div id="train-section" class="train-section main-subsection">
                 <div id="train-info-header">
-                    <div>
-                        <button id="backToTrainListBtn" class="btn btn-primary" type="button">
-                            <a href="/admin">BACK</a>
-                        </button>
-                        <h2>Train number ${train.number}</h2>
-                        <span>Total seat count ${train.seatCount}</span>
-                        <h3>Schedule</h3>
-                        <span>Days:
-                        <c:forEach var="dayIndex" items="${train.routePlan.weekdays}">
-                            ${train.routePlan.daysOfWeekNames[dayIndex].substring(0,2)}
-                        </c:forEach>
-                    </span>
+                    <div id="train-info-header-left">
+                        <div id="train-info-header-top">
+                            <button id="backToTrainListBtn" class="btn btn-primary" type="button">
+                                <a href="/admin">BACK</a>
+                            </button>
+                            <h2>Train number ${train.number}</h2>
+                            <span>Total seat count ${train.seatCount}</span>
+                        </div>
+                        <div id="train-info-header-bottom">
+                            <p class="small-title">Schedule</p>
+                            <p class="small-title-text-below">Days:
+                                <c:forEach var="dayIndex" items="${train.routePlan.weekdays}">
+                                    ${train.routePlan.daysOfWeekNames[dayIndex].substring(0,2)}
+                                </c:forEach>
+                            </p>
+                        </div>
                     </div>
                     <div>
                         <%@include file="includes/common/calender.jsp" %>
@@ -57,6 +61,7 @@
                 <div class="table-row table-header table-columns-3">
                     <div class="table-cell">Date</div>
                     <div class="table-cell">Tickets sold</div>
+                    <div class="table-cell"></div>
                 </div>
                 <c:forEach var="route" items="${train.routePlan.routes}">
                     <div class="table-row table-columns-3">

@@ -2,6 +2,8 @@ package io.github.olgaak.dto;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 public class RoutePlanDto {
 
@@ -35,6 +37,25 @@ public class RoutePlanDto {
 
     public List<String> getDaysOfWeekNames() {
         return Arrays.asList("Monday", "Tuesday","Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
+    }
+
+    public List<String> getRoutesDates(){
+        return routes.stream().map(route -> {
+                    String date = route.getFormattedDepartureDate();
+                    if(date.startsWith("0")) date = date.substring(1); // frontend day has no 0
+                    return date;
+                }
+        ).collect(Collectors.toList());
+    }
+
+    public boolean checkIfRouteDate(int day){
+        AtomicBoolean isRouteDate = new AtomicBoolean(false);
+        routes.stream().forEach(route -> {
+            String date = route.getFormattedDepartureDate();
+            if(date.startsWith("0")) date = date.substring(1); // frontend day has no 0
+            if(date.equals(day + ".06.2021")) isRouteDate.set(true); // todo fix dynamic month and year
+        });
+        return isRouteDate.get();
     }
 
     public RoutePlanDto() {

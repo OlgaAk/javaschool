@@ -26,14 +26,27 @@
         <div class="main-container-left-side">
             <%@include file="includes/admin/trains_section.jsp" %>
         </div>
-<%--        <div class="main-container-right-side">--%>
-<%--            <%@include file="includes/admin/routes_section.jsp" %>--%>
-<%--        </div>--%>
+        <%--        <div class="main-container-right-side">--%>
+        <%--            <%@include file="includes/admin/routes_section.jsp" %>--%>
+        <%--        </div>--%>
     </div>
 
 
 </div>
 
+
+<%--ERROR POP-UP--%>
+<div id="error-popup" class="edit-popup-container ${adminPageError && adminPageError != "" ? "" : "hidden"}">
+    <div class="edit-popup">
+        <h3>Error</h3>
+        ${adminPageError}
+        <button class="btn btn-close-popup" type="button"
+                onclick="closeEditPopUp('error-popup')">
+        <span class="material-icons md-18">close</span>
+        </button>
+
+    </div>
+</div>
 
 
 <%--EDIT POP-UP--%>

@@ -25,7 +25,7 @@ public class Route {
     @JoinColumn(name = "train_id")
     private Train train;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE})
     @JoinTable(name = "route_station",
             joinColumns = @JoinColumn(name = "route_id"),
             inverseJoinColumns = @JoinColumn(name = "station_id", updatable=false)
@@ -37,7 +37,7 @@ public class Route {
     private Set<Ticket> tickets = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "route_id", updatable=false)
+    @JoinColumn(name = "route_id")
     private Set<Seat> seats = new HashSet<>();
 
     public Route() {

@@ -73,8 +73,12 @@ public class TrainDaoImpl implements TrainDao {
         try {
             transaction = entityManager.getTransaction();
             transaction.begin();
-            Train train = entityManager.find(Train.class, id);
-            entityManager.remove(train);
+//            Train train = entityManager.find(Train.class, id);
+//            entityManager.remove(train);
+            Query query = entityManager
+                    .createQuery("DELETE FROM Train t WHERE t.id  = :trainId")
+                    .setParameter("trainId", id);
+            query.executeUpdate();
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {

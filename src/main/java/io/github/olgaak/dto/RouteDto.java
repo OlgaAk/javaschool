@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RouteDto {
+public class RouteDto implements Comparable<RouteDto>{
 
     private long id;
 
@@ -108,5 +108,10 @@ public class RouteDto {
 
     public void setDepartureDate(Date departureDate) {
         this.departureDate = departureDate;
+    }
+
+    @Override
+    public int compareTo(RouteDto o) {
+        return (int) (departureDate.getTime() - o.departureDate.getTime());
     }
 }
