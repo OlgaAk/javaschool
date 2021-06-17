@@ -11,7 +11,7 @@
 </head>
 <body>
 <%@include file="includes/common/navbar.jsp" %>
-
+<%@include file="includes/common/spinner.jsp" %>
 <div class="main-container">
 
     <div id="trains-subpage" class="admin-subpage">
@@ -21,7 +21,7 @@
                     <div id="train-info-header-left">
                         <div id="train-info-header-top">
                             <button id="backToTrainListBtn" class="btn btn-primary" type="button">
-                                <a href="/admin">BACK</a>
+                                <a href="/admin/train">BACK</a>
                             </button>
                             <h2>Train number ${train.number}</h2>
                             <span>Total seat count ${train.seatCount}</span>
@@ -68,7 +68,7 @@
                         <span class="table-cell">${route.formattedDepartureDate}</span>
                         <span class="table-cell">${route.tickets.size()}</span>
                         <span class="table-cell"><a href="/admin/delete/route/${route.id}" class="icon">
-                            <span class="material-icons md-18">delete</span>
+                            <span onclick="showSpinner()" class="material-icons md-18">delete</span>
                         </a></span>
                     </div>
                 </c:forEach>

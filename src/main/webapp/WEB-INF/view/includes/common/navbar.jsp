@@ -33,10 +33,12 @@
             <sec:authorize access="hasRole('ADMIN')">
                 <div class="admin_menu_items_container">
                     <div class="admin_menu_item">
+                        <a href="/admin/station">
                             <span class="active" id="admin_menu_item_stations">Stations</span>
+                        </a>
                     </div>
                     <div class="admin_menu_item">
-                        <a>
+                        <a href="/admin/train">
                             <span id="admin_menu_item_trains">Trains</span>
                         </a>
                     </div>

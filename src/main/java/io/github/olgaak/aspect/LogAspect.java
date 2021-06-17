@@ -16,7 +16,6 @@ public class LogAspect {
 
     @Before("execution(* io.github.olgaak.service.impl.*.*(..))")
     public void afterServiceMethodInvocation(JoinPoint jp){
-        System.out.println("Test aop");
         logger.info("Service method was invoked " + jp.getSignature());
     }
 }

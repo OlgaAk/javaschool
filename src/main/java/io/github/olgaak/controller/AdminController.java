@@ -10,6 +10,8 @@ import io.github.olgaak.service.api.RouteService;
 import io.github.olgaak.service.api.StationService;
 import io.github.olgaak.service.api.TimetableService;
 import io.github.olgaak.service.api.TrainService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,10 +38,11 @@ public class AdminController {
     @Autowired
     public MessageSender messageSender;
 
+    private static final Logger logger
+            = LoggerFactory.getLogger(AdminController.class);
 
     @GetMapping("")
     public String getAdminPage(ModelMap model) {
-//        model.addAttribute("name", "Tom");
         List<TrainDto> trains = trainService.getAllTrains();
         model.addAttribute("trains", trains);
         List<StationDto> stations = stationService.getAllStations();
@@ -47,11 +50,29 @@ public class AdminController {
         return "admin_page";
     }
 
+    @GetMapping("/train")
+    public String getTrainPage(ModelMap model) {
+        List<TrainDto> trains = trainService.getAllTrains();
+        model.addAttribute("trains", trains);
+        List<StationDto> stations = stationService.getAllStations();
+        model.addAttribute("stations", stations);
+        return "train_page";
+    }
+
+    @GetMapping("/station")
+    public String getStationPage(ModelMap model) {
+        List<StationDto> stations = stationService.getAllStations();
+        model.addAttribute("stations", stations);
+        return "station_page";
+    }
+
     @PostMapping("/add/train")
     public String addTrain(@ModelAttribute("train") TrainDto trainDto) {
+        logger.info("Train creation query received");
         trainService.createNewTrain(trainDto);
+        logger.info("New train with routeplan and routes created");
         messageSender.sendMessage();
-        return "redirect:/admin";
+        return "redirect:/admin/train";
     }
 
     @GetMapping("/delete/train/{id}")
@@ -61,7 +82,7 @@ public class AdminController {
         } catch (ActionNotAllowedException e) {
             String adminPageError = "train has tickets";
             model.addAttribute("adminPageError", adminPageError );
-            return "redirect:/admin";
+            return "redirect:/admin/train";
         }
         messageSender.sendMessage();
         return "redirect:/admin";
@@ -72,7 +93,7 @@ public class AdminController {
     public String editTrain(@ModelAttribute("train") Train train) {
         trainService.editTrain(train);
         messageSender.sendMessage();
-        return "redirect:/admin";
+        return "redirect:/admin/train";
     }
 
     @GetMapping("/train/{trainId}")
@@ -86,19 +107,19 @@ public class AdminController {
     @PostMapping("/add/station")
     public String addStation(@ModelAttribute("station") Station station) {
         stationService.createNewStation(station);
-        return "redirect:/admin";
+        return "redirect:/admin/station";
     }
 
     @PostMapping("/edit/station")
     public String editTrain(@ModelAttribute("station") Station station) {
         stationService.editStation(station);
-        return "redirect:/admin";
+        return "redirect:/admin/station";
     }
 
     @GetMapping("/delete/station/{id}")
     public String deleteStation(@PathVariable("id") long id) {
         stationService.deleteStation(id);
-        return "redirect:/admin";
+        return "redirect:/admin/station";
     }
 
     @PostMapping("/add/timeTableItem")

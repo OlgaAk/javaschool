@@ -288,8 +288,11 @@ function removeParent(e) {
     }
 }
 
+function showSpinner(){
+    document.getElementById("spinner").classList.remove("hidden");
+    console.log("spinner");
 
-
+}
 
 
 

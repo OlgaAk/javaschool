@@ -1,5 +1,7 @@
 package io.github.olgaak.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
@@ -13,8 +15,12 @@ public class MessageSender {
     @Qualifier("jmsQueueTemplate")
     private JmsTemplate jmsTemplate;
 
+    private static final Logger logger
+            = LoggerFactory.getLogger(MessageSender.class);
+
     public void sendMessage(){
         MessageCreator messageCreator = session -> session.createTextMessage("update");
         jmsTemplate.send(messageCreator);
+        logger.info("Jms message sent");
     }
 }

@@ -43,14 +43,14 @@
     text-decoration: none;
 }
 
-.admin-subpage{
+.admin-subpage {
     display: grid;
     grid-column-gap: 60px;
     margin: 100px 40px 10px 40px;
     width: min-content;
 }
 
-.admin-subpage.hidden{
+.admin-subpage.hidden {
     display: none;
 }
 
@@ -78,7 +78,7 @@
     justify-content: left;
 }
 
-#train-section .input-box{
+#train-section .input-box {
     margin: 10px 0;
 }
 
@@ -88,31 +88,32 @@
     margin: 20px 0px;
 }
 
-.passenger-info-title{
+.passenger-info-title {
     font-size: 14px;
     margin: 10px 0 4px 0;
     font-weight: bold;
     background-color: var(--main-color);
 }
+
 .passenger-info-row {
     font-size: 13px;
 }
 
-.schedule-item{
+.schedule-item {
     padding: 8px;
     background-color: var(--main-color);
     border-radius: 8px;
     margin: 8px;
 }
 
-.routes_stations_div_item{
+.routes_stations_div_item {
     display: grid;
     grid-template-columns: 15px 1fr 1fr 1fr;
     grid-row-gap: 10px;
     margin: 10px 0;
 }
 
-.routes_stations_div_item span{
+.routes_stations_div_item span {
     font-size: 14px;
     vertical-align: middle;
     align-self: end;
@@ -121,39 +122,41 @@
     color: #a52b2b;
 }
 
-.timetable-input{
+.timetable-input {
     width: 100px;
     height: 24px;
 }
 
-.route-day-of-week{
+.route-day-of-week {
     text-align: center;
     font-size: 12px;
 }
-#route-days-of-week{
+
+#route-days-of-week {
     display: flex;
     flex-wrap: wrap;
     margin: 20px 0;
 }
-.routes_stations_div_item label{
+
+.routes_stations_div_item label {
     color: #a7a1a1;
     font-size: 14px;
 }
 
-.train-input-info label{
+.train-input-info label {
     width: 150px;
     display: block;
 }
 
-.train-input-info{
+.train-input-info {
     display: flex;
 }
 
-.timetable-input-left{
+.timetable-input-left {
     position: relative;
 }
 
-.timetable-input-left::after{
+.timetable-input-left::after {
     content: "\e14c";;
     font-family: "Material Icons";
     display: block;
@@ -164,34 +167,51 @@
     bottom: 0;
 }
 
-#train-info-header{
+#train-info-header {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-#train-info-header-left{
+#train-info-header-left {
     display: flex;
     flex-direction: column;
 }
-#train-info-header-top{
+
+#train-info-header-top {
     flex: 1;
 }
 
-#train-info-header-bottom{
+#train-info-header-bottom {
     margin-bottom: 20px;
 }
 
-.small-title{
+.small-title {
     margin: 2px 0;
     font-weight: bold;
 }
-.small-title-text-below{
+
+.small-title-text-below {
     color: gray;
     margin: 0;
     font-size: 14px;
 }
 
+.spinner-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(22, 22, 22, 0.5);
+    z-index: 999;
+}
 
+.spinner-icon {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    color: white;
+}
 
 
 

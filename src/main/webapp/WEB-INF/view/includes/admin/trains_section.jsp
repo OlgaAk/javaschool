@@ -51,7 +51,7 @@
                 </span>
                         <span class="table-cell">
                     <a href="/admin/delete/train/${train.id}" class="icon">
-                        <span class="material-icons icon md-18">delete</span>
+                        <span onclick="showSpinner()" class="material-icons icon md-18">delete</span>
                     </a>
                 </span>
                     </div>

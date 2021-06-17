@@ -4,19 +4,20 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.init.DataSourceInitializer;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.orm.jpa.JpaTransactionManager;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 @EnableWebMvc
+@EnableTransactionManagement
 @Configuration
 @ComponentScan(basePackages = {"io.github.olgaak.controller",
         "io.github.olgaak.service", "io.github.olgaak.dao.impl", "io.github.olgaak.exception", "io.github.olgaak.aspect"})
@@ -43,6 +44,15 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public  EntityManagerFactory entityManagerFactory(){
        return Persistence.createEntityManagerFactory("railway_app");
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(){
+        JpaTransactionManager transactionManager
+                = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(
+                entityManagerFactory());
+        return transactionManager;
     }
 
 

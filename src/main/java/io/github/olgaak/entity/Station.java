@@ -15,13 +15,13 @@ public class Station {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "station", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "station")
     private Set<TimetableItem> timetableItems;
 
-    @ManyToMany(mappedBy = "stations", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "stations")
     private Set<Train> trains;
 
-    @ManyToMany(mappedBy = "stations", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "stations")
     private Set<Route> routes;
 
     public Station() {}
