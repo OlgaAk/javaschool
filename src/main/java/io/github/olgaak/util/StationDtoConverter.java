@@ -21,6 +21,14 @@ public class StationDtoConverter {
         return stationDto;
     }
 
+
+    public static StationDto convertStationEntityToDtoWithoutChildren(Station station) {
+        StationDto stationDto = new StationDto();
+        stationDto.setId(station.getId());
+        stationDto.setName(station.getName());
+        return stationDto;
+    }
+
     public static Station convertStationDtoToEntity(StationDto stationDto) {
         Station station = new Station();
         station.setId(stationDto.getId());

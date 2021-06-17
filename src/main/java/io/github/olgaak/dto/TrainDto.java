@@ -15,8 +15,6 @@ public class TrainDto {
 
     private List<String> stations  = new ArrayList<>();;
 
-    private List<String> stationsUnique = new ArrayList<>();
-
     private RoutePlanDto routePlan;
 
     public TrainDto() {
@@ -67,9 +65,6 @@ public class TrainDto {
         this.stations = stations;
     }
 
-    public List<String> getStationsUnique() {
-        return new ArrayList<String>(new HashSet<>(stations));
-    }
 
 
 }

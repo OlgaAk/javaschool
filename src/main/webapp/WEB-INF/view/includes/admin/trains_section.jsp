@@ -24,18 +24,13 @@
                     <div class="table-row table-columns-5">
                         <a href="/admin/train/${train.id}"><span class="table-cell">${train.number}</span></a>
                         <span class="table-cell">${train.seatCount}</span>
-                        <span class="table-cell station-names-cell"
-                              onclick="openRoutesSection(${train.number}, ${train.id},${train.seatCount},
-                                      '<c:forEach var="station"
-                                                  items="${train.stationsUnique}">${station},</c:forEach>')">
+                        <span class="table-cell station-names-cell">
                     <c:choose>
-                        <c:when test="${train.stationsUnique.size()==0}">
+                        <c:when test="${train.stations.size()<2}">
                             no stations yet
                         </c:when>
                         <c:otherwise>
-                            <c:forEach var="station" items="${train.stationsUnique}" varStatus="loop">
-                                ${station}<c:if test="${!loop.last}">,&nbsp;</c:if>
-                            </c:forEach>
+                            ${train.stations[0]} - ${train.stations[1]}
                         </c:otherwise>
                     </c:choose>
 

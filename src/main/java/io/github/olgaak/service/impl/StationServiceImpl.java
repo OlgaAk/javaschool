@@ -33,7 +33,7 @@ public class StationServiceImpl implements StationService {
         return stations
                 .stream()
                 .map(station ->
-                        StationDtoConverter.convertStationEntityToDto(station))
+                        StationDtoConverter.convertStationEntityToDtoWithoutChildren(station))
                 .collect(Collectors.toList());
     }
 

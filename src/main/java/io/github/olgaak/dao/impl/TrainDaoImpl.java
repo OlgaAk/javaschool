@@ -3,6 +3,7 @@ package io.github.olgaak.dao.impl;
 import io.github.olgaak.dao.api.TrainDao;
 import io.github.olgaak.dto.TrainDto;
 import io.github.olgaak.entity.Train;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -54,9 +55,10 @@ public class TrainDaoImpl implements TrainDao {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Train train = null;
         try {
-            Query query = entityManager.createQuery("SELECT t FROM Train t WHERE t.id = :id" +
-                    "").setParameter("id", id);
-            train = (Train) query.getSingleResult();
+             train = entityManager.find(Train.class, id);
+             //force hibernate to initialize because of lazy loading issue, no session error despite @transactional
+            Hibernate.initialize(train.getRoutePlan().getTimetableItems());
+            Hibernate.initialize(train.getRoutePlan().getRoutes());
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

@@ -14,6 +14,14 @@ public class TrainDtoConverter {
         return trainDto;
     }
 
+    public static TrainDto convertTrainEntityToDtoWithoutChildren(Train train){
+        TrainDto trainDto = new TrainDto();
+        trainDto.setId(train.getId());
+        trainDto.setNumber(train.getNumber());
+        trainDto.setSeatCount(train.getSeatCount());
+        return trainDto;
+    }
+
     public static Train convertTrainDtoToEntity(TrainDto trainDto){
         Train train = new Train();
         train.setId(trainDto.getId());

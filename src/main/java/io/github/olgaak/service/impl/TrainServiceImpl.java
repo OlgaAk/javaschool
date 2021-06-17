@@ -51,11 +51,14 @@ public class TrainServiceImpl implements TrainService {
     public List<TrainDto> getAllTrains() {
         List<Train> trains = trainDao.getAllTrains();
         return trains.stream().map(train -> {
-            TrainDto trainDto = TrainDtoConverter.convertTrainEntityToDto(train);
+            TrainDto trainDto = TrainDtoConverter.convertTrainEntityToDtoWithoutChildren(train);
             List<String> stations = new ArrayList<>();
-            RoutePlanDto routePlanDto = RoutePlanDtoConverter.convertRoutePlanEntityToDto(train.getRoutePlan());
-            stations.add(routePlanDto.getStartTripStation().getName());
-            stations.add(routePlanDto.getEndTripStation().getName());
+            try {
+                stations.add(train.getRoutePlan().getStartTripStation().getName());
+                stations.add(train.getRoutePlan().getEndTripStation().getName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             trainDto.setStations(stations);
             return trainDto;
         }).collect(Collectors.toList());

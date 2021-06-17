@@ -21,7 +21,7 @@ public class Train implements Serializable {
     @Column(name = "seat_count", nullable = false)
     private int seatCount;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "train_station",
             joinColumns = @JoinColumn(name = "train_id"),
             inverseJoinColumns = @JoinColumn(name = "station_id")
@@ -32,7 +32,7 @@ public class Train implements Serializable {
     @JoinColumn(name = "routeplan_id", referencedColumnName = "id")
     private RoutePlan routePlan;
 
-    @OneToMany(mappedBy = "train", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "train")
     private Set<Route> routes;
 
     public Train(int number, int seat_count) {

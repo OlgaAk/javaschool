@@ -12,11 +12,11 @@ public class RoutePlan {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "routeplan_id")
     private Set<TimetableItem> timetableItems = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "routeplan_id")
     private Set<Route> routes = new HashSet<>();
 
@@ -29,6 +29,14 @@ public class RoutePlan {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "train_id")
     private Train train;
+
+    @ManyToOne
+    @JoinColumn(name = "start_station_id")
+    private Station startTripStation;
+
+    @ManyToOne
+    @JoinColumn(name = "end_station_id")
+    private Station endTripStation;
 
     public RoutePlan() {
     }
@@ -77,4 +85,19 @@ public class RoutePlan {
         this.train = train;
     }
 
+    public Station getStartTripStation() {
+        return startTripStation;
+    }
+
+    public void setStartTripStation(Station startTripStation) {
+        this.startTripStation = startTripStation;
+    }
+
+    public Station getEndTripStation() {
+        return endTripStation;
+    }
+
+    public void setEndTripStation(Station endTripStation) {
+        this.endTripStation = endTripStation;
+    }
 }

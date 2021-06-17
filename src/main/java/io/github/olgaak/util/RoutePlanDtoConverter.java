@@ -2,10 +2,7 @@ package io.github.olgaak.util;
 
 import io.github.olgaak.dto.RoutePlanDto;
 import io.github.olgaak.dto.TimetableItemDto;
-import io.github.olgaak.entity.RoutePlan;
-import io.github.olgaak.entity.TimetableItem;
-import io.github.olgaak.entity.Train;
-import io.github.olgaak.entity.Weekday;
+import io.github.olgaak.entity.*;
 
 import java.util.Comparator;
 import java.util.HashSet;
@@ -21,9 +18,9 @@ public class RoutePlanDtoConverter {
         RoutePlanDto routePlanDto = new RoutePlanDto();
         TimetableItem firstStop = getFirstStation(routePlan);
         TimetableItem lastStop = getLastStation(routePlan);
-        routePlanDto.setStartTripStation(StationDtoConverter.convertStationEntityToDto(firstStop.getStation()));
+        routePlanDto.setStartTripStation(StationDtoConverter.convertStationEntityToDtoWithoutChildren(firstStop.getStation()));
         routePlanDto.setStartTripTime(firstStop.getDepartureTime().toString());
-        routePlanDto.setEndTripStation(StationDtoConverter.convertStationEntityToDto(lastStop.getStation()));
+        routePlanDto.setEndTripStation(StationDtoConverter.convertStationEntityToDtoWithoutChildren(lastStop.getStation()));
         routePlanDto.setEndTripTime(lastStop.getArrivalTime().toString());
         routePlanDto.setStartTripTimeHours(DateTimeConverter.parseDateToString(firstStop.getDepartureTime(), "HH:mm"));
         routePlanDto.setEndTripTimeHours(DateTimeConverter.parseDateToString(lastStop.getArrivalTime(), "HH:mm"));
@@ -43,7 +40,7 @@ public class RoutePlanDtoConverter {
         List<Integer> weekdays = routePlan.getWeekdays().stream().distinct().map(weekday -> weekday.ordinal()).collect(Collectors.toList());
         routePlanDto.setWeekdays(weekdays);
         routePlanDto.setRoutes(routePlan.getRoutes().stream().map(route -> RouteDtoConverter.convertRouteEntityToDto(route)).sorted().collect(Collectors.toList()));
-       return routePlanDto;
+        return routePlanDto;
     }
 
     public static TimetableItem getFirstStation(RoutePlan routePlan) {
@@ -80,12 +77,18 @@ public class RoutePlanDtoConverter {
     public static RoutePlan convertRoutePlanDtoToEntity(RoutePlanDto routePlanDto) {
         RoutePlan routePlan = new RoutePlan();
         routePlan.setId(routePlanDto.getId());
+        List<TimetableItemDto> tList = routePlanDto.getTimetableItems();
+        if (tList == null || tList.size() < 2) {
+            throw new IllegalArgumentException("Timetable items size should be > 2 ");
+        }
         List<TimetableItem> timetableItems =
-        IntStream.range(0, routePlanDto.getTimetableItems().size())
-                .mapToObj(i -> TimetableDtoConverter.convertTimetableItemDtoToEntity(routePlanDto.getTimetableItems().get(i), routePlan, i))
-                .collect(Collectors.toList());
+                IntStream.range(0, tList.size())
+                        .mapToObj(i -> TimetableDtoConverter.convertTimetableItemDtoToEntity(tList.get(i), routePlan, i))
+                        .collect(Collectors.toList());
         routePlan.setTimetableItems(new HashSet<>(timetableItems));
-        List<Weekday> weekdays = routePlanDto.getWeekdays().stream().map(weekday-> Weekday.values()[weekday]).collect(Collectors.toList());
+        routePlan.setStartTripStation(new Station(tList.get(0).getStationId()));
+        routePlan.setStartTripStation(new Station(tList.get(timetableItems.size() - 1).getStationId()));
+        List<Weekday> weekdays = routePlanDto.getWeekdays().stream().map(weekday -> Weekday.values()[weekday]).collect(Collectors.toList());
         routePlan.setWeekdays(weekdays);
         return routePlan;
     }

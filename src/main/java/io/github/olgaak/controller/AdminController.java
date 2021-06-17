@@ -42,11 +42,7 @@ public class AdminController {
             = LoggerFactory.getLogger(AdminController.class);
 
     @GetMapping("")
-    public String getAdminPage(ModelMap model) {
-        List<TrainDto> trains = trainService.getAllTrains();
-        model.addAttribute("trains", trains);
-        List<StationDto> stations = stationService.getAllStations();
-        model.addAttribute("stations", stations);
+    public String getAdminPage() {
         return "admin_page";
     }
 
@@ -143,7 +139,7 @@ public class AdminController {
     @GetMapping("/delete/route/{id}")
     public String deleteRoute(@PathVariable("id") long id) throws ActionNotAllowedException {
         routeService.deleteRoute(id);
-        return "redirect:/admin";
+        return "redirect:/admin/train";
     }
 
     @GetMapping("/routes/{trainId}")
