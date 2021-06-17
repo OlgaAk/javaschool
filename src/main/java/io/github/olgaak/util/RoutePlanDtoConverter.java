@@ -87,7 +87,7 @@ public class RoutePlanDtoConverter {
                         .collect(Collectors.toList());
         routePlan.setTimetableItems(new HashSet<>(timetableItems));
         routePlan.setStartTripStation(new Station(tList.get(0).getStationId()));
-        routePlan.setStartTripStation(new Station(tList.get(timetableItems.size() - 1).getStationId()));
+        routePlan.setEndTripStation(new Station(tList.get(timetableItems.size() - 1).getStationId()));
         List<Weekday> weekdays = routePlanDto.getWeekdays().stream().map(weekday -> Weekday.values()[weekday]).collect(Collectors.toList());
         routePlan.setWeekdays(weekdays);
         return routePlan;

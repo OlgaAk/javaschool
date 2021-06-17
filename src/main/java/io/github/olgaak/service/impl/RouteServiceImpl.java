@@ -9,8 +9,10 @@ import io.github.olgaak.service.MessageSender;
 import io.github.olgaak.service.api.RouteService;
 import io.github.olgaak.util.DateTimeConverter;
 import io.github.olgaak.util.RouteDtoConverter;
+import org.apache.commons.lang3.time.DateUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -28,31 +30,35 @@ public class RouteServiceImpl implements RouteService {
     ModelMapper modelMapper;
 
     @Autowired
+    public MessageSender messageSender;
+
+    @Autowired
     public RouteServiceImpl(RouteDao routeDao){
         this.routeDao = routeDao;
     }
 
-    public Route createNewRoute(RouteDto routeDto) {
-        Route route = RouteDtoConverter.convertRouteDtoToEntity(routeDto);
-        Set<Station> stations = new HashSet<>();
-        for (TimetableItem timetable : route.getRoutePlan().getTimetableItems()) {
-            stations.add(timetable.getStation());
-        }
-        route.setStations(stations);
-        Set<Seat> seats = new HashSet<>();
-        for(int i = 1; i<= routeDto.getSeatCount(); i++){
-            Seat seat = new Seat(i);
-            seat.setRoute(route);
-            seats.add(seat);
-        }
-        route.setSeats(seats);
-        routeDao.createNewRoute(route);
-        return null;
-    }
+//    public Route createNewRoute(RouteDto routeDto) {
+//        Route route = RouteDtoConverter.convertRouteDtoToEntity(routeDto);
+//        Set<Station> stations = new HashSet<>();
+//        for (TimetableItem timetable : route.getRoutePlan().getTimetableItems()) {
+//            stations.add(timetable.getStation());
+//        }
+//        route.setStations(stations);
+//        Set<Seat> seats = new HashSet<>();
+//        for(int i = 1; i<= routeDto.getSeatCount(); i++){
+//            Seat seat = new Seat(i);
+//            seat.setRoute(route);
+//            seats.add(seat);
+//        }
+//        route.setSeats(seats);
+//        routeDao.createNewRoute(route);
+//        return null;
+//    }
 
-    public void createNewRoute(Train train) {
+    @Async
+    public void createTrainRoutes(Train train) {
         List<Integer> weekdays = train.getRoutePlan().getWeekdays().stream().map(d -> d.ordinal()).collect(Collectors.toList());
-        int periodLimitDays = 30;
+        int periodLimitDays = 14;
         Calendar calendar = DateTimeConverter.createCalender();
         Set<Station> stations = new HashSet<>();
         for (TimetableItem timetable : train.getRoutePlan().getTimetableItems()) {
@@ -60,23 +66,28 @@ public class RouteServiceImpl implements RouteService {
         }
         for (int i = 0; i < periodLimitDays; i++) {
             if (weekdays.contains(calendar.get(Calendar.DAY_OF_WEEK)-1)) {
-                Route route = new Route();
-                route.setRoutePlan(train.getRoutePlan());
-                route.setTrain(train);
-                Date date = calendar.getTime();
-                route.setDepartureDate(date);
-                route.setStations(stations);
-                Set<Seat> seats = new HashSet<>();
-                for (int j = 1; j <= train.getSeatCount(); j++) {
-                    Seat seat = new Seat(j);
-                    seat.setRoute(route);
-                    seats.add(seat);
-                }
-                route.setSeats(seats);
-                routeDao.createNewRoute(route);
+                createRoute(calendar, train, stations);
+                if(i==0) messageSender.sendMessage(); //if train is today, update second app`s timetable
             }
             calendar.add(Calendar.DATE, 1);
         }
+    }
+
+    public void createRoute(Calendar calendar, Train train,  Set<Station>stations) {
+        Route route = new Route();
+        route.setRoutePlan(train.getRoutePlan());
+        route.setTrain(train);
+        Date date = calendar.getTime();
+        route.setDepartureDate(date);
+        route.setStations(stations);
+        Set<Seat> seats = new HashSet<>();
+        for (int j = 1; j <= train.getSeatCount(); j++) {
+            Seat seat = new Seat(j);
+            seat.setRoute(route);
+            seats.add(seat);
+        }
+        route.setSeats(seats);
+        routeDao.createNewRoute(route);
     }
 
 

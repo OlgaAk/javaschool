@@ -20,8 +20,8 @@ public class TimetableDtoConverter {
         timetableItemDto.setArrivalTimeAsDate(timetableItem.getArrivalTime());
         timetableItemDto.setStationId(timetableItem.getStation().getId());
         timetableItemDto.setStationName(timetableItem.getStation().getName());
-        timetableItemDto.setStartTripStationName(RoutePlanDtoConverter.getFirstStation(timetableItem.getRoutePlan()).getStation().getName());
-        timetableItemDto.setEndTripStationName(RoutePlanDtoConverter.getLastStation(timetableItem.getRoutePlan()).getStation().getName());
+        timetableItemDto.setStartTripStationName(timetableItem.getRoutePlan().getStartTripStation().getName());
+        timetableItemDto.setEndTripStationName(timetableItem.getRoutePlan().getEndTripStation().getName());
         timetableItemDto.setId(timetableItem.getId());
         timetableItemDto.setStationId(timetableItem.getStation().getId());
         timetableItemDto.setStationName(timetableItem.getStation().getName());

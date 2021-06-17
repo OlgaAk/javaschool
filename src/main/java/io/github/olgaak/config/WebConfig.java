@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
@@ -18,6 +19,7 @@ import javax.persistence.Persistence;
 
 @EnableWebMvc
 @EnableTransactionManagement
+@EnableAsync
 @Configuration
 @ComponentScan(basePackages = {"io.github.olgaak.controller",
         "io.github.olgaak.service", "io.github.olgaak.dao.impl", "io.github.olgaak.exception", "io.github.olgaak.aspect"})

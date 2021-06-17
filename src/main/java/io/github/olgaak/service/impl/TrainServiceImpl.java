@@ -45,7 +45,7 @@ public class TrainServiceImpl implements TrainService {
     public void createNewTrain(TrainDto trainDto) {
         Train train = TrainDtoConverter.convertTrainDtoToEntity(trainDto);
         Train savedTrain = trainDao.createNewTrain(train);
-        routeService.createNewRoute(savedTrain);
+        routeService.createTrainRoutes(savedTrain);
     }
 
     public List<TrainDto> getAllTrains() {

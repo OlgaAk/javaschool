@@ -3,6 +3,8 @@ package io.github.olgaak.dao.impl;
 import io.github.olgaak.dao.api.StationDao;
 import io.github.olgaak.entity.Route;
 import io.github.olgaak.entity.Station;
+import io.github.olgaak.entity.TimetableItem;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -98,6 +100,8 @@ public class StationDaoImpl implements StationDao {
                     .createQuery("SELECT s FROM Station s WHERE s.id  = :stationId", Station.class)
                     .setParameter("stationId", id);
             station = (Station) query.getSingleResult();
+            //force hibernate to initialize because of lazy loading issue, no session error despite @transactional
+            Hibernate.initialize(station.getTimetableItems());
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

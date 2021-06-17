@@ -31,7 +31,7 @@ public class TimetableItem {
     private Station station;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "routeplan_id")
     private RoutePlan routePlan;
 

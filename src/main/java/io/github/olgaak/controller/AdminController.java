@@ -43,7 +43,7 @@ public class AdminController {
 
     @GetMapping("")
     public String getAdminPage() {
-        return "admin_page";
+        return "train_page";
     }
 
     @GetMapping("/train")
@@ -67,7 +67,6 @@ public class AdminController {
         logger.info("Train creation query received");
         trainService.createNewTrain(trainDto);
         logger.info("New train with routeplan and routes created");
-        messageSender.sendMessage();
         return "redirect:/admin/train";
     }
 
@@ -81,7 +80,7 @@ public class AdminController {
             return "redirect:/admin/train";
         }
         messageSender.sendMessage();
-        return "redirect:/admin";
+        return "redirect:/admin/train";
     }
 
 
@@ -121,14 +120,14 @@ public class AdminController {
     @PostMapping("/add/timeTableItem")
     public String addStation(@ModelAttribute("timetableItem") TimetableItem timetableItem) {
         timetableService.createNewTimetableItem(timetableItem);
-        return "redirect:/admin";
+        return "redirect:/admin/train";
     }
 
-    @PostMapping(path = "/add/route")
-    public String addRoute(@ModelAttribute("route") RouteDto route) {
-        routeService.createNewRoute(route);
-        return "redirect:/admin";
-    }
+//    @PostMapping(path = "/add/route")
+//    public String addRoute(@ModelAttribute("route") RouteDto route) {
+//        routeService.createNewRoute(route);
+//        return "redirect:/admin";
+//    }
 
     @PostMapping("/edit/route")
     public String editRoute(@ModelAttribute("route") RouteDto routeDto) {
