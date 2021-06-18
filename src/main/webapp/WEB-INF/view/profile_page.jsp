@@ -46,7 +46,7 @@
                             <div class="ticket-container ${ticket.isArchived? "ticket-archived" : ""}">
                                 <div class="ticket-container-content">
                                     <h5>Ticket ${ticket.isArchived? "(archived)" : ""}</h5>
-                                    <p>Train number: ${ticket.route.train.number}</p>
+                                    <p>Train number: ${ticket.route.routePlan.train.number}</p>
                                     <p>${ticket.departureTime} - ${ticket.arrivalTime}</p>
                                     <p>${ticket.startStation.name} - ${ticket.endStation.name}</p>
                                     <p>Passenger: ${ticket.passenger.firstName} ${ticket.passenger.lastName}</p>

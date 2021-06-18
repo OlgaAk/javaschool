@@ -18,17 +18,17 @@
     <div class="train-search-result-item">
         <div class="train-search-result-item-left">
             <div class="train-search-result-item-row">
-                <div class="train-search-result-item-time">${route.startTripTimeHours}</div>
-                <div id="startTripStation" data-id="${route.startTripStation.id}" data-routeid="${route.id}"
-                     class="train-search-result-item-station">${route.startTripStation.name}</div>
+                <div class="train-search-result-item-time">${route.routePlan.startTripTimeHours}</div>
+                <div id="startTripStation" data-id="${route.routePlan.startTripStation.id}" data-routeid="${route.id}"
+                     class="train-search-result-item-station">${route.routePlan.startTripStation.name}</div>
             </div>
             <div class="train-search-result-item-row">
-                <div class="train-search-result-item-time">${route.endTripTimeHours}</div>
-                <div id="endTripStation" data-id="${route.endTripStation.id}"
-                     class="train-search-result-item-station">${route.endTripStation.name}</div>
+                <div class="train-search-result-item-time">${route.routePlan.endTripTimeHours}</div>
+                <div id="endTripStation" data-id="${route.routePlan.endTripStation.id}"
+                     class="train-search-result-item-station">${route.routePlan.endTripStation.name}</div>
             </div>
             <div class="train-search-result-item-row">
-                <div class="train-search-result-item-duration">${route.tripDuration}</div>
+                <div class="train-search-result-item-duration">${route.routePlan.tripDuration}</div>
                 <div class="train-search-result-item-change">${route.changeType}</div>
             </div>
         </div>

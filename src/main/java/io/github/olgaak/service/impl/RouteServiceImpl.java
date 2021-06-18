@@ -109,6 +109,8 @@ public class RouteServiceImpl implements RouteService {
     public RouteDto getRouteById(Long routeId) {
         RouteDto routeDto = new RouteDto();
         Route route = routeDao.getRouteById(routeId);
+        List<TimetableItem> timetableItems = timetableItemDao.getRoutePlanTimetableItems(route.getRoutePlan().getId());
+        route.getRoutePlan().setTimetableItems((new HashSet<>(timetableItems)));
         if(route == null) return null;
         routeDto = RouteDtoConverter.convertRouteEntityToDto(route);
         return routeDto;

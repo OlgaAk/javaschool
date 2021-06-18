@@ -28,6 +28,7 @@ public class TrainDtoConverter {
         train.setNumber(trainDto.getNumber());
         train.setSeatCount(trainDto.getSeatCount());
         train.setRoutePlan(RoutePlanDtoConverter.convertRoutePlanDtoToEntity(trainDto.getRoutePlan()));
+        train.getRoutePlan().setTrain(train);
         return train;
     }
 

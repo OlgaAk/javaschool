@@ -86,6 +86,14 @@ public class TimetableItem implements Comparable<TimetableItem> {
         return date;
     }
 
+    public Date getFullArrivalDate(Date date) {
+        int minutes = arrivalTime.getMinutes();
+        int hours = arrivalTime.getHours();
+        date.setMinutes(minutes);
+        date.setHours(hours);
+        return date;
+    }
+
     public Station getStation() {
         return station;
     }

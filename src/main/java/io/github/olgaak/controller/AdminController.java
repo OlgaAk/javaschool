@@ -42,7 +42,11 @@ public class AdminController {
             = LoggerFactory.getLogger(AdminController.class);
 
     @GetMapping("")
-    public String getAdminPage() {
+    public String getAdminPage(ModelMap model) {
+        List<TrainDto> trains = trainService.getAllTrains();
+        model.addAttribute("trains", trains);
+        List<StationDto> stations = stationService.getAllStations();
+        model.addAttribute("stations", stations);
         return "train_page";
     }
 

@@ -71,7 +71,7 @@ public class RouteDaoImpl implements RouteDao {
         Route route = null;
         try {
             Query query = entityManager
-                    .createQuery("SELECT r FROM Route r WHERE r.id  = :routeId", Route.class)
+                    .createQuery("SELECT r FROM Route r join fetch RoutePlan p on r.routePlan.id = p.id join fetch TimetableItem t on r.routePlan.id = t.routePlan.id WHERE r.id  = :routeId", Route.class)
                     .setParameter("routeId", routeId);
             route = (Route) query.getSingleResult();
         } catch (Exception ex) {
