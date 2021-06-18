@@ -83,6 +83,10 @@ public class UserController {
     @GetMapping("/profile")
     public String getProfilePage(ModelMap model, Authentication authentication) {
         String userEmail = authentication.getName();
+        if(userEmail.equals("admin")) {
+            authentication.setAuthenticated(false);
+            return "login_page";
+        }
         CustomUserDetails details = (CustomUserDetails) authentication.getPrincipal();
         long userId = details.getUserId();
         UserDto userDto = userService.findByEmail(userEmail);

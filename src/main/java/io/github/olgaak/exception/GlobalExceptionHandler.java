@@ -85,6 +85,13 @@ public class GlobalExceptionHandler {
         return "500";
     }
 
+    @ExceptionHandler(ActionNotAllowedException.class)
+    public String handleActionNotAllowedException(HttpServletRequest request, Exception e) {
+        logger.error(e.getMessage(), e.getCause());
+        logger.error(e.getStackTrace()[0].getFileName() + " " + e.getStackTrace()[0].getMethodName() + " " +  e.getStackTrace()[0].getLineNumber());
+        return "403";
+    }
+
     @ExceptionHandler(NoHandlerFoundException.class)
     public String handleError404(HttpServletRequest request, Exception e) {
         logger.warn(e.getMessage());

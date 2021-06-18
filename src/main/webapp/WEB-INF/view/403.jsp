@@ -16,7 +16,7 @@
 
     <div>
         <h1 class="train-search-title">403</h1>
-        <h2 class="train-search-title">Permission denied</h2>
+        <h2 class="train-search-title">Forbidden</h2>
 
     </div>
 
