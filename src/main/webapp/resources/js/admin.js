@@ -268,6 +268,10 @@ function showCreateTrainPopUp() {
     document.getElementById("train-create-popup-container").classList.remove("hidden");
 }
 
+function showPopUpById(id) {
+    document.getElementById(id).classList.remove("hidden");
+}
+
 function fixInputNames(htmlElement) {
     console.log(htmlElement)
     for (let index = 0; index < htmlElement.children.length; index++) {

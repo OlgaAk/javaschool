@@ -25,6 +25,10 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 
+.table-columns-3-left-big {
+    grid-template-columns: 1fr 50px 50px;
+}
+
 .table-columns-2 {
     grid-template-columns: 1fr 1fr;
 }
@@ -55,15 +59,18 @@
 }
 
 .main-container-left-side {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
+
 }
 
 
 .main-subsection {
-    min-width: 680px;
+    min-width: 350px;
     background-color: #f3f2f2;
     padding: 20px;
+}
+
+#train-section{
+    min-width: 600px;
 }
 
 .station-section {

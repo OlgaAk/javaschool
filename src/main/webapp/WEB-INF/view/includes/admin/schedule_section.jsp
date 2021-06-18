@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%--Schedule Section--%>
-    <div id="schedule-section" >
+    <div id="schedule-section" hidden>
         <h3 id="schedule_title">Schedules for station ***</h3>
 <%--        <div class="addNew-section">--%>
 <%--            <form method="post" action="/add/timeTableItem" >--%>

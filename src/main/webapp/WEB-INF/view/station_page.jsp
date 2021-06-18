@@ -5,12 +5,27 @@
     <title>Admin area</title>
     <link href="<c:url value="/resources/css/main.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/css/admin.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/css/map.css"/>" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
+    <script src="https://www.gstatic.com/external_hosted/handlebars/v4.7.6/handlebars.min.js"></script>
+    <script src="/resources/js/map.js"></script>
+
+    <script src="/resources/js/map_config.js"></script>
+    <script id="locator-result-items-tmpl" type="text/x-handlebars-template" defer>
+        {{#each locations}}
+        <li class="location-result" data-location-index="{{index}}">
+            <button class="select-location">
+                <h2 class="name">{{title}}</h2>
+            </button>
+        </li>
+        {{/each}}
+    </script>
 </head>
 <body>
 <%@include file="includes/common/navbar.jsp" %>
 <%@include file="includes/common/spinner.jsp" %>
+
 
 <div class="main-container">
 
@@ -23,46 +38,77 @@
                     <form method="post" action="/admin/add/station">
                         <label>Station name</label>
                         <input id="station-name" name="name" type="text" required>
-                        <button class="btn btn-primary" type="submit">ADD NEW STATION</button>
+                        <button class="btn btn-primary" onclick="showPopUpById('station-create-popup-container')">ADD
+                            NEW STATION
+                        </button>
                     </form>
                 </div>
                 <div class="table">
                     <h3>Station list</h3>
-                    <div class="table-row table-header table-columns-4">
+                    <div class="table-row table-header table-columns-3-left-big">
                         <div class="table-cell">Station name</div>
-                        <div class="table-cell">Schedule</div>
                         <div class="table-cell"></div>
                         <div class="table-cell"></div>
                     </div>
                     <c:forEach var="station" items="${stations}">
-                        <div class="table-row table-columns-4">
-                            <span class="table-cell">${station.name}</span>
-                            <span class="table-cell" onclick="openScheduleSection(${station.id}, '${station.name}')
-                                <%--'<c:forEach var="train" items="${station.trains}">${train.number},</c:forEach>') --%>
-                                    ">View Schedule</span>
+                        <div class="table-row table-columns-3-left-big">
+                            <span class="table-cell" onclick="openScheduleSection(${station.id}, '${station.name}')">
+                                    ${station.name}
+                            </span>
+
+                            <span class="material-icons icon"
+                                  onclick="openStationEditPopUp(${station.id}, '${station.name}')">
+                                edit
+                            </span>
                             <span class="table-cell">
-                    <span class="material-icons icon"
-                          onclick="openStationEditPopUp(${station.id}, '${station.name}')">
-                        edit
-                    </span>
-                     </span>
-                            <span class="table-cell">
-                    <a href="/admin/delete/station/${station.id}" class="icon">
-                        <span class="material-icons icon">delete</span>
-                    </a>
-                </span>
+                                 <a href="/admin/delete/station/${station.id}" class="icon">
+                                    <span class="material-icons icon">delete</span>
+                                 </a>
+                            </span>
                         </div>
                     </c:forEach>
                 </div>
             </div>
         </div>
-        <div class="main-container-right-side">
-            <%@include file="includes/admin/schedule_section.jsp" %>
-        </div>
+
     </div>
+    <%@include file="includes/admin/schedule_section.jsp" %>
 
 </div>
 
+
+<div id="station-create-popup-container" class="edit-popup-container hidden">
+    <div class="edit-popup map-popup">
+        <div id="map-container">
+            <div id="locations-panel">
+                <div id="locations-panel-list">
+
+                    <div class="section-name" id="location-results-section-name">
+                        All locations
+                    </div>
+                    <div class="results">
+                        <ul id="location-results-list"></ul>
+                    </div>
+                </div>
+                <div id="locations-panel-details"></div>
+            </div>
+            <div id="map"></div>
+        </div>
+        <form method="post" action="/admin/add/train">
+            <div class="input-box input-row train-input-info">
+                <label for="train-number">Station</label>
+                <input id="train-number" name="number" type="number" required>
+            </div>
+
+
+            <button class="btn btn-primary float-right" type="submit">ADD STATION</button>
+            <button class="btn btn-close-popup" type="button"
+                    onclick="closeEditPopUp('station-create-popup-container')">
+                <span class="material-icons md-18">close</span>
+            </button>
+        </form>
+    </div>
+</div>
 
 <%--ERROR POP-UP--%>
 <div id="error-popup" class="edit-popup-container ${adminPageError && adminPageError != "" ? "" : "hidden"}">
@@ -71,7 +117,7 @@
         ${adminPageError}
         <button class="btn btn-close-popup" type="button"
                 onclick="closeEditPopUp('error-popup')">
-        <span class="material-icons md-18">close</span>
+            <span class="material-icons md-18">close</span>
         </button>
 
     </div>
@@ -93,7 +139,9 @@
     </div>
 </div>
 
-<script src="/resources/js/admin.js"/>
-></script>
+<script src="/resources/js/admin.js" defer></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpRycTSimqO5xTUhAQWf7rBWUB5s1pd1o&callback=initMap&libraries=places,geometry&channel=GMPSB_locatorplus_v2_cABCDE"
+        async defer></script>
 </body>
 </html>
