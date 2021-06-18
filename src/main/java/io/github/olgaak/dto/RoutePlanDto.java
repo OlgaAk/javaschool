@@ -39,14 +39,14 @@ public class RoutePlanDto {
         return Arrays.asList("Monday", "Tuesday","Wednesday", "Thursday", "Friday", "Saturday", "Sunday");
     }
 
-    public List<String> getRoutesDates(){
-        return routes.stream().map(route -> {
-                    String date = route.getFormattedDepartureDate();
-                    if(date.startsWith("0")) date = date.substring(1); // frontend day has no 0
-                    return date;
-                }
-        ).collect(Collectors.toList());
-    }
+//    public List<String> getRoutesDates(){
+//        return routes.stream().map(route -> {
+//                    String date = route.getFormattedDepartureDate();
+//                    if(date.startsWith("0")) date = date.substring(1); // frontend day has no 0
+//                    return date;
+//                }
+//        ).collect(Collectors.toList());
+//    }
 
     public boolean checkIfRouteDate(int day){
         AtomicBoolean isRouteDate = new AtomicBoolean(false);

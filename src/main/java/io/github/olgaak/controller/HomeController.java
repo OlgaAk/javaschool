@@ -37,7 +37,7 @@ public class HomeController {
         return "home_page";
     }
 
-    //todo auto mapping to dto
+    //tofix auto mapping to dto
     @GetMapping("/train-query")
     @ResponseBody
     public  List<RouteDto> trainQuery(@RequestParam("departure_station") String departureStation,
@@ -45,11 +45,10 @@ public class HomeController {
                              @RequestParam("departure_date") String departureDate,
                              ModelMap model) {
         TrainQueryDto trainQuery = new TrainQueryDto();
-        List<RouteDto> routes = new ArrayList<>();
         trainQuery.setDepartureDate(departureDate);
         trainQuery.setDepartureStationId(departureStation);
         trainQuery.setArrivalStationId(arrivalStation);
-        routes = routeService.getTrainRoutesByQuery(trainQuery);
+        List<RouteDto> routes = routeService.getTrainRoutesByQuery(trainQuery);
         return routes;
     }
 

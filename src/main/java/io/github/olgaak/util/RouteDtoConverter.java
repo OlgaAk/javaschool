@@ -11,6 +11,7 @@ public class RouteDtoConverter {
     public static RouteDto convertRouteEntityToDto(Route route) {
         RouteDto routeDto = new RouteDto();
         routeDto.setId(route.getId());
+        routeDto.setRoutePlan(RoutePlanDtoConverter.convertRoutePlanEntityToDtoWithoutChildren(route.getRoutePlan()));
         routeDto.setSeats(route
                 .getSeats()
                 .stream()

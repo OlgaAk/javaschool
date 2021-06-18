@@ -1,6 +1,7 @@
 package io.github.olgaak.dao.impl;
 
 import io.github.olgaak.dao.api.TimetableDao;
+import io.github.olgaak.entity.RoutePlan;
 import io.github.olgaak.entity.TimetableItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ public class TimetableDaoImpl implements TimetableDao {
     @Autowired
     private EntityManagerFactory entityManagerFactory;
 
-    public void createNewTimetableItem(TimetableItem timetableItem){
+    public void createNewTimetableItem(TimetableItem timetableItem) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = null;
         try {
@@ -24,9 +25,8 @@ public class TimetableDaoImpl implements TimetableDao {
             entityManager.persist(timetableItem);
 //            entityManager.flush();
             transaction.commit();
-        }
-        catch (Exception ex){
-            if(transaction != null){
+        } catch (Exception ex) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();
@@ -44,6 +44,28 @@ public class TimetableDaoImpl implements TimetableDao {
         return timetableItems;
     }
 
+    @Transactional
+    public List<TimetableItem> getRoutePlanTimetableItems(long routePlanId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = null;
+        List<TimetableItem> timetableItems = null;
+        try {
+            transaction = entityManager.getTransaction();
+            transaction.begin();
+            Query query = entityManager.createQuery("SELECT t FROM TimetableItem t where t.routePlan.id = :id")
+                    .setParameter("id", routePlanId);
+            timetableItems = query.getResultList();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return timetableItems;
+    }
+
     @Override
     public void deleteTimetableItem(long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -54,9 +76,8 @@ public class TimetableDaoImpl implements TimetableDao {
             TimetableItem timetableItem = entityManager.find(TimetableItem.class, id);
             entityManager.remove(timetableItem);
             transaction.commit();
-        }
-        catch (Exception ex){
-            if(transaction != null){
+        } catch (Exception ex) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();
@@ -74,9 +95,8 @@ public class TimetableDaoImpl implements TimetableDao {
             transaction.begin();
             entityManager.merge(timetableItem);
             transaction.commit();
-        }
-        catch (Exception ex){
-            if(transaction != null){
+        } catch (Exception ex) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();

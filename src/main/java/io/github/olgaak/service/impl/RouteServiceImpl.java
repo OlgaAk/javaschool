@@ -1,6 +1,7 @@
 package io.github.olgaak.service.impl;
 
 import io.github.olgaak.dao.api.RouteDao;
+import io.github.olgaak.dao.api.TimetableDao;
 import io.github.olgaak.dto.RouteDto;
 import io.github.olgaak.dto.TrainQueryDto;
 import io.github.olgaak.entity.*;
@@ -26,6 +27,8 @@ public class RouteServiceImpl implements RouteService {
 
     private RouteDao routeDao;
 
+    private TimetableDao timetableItemDao;
+
     @Autowired
     ModelMapper modelMapper;
 
@@ -33,8 +36,9 @@ public class RouteServiceImpl implements RouteService {
     public MessageSender messageSender;
 
     @Autowired
-    public RouteServiceImpl(RouteDao routeDao){
+    public RouteServiceImpl(RouteDao routeDao, TimetableDao timetableItemDao){
         this.routeDao = routeDao;
+        this.timetableItemDao = timetableItemDao;
     }
 
 //    public Route createNewRoute(RouteDto routeDto) {
@@ -114,6 +118,8 @@ public class RouteServiceImpl implements RouteService {
         List<Route> routesByQuery = routeDao.getTrainRoutesByQuery(trainQuery);
         List<RouteDto> routeDtoList = new ArrayList<>();
         routesByQuery.stream().forEach(route->{
+            List<TimetableItem> timetableItems = timetableItemDao.getRoutePlanTimetableItems(route.getRoutePlan().getId());
+            route.getRoutePlan().setTimetableItems((new HashSet<>(timetableItems)));
             routeDtoList.add(RouteDtoConverter.convertRouteEntityToDto(route));
         });
         return routeDtoList;

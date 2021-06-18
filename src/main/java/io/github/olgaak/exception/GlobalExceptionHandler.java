@@ -73,7 +73,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NullPointerException.class)
     public String handleNullPointer(HttpServletRequest request, Exception e) {
         logger.error(e.getMessage(), e.getCause());
-        logger.error(e.getStackTrace()[0].getFileName() + e.getStackTrace()[0].getMethodName() + e.getStackTrace()[0].getLineNumber());
+        logger.error(e.getStackTrace()[0].getFileName() + " " + e.getStackTrace()[0].getMethodName() + " " +  e.getStackTrace()[0].getLineNumber());
         return "500";
     }
 

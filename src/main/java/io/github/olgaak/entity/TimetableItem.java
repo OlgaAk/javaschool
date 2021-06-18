@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "timetableItem")
-public class TimetableItem {
+public class TimetableItem implements Comparable<TimetableItem> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -100,5 +100,10 @@ public class TimetableItem {
 
     public void setOrder(int order) {
         this.order = order;
+    }
+
+    @Override
+    public int compareTo(TimetableItem o) {
+            return order - o.getOrder();
     }
 }

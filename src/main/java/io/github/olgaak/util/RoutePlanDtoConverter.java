@@ -4,6 +4,7 @@ import io.github.olgaak.dto.RoutePlanDto;
 import io.github.olgaak.dto.TimetableItemDto;
 import io.github.olgaak.entity.*;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +26,7 @@ public class RoutePlanDtoConverter {
         routePlanDto.setStartTripTimeHours(DateTimeConverter.parseDateToString(firstStop.getDepartureTime(), "HH:mm"));
         routePlanDto.setEndTripTimeHours(DateTimeConverter.parseDateToString(lastStop.getArrivalTime(), "HH:mm"));
         routePlanDto.setId(routePlan.getId());
-        long duration = getDurationMilli(routePlan, lastStop);
+        long duration = getDurationMilli(routePlan);
         routePlanDto.setTripDurationMilli(duration);
         routePlanDto.setTripDuration(getDuration(duration));
         List<TimetableItemDto> timetableItemDtoList = routePlan
@@ -43,6 +44,23 @@ public class RoutePlanDtoConverter {
         return routePlanDto;
     }
 
+    public static RoutePlanDto convertRoutePlanEntityToDtoWithoutChildren(RoutePlan routePlan) {
+        RoutePlanDto routePlanDto = new RoutePlanDto();
+        TimetableItem firstStop = getFirstStation(routePlan);
+        TimetableItem lastStop = getLastStation(routePlan);
+        routePlanDto.setStartTripStation(StationDtoConverter.convertStationEntityToDtoWithoutChildren(firstStop.getStation()));
+        routePlanDto.setStartTripTime(firstStop.getDepartureTime().toString());
+        routePlanDto.setEndTripStation(StationDtoConverter.convertStationEntityToDtoWithoutChildren(lastStop.getStation()));
+        routePlanDto.setEndTripTime(lastStop.getArrivalTime().toString());
+        routePlanDto.setStartTripTimeHours(DateTimeConverter.parseDateToString(firstStop.getDepartureTime(), "HH:mm"));
+        routePlanDto.setEndTripTimeHours(DateTimeConverter.parseDateToString(lastStop.getArrivalTime(), "HH:mm"));
+        routePlanDto.setId(routePlan.getId());
+        long duration = getDurationMilli(routePlan);
+        routePlanDto.setTripDurationMilli(duration);
+        routePlanDto.setTripDuration(getDuration(duration));
+        return routePlanDto;
+    }
+
     public static TimetableItem getFirstStation(RoutePlan routePlan) {
         return routePlan.getTimetableItems().stream()
                 .min(Comparator.comparing(
@@ -57,14 +75,33 @@ public class RoutePlanDtoConverter {
                 .get();
     }
 
-    private static long getDurationMilli(RoutePlan routePlan, TimetableItem lastStop) {
-        AtomicLong duration = new AtomicLong();
-        routePlan.getTimetableItems().stream().forEach(item -> {
-            if (item.getId() != lastStop.getId()) duration.addAndGet(item.getDepartureTime().getTime());
-            else duration.addAndGet(item.getArrivalTime().getTime());
-        });
+    /**
+     * Function to count time difference in milliseconds between start trip time and end trip time
+     * @param routePlan takes Routeplan object to itirate throw its timetable items
+     * @return time difference in milliseconds between start trip time and end trip time
+     */
+    public static long getDurationMilli(RoutePlan routePlan) {
+       List <TimetableItem> items = new ArrayList<>(routePlan.getTimetableItems().stream().sorted().collect(Collectors.toList()));
+       long duration = 0;
+       for(int i=0; i< items.size()-1; i++){
+           long time1 = items.get(i).getDepartureTime().getTime();
+           long time2;
+           if(i < items.size()-2){// before penultimate stop
+               time2 = items.get(i + 1).getDepartureTime().getTime();
+           } else{
+               time2 = items.get(i + 1).getArrivalTime().getTime();
+           }
+           duration += getTimeBetweenStops(time1, time2);
+       }
+        return duration;
+    }
 
-        return duration.longValue();
+    private static long getTimeBetweenStops(long time1, long time2){
+        if(time1 <= time2){
+            return time2 - time1;
+        } else{
+            return 24*60*60*1000 - time1 + time2;
+        }
     }
 
     private static String getDuration(long duration) {

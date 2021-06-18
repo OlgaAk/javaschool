@@ -97,7 +97,6 @@ public class RouteDaoImpl implements RouteDao {
                     .setParameter("departureDate", trainQuery.getDepartureDate())
                     .setParameter("arrivalStation", trainQuery.getArrivalStationId())
                     .setParameter("departureStation", trainQuery.getDepartureStationId());
-
             routes = query.getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();

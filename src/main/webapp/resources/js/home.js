@@ -35,9 +35,14 @@ async function getRoutesByQuery(departureStationInputValue, arrivalStationInputV
         + departureStationInputValue + "&arrival_station="
         + arrivalStationInputValue + "&departure_date=" + departureDate);
     if (response.ok) {
-        let json = await response.json();
-        console.log(json)
-        return json;
+        try {
+            let json = await response.json();
+            console.log(json)
+            return json;
+        } catch (e) {
+            console.log(e)
+            return null;
+        }
     } else {
         console.log("Ошибка HTTP: " + response.status);
         return null;
@@ -51,7 +56,8 @@ async function submitSearchForm() {
     let departureDate = document.getElementById("departure-date-input").value;
     if (departureStationInputValue != "" && arrivalStationInputValue != "" && departureDate != "") {
         let routes = await getRoutesByQuery(departureStationInputValue, arrivalStationInputValue, departureDate);
-            if (routes != null || routes.length > 0) {
+        if (routes != null && routes.length > 0) {
+            cleanSearchResultContent();
             routes.forEach(route => createSearchResult(route))
         } else createSearchResultError("No trains found");
     } else {
@@ -78,16 +84,14 @@ function cleanSearchResultContent() {
 }
 
 function createSearchResult(route) {
-    cleanSearchResultContent();
     let container = document.getElementById("train-search-result-container");
     let resultItem = container.children[0].cloneNode(true);
-    cleanSearchResultContent();
     resultItem.style.display = "grid";
-    resultItem.querySelector(".train-search-result-item-time").innerHTML = getFormattedTime(route.startTripTime);
-    resultItem.querySelector(".train-search-result-item-station").innerHTML = route.startTripStation.name;
-    resultItem.querySelectorAll(".train-search-result-item-time")[1].innerHTML = getFormattedTime(route.endTripTime);
-    resultItem.querySelectorAll(".train-search-result-item-station")[1].innerHTML = route.endTripStation.name;
-    resultItem.querySelector(".train-search-result-item-duration").innerHTML = route.tripDuration;
+    resultItem.querySelector(".train-search-result-item-time").innerHTML = getFormattedTime(route.routePlan.startTripTime);
+    resultItem.querySelector(".train-search-result-item-station").innerHTML = route.routePlan.startTripStation.name;
+    resultItem.querySelectorAll(".train-search-result-item-time")[1].innerHTML = getFormattedTime(route.routePlan.endTripTime);
+    resultItem.querySelectorAll(".train-search-result-item-station")[1].innerHTML = route.routePlan.endTripStation.name;
+    resultItem.querySelector(".train-search-result-item-duration").innerHTML = route.routePlan.tripDuration;
     resultItem.querySelector(".train-search-result-item-change").innerHTML = route.changeType;
     resultItem.querySelector(".train-search-result-item-price").innerHTML = "$" + route.price;
     resultItem.querySelector("a").href = "/user/purchase/" + route.id;
@@ -109,18 +113,18 @@ function setEventListenerOnSearchButton() {
 
 }
 
-function setMinMaxInputDateRange(){
+function setMinMaxInputDateRange() {
     let today = new Date();
     let dd = today.getDate();
-    let mm = today.getMonth()+1; //January is 0
+    let mm = today.getMonth() + 1; //January is 0
     let yyyy = today.getFullYear();
-    if(dd<10){
-        dd='0'+dd
+    if (dd < 10) {
+        dd = '0' + dd
     }
-    if(mm<10){
-        mm='0'+mm
+    if (mm < 10) {
+        mm = '0' + mm
     }
-    today = yyyy+'-'+mm+'-'+dd;
+    today = yyyy + '-' + mm + '-' + dd;
     document.getElementById("departure-date-input").setAttribute("min", today);
 }
 
