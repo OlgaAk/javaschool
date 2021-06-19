@@ -3,6 +3,7 @@ package io.github.olgaak.service.impl;
 import io.github.olgaak.dao.api.StationDao;
 import io.github.olgaak.dto.StationDto;
 import io.github.olgaak.entity.Station;
+import io.github.olgaak.exception.ActionNotAllowedException;
 import io.github.olgaak.service.api.StationService;
 import io.github.olgaak.util.StationDtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,11 @@ public class StationServiceImpl implements StationService {
         this.stationDao = stationDao;
     }
 
-    public Station createNewStation(Station station) {
+    public Station createNewStation(StationDto stationDto) throws ActionNotAllowedException {
+        List<Station> stations = stationDao.getAllStations();
+        Boolean present = stations.stream().filter(s -> s.getName().equals(stationDto.getName())).findAny().isPresent();
+        if(present) throw new ActionNotAllowedException("Station already added");
+        Station station = StationDtoConverter.convertStationDtoToEntity(stationDto);
         stationDao.createNewStation(station);
         return null;
     }

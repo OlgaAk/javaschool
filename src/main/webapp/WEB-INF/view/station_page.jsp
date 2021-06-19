@@ -15,8 +15,8 @@
     <script id="locator-result-items-tmpl" type="text/x-handlebars-template" defer>
         {{#each locations}}
         <li class="location-result" data-location-index="{{index}}">
-            <button class="select-location">
-                <h2 class="name">{{title}}</h2>
+            <button class="select-location" type="button">
+                <p class="name no-margin" data-lat="{{coords.lat}}" data-lng="{{coords.lng}}" onclick="setStationInputName(this.innerText, this.dataset.lat, this.dataset.lng)">{{title}}</p>
             </button>
         </li>
         {{/each}}
@@ -35,13 +35,10 @@
 
             <div id="station-section" class="station-section main-subsection">
                 <div class="addNew-section">
-                    <form method="post" action="/admin/add/station">
-                        <label>Station name</label>
-                        <input id="station-name" name="name" type="text" required>
                         <button class="btn btn-primary" onclick="showPopUpById('station-create-popup-container')">ADD
                             NEW STATION
                         </button>
-                    </form>
+
                 </div>
                 <div class="table">
                     <h3>Station list</h3>
@@ -55,10 +52,11 @@
                             <span class="table-cell" onclick="openScheduleSection(${station.id}, '${station.name}')">
                                     ${station.name}
                             </span>
-
-                            <span class="material-icons icon"
-                                  onclick="openStationEditPopUp(${station.id}, '${station.name}')">
-                                edit
+                            <span class="table-cell">
+                                <span class="material-icons icon"
+                                      onclick="openStationEditPopUp(${station.id}, '${station.name}')">
+                                    edit
+                                </span>
                             </span>
                             <span class="table-cell">
                                  <a href="/admin/delete/station/${station.id}" class="icon">
@@ -79,7 +77,15 @@
 
 <div id="station-create-popup-container" class="edit-popup-container hidden">
     <div class="edit-popup map-popup">
+        <form method="post" action="/admin/add/station">
         <div id="map-container">
+
+                <h4>Select from list of cities:</h4>
+                <label>Selected location</label>   <span id="station-name-p"></span>
+                <input id="station-name-input" name="name" type="text" hidden required>
+                <input id="station-latitude" name="latitude" type="text" hidden>
+                <input id="station-longitude" name="longitude" type="text" hidden>
+
             <div id="locations-panel">
                 <div id="locations-panel-list">
 
@@ -94,12 +100,6 @@
             </div>
             <div id="map"></div>
         </div>
-        <form method="post" action="/admin/add/train">
-            <div class="input-box input-row train-input-info">
-                <label for="train-number">Station</label>
-                <input id="train-number" name="number" type="number" required>
-            </div>
-
 
             <button class="btn btn-primary float-right" type="submit">ADD STATION</button>
             <button class="btn btn-close-popup" type="button"

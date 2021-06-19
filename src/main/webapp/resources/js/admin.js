@@ -298,6 +298,14 @@ function showSpinner(){
 
 }
 
+//map
+function setStationInputName(name, lat, lng){
+    document.getElementById("station-name-input").value = name;
+    document.getElementById("station-name-p").innerText = name;
+    document.getElementById("station-latitude").value = lat;
+    document.getElementById("station-longitude").value = lng;
+}
+
 
 
 

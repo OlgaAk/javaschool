@@ -7,7 +7,7 @@ body {
 
 #map-container {
     width: 100%;
-    height: 100%;
+    height: 360px;
     position: relative;
     font-family: "Roboto", sans-serif;
     box-sizing: border-box;
@@ -26,28 +26,23 @@ body {
 #map {
     position: absolute;
     left: 22em;
-    top: 0;
+    top: 30px;
     right: 0;
     bottom: 0;
     height: 300px;
     width: 400px;
 }
 
-#locations-panel {
-    position: absolute;
-    left: 0;
-    width: 22em;
-    top: 0;
-    bottom: 0;
-    overflow-y: auto;
-    background: white;
-    padding: 0.5em;
-    box-sizing: border-box;
+#locations-panel-list{
+    max-height: 700px;
+    overflow: auto;
 }
 
+
 #location-results-list li.selected{
-    background-color: yellow;
+    font-weight: bold;
 }
+
 
 .map-popup{
     min-width: 80vw;

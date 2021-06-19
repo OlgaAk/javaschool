@@ -60,6 +60,10 @@ a {
     position: relative;
 }
 
+.no-margin{
+    margin: 0;
+}
+
 .editable:hover {
     cursor: pointer;
 }

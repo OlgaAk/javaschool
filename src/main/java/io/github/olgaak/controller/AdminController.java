@@ -104,7 +104,7 @@ public class AdminController {
 
 
     @PostMapping("/add/station")
-    public String addStation(@ModelAttribute("station") Station station) {
+    public String addStation(@ModelAttribute("station") StationDto station) throws ActionNotAllowedException {
         stationService.createNewStation(station);
         return "redirect:/admin/station";
     }

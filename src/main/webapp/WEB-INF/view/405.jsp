@@ -15,9 +15,8 @@
 <div class="main-container-home">
 
     <div>
-        <h1 class="train-search-title">403</h1>
-        <h2 class="train-search-title">Forbidden</h2>
-        <p class="center">${errorMsg}</p>
+        <h1 class="train-search-title">405</h1>
+        <h2 class="train-search-title">Method Not Allowed</h2>
 
     </div>
 

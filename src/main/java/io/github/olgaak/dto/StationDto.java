@@ -8,6 +8,10 @@ public class StationDto {
 
     private String name;
 
+    private Double latitude;
+
+    private double longitude;
+
     private List<TimetableItemDto> timetableItems;
 
     private List<TrainDto> trains;
@@ -60,6 +64,30 @@ public class StationDto {
     public void setRoutes(List<RouteDto> routes) {
         this.routes = routes;
     }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = Double.parseDouble(latitude);
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+    public void setLongitude(String  longitude) {
+        this.longitude = Double.parseDouble(longitude);
+    }
+
 
     @Override
     public String toString() {

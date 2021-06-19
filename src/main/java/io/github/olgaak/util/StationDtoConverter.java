@@ -11,6 +11,8 @@ public class StationDtoConverter {
         StationDto stationDto = new StationDto();
         stationDto.setId(station.getId());
         stationDto.setName(station.getName());
+        stationDto.setLatitude(station.getLatitude());
+        stationDto.setLongitude(station.getLongitude());
         stationDto.setTimetableItems(station
                 .getTimetableItems()
                 .stream()
@@ -26,6 +28,8 @@ public class StationDtoConverter {
         StationDto stationDto = new StationDto();
         stationDto.setId(station.getId());
         stationDto.setName(station.getName());
+//        stationDto.setLatitude(station.getLatitude());
+//        stationDto.setLongitude(station.getLongitude());
         return stationDto;
     }
 
@@ -33,6 +37,8 @@ public class StationDtoConverter {
         Station station = new Station();
         station.setId(stationDto.getId());
         station.setName(stationDto.getName());
+        station.setLatitude(stationDto.getLatitude());
+        station.setLongitude(stationDto.getLongitude());
         return station;
     }
 

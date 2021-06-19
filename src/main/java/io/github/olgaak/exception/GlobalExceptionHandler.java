@@ -7,9 +7,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.util.NestedServletException;
 import org.springframework.web.util.WebUtils;
@@ -86,16 +89,26 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ActionNotAllowedException.class)
-    public String handleActionNotAllowedException(HttpServletRequest request, Exception e) {
+    public ModelAndView handleActionNotAllowedException(HttpServletRequest request, Exception e) {
         logger.error(e.getMessage(), e.getCause());
         logger.error(e.getStackTrace()[0].getFileName() + " " + e.getStackTrace()[0].getMethodName() + " " +  e.getStackTrace()[0].getLineNumber());
-        return "403";
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("errorMsg", e.getMessage());
+        mav.addObject("url", request.getRequestURL());
+        mav.setViewName("403");
+        return mav;
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public String handleError404(HttpServletRequest request, Exception e) {
         logger.warn(e.getMessage());
         return "404";
+    }
+
+    @ExceptionHandler(HttpClientErrorException.MethodNotAllowed.class)
+    public String handleMethodNotAllowed(HttpServletRequest request, Exception e) {
+        logger.warn(e.getMessage());
+        return "405";
     }
 }
 

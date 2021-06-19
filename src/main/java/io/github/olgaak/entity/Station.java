@@ -15,6 +15,12 @@ public class Station {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
+
     @OneToMany(mappedBy = "station")
     private Set<TimetableItem> timetableItems;
 
@@ -68,5 +74,21 @@ public class Station {
 
     public void setTrains(Set<Train> trains) {
         this.trains = trains;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }
