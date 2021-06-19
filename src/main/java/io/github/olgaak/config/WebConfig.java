@@ -10,14 +10,17 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.orm.jpa.JpaTransactionManager;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 @EnableWebMvc
+@EnableOpenApi
 @EnableTransactionManagement
 @EnableAsync
 @Configuration
@@ -33,10 +36,6 @@ public class WebConfig implements WebMvcConfigurer {
         return bean;
     }
 
-    @Override
-    public void addResourceHandlers(final ResourceHandlerRegistry registry){
-        registry.addResourceHandler("resources/**").addResourceLocations("/resources/");
-    }
 
     @Bean
     public ModelMapper modelMapper(){
@@ -55,6 +54,25 @@ public class WebConfig implements WebMvcConfigurer {
         transactionManager.setEntityManagerFactory(
                 entityManagerFactory());
         return transactionManager;
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("resources/**").addResourceLocations("/resources/");
+//        registry.
+//                addResourceHandler("/swagger-ui/**")
+//                .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/")
+//                .resourceChain(false);
+        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/swagger-ui/")
+//                .setViewName("forward:" + "/swagger-ui/index.html");
+        registry.addRedirectViewController("/configuration/ui", "/swagger-resources/configuration/ui");
     }
 
 
