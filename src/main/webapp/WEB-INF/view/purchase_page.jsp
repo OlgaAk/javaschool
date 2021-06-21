@@ -101,7 +101,7 @@
                 <p id="confirmation-passenger-seat">Seat</p>
                 <p>Passenger details:</p>
                 <div id="confirmation-passenger-details"></div>
-                <p id="confirmation-passenger-price">Price: </p>
+                <p id="confirmation-passenger-price" data-price="${route.price}">Price: $${route.price}</p>
             </div>
             <button class="purchase-section-back-btn purchase-section-btn"
                     onclick="goToSection('purchase-section-passenger')">Back

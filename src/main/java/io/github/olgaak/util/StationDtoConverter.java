@@ -28,8 +28,8 @@ public class StationDtoConverter {
         StationDto stationDto = new StationDto();
         stationDto.setId(station.getId());
         stationDto.setName(station.getName());
-//        stationDto.setLatitude(station.getLatitude());
-//        stationDto.setLongitude(station.getLongitude());
+        stationDto.setLatitude(station.getLatitude());
+        stationDto.setLongitude(station.getLongitude());
         return stationDto;
     }
 

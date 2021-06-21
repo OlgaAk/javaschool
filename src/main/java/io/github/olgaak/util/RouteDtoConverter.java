@@ -24,6 +24,7 @@ public class RouteDtoConverter {
                 .map(ticket -> TicketDtoConverter.convertTicketEntityToDto(ticket, routeDto))
                 .collect(Collectors.toList()));
         routeDto.setDepartureDate(route.getDepartureDate());
+        routeDto.setPrice(new GeoLocationHelper().countPrice(routeDto));
         return routeDto;
     }
 

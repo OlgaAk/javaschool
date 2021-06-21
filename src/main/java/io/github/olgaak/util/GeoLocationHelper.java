@@ -1,9 +1,16 @@
 package io.github.olgaak.util;
 
+import io.github.olgaak.dto.RouteDto;
+import io.github.olgaak.dto.StationDto;
+
+
 public class GeoLocationHelper {
 
     public final static double AVERAGE_RADIUS_OF_EARTH = 6371;
-    public int distance(double userLat, double userLng, double venueLat, double venueLng) {
+
+    public final static double KM_DOLLAR_PRICE = 0.04;
+
+    public int countDistanceByCoords(double userLat, double userLng, double venueLat, double venueLng) {
 
         double latDistance = Math.toRadians(userLat - venueLat);
         double lngDistance = Math.toRadians(userLng - venueLng);
@@ -18,5 +25,12 @@ public class GeoLocationHelper {
 
         return (int) (Math.round(AVERAGE_RADIUS_OF_EARTH * c));
 
+    }
+
+    public double countPrice(RouteDto route) {
+        StationDto s1 = route.getRoutePlan().getStartTripStation();
+        StationDto s2 = route.getRoutePlan().getEndTripStation();
+        long distance = countDistanceByCoords(s1.getLatitude(), s1.getLongitude(), s2.getLatitude(), s2.getLongitude());
+        return distance*KM_DOLLAR_PRICE;
     }
 }

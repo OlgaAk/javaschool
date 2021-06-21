@@ -16,7 +16,7 @@ public class RouteDto implements Comparable<RouteDto>{
 
     private String changeType = "direct";
 
-    private long price;
+    private double price;
 
     private int seatCount; // used to get seatcount from input form and generate seats in entity
 
@@ -90,11 +90,11 @@ public class RouteDto implements Comparable<RouteDto>{
         this.routePlan = routePlan;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

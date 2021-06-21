@@ -4,7 +4,8 @@ function fillSeatInfoContainerWithText(seatNumber) {
     let seatNumberNode = document.createElement("p");
     seatNumberNode.innerText = "Selected seat " + seatNumber;
     let ticketPriceNode = document.createElement("p");
-    ticketPriceNode.innerText = "Price $100";
+    let price = document.getElementById("confirmation-passenger-price").dataset.price;
+    ticketPriceNode.innerText = "Price $"+price;
     seatInfoContainer.append(seatNumberNode, ticketPriceNode);
 }
 
@@ -20,7 +21,6 @@ function selectSeat(element, seatNumber) {
 function fillConfirmInformation() {
     addPassengerDataErrorMessage("");
     let seatNumber = document.getElementsByClassName("seat-selected")[0].dataset.number;
-    let price = 100; //todo un hardcode
     let firstName = document.getElementById("passengerFirstname").value;
     let lastName = document.getElementById("passengerLastname").value;
     let dateOfBirth = document.getElementById("passengerDateOfBirth").value;
@@ -28,7 +28,6 @@ function fillConfirmInformation() {
     document.getElementById("confirmation-passenger-details").innerHTML =
         firstName + " " + lastName + "<br>" + dateOfBirth + "<br>" + passportNumber;
     document.getElementById("confirmation-passenger-seat").innerHTML = "Seat: " + seatNumber;
-    document.getElementById("confirmation-passenger-price").innerHTML = "Price: $" + price;
     let errorMessage = checkPassengerDataValidity(seatNumber, firstName, lastName, passportNumber, dateOfBirth);
     if (errorMessage != "") {
         addPassengerDataErrorMessage(errorMessage);
@@ -73,6 +72,7 @@ async function purchaseTicket() {
     let dateOfBirth = document.getElementById("passengerDateOfBirth").value;
     let tripStartStationId = document.getElementById("startTripStation").dataset.id;
     let tripEndStationId = document.getElementById("endTripStation").dataset.id;
+    let price = document.getElementById("confirmation-passenger-price").dataset.price;
     let routeId = document.getElementById("startTripStation").dataset.routeid;
     let errorMessage = checkPassengerDataValidity(seatId, firstName, lastName, passportNumber, dateOfBirth);
     if (errorMessage != "") {
@@ -80,7 +80,7 @@ async function purchaseTicket() {
         return;
     }
     let ticket = {
-        price: 100, //todo make dynamic
+        price,
         seatId,
         routeId,
         startStation: {

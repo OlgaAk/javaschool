@@ -9,7 +9,7 @@ import java.util.List;
 public class SeleniumTest {
 
     private SeleniumConfig config;
-    private String url = "http://localhost:8080/";
+    private String url = "http://localhost:8081/";
 
     public SeleniumTest() {
         config = new SeleniumConfig();

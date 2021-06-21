@@ -51,6 +51,7 @@
                                     <p>${ticket.startStation.name} - ${ticket.endStation.name}</p>
                                     <p>Passenger: ${ticket.passenger.firstName} ${ticket.passenger.lastName}</p>
                                     <p>Seat ${ticket.seat.number}</p>
+                                    <p>Price $${ticket.price}</p>
                                 </div>
                                 <c:if test="${!ticket.isArchived}">
                                     <button class="btn-delete btn btn-primary ticket-container-btn"
