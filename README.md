@@ -15,4 +15,4 @@ Swagger UI
 Selenium Tests
 Google Maps Api
 
-[![Quality Gate Status](http://localhost:9000/api/project_badges/measure?project=org.example%3Arailway_app&metric=alert_status)](http://localhost:9000/dashboard?id=org.example%3Arailway_app)
+![image](https://user-images.githubusercontent.com/10347255/122880174-6625fd00-d342-11eb-939a-6f2a24a89678.png)
