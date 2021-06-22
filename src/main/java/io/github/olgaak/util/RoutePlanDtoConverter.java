@@ -40,6 +40,7 @@ public class RoutePlanDtoConverter {
         routePlanDto.setTimetableItems(timetableItemDtoList);
         List<Integer> weekdays = routePlan.getWeekdays().stream().distinct().map(weekday -> weekday.ordinal()).collect(Collectors.toList());
         routePlanDto.setWeekdays(weekdays);
+        routePlanDto.setTrain(TrainDtoConverter.convertTrainEntityToDtoWithoutChildren(routePlan.getTrain()));
         routePlanDto.setRoutes(routePlan.getRoutes().stream().map(route -> RouteDtoConverter.convertRouteEntityToDto(route)).sorted().collect(Collectors.toList()));
         return routePlanDto;
     }
@@ -54,6 +55,8 @@ public class RoutePlanDtoConverter {
         routePlanDto.setEndTripTime(lastStop.getArrivalTime().toString());
         routePlanDto.setStartTripTimeHours(DateTimeConverter.parseDateToString(firstStop.getDepartureTime(), "HH:mm"));
         routePlanDto.setEndTripTimeHours(DateTimeConverter.parseDateToString(lastStop.getArrivalTime(), "HH:mm"));
+        routePlanDto.setTrain(TrainDtoConverter.convertTrainEntityToDtoWithoutChildren(routePlan.getTrain()));
+        routePlanDto.setTrain(TrainDtoConverter.convertTrainEntityToDtoWithoutChildren(routePlan.getTrain()));
         routePlanDto.setId(routePlan.getId());
         long duration = getDurationMilli(routePlan);
         routePlanDto.setTripDurationMilli(duration);

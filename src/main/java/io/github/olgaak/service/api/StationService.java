@@ -13,7 +13,7 @@ public interface StationService {
 
     StationDto getStationById(long id);
 
-    void deleteStation(long id);
+    void deleteStation(long id) throws ActionNotAllowedException;
 
     void editStation(Station station);
 }

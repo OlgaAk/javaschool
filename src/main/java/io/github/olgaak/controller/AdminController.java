@@ -116,7 +116,7 @@ public class AdminController {
     }
 
     @GetMapping("/delete/station/{id}")
-    public String deleteStation(@PathVariable("id") long id) {
+    public String deleteStation(@PathVariable("id") long id) throws ActionNotAllowedException {
         stationService.deleteStation(id);
         return "redirect:/admin/station";
     }

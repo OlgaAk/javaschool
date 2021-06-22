@@ -49,7 +49,9 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public void deleteStation(long id) {
+    public void deleteStation(long id) throws ActionNotAllowedException {
+        Station station = stationDao.getStationById(id);
+        if(station.getTimetableItems().size()>0) throw new ActionNotAllowedException("Station has trains.");
         stationDao.deleteStation(id);
     }
 

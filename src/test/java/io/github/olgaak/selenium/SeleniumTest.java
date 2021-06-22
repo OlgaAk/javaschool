@@ -45,7 +45,7 @@ public class SeleniumTest {
         JavascriptExecutor js = (JavascriptExecutor) config.getDriver();
         js.executeScript("document.getElementById('departure-station-input').dataset.stationid = '3'");
         js.executeScript("document.getElementById('arrival-station-input').dataset.stationid = '1'");
-        js.executeScript("document.getElementById('departure-date-input').value = '2021-05-10'");
+        js.executeScript("document.getElementById('departure-date-input').value = '2021-06-21'");
         WebElement searchButton = this.config.getDriver()
                 .findElement(By.id("train-search-btn"));
         searchButton.click();

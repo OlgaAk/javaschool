@@ -33,8 +33,8 @@ public class TrainDaoImpl implements TrainDao {
             ex.printStackTrace();
         } finally {
             entityManager.close();
-            return train;
         }
+        return train;
     }
 
     public List<Train> getAllTrains() {

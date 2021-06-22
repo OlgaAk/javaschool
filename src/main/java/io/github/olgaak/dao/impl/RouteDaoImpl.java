@@ -93,7 +93,8 @@ public class RouteDaoImpl implements RouteDao {
                             "JOIN TimetableItem t on rp.id = t.routePlan.id " +
                             "JOIN TimetableItem t2 on rp.id = t2.routePlan.id " +
                             "WHERE r.departureDate = :departureDate " +
-                            "and t2.station.id = :arrivalStation and t.station.id = :departureStation ", Route.class)
+                            "and t2.station.id = :arrivalStation and t.station.id = :departureStation " +
+                            "and t2.arrivalTime > t.departureTime", Route.class)
                     .setParameter("departureDate", trainQuery.getDepartureDate())
                     .setParameter("arrivalStation", trainQuery.getArrivalStationId())
                     .setParameter("departureStation", trainQuery.getDepartureStationId());
